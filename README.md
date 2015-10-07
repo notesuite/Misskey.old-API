@@ -1,1 +1,1 @@
-# Misskey-API
+# Misskey API
