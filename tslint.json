@@ -67,7 +67,13 @@
 		"sort-object-literal-keys": false,
 		"switch-default": true,
 		"triple-equals": true,
-		"typedef": false,
+		"typedef": [true,
+			"call-signature",
+			"parameter",
+			"property-declaration",
+			"variable-declaration",
+			"member-variable-declaration"
+		],
 		"typedef-whitespace": [true, {
 			"call-signature": "nospace",
 			"index-signature": "nospace",
