@@ -8,7 +8,7 @@ module.exports = (appKey: string) =>
 	return new Promise((resolve, reject) =>
 	{
 		Application.findOne({
-			appKey: appKey
+			appKey
 		}).then((app) => {
 			resolve(app != null);
 		});
