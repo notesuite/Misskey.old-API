@@ -14,6 +14,7 @@
 		"node_modules/typescript/lib/lib.es6.d.ts",
 		"typings/bundle.d.ts",
 		"src/index.ts",
+		"src/models/status.ts",
 		"src/models/user.ts"
 	]
 }
