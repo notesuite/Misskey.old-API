@@ -1,7 +1,7 @@
 const config: any = require('./config');
-const mongo = require('promised-mongo');
-const db = mongo(config.mongoConnectionString);
-const ApplicationDB = db.collection('application');
+const mongo: any = require('promised-mongo');
+const db: any = mongo(config.mongoConnectionString);
+const ApplicationDB: any = db.collection('application');
 
 export default function(appKey: string): Promise<boolean> {
 	'use strict';
