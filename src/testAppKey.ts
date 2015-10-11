@@ -3,7 +3,7 @@ const mongo = require('promised-mongo');
 const db = mongo(config.mongoConnectionString);
 const Application = db.collection('application');
 
-module.exports = (appKey: string) =>
+export default function(appKey: string)
 {
 	return new Promise((resolve, reject) =>
 	{
