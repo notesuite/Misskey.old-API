@@ -3,7 +3,7 @@ const mongo = require('promised-mongo');
 const db = mongo(config.mongoConnectionString);
 const ApplicationDB = db.collection('application');
 
-export default function(appKey: string) {
+export default function(appKey: string): Promise<boolean> {
 	"use-strict";
 	return new Promise((resolve: (boolean) => void, reject: (any) => void) => {
 		ApplicationDB.findOne({
