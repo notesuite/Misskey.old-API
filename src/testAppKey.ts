@@ -1,7 +1,7 @@
-var config = require('./config');
-var mongo = require('promised-mongo');
-var db = mongo(config.mongoConnectionString);
-var Application = db.collection('application');
+const config = require('./config');
+const mongo = require('promised-mongo');
+const db = mongo(config.mongoConnectionString);
+const Application = db.collection('application');
 
 module.exports = (appKey: string) =>
 {
