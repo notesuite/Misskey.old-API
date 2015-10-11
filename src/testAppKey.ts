@@ -1,14 +1,14 @@
 const config: any = require('./config');
 const mongo = require('promised-mongo');
 const db = mongo(config.mongoConnectionString);
-const Application = db.collection('application');
+const ApplicationDB = db.collection('application');
 
 export default function(appKey: string) {
 	"use-strict";
 	return new Promise((resolve, reject) => {
-		Application.findOne({
+		ApplicationDB.findOne({
 			appKey
-		}).then((app) => {
+		}).then((app: Application) => {
 			resolve(app !== null);
 		});
 	});
