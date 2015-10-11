@@ -8,7 +8,7 @@ export default function(appKey: string) {
 		Application.findOne({
 			appKey
 		}).then((app) => {
-			resolve(app != null);
+			resolve(app !== null);
 		});
 	});
 };
