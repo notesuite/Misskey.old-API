@@ -1,4 +1,4 @@
-const config = require('./config');
+const config: any = require('./config');
 const mongo = require('promised-mongo');
 const db = mongo(config.mongoConnectionString);
 const Application = db.collection('application');
