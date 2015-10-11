@@ -1,6 +1,6 @@
 var config = require('./config');
 var mongo = require('promised-mongo');
-var db = pmongo(config.mongoConnectionString);
+var db = mongo(config.mongoConnectionString);
 var Application = db.collection('application');
 
 module.exports = (appKey: string) =>
