@@ -5,7 +5,7 @@ const ApplicationDB = db.collection('application');
 
 export default function(appKey: string) {
 	"use-strict";
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve: (boolean) => void, reject: (any) => void) => {
 		ApplicationDB.findOne({
 			appKey
 		}).then((app: Application) => {
