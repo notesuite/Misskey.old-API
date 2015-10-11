@@ -16,5 +16,6 @@
 		"src/index.ts",
 		"src/models/user.ts",
 		"src/models/status.ts"
+		"src/models/application.ts"
 	]
 }
