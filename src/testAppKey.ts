@@ -1,3 +1,4 @@
+import { Application } from './models/application';
 const config: any = require('./config');
 const mongo: any = require('promised-mongo');
 const db: any = mongo(config.mongoConnectionString);
