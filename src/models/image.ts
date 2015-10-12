@@ -1,4 +1,4 @@
-interface Image {
+export interface Image {
 	id: string;
 	createdAt: Date;
 	userId: string;
