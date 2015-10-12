@@ -17,6 +17,7 @@
 		"src/testAppKey.ts",
 		"src/models/status.ts",
 		"src/models/user.ts",
-		"src/models/application.ts"
+		"src/models/application.ts",
+		"src/models/image.ts"
 	]
 }
