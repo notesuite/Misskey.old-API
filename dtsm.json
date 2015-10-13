@@ -24,6 +24,9 @@
     },
     "del/del.d.ts": {
       "ref": "3db73cb78cb08ef2315d756d1a614fda84b26df3"
+    },
+    "mongoose/mongoose.d.ts": {
+      "ref": "14ab703f435375194360cdba3abab61afc879c18"
     }
   }
 }
