@@ -3,7 +3,7 @@ import * as mongoose from 'mongoose';
 const config: any = require('../config');
 
 // Grobal option
-const modelName = 'Application';
+const modelName: string = 'Application';
 
 // Mongo settings
 const Schema = mongoose.Schema;
