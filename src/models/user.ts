@@ -34,7 +34,7 @@ const schema: mongoose.Schema = new Schema({
 	isPro: { type: Boolean, required: false, default: false },
 	isPrivate: { type: Boolean, required: false, default: false },
 	isDeleted: { type: Boolean, required: false, default: false },
-	isSuspended: { type: Boolean, required: false, default: false },
+	isSuspended: { type: Boolean, required: false, default: false }
 });
 
 // Declare iconUrl virtual property

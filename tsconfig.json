@@ -17,6 +17,6 @@
 		"src/models/user.ts",
 		"src/models/status.ts",
 		"src/models/application.ts",
-		"src/models/image.ts"
+		"src/models/userStorageFile.ts"
 	]
 }
