@@ -6,8 +6,8 @@ const config: any = require('../config');
 const modelName: string = 'Application';
 
 // Mongo settings
-const Schema = mongoose.Schema;
-const db = mongoose.createConnection(config.mongo.uri, config.mongo.options);
+const Schema: typeof mongoose.Schema = mongoose.Schema;
+const db: mongoose.Connection = mongoose.createConnection(config.mongo.uri, config.mongo.options);
 
 // Declare scheme
 const schema: mongoose.Schema = new Schema({
@@ -23,8 +23,7 @@ const schema: mongoose.Schema = new Schema({
 	permissions: { type: [String], required: false, default: [] }
 });
 
-schema.virtual('iconUrl').get(() =>
-{
+schema.virtual('iconUrl').get(() => {
 	return config.imageServerUrl + "/" + this.icon;
 });
 

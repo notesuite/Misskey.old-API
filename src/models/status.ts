@@ -7,8 +7,8 @@ const config: any = require('../config');
 const modelName: string = 'Status';
 
 // Mongo settings
-const Schema = mongoose.Schema;
-const db = mongoose.createConnection(config.mongo.uri, config.mongo.options);
+const Schema: typeof mongoose.Schema = mongoose.Schema;
+const db: mongoose.Connection = mongoose.createConnection(config.mongo.uri, config.mongo.options);
 
 mongooseAutoIncrement.initialize(db);
 
