@@ -2,9 +2,14 @@ import * as mongoose from 'mongoose';
 
 const config: any = require('../config');
 
-const db = mongoose.createConnection(config.mongo.uri, config.mongo.options);
-const Schema = mongoose.Schema;
+// Grobal option
+const modelName = 'Application';
 
+// Mongo settings
+const Schema = mongoose.Schema;
+const db = mongoose.createConnection(config.mongo.uri, config.mongo.options);
+
+// Declare scheme
 const schema: mongoose.Schema = new Schema({
 	name: { type: String, required: true },
 	userId: { type: Schema.Types.ObjectId, required: true },
@@ -23,4 +28,5 @@ schema.virtual('iconUrl').get(() =>
 	return config.imageServerUrl + "/" + this.icon;
 });
 
-module.exports = db.model('Application', schema);
+// Export model
+module.exports = db.model(modelName, schema);
