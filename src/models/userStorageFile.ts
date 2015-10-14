@@ -17,7 +17,7 @@ mongooseAutoIncrement.initialize(db);
 const schema: mongoose.Schema = new Schema({
 	userId: { type: Schema.Types.ObjectId, required: true },
 	createdAt: { type: Date, required: true, default: Date.now },
-	folder: { type: Schema.Types.ObjectId, required: false, default: null },
+	folderId: { type: Schema.Types.ObjectId, required: false, default: null },
 	cursor: { type: Number },
 	dataSize: { type: Number, required: true },
 	serverPath: { type: String, required: true },

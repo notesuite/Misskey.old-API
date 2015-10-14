@@ -19,7 +19,7 @@ const schema: mongoose.Schema = new Schema({
 	description: { type: String, required: true },
 	isDeleted: { type: Boolean, required: false, default: false },
 	isSuspended: { type: Boolean, required: false, default: false },
-	icon: { type: Schema.Types.ObjectId, required: false, default: null },
+	iconId: { type: Schema.Types.ObjectId, required: false, default: null },
 	permissions: { type: [String], required: false, default: [] }
 });
 
