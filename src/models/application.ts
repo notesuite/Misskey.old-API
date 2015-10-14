@@ -23,6 +23,7 @@ const schema: mongoose.Schema = new Schema({
 	permissions: { type: [String], required: false, default: [] }
 });
 
+// Declare iconUrl virtual property
 schema.virtual('iconUrl').get(() => {
 	return config.imageServerUrl + "/" + this.icon;
 });
