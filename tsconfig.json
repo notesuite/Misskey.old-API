@@ -14,9 +14,9 @@
 		"node_modules/typescript/lib/lib.es6.d.ts",
 		"typings/bundle.d.ts",
 		"src/index.ts",
-		"src/models/user.ts",
-		"src/models/status.ts",
-		"src/models/application.ts",
-		"src/models/userStorageFile.ts"
+		"src/db/user.ts",
+		"src/db/status.ts",
+		"src/db/application.ts",
+		"src/db/userStorageFile.ts"
 	]
 }
