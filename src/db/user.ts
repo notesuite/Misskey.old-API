@@ -1,11 +1,6 @@
 import * as mongoose from 'mongoose';
+import { Schema } from 'mongoose';
 const config: any = require('../config');
-
-const modelName: string = 'User';
-
-// Mongo settings
-const Schema: typeof mongoose.Schema = mongoose.Schema;
-const db: mongoose.Connection = mongoose.createConnection(config.mongo.uri, config.mongo.options);
 
 const schema: mongoose.Schema = new Schema({
 	name: { type: String, required: true },
@@ -35,5 +30,3 @@ const schema: mongoose.Schema = new Schema({
 });
 
 schema.virtual('iconUrl').get(() => `${config.imageServerUrl}/${this.icon}`);
-
-export default db.model(modelName, schema);

@@ -1,14 +1,6 @@
 import * as mongoose from 'mongoose';
+import { Schema } from 'mongoose';
 const mongooseAutoIncrement: any = require('mongoose-auto-increment');
-const config: any = require('../config');
-
-const modelName: string = 'Status';
-
-// Mongo settings
-const Schema: typeof mongoose.Schema = mongoose.Schema;
-const db: mongoose.Connection = mongoose.createConnection(config.mongo.uri, config.mongo.options);
-
-mongooseAutoIncrement.initialize(db);
 
 const schema: mongoose.Schema = new Schema({
 	appId: { type: Schema.Types.ObjectId, required: false, default: null },
@@ -22,8 +14,6 @@ const schema: mongoose.Schema = new Schema({
 });
 
 schema.plugin(mongooseAutoIncrement.plugin, {
-	model: modelName,
+	model: 'Status',
 	field: 'cursor'
 });
-
-export default db.model(modelName, schema);

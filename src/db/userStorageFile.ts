@@ -1,15 +1,6 @@
 import * as mongoose from 'mongoose';
+import { Schema } from 'mongoose';
 const mongooseAutoIncrement: any = require('mongoose-auto-increment');
-
-const config: any = require('../config');
-
-const modelName: string = 'UserStorageFile';
-
-// Mongo settings
-const Schema: typeof mongoose.Schema = mongoose.Schema;
-const db: mongoose.Connection = mongoose.createConnection(config.mongo.uri, config.mongo.options);
-
-mongooseAutoIncrement.initialize(db);
 
 const schema: mongoose.Schema = new Schema({
 	userId: { type: Schema.Types.ObjectId, required: true },
@@ -27,8 +18,6 @@ const schema: mongoose.Schema = new Schema({
 });
 
 schema.plugin(mongooseAutoIncrement.plugin, {
-	model: modelName,
+	model: 'UserStorageFile',
 	field: 'cursor'
 });
-
-export default db.model(modelName, schema);
