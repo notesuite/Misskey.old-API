@@ -1,10 +1,9 @@
 import * as mongoose from 'mongoose';
-// import * as mongooseAutoIncrement from 'mongoose-auto-increment';
 const mongooseAutoIncrement: any = require('mongoose-auto-increment');
 
 const config: any = require('../config');
 
-// Grobal option
+// Global option
 const modelName: string = 'UserStorageFile';
 
 // Mongo settings
@@ -13,7 +12,6 @@ const db: mongoose.Connection = mongoose.createConnection(config.mongo.uri, conf
 
 mongooseAutoIncrement.initialize(db);
 
-// Declare scheme
 const schema: mongoose.Schema = new Schema({
 	userId: { type: Schema.Types.ObjectId, required: true },
 	createdAt: { type: Date, required: true, default: Date.now },
@@ -29,11 +27,9 @@ const schema: mongoose.Schema = new Schema({
 	isDeleted: { type: Boolean, required: false, default: false }
 });
 
-// AutoIncrement
 schema.plugin(mongooseAutoIncrement.plugin, {
 	model: modelName,
 	field: 'cursor'
 });
 
-// Export model
-module.exports = db.model(modelName, schema);
+export default db.model(modelName, schema);

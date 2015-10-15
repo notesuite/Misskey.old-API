@@ -1,5 +1,4 @@
 import * as mongoose from 'mongoose';
-
 const config: any = require('../config');
 
 // Grobal option
@@ -9,7 +8,6 @@ const modelName: string = 'User';
 const Schema: typeof mongoose.Schema = mongoose.Schema;
 const db: mongoose.Connection = mongoose.createConnection(config.mongo.uri, config.mongo.options);
 
-// Declare scheme
 const schema: mongoose.Schema = new Schema({
 	name: { type: String, required: true },
 	createdAt: { type: Date, required: true, default: Date.now },
@@ -37,10 +35,8 @@ const schema: mongoose.Schema = new Schema({
 	isSuspended: { type: Boolean, required: false, default: false }
 });
 
-// Declare iconUrl virtual property
 schema.virtual('iconUrl').get(() => {
 	return config.imageServerUrl + "/" + this.icon;
 });
 
-// Export model
-module.exports = db.model(modelName, schema);
+export default db.model(modelName, schema);
