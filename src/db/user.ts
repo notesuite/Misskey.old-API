@@ -56,6 +56,6 @@ export class UserSchema extends Schema {
 			isDeleted: { type: Boolean, required: false, default: false },
 			isSuspended: { type: Boolean, required: false, default: false }
 		}, {});
-		this.virtual('iconUrl').get(() => `${config.imageServerUrl}/${this.icon}`);
+		this.virtual('iconUrl').get(() => `${config.imageServerUrl}/${this.iconId}`);
 	}
 }
