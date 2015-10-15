@@ -2,7 +2,7 @@ import * as mongoose from 'mongoose';
 
 const config: any = require('../config');
 
-// Grobal option
+// Global option
 const modelName: string = 'Application';
 
 // Mongo settings
