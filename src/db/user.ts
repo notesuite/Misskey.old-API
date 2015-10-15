@@ -15,7 +15,7 @@ export interface UserDocument extends Document {
 	email: string;
 	hashedPassword: string;
 	credit: number;
-	pinnedStatusId: string:
+	pinnedStatusId: string;
 	birthday: Date;
 	iconId: string;
 	bannerId: string;
