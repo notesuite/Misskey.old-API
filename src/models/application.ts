@@ -27,4 +27,4 @@ schema.virtual('iconUrl').get(() => {
 	return config.imageServerUrl + "/" + this.icon;
 });
 
-module.exports = db.model(modelName, schema);
+export default db.model(modelName, schema);
