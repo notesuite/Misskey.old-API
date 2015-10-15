@@ -9,7 +9,6 @@ const modelName: string = 'Application';
 const Schema: typeof mongoose.Schema = mongoose.Schema;
 const db: mongoose.Connection = mongoose.createConnection(config.mongo.uri, config.mongo.options);
 
-// Declare scheme
 const schema: mongoose.Schema = new Schema({
 	name: { type: String, required: true },
 	userId: { type: Schema.Types.ObjectId, required: true },
@@ -28,5 +27,4 @@ schema.virtual('iconUrl').get(() => {
 	return config.imageServerUrl + "/" + this.icon;
 });
 
-// Export model
 module.exports = db.model(modelName, schema);
