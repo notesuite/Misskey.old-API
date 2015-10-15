@@ -3,7 +3,6 @@ const mongooseAutoIncrement: any = require('mongoose-auto-increment');
 
 const config: any = require('../config');
 
-// Global option
 const modelName: string = 'UserStorageFile';
 
 // Mongo settings

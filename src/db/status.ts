@@ -2,7 +2,6 @@ import * as mongoose from 'mongoose';
 const mongooseAutoIncrement: any = require('mongoose-auto-increment');
 const config: any = require('../config');
 
-// Grobal option
 const modelName: string = 'Status';
 
 // Mongo settings

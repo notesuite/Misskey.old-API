@@ -1,7 +1,6 @@
 import * as mongoose from 'mongoose';
 const config: any = require('../config');
 
-// Grobal option
 const modelName: string = 'User';
 
 // Mongo settings
@@ -35,8 +34,6 @@ const schema: mongoose.Schema = new Schema({
 	isSuspended: { type: Boolean, required: false, default: false }
 });
 
-schema.virtual('iconUrl').get(() => {
-	return config.imageServerUrl + "/" + this.icon;
-});
+schema.virtual('iconUrl').get(() => `${config.imageServerUrl}/${this.icon}`);
 
 export default db.model(modelName, schema);

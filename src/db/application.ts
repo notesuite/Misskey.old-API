@@ -21,8 +21,6 @@ const schema: mongoose.Schema = new Schema({
 });
 
 // Declare iconUrl virtual property
-schema.virtual('iconUrl').get(() => {
-	return config.imageServerUrl + "/" + this.icon;
-});
+schema.virtual('iconUrl').get(() => `${config.imageServerUrl}/${this.icon}`);
 
 export default db.model(modelName, schema);
