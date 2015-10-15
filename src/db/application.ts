@@ -1,9 +1,8 @@
-import * as mongoose from 'mongoose';
 import { Schema } from 'mongoose';
 
 const config: any = require('../config');
 
-const schema: mongoose.Schema = new Schema({
+const schema: Schema = new Schema({
 	name: { type: String, required: true },
 	userId: { type: Schema.Types.ObjectId, required: true },
 	createdAt: { type: Date, required: true, default: Date.now },

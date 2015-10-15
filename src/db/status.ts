@@ -1,8 +1,7 @@
-import * as mongoose from 'mongoose';
 import { Schema } from 'mongoose';
 const mongooseAutoIncrement: any = require('mongoose-auto-increment');
 
-const schema: mongoose.Schema = new Schema({
+const schema: Schema = new Schema({
 	appId: { type: Schema.Types.ObjectId, required: false, default: null },
 	createdAt: { type: Date, required: true, default: Date.now },
 	cursor: { type: Number },
