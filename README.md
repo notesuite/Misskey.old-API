@@ -1,4 +1,5 @@
 # Misskey API
+[![Build Status](https://travis-ci.org/MissKernel/Misskey-API.svg)](https://travis-ci.org/MissKernel/Misskey-API)
 
 ## How to build
 1. `git clone git://github.com/MissKernel/Misskey-API.git`
