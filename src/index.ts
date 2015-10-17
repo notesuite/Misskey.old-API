@@ -8,6 +8,7 @@ fs.readFile(config.configPath, 'utf8', (err: NodeJS.ErrnoException, data: string
 		console.error(err);
 	} else {
 		console.log('Loaded config');
-		console.log(data);
+
+		// require('./server');
 	}
 });
