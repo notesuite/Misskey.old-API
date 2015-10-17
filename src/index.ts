@@ -3,7 +3,7 @@ import * as config from './config';
 
 console.log('Welcome to Misskey API');
 
-fs.readFile(config.configPath, 'utf8', function (err: NodeJS.ErrnoException, data: string) {
+fs.readFile(config.configPath, 'utf8', (err: NodeJS.ErrnoException, data: string) => {
 	if (err) {
 		console.error(err);
 	} else {
