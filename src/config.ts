@@ -25,5 +25,5 @@ export const template: IConfig = {
 			user: "",
 			pass: ""
 		}
-	},
+	}
 };
