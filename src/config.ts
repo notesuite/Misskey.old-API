@@ -24,6 +24,7 @@ export const configDirectoryPath: string = `${homeDirPath}/${configDirName}`;
 export const configPath: string = `${configDirectoryPath}/${configFileName}`;
 
 export function load(): IConfig {
+	'use strict';
 	return <IConfig>require(`${homeDirPath}/.misskey/api.json`);
 }
 
