@@ -14,7 +14,7 @@ if (fs.existsSync(config.configPath)) {
 		} else {
 			console.log('configが存在しなかったため作成しました。configファイルを開き、必要事項を記入してください:');
 			console.log(`ファイルパス: ${config.configPath}`);
-			process.exit();
 		}
+		process.exit();
 	});
 }
