@@ -8,8 +8,22 @@ export default <IConfig>require(configPath);
 
 export interface IConfig {
 	env: string;
+	mongo: {
+		uri: string;
+		options: {
+			user: string;
+			pass: string;
+		};
+	};
 }
 
 export const template: IConfig = {
-	env: ""
+	env: "",
+	mongo: {
+		uri: "",
+		options: {
+			user: "",
+			pass: ""
+		}
+	},
 };
