@@ -14,9 +14,14 @@ export const configDirName: string = '.misskey';
 export const configFileName: string = 'api.json';
 
 /**
+ * Full path of config directory
+ */
+export const configDirectoryPath: string = `${homeDirPath}/${configDirName}`;
+
+/**
  * Full path of config file
  */
-export const configPath: string = `${homeDirPath}/${configDirName}/${configFileName}`;
+export const configPath: string = `${configDirectoryPath}/${configFileName}`;
 
 export function load(): IConfig {
 	return <IConfig>require(`${homeDirPath}/.misskey/api.json`);
