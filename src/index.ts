@@ -3,29 +3,18 @@ import * as config from './config';
 
 console.log('Welcome to Misskey API');
 
-fs.readFile(config.configPath, 'utf8', (readErr: NodeJS.ErrnoException, data: string) => {
-	if (readErr) {
-		console.error(readErr);
-
-		// File not found
-		if (readErr.code === 'ENOENT') {
-			const template: config.IConfig = {
-				env: ''
-			};
-
-			fs.mkdirSync(config.configDirectoryPath);
-
-			fs.writeFile(config.configPath, JSON.stringify(template), (writeErr: NodeJS.ErrnoException) => {
-				if (writeErr) {
-					console.error(writeErr);
-				} else {
-					console.log(`INFO: configが存在しなかったため作成しました。configファイルを開き、必要事項を記入してください。\r\nファイルパス: ${config.configPath}`);
-				}
-			});
+if (fs.existsSync(config.configPath)) {
+	// require('./server');
+} else {
+	fs.mkdirSync(config.configDirectoryPath);
+	fs.writeFile(config.configPath, JSON.stringify(config.template), (writeErr: NodeJS.ErrnoException) => {
+		if (writeErr) {
+			console.log('configが存在しなかったため新規作成しようとしましたが、問題が発生しました:');
+			console.error(writeErr);
+		} else {
+			console.log('configが存在しなかったため作成しました。configファイルを開き、必要事項を記入してください:');
+			console.log(`ファイルパス: ${config.configPath}`);
+			process.exit();
 		}
-	} else {
-		console.log('Loaded config');
-
-		// require('./server');
-	}
-});
+	});
+}

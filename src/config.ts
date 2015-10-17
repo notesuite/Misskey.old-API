@@ -9,3 +9,7 @@ export default <IConfig>require(configPath);
 export interface IConfig {
 	env: string;
 }
+
+export const template: IConfig = {
+	env: ""
+}
