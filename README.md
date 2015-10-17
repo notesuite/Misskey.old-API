@@ -20,7 +20,7 @@ The MIT License. See [LICENSE](LICENSE).
 [mit]:             http://opensource.org/licenses/MIT
 [mit-badge]:       https://img.shields.io/badge/license-MIT-444444.svg?style=flat-square
 [travis-link]:     https://travis-ci.org/MissKernel/Misskey-API
-[travis-badge]:    https://travis-ci.org/MissKernel/Misskey-API.svg
+[travis-badge]:    http://img.shields.io/travis/MissKernel/Misskey-API.svg?style=flat-square
 [david-link]:      https://david-dm.org/MissKernel/Misskey-API
 [david-badge]:     https://img.shields.io/david/MissKernel/Misskey-API.svg?style=flat-square
 [david-dev-link]:  https://david-dm.org/MissKernel/Misskey-API#info=devDependencies&view=table
