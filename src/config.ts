@@ -18,7 +18,9 @@ export const configFileName: string = 'api.json';
  */
 export const configPath: string = `${homeDirPath}/${configDirName}/${configFileName}`;
 
-export default <IConfig>require(`${homeDirPath}/.misskey/api.json`);
+export function load(): IConfig {
+	return <IConfig>require(`${homeDirPath}/.misskey/api.json`);
+}
 
 export interface IConfig {
 	env: string;
