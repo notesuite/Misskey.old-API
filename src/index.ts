@@ -1,5 +1,13 @@
+import * as fs from 'fs';
 import * as config from './config';
 
-config.initConfigLoader().then((conf: config.IConfig) => {
-	console.log(conf);
+console.log('Welcome to Misskey API');
+
+fs.readFile(config.configPath, 'utf8', function (err: NodeJS.ErrnoException, data: string) {
+	if (err) {
+		console.error(err);
+	} else {
+		console.log('Loaded config');
+		console.log(data);
+	}
 });

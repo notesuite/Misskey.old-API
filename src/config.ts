@@ -1,17 +1,25 @@
-const homeDirPath = process.env[(process.platform === 'win32') ? 'USERPROFILE' : 'HOME'];
+/**
+ * Path of home directory
+ */
+export const homeDirPath: string = process.env[(process.platform === 'win32') ? 'USERPROFILE' : 'HOME'];
+
+/**
+ * Name of config directory
+ */
+export const configDirName: string = '.misskey';
+
+/**
+ * Name of config file
+ */
+export const configFileName: string = 'api.json';
+
+/**
+ * Full path of config file
+ */
+export const configPath: string = `${homeDirPath}/${configDirName}/${configFileName}`;
 
 export default <IConfig>require(`${homeDirPath}/.misskey/api.json`);
 
 export interface IConfig {
 	env: string;
-}
-
-export function initConfigLoader(): Promise<IConfig> {
-	'use strict';
-	return new Promise((resolve: (value: IConfig) => void, reject: (err: any) => void) => {
-		//
-		// Hoge
-		//
-		resolve(<IConfig>require(`${homeDirPath}/.misskey/api.json`));
-	});
 }
