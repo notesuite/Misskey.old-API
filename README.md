@@ -1,5 +1,8 @@
 # Misskey API
-[![Build Status](https://travis-ci.org/MissKernel/Misskey-API.svg)](https://travis-ci.org/MissKernel/Misskey-API)
+[![][travis-badge]][travis-link]
+[![][david-badge]][david-link]
+[![][david-dev-badge]][david-dev-link]
+[![][mit-badge]][mit]
 
 ## How to build
 1. `git clone git://github.com/MissKernel/Misskey-API.git`
@@ -13,3 +16,12 @@
 
 ## License
 The MIT License. See [LICENSE](LICENSE).
+
+[mit]:             http://opensource.org/licenses/MIT
+[mit-badge]:       https://img.shields.io/badge/license-MIT-444444.svg?style=flat-square
+[travis-link]:     https://travis-ci.org/MissKernel/Misskey-API
+[travis-badge]:    https://travis-ci.org/MissKernel/Misskey-API.svg
+[david-link]:      https://david-dm.org/MissKernel/Misskey-API
+[david-badge]:     https://img.shields.io/david/MissKernel/Misskey-API.svg?style=flat-square
+[david-dev-link]:  https://david-dm.org/MissKernel/Misskey-API#info=devDependencies&view=table
+[david-dev-badge]: https://img.shields.io/david/dev/MissKernel/Misskey-API.svg?style=flat-square
