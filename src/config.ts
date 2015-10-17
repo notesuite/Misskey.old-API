@@ -12,4 +12,4 @@ export interface IConfig {
 
 export const template: IConfig = {
 	env: ""
-}
+};
