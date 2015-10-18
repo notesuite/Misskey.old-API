@@ -23,5 +23,5 @@ const server: http.Server = app.listen(config.port.http, () => {
 	const host: string = server.address().address;
 	const port: number = server.address().port;
 
-	console.log(`Server listning at ${host}:${port}`);
+	console.log(`MisskeyAPI server listening at ${host}:${port}`);
 });
