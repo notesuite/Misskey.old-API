@@ -27,6 +27,15 @@
     },
     "mongoose/mongoose.d.ts": {
       "ref": "14ab703f435375194360cdba3abab61afc879c18"
+    },
+    "express/express.d.ts": {
+      "ref": "af5b8275d1f2b92738b93fddabc461fc20c553a1"
+    },
+    "body-parser/body-parser.d.ts": {
+      "ref": "af5b8275d1f2b92738b93fddabc461fc20c553a1"
+    },
+    "multer/multer.d.ts": {
+      "ref": "af5b8275d1f2b92738b93fddabc461fc20c553a1"
     }
   }
 }
