@@ -15,15 +15,23 @@ export interface IConfig {
 			pass: string;
 		};
 	};
+	port: {
+		http: number;
+		https: number;
+	};
 }
 
 export const template: IConfig = {
-	env: "",
+	env: "production or development",
 	mongo: {
-		uri: "",
+		uri: "mongodb://localhost/Misskey",
 		options: {
-			user: "",
-			pass: ""
+			user: "himawari",
+			pass: "sakurako0907"
 		}
+	},
+	port: {
+		http: 80,
+		https: 443
 	}
 };
