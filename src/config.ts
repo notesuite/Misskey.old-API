@@ -20,7 +20,7 @@ export interface IConfig {
 	};
 }
 
-export const template: IConfig = {
+export const defaultConfig: IConfig = {
 	mongo: {
 		uri: "mongodb://localhost/Misskey",
 		options: {

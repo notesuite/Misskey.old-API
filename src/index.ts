@@ -7,7 +7,7 @@ if (fs.existsSync(config.configPath)) {
 	// require('./server');
 } else {
 	fs.mkdirSync(config.configDirectoryPath);
-	fs.writeFile(config.configPath, JSON.stringify(config.template), (writeErr: NodeJS.ErrnoException) => {
+	fs.writeFile(config.configPath, JSON.stringify(config.defaultConfig), (writeErr: NodeJS.ErrnoException) => {
 		if (writeErr) {
 			console.log('configが存在しなかったため新規作成しようとしましたが、問題が発生しました:');
 			console.error(writeErr);
