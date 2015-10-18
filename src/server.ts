@@ -3,7 +3,7 @@ import * as bodyParser from 'body-parser';
 import * as multer from 'multer';
 import config from './config';
 
-var server: express.Express = express();
+const server: express.Express = express();
 server.disable('x-powered-by');
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(multer());
