@@ -7,7 +7,6 @@ export const configPath: string = `${configDirectoryPath}/${configFileName}`;
 export default <IConfig>require(configPath);
 
 export interface IConfig {
-	env: string;
 	mongo: {
 		uri: string;
 		options: {
@@ -22,7 +21,6 @@ export interface IConfig {
 }
 
 export const template: IConfig = {
-	env: "production or development",
 	mongo: {
 		uri: "mongodb://localhost/Misskey",
 		options: {
