@@ -4,7 +4,16 @@ export const configFileName: string = 'api.json';
 export const configDirectoryPath: string = `${homeDirPath}/${configDirName}`;
 export const configPath: string = `${configDirectoryPath}/${configFileName}`;
 
-export default <IConfig>require(configPath);
+export default loadConfig();
+
+function loadConfig(): IConfig {
+	'use strict';
+	try {
+		return <IConfig>require(configPath);
+	} catch (e) {
+		return null;
+	}
+}
 
 export interface IConfig {
 	mongo: {
