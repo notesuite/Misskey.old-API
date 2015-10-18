@@ -5,7 +5,6 @@ import * as multer from 'multer';
 import config from './config';
 
 console.log('Init server');
-console.log(config.mongo.options.user);
 
 const app: express.Express = express();
 app.disable('x-powered-by');
