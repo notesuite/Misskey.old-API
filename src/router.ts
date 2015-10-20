@@ -6,7 +6,7 @@ interface IRoute {
 }
 
 const routing: Array<IRoute> = [
-	{method: 'get', endpoint: '/screenname-available'}
+	{method: 'get', endpoint: 'screenname-available'}
 ];
 
 export default function(app: express.Express): void {
@@ -18,6 +18,6 @@ export default function(app: express.Express): void {
 	});
 
 	routing.forEach((route: IRoute) => {
-		(<any>app)[route.method](route.endpoint, require(`${__dirname}/restHandlers${route.endpoint}`));
+		(<any>app)[route.method]('/' + route.endpoint, require(`${__dirname}/restHandlers/${route.endpoint}`));
 	});
 }
