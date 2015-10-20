@@ -18,6 +18,6 @@ export default function(app: express.Express): void {
 	});
 
 	routing.forEach((route: IRoute) => {
-		(<any>app)[route.method](route.endpoint, require(`${__dirname}/endpoints${route.endpoint}`));
+		(<any>app)[route.method](route.endpoint, require(`${__dirname}/restHandlers${route.endpoint}`));
 	});
 }
