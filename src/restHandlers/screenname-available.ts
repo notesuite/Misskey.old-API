@@ -1,14 +1,14 @@
-import * as express from 'express';
-import User from '../models/user';
+// import * as express from 'express';
+import { MisskeyExpressRequest } from '../misskeyExpressRequest';
+import { MisskeyExpressResponse } from '../misskeyExpressResponse';
+import screennameAvailable from '../endpoints/screenname-available';
 
-export default function(req: express.Request, res: express.Response): void {
+export default function(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
 	'use strict';
-	
+	screennameAvailable(req.query['screen-name']).then((available: boolean) => {
+		res.apiRender(available);
+	}, (err: any) => {
+		// TODO: エラーコードを判別して適切なHTTPステータスコードを返す
+		res.apiError(500, err);
+	});
 }
-
-module.exports = (req, res) ->
-	[screen-name] = get-express-params req, <[ screen-name ]>
-
-	if empty screen-name
-	then res.api-error 400 'screen-name parameter is required :('
-	else exist-screenname screen-name .then res.api-render
