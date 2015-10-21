@@ -1,8 +1,8 @@
 import * as express from 'express';
-import Application from './models/application';
-import user from './models/user';
+import {Application} from './models/application';
+import {User} from './models/user';
 
 export interface MisskeyExpressRequest extends express.Request {
-	app: Application;
-	user: User;
+	misskeyApp: Application;
+	misskeyUser: User;
 }

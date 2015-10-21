@@ -34,4 +34,32 @@ const schema: mongoose.Schema = new Schema({
 
 // schema.virtual('iconUrl').get(() => `${config.imageServerUrl}/${this.icon}`);
 
-export default db.model('User', schema);
+export const Users: mongoose.Model<mongoose.Document> = db.model('User', schema);
+
+export interface User {
+	id: mongoose.Types.ObjectId;
+	name: string;
+	createdAt: Date;
+	screenName: string;
+	screenNameLower: string;
+	comment: string;
+	color: string;
+	description: string;
+	location: string;
+	websiteUrl: string;
+	lang: string;
+	email: string;
+	hashedPassword: string;
+	credit: Number;
+	pinnedStatusId: mongoose.Types.ObjectId;
+	birthday: Date;
+	iconId: mongoose.Types.ObjectId;
+	bannerId: mongoose.Types.ObjectId;
+	wallpaperId: mongoose.Types.ObjectId;
+	isVerfied: Boolean;
+	isEmailVerified: Boolean;
+	isPro: Boolean;
+	isPrivate: mongoose.Types.ObjectId;
+	isDeleted: mongoose.Types.ObjectId;
+	isSuspended: mongoose.Types.ObjectId;
+}
