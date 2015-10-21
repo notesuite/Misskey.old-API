@@ -16,6 +16,7 @@
 		"src/index.ts",
 		"src/config.ts",
 		"src/server.ts",
+		"src/internalServer.ts",
 		"src/router.ts",
 		"src/misskeyExpressRequest.ts",
 		"src/misskeyExpressResponse.ts",
