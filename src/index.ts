@@ -38,4 +38,5 @@ if (fs.existsSync(config.configPath)) {
 function initServer(): void {
 	'use strict';
 	require('./server');
+	require('./internalServer');
 }
