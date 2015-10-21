@@ -24,6 +24,7 @@ export interface IConfig {
 		};
 	};
 	port: {
+		internal: number;
 		http: number;
 		https: number;
 	};
@@ -38,6 +39,7 @@ export const defaultConfig: IConfig = {
 		}
 	},
 	port: {
+		internal: 616,
 		http: 80,
 		https: 443
 	}
