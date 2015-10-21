@@ -7,7 +7,7 @@ export default function(screenName: string): Promise<boolean> {
 			User.find({
 				screenNameLower: screenName.toLowerCase()
 			}).limit(1).exec((err: any, user: any) => {
-				resolve(user === null);
+				resolve(user.length === 0);
 			});
 		} else {
 			reject('empty-screen-name');
