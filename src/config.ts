@@ -23,6 +23,7 @@ export interface IConfig {
 			pass: string;
 		};
 	};
+	apiPasskey: string;
 	port: {
 		internal: number;
 		http: number;
@@ -38,6 +39,7 @@ export const defaultConfig: IConfig = {
 			pass: "sakurako0907"
 		}
 	},
+	apiPasskey: "",
 	port: {
 		internal: 616,
 		http: 80,

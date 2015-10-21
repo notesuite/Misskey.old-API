@@ -5,6 +5,7 @@ import * as multer from 'multer';
 import { MisskeyExpressRequest } from './misskeyExpressRequest';
 import { MisskeyExpressResponse } from './misskeyExpressResponse';
 import config from './config';
+import User from './models/user';
 import router from './router';
 
 console.log('Init server');
@@ -25,7 +26,25 @@ app.use((req: MisskeyExpressRequest, res: MisskeyExpressResponse, next: () => vo
 			error: error
 		});
 	};
-	next();
+	
+	if (req.headers['passkey'] !== null) {
+		if (req.headers['passkey'] === config.apiPasskey) {
+			req.app = null;
+			if (req.headers['user-id'] !== null) {
+				User.findById(req.headers['user-id'], (err: any, user: any) => {
+					req.user = user;
+					next();
+				});
+			} else {
+				req.user = null;
+				next();
+			}
+		} else {
+			res.send(403);
+		}
+	} else {
+		res.send(403);
+	}
 });
 
 router(app);
