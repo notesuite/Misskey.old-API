@@ -15,7 +15,7 @@ export default function(screenName: string, password: string): Promise<User> {
 			Users.create({
 				screenName: screenName,
 				screenNameLower: screenName.toLowerCase(),
-				password: hashedPassword
+				hashedPassword: hashedPassword
 			}, (err: any, createdUser: User) => {
 				
 			});
