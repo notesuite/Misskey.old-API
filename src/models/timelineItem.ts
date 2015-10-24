@@ -25,9 +25,9 @@ if (!(<any>schema).options.toObject) {
 	delete ret.__v;
 };
 
-export function transformTimelineItem(timelineItem: any): Promise<Object> {
-	return new Promise((resolve: (obj: any) => void, reject: (err: any) => void) => {
-		switch(timelineItem.contentType) {
+export function entityizeTimelineItem(timelineItem: any): Promise<any> {
+	return new Promise((resolve: (entity: any) => void, reject: (err: any) => void) => {
+		switch (timelineItem.contentType) {
 			case 'status':
 				Status.findById(timelineItem.contentId.toString(), (err: any, status: IStatus) => {
 					resolve(status);
