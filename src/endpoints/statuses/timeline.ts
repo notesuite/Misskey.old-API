@@ -1,5 +1,7 @@
 import {UserFollowing, IUserFollowing} from '../../models/userFollowing';
-import getUserTimeline from '../../core/getUserTimeline';
+import {ITimelineItem} from '../../models/timelineItem';
+import getTimeline from '../../core/getTimeline';
+import serializeTimeline from '../../core/serializeTimeline';
 
 /**
  * ユーザーのStatusタイムラインを取得します
@@ -28,9 +30,11 @@ export default function(userId: string, limit?: number, sinceCursor?: number, ma
 					}).concat([userId])
 					: [userId];
 
-				getUserTimeline(followingIds, ['status', 'status-repost'], limit, sinceCursor, maxCursor)
-						.then((timeline: Object[]) => {
-					resolve(timeline);
+				getTimeline(followingIds, ['status', 'status-repost'], limit, sinceCursor, maxCursor)
+						.then((timeline: ITimelineItem[]) => {
+					serializeTimeline(timeline).then((serializedTimeline: Object[]) => {
+						resolve(serializedTimeline);
+					});
 				});
 			}
 		});
