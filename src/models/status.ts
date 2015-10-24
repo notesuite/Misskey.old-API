@@ -37,6 +37,20 @@ schema.plugin(mongooseAutoIncrement.plugin, {
 	field: 'cursor'
 });
 
+export const Status: mongoose.Model<mongoose.Document> = db.model('Status', schema);
+
+export interface IStatus extends mongoose.Document {
+	userId: mongoose.Types.ObjectId;
+	appId: mongoose.Types.ObjectId;
+	createdAt: Date;
+	cursor: number;
+	text: string;
+	attachedFileIds: mongoose.Types.ObjectId[];
+	inReplyToStatusId: mongoose.Types.ObjectId;
+	isContentModified: boolean;
+	isDeleted: boolean;
+}
+
 export function serializeStatus(status: IStatus, options: {
 	includeAuthor: boolean;
 	includeReplyTarget: boolean;
@@ -116,18 +130,4 @@ export function serializeStatus(status: IStatus, options: {
 			reject(serializedErr);
 		});
 	});
-}
-
-export const Status: mongoose.Model<mongoose.Document> = db.model('Status', schema);
-
-export interface IStatus extends mongoose.Document {
-	userId: mongoose.Types.ObjectId;
-	appId: mongoose.Types.ObjectId;
-	createdAt: Date;
-	cursor: number;
-	text: string;
-	attachedFileIds: mongoose.Types.ObjectId[];
-	inReplyToStatusId: mongoose.Types.ObjectId;
-	isContentModified: boolean;
-	isDeleted: boolean;
 }
