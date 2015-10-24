@@ -2,6 +2,7 @@
 const mongooseAutoIncrement: any = require('mongoose-auto-increment');
 import * as mongoose from 'mongoose';
 import {User, IUser, serializeUser} from '../models/user';
+import getStatusStargazers from '../core/getStatusStargazers';
 import config from '../config';
 
 const Schema: typeof mongoose.Schema = mongoose.Schema;
@@ -44,52 +45,75 @@ export function serializeStatus(status: IStatus, options: {
 	includeAuthor: true,
 	includeReplyTarget: true,
 	includeStargazers: true
-}): Promise<mongoose.Document> {
-	const obj: any = status.toObject();
-	return new Promise((resolve: (entity: mongoose.Document) => void, reject: (err: any) => void) => {
+}): Promise<Object> {
+	return new Promise((resolve: (serializedStatus: Object) => void, reject: (err: any) => void) => {
 		Promise.all([
 			// Get author
-			new Promise((resolve: (obj: any) => void, reject: (err: any) => void) => {
+			new Promise((getAuthorResolve: (author: Object) => void, getAuthorReject: (err: any) => void) => {
 				if (options.includeAuthor) {
-					User.findById(status.userId.toString(), (err: any, user: IUser) => {
-						resolve(user.toObject());
+					User.findById(status.userId.toString(), (findErr: any, user: IUser) => {
+						if (findErr) {
+							getAuthorReject(findErr);
+						} else {
+							getAuthorResolve(user.toObject());
+						}
 					});
 				} else {
-					resolve(undefined);
+					getAuthorResolve(undefined);
 				}
 			}),
 			// Get reply target
-			new Promise((resolve: (obj: any) => void, reject: (err: any) => void) => {
+			new Promise((getReplyTargetResolve: (replyTarget: Object) => void, getReplyTargetReject: (err: any) => void) => {
 				if (options.includeReplyTarget) {
 					if (status.inReplyToStatusId !== null) {
-						Status.findById(status.inReplyToStatusId.toString(), (err: any, replyTargetStatus: IStatus) => {
-							if (replyTargetStatus !== null) {
-								resolve(serializeStatus(replyTargetStatus, {
+						Status.findById(status.inReplyToStatusId.toString(), (findErr: any, replyTargetStatus: IStatus) => {
+							if (findErr) {
+								getReplyTargetReject(findErr);
+							} else if (replyTargetStatus !== null) {
+								serializeStatus(replyTargetStatus, {
 									includeAuthor: true,
 									includeReplyTarget: false,
 									includeStargazers: false
-								}));
+								}).then((serializedStatus: Object) => {
+									getReplyTargetResolve(serializedStatus);
+								},
+								(serializedStatusErr: any) => {
+									getReplyTargetReject(serializedStatusErr);
+								});
 							} else {
-								resolve(null);
+								getReplyTargetResolve(null);
 							}
 						});
 					} else {
-						resolve(undefined);
+						getReplyTargetResolve(undefined);
 					}
 				} else {
-					resolve(undefined);
+					getReplyTargetResolve(undefined);
 				}
 			}),
 			// Get stargazers
-			new Promise((resolve: (obj: any) => void, reject: (err: any) => void) => {
+			new Promise((getStargazersResolve: (stargazers: Object[]) => void, getStargazersReject: (err: any) => void) => {
 				if (options.includeStargazers) {
-					
+					getStatusStargazers(status.id, 10).then((stargazers: IUser[]) => {
+						getStargazersResolve(stargazers.map((stargazer: IUser) => {
+							return stargazer.toObject();
+						}));
+					}, (getStargazersErr: any) => {
+						getStargazersReject(getStargazersErr);
+					});
 				} else {
-					resolve(undefined);
+					getStargazersResolve(undefined);
 				}
 			}),
 		]).then((results: any[]) => {
-			
+			const serializedStatus: any = status.toObject();
+			serializedStatus.user = results[0];
+			serializedStatus.replyTarget = results[1];
+			serializedStatus.stargazers = results[2];
+			resolve(serializedStatus);
+		},
+		(serializedErr: any) => {
+			reject(serializedErr);
 		});
 	});
 }
