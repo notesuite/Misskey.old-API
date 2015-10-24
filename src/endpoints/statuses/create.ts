@@ -3,8 +3,11 @@ import {Application, IApplication} from '../../models/application';
 
 /**
  * Statusを作成します
- * @userId: ユーザーID
+ * @app: API利用App
+ * @user: API利用ユーザー
  * @text: 本文
+ * @inReplyToStatusId: 返信先StatusのID。nullを設定すると通常のStatusになります
+ * @attachFileIds: 添付ファイルのIDの配列
  */
 export default function(app: IApplication, userId: string, text: string, inReplyToStatusId: string = null, attachFileIds: string = null)
 		: Promise<Object> {

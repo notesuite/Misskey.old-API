@@ -21,7 +21,7 @@ const schema: mongoose.Schema = new Schema({
 
 export const Application: mongoose.Model<mongoose.Document> = db.model('Application', schema);
 
-export interface IApplication {
+export interface IApplication extends mongoose.Document {
 	createdAt: Date;
 	userId: mongoose.Types.ObjectId;
 	appKey: string;
