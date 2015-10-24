@@ -16,7 +16,7 @@ const schema: mongoose.Schema = new Schema({
 	location: { type: String, required: false, default: null },
 	websiteUrl: { type: String, required: false, default: null },
 	lang: { type: String, required: true },
-	email: { type: String, required: false, unique: true, sparse: true, default: null },
+	email: { type: String, required: false, sparse: true, default: null },
 	hashedPassword: { type: String, required: true },
 	credit: { type: Number, required: true },
 	pinnedStatusId: { type: Schema.Types.ObjectId, required: false, default: null },
@@ -34,10 +34,9 @@ const schema: mongoose.Schema = new Schema({
 
 // schema.virtual('iconUrl').get(() => `${config.imageServerUrl}/${this.icon}`);
 
-export const Users: mongoose.Model<mongoose.Document> = db.model('User', schema);
+export const User: mongoose.Model<mongoose.Document> = db.model('User', schema);
 
-export interface User {
-	id: mongoose.Types.ObjectId;
+export interface IUser extends mongoose.Document {
 	name: string;
 	createdAt: Date;
 	screenName: string;

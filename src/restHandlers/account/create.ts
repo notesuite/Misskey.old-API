@@ -2,13 +2,13 @@
 import { MisskeyExpressRequest } from '../../misskeyExpressRequest';
 import { MisskeyExpressResponse } from '../../misskeyExpressResponse';
 import createAccount from '../../endpoints/account/create';
-import {User} from '../../models/user';
+import {IUser} from '../../models/user';
 
 module.exports = (req: MisskeyExpressRequest, res: MisskeyExpressResponse): void => {
 	'use strict';
-	createAccount(req.body['screen-name'], req.body['password']).then((user: User) => {
+	createAccount(req.body['screen-name'], req.body['password']).then((user: IUser) => {
 		res.apiRender({
-			user
+			user: user.toObject()
 		});
 	}, (err: any) => {
 		const statuscode: number = (() => {

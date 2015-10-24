@@ -6,7 +6,8 @@ interface IRoute {
 }
 
 const routing: Array<IRoute> = [
-	{method: 'get', endpoint: 'screenname-available'}
+	{method: 'get', endpoint: 'screenname-available'},
+	{method: 'post', endpoint: 'account/create'}
 ];
 
 export default function(app: express.Express): void {
