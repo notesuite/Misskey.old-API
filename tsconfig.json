@@ -32,7 +32,9 @@
 		"src/restHandlers/statuses/timeline.ts",
 		"src/models/user.ts",
 		"src/models/userFollowing.ts",
+		"src/models/timelineItem.ts",
 		"src/models/status.ts",
+		"src/models/statusRepost.ts",
 		"src/models/application.ts",
 		"src/models/image.ts"
 	]

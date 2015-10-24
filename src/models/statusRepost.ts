@@ -12,10 +12,7 @@ const schema: mongoose.Schema = new Schema({
 	appId: { type: mongoose.Types.ObjectId, required: false, default: null },
 	createdAt: { type: Date, required: true, default: Date.now },
 	cursor: { type: Number },
-	text: { type: String, required: false, default: null },
-	attachedFileIds: { type: [mongoose.Types.ObjectId], required: false, default: [] },
-	inReplyToStatusId: { type: mongoose.Types.ObjectId, required: false, default: null },
-	isContentModified: { type: Boolean, required: false, default: false },
+	statusId: { type: mongoose.Types.ObjectId, required: true },
 	isDeleted: { type: Boolean, required: false, default: false }
 });
 
@@ -35,9 +32,9 @@ schema.plugin(mongooseAutoIncrement.plugin, {
 	field: 'cursor'
 });
 
-export const Status: mongoose.Model<mongoose.Document> = db.model('Status', schema);
+export const StatusRepost: mongoose.Model<mongoose.Document> = db.model('StatusRepost', schema);
 
-export interface IStatus extends mongoose.Document {
+export interface IStatusRepost extends mongoose.Document {
 	userId: mongoose.Types.ObjectId;
 	appId: mongoose.Types.ObjectId;
 	createdAt: Date;
@@ -45,6 +42,6 @@ export interface IStatus extends mongoose.Document {
 	text: string;
 	attachedFileIds: mongoose.Types.ObjectId[];
 	inReplyToStatusId: mongoose.Types.ObjectId;
-	isContentModified: boolean;
-	isDeleted: boolean;
+	isContentModified: mongoose.Types.ObjectId;
+	isDeleted: mongoose.Types.ObjectId;
 }
