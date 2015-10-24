@@ -1,5 +1,7 @@
 import {UserFollowing, IUserFollowing} from '../../models/userFollowing';
+import {TimelineItem, ITimelineItem} from '../../models/timelineItem';
 import {Status, IStatus} from '../../models/status';
+import {StatusRepost, IStatusRepost} from '../../models/statusRepost';
 
 /**
  * ユーザーのStatusタイムラインを取得します
@@ -41,10 +43,11 @@ export default function(userId: string, limit?: number, sinceCursor?: number, ma
 				})();
 
 				// クエリを発行してタイムラインを取得
-				Status.find(query).sort('-createdAt').limit(limit).exec((err: any, statuses: IStatus[]) => {
+				TimelineItem.find(query).sort('-createdAt').limit(limit).exec((err: any, timeline: ITimelineItem[]) => {
 					if (err) {
 						reject(err);
 					} else {
+						
 						resolve(statuses.map((status: IStatus): Object => {
 							return status.toObject({
 								userId,
