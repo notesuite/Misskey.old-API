@@ -5,7 +5,7 @@ import {IStatus} from '../../models/status';
 
 module.exports = (req: MisskeyExpressRequest, res: MisskeyExpressResponse): void => {
 	'use strict';
-	getTimeline(req.misskeyUserId, req.body['since-cursor'], req.body['max-cursor']).then((timeline: IStatus[]) => {
+	getTimeline(req.misskeyUserId, req.body['limit'], req.body['since-cursor'], req.body['max-cursor']).then((timeline: IStatus[]) => {
 		res.apiRender(timeline.map((status: IStatus) => {
 			return status.toObject();
 		}));

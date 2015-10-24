@@ -1,9 +1,10 @@
 import {UserFollowing, IUserFollowing} from '../../models/userFollowing';
 import {Status, IStatus} from '../../models/status';
 
-export default function(userId: string, limit: number, sinceCursor?: number, maxCursor?: number)
+export default function(userId: string, limit?: number, sinceCursor?: number, maxCursor?: number)
 		: Promise<IStatus[]> {
 	'use strict';
+	limit = limit ? limit : 10;
 	return new Promise((resolve: (statuses: IStatus[]) => void, reject: (err: any) => void) => {
 		// 自分がフォローしているユーザーの関係を取得
 		UserFollowing.find({followerId: userId}, (followingsFindErr: any, followings: IUserFollowing[]) => {
