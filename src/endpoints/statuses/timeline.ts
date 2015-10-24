@@ -32,9 +32,15 @@ export default function(userId: string, limit?: number, sinceCursor?: number, ma
 
 				getTimeline(followingIds, ['status', 'status-repost'], limit, sinceCursor, maxCursor)
 						.then((timeline: ITimelineItem[]) => {
-					serializeTimeline(timeline).then((serializedTimeline: Object[]) => {
-						resolve(serializedTimeline);
-					});
+					if (timeline === null || timeline.length === 0) {
+						resolve(null);
+					} else {
+						serializeTimeline(timeline).then((serializedTimeline: Object[]) => {
+							resolve(serializedTimeline);
+						}, (serializeErr: any) => {
+							reject(serializeErr);
+						});
+					}
 				});
 			}
 		});
