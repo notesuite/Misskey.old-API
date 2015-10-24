@@ -59,6 +59,7 @@ export default function(userIds: string[], itemTypes?: string[], limit?: number,
 }
 
 function entityizeTimeline(timeline: ITimelineItem[]): Promise<any[]> {
+	'use strict';
 	return Promise.all(timeline.map((item: ITimelineItem): Object => {
 		const type: string = item.contentType;
 		const id: string = item.contentId.toString();
@@ -66,14 +67,24 @@ function entityizeTimeline(timeline: ITimelineItem[]): Promise<any[]> {
 			switch (type) {
 				case 'status':
 					Status.findById(id, (err: any, status: IStatus) => {
-						
-						resolve(status.toObject());
+						serializeStatus(status).then((serializedStatus: Object) => {
+							resolve(serializedStatus);
+						}, (serializeErr: any) => {
+							reject(serializeErr);
+						});
 					});
 					break;
 				case 'status-repost':
 					StatusRepost.findById(id, (err: any, statusRepost: IStatusRepost) => {
-						resolve(statusRepost.toObject());
+						serializeStatusRepost(statusRepost).then((serializedStatusRepost: Object) => {
+							resolve(serializedStatusRepost);
+						}, (serializeErr: any) => {
+							reject(serializeErr);
+						});
 					});
+					break;
+				default:
+					reject('unknown-timeline-item-type');
 					break;
 			}
 		});

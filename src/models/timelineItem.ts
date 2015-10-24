@@ -1,6 +1,4 @@
 import * as mongoose from 'mongoose';
-import {Status, IStatus} from './status';
-import {StatusRepost, IStatusRepost} from './statusRepost';
 import config from '../config';
 
 const Schema: typeof mongoose.Schema = mongoose.Schema;

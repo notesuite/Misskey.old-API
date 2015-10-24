@@ -60,6 +60,7 @@ export function serializeStatus(status: IStatus, options: {
 	includeReplyTarget: true,
 	includeStargazers: true
 }): Promise<Object> {
+	'use strict';
 	return new Promise((resolve: (serializedStatus: Object) => void, reject: (err: any) => void) => {
 		Promise.all([
 			// Get author

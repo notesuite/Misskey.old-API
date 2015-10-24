@@ -1,6 +1,7 @@
 // import mongooseAutoIncrement from 'mongoose-auto-increment';
 const mongooseAutoIncrement: any = require('mongoose-auto-increment');
 import * as mongoose from 'mongoose';
+import {Status, IStatus, serializeStatus} from './status';
 import config from '../config';
 
 const Schema: typeof mongoose.Schema = mongoose.Schema;
@@ -41,4 +42,25 @@ export interface IStatusRepost extends mongoose.Document {
 	createdAt: Date;
 	cursor: number;
 	isDeleted: mongoose.Types.ObjectId;
+}
+
+export function serializeStatusRepost(repost: IStatusRepost): Promise<Object> {
+	'use strict';
+	return new Promise((resolve: (serializedStatusRepost: Object) => void, reject: (err: any) => void) => {
+		Status.findById(repost.statusId.toString(), (findErr: any, status: IStatus) => {
+			if (findErr) {
+				reject(findErr);
+			} else {
+				serializeStatus(status).then((serializedStatus: Object) => {
+					const serializedStatusRepost: any = {};
+					serializedStatusRepost.createdAt = repost.createdAt;
+					serializedStatusRepost.cursor = repost.cursor;
+					serializedStatusRepost.repost = serializedStatus;
+					resolve(serializedStatusRepost);
+				}, (serializeStatusRrr: any) => {
+					reject(serializeStatusRrr);
+				});
+			}
+		});
+	});
 }

@@ -1,5 +1,4 @@
 import {User, IUser} from '../models/user';
-import {Status, IStatus} from '../models/status';
 import {StatusFavorite, IStatusFavorite} from '../models/statusFavorite';
 
 export default function(statusId: string, limit?: number, sinceCursor?: number, maxCursor?: number)
@@ -40,7 +39,7 @@ export default function(statusId: string, limit?: number, sinceCursor?: number, 
 							if (findUserErr) {
 								findUserReject(findUserErr);
 							} else if (stargazer === null) {
-								findUserResolve(null)
+								findUserResolve(null);
 							} else {
 								findUserResolve(stargazer);
 							}

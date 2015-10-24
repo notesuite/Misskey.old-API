@@ -1,7 +1,4 @@
 import {UserFollowing, IUserFollowing} from '../../models/userFollowing';
-import {TimelineItem, ITimelineItem} from '../../models/timelineItem';
-import {Status, IStatus} from '../../models/status';
-import {StatusRepost, IStatusRepost} from '../../models/statusRepost';
 import getUserTimeline from '../../core/getUserTimeline';
 
 /**
@@ -12,8 +9,7 @@ import getUserTimeline from '../../core/getUserTimeline';
  * @maxCursor: 取得するStatusを、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
  * @includeUserEntity: Statusを作成したユーザーのUserオブジェクトを含めるかどうか
  */
-export default function(userId: string, limit?: number, sinceCursor?: number, maxCursor?: number,
-		includeUserEntity?: boolean)
+export default function(userId: string, limit?: number, sinceCursor?: number, maxCursor?: number, includeUserEntity?: boolean)
 		: Promise<Object[]> {
 	'use strict';
 	limit = limit ? limit : 10;

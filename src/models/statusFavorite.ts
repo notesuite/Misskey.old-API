@@ -11,7 +11,7 @@ const schema: mongoose.Schema = new Schema({
 	userId: { type: mongoose.Types.ObjectId, required: true },
 	createdAt: { type: Date, required: true, default: Date.now },
 	cursor: { type: Number },
-	statusId: { type: mongoose.Types.ObjectId, required: true },
+	statusId: { type: mongoose.Types.ObjectId, required: true }
 });
 
 if (!(<any>schema).options.toObject) {
