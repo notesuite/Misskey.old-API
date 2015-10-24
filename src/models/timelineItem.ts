@@ -6,11 +6,11 @@ const Schema: typeof mongoose.Schema = mongoose.Schema;
 const db: mongoose.Connection = mongoose.createConnection(config.mongo.uri, config.mongo.options);
 
 const schema: mongoose.Schema = new Schema({
-	userId: { type: mongoose.Types.ObjectId, required: true },
+	userId: { type: Schema.Types.ObjectId, required: true },
 	createdAt: { type: Date, required: true, default: Date.now },
 	cursor: { type: Number, required: true },
 	contentType: { type: String, required: true },
-	contentId: { type: mongoose.Types.ObjectId, required: true },
+	contentId: { type: Schema.Types.ObjectId, required: true },
 	isContentDeleted: { type: Boolean, required: false, default: false }
 });
 

@@ -8,12 +8,14 @@ const Schema: typeof mongoose.Schema = mongoose.Schema;
 
 const db: mongoose.Connection = mongoose.createConnection(config.mongo.uri, config.mongo.options);
 
+mongooseAutoIncrement.initialize(db);
+
 const schema: mongoose.Schema = new Schema({
-	userId: { type: mongoose.Types.ObjectId, required: true },
-	appId: { type: mongoose.Types.ObjectId, required: false, default: null },
+	userId: { type: Schema.Types.ObjectId, required: true },
+	appId: { type: Schema.Types.ObjectId, required: false, default: null },
 	createdAt: { type: Date, required: true, default: Date.now },
 	cursor: { type: Number },
-	statusId: { type: mongoose.Types.ObjectId, required: true },
+	statusId: { type: Schema.Types.ObjectId, required: true },
 	isDeleted: { type: Boolean, required: false, default: false }
 });
 

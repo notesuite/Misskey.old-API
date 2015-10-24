@@ -1,22 +1,22 @@
 import {User, IUser} from '../../models/user';
 
-export default function(id?: string, screenName?: string): Promise<IUser> {
+export default function(id?: string, screenName?: string): Promise<Object> {
 	'use strict';
-	return new Promise((resolve: (user: IUser) => void, reject: (err: any) => void) => {
-		if (id) {
+	return new Promise((resolve: (user: Object) => void, reject: (err: any) => void) => {
+		if (id !== undefined && id !== null) {
 			User.findById(id, (err: any, user: IUser) => {
-				if (err) {
+				if (err !== null) {
 					reject(err);
 				} else {
-					resolve(user);
+					resolve(user.toObject());
 				}
 			});
-		} else if (screenName) {
+		} else if (screenName !== undefined && screenName !== null) {
 			User.findOne({screenNameLower: screenName.toLowerCase()}, (err: any, user: IUser) => {
-				if (err) {
+				if (err !== null) {
 					reject(err);
 				} else {
-					resolve(user);
+					resolve(user.toObject());
 				}
 			});
 		} else {
