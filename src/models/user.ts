@@ -34,6 +34,17 @@ const schema: mongoose.Schema = new Schema({
 
 // schema.virtual('iconUrl').get(() => `${config.imageServerUrl}/${this.icon}`);
 
+if (!(<any>schema).options.toObject) {
+	(<any>schema).options.toObject = {};
+}
+(<any>schema).options.toObject.transform = (doc: any, ret: any) => {
+	ret.id = doc.id;
+	delete ret._id;
+	delete ret.__v;
+	delete ret.encryptedPassword;
+	return ret;
+};
+
 export const User: mongoose.Model<mongoose.Document> = db.model('User', schema);
 
 export interface IUser extends mongoose.Document {
