@@ -17,7 +17,7 @@ const schema: mongoose.Schema = new Schema({
 	websiteUrl: { type: String, required: false, default: null },
 	lang: { type: String, required: true },
 	email: { type: String, required: false, sparse: true, default: null },
-	hashedPassword: { type: String, required: true },
+	encryptedPassword: { type: String, required: true },
 	credit: { type: Number, required: true },
 	pinnedStatusId: { type: Schema.Types.ObjectId, required: false, default: null },
 	birthday: { type: Date, required: false, default: null },
@@ -48,7 +48,7 @@ export interface IUser extends mongoose.Document {
 	websiteUrl: string;
 	lang: string;
 	email: string;
-	hashedPassword: string;
+	encryptedPassword: string;
 	credit: Number;
 	pinnedStatusId: mongoose.Types.ObjectId;
 	birthday: Date;

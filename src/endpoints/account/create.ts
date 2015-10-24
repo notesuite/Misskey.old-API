@@ -14,7 +14,7 @@ export default function(screenName: string, password: string): Promise<IUser> {
 		} else {
 			// Generate hash of password
 			const salt: string = bcrypt.genSaltSync(14);
-			const hashedPassword: string = bcrypt.hashSync(password, salt);
+			const encryptedPassword: string = bcrypt.hashSync(password, salt);
 
 			User.create({
 				screenName: screenName,
@@ -22,7 +22,7 @@ export default function(screenName: string, password: string): Promise<IUser> {
 				name: 'no name',
 				lang: 'ja',
 				credit: 3000,
-				hashedPassword: hashedPassword
+				encryptedPassword: encryptedPassword
 			}, (err: any, createdUser: IUser) => {
 				if (err) {
 					reject(err);
