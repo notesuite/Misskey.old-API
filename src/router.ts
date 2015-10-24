@@ -6,6 +6,7 @@ interface IRoute {
 }
 
 const routing: Array<IRoute> = [
+	{method: 'get', endpoint: 'login'},
 	{method: 'get', endpoint: 'screenname-available'},
 	{method: 'post', endpoint: 'account/create'}
 ];
