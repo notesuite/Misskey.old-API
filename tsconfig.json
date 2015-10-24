@@ -21,6 +21,7 @@
 		"src/misskeyExpressRequest.ts",
 		"src/misskeyExpressResponse.ts",
 		"src/core/getUserTimeline.ts",
+		"src/core/getStatusStargazers.ts",
 		"src/endpoints/login.ts",
 		"src/endpoints/screenname-available.ts",
 		"src/endpoints/account/create.ts",
@@ -36,6 +37,7 @@
 		"src/models/timelineItem.ts",
 		"src/models/status.ts",
 		"src/models/statusRepost.ts",
+		"src/models/statusFavorite.ts",
 		"src/models/application.ts",
 		"src/models/image.ts"
 	]

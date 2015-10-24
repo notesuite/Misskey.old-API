@@ -9,11 +9,9 @@ const db: mongoose.Connection = mongoose.createConnection(config.mongo.uri, conf
 
 const schema: mongoose.Schema = new Schema({
 	userId: { type: mongoose.Types.ObjectId, required: true },
-	appId: { type: mongoose.Types.ObjectId, required: false, default: null },
 	createdAt: { type: Date, required: true, default: Date.now },
 	cursor: { type: Number },
 	statusId: { type: mongoose.Types.ObjectId, required: true },
-	isDeleted: { type: Boolean, required: false, default: false }
 });
 
 if (!(<any>schema).options.toObject) {
@@ -32,13 +30,11 @@ schema.plugin(mongooseAutoIncrement.plugin, {
 	field: 'cursor'
 });
 
-export const StatusRepost: mongoose.Model<mongoose.Document> = db.model('StatusRepost', schema);
+export const StatusFavorite: mongoose.Model<mongoose.Document> = db.model('StatusFavorite', schema);
 
-export interface IStatusRepost extends mongoose.Document {
+export interface IStatusFavorite extends mongoose.Document {
 	userId: mongoose.Types.ObjectId;
-	appId: mongoose.Types.ObjectId;
 	statusId: mongoose.Types.ObjectId;
 	createdAt: Date;
 	cursor: number;
-	isDeleted: mongoose.Types.ObjectId;
 }

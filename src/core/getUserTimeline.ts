@@ -1,6 +1,6 @@
 import {TimelineItem, ITimelineItem} from '../models/timelineItem';
-import {Status, IStatus} from '../models/status';
-import {StatusRepost, IStatusRepost} from '../models/statusRepost';
+import {Status, IStatus, serializeStatus} from '../models/status';
+import {StatusRepost, IStatusRepost, serializeStatusRepost} from '../models/statusRepost';
 
 /**
  * ユーザーのタイムラインを取得します
@@ -66,6 +66,7 @@ function entityizeTimeline(timeline: ITimelineItem[]): Promise<any[]> {
 			switch (type) {
 				case 'status':
 					Status.findById(id, (err: any, status: IStatus) => {
+						
 						resolve(status.toObject());
 					});
 					break;

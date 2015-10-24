@@ -1,6 +1,7 @@
 // import mongooseAutoIncrement from 'mongoose-auto-increment';
 const mongooseAutoIncrement: any = require('mongoose-auto-increment');
 import * as mongoose from 'mongoose';
+import {User, IUser, serializeUser} from '../models/user';
 import config from '../config';
 
 const Schema: typeof mongoose.Schema = mongoose.Schema;
@@ -34,6 +35,64 @@ schema.plugin(mongooseAutoIncrement.plugin, {
 	model: 'Timeline',
 	field: 'cursor'
 });
+
+export function serializeStatus(status: IStatus, options: {
+	includeAuthor: boolean;
+	includeReplyTarget: boolean;
+	includeStargazers: boolean;
+} = {
+	includeAuthor: true,
+	includeReplyTarget: true,
+	includeStargazers: true
+}): Promise<mongoose.Document> {
+	const obj: any = status.toObject();
+	return new Promise((resolve: (entity: mongoose.Document) => void, reject: (err: any) => void) => {
+		Promise.all([
+			// Get author
+			new Promise((resolve: (obj: any) => void, reject: (err: any) => void) => {
+				if (options.includeAuthor) {
+					User.findById(status.userId.toString(), (err: any, user: IUser) => {
+						resolve(user.toObject());
+					});
+				} else {
+					resolve(undefined);
+				}
+			}),
+			// Get reply target
+			new Promise((resolve: (obj: any) => void, reject: (err: any) => void) => {
+				if (options.includeReplyTarget) {
+					if (status.inReplyToStatusId !== null) {
+						Status.findById(status.inReplyToStatusId.toString(), (err: any, replyTargetStatus: IStatus) => {
+							if (replyTargetStatus !== null) {
+								resolve(serializeStatus(replyTargetStatus, {
+									includeAuthor: true,
+									includeReplyTarget: false,
+									includeStargazers: false
+								}));
+							} else {
+								resolve(null);
+							}
+						});
+					} else {
+						resolve(undefined);
+					}
+				} else {
+					resolve(undefined);
+				}
+			}),
+			// Get stargazers
+			new Promise((resolve: (obj: any) => void, reject: (err: any) => void) => {
+				if (options.includeStargazers) {
+					
+				} else {
+					resolve(undefined);
+				}
+			}),
+		]).then((results: any[]) => {
+			
+		});
+	});
+}
 
 export const Status: mongoose.Model<mongoose.Document> = db.model('Status', schema);
 

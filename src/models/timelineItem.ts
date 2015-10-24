@@ -25,23 +25,6 @@ if (!(<any>schema).options.toObject) {
 	delete ret.__v;
 };
 
-export function entityizeTimelineItem(timelineItem: any): Promise<mongoose.Document> {
-	return new Promise((resolve: (entity: mongoose.Document) => void, reject: (err: any) => void) => {
-		switch (timelineItem.contentType) {
-			case 'status':
-				Status.findById(timelineItem.contentId.toString(), (err: any, status: IStatus) => {
-					resolve(status);
-				});
-				break;
-			case 'status-repost':
-				StatusRepost.findById(timelineItem.contentId.toString(), (err: any, statusRepost: IStatusRepost) => {
-					resolve(statusRepost);
-				});
-				break;
-		}
-	});
-}
-
 export const TimelineItem: mongoose.Model<mongoose.Document> = db.model('TimelineItem', schema);
 
 export interface ITimelineItem extends mongoose.Document {
