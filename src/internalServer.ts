@@ -5,7 +5,6 @@ import * as multer from 'multer';
 import { MisskeyExpressRequest } from './misskeyExpressRequest';
 import { MisskeyExpressResponse } from './misskeyExpressResponse';
 import config from './config';
-import {User, IUser} from './models/user';
 import router from './router';
 
 console.log('Init server');
@@ -31,12 +30,10 @@ app.use((req: MisskeyExpressRequest, res: MisskeyExpressResponse, next: () => vo
 		if (req.headers['passkey'] === config.apiPasskey) {
 			req.misskeyApp = null;
 			if (req.headers['user-id'] !== null) {
-				User.findById(req.headers['user-id'], (err: any, user: IUser) => {
-					req.misskeyUser = user;
-					next();
-				});
+				req.misskeyUserId = req.headers['user-id'];
+				next();
 			} else {
-				req.misskeyUser = null;
+				req.misskeyUserId = null;
 				next();
 			}
 		} else {
