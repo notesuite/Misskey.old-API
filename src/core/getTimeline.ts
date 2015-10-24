@@ -8,11 +8,9 @@ import {TimelineItem, ITimelineItem} from '../models/timelineItem';
  * @sinceCursor: 取得するコンテンツを、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
  * @maxCursor: 取得するコンテンツを、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
  */
-export default function(userIds: string[], itemTypes?: string[], limit?: number, sinceCursor?: number, maxCursor?: number)
+export default function(userIds: string[], itemTypes: string[] = ['status', 'status-repost'], limit: number = 10, sinceCursor: number = null, maxCursor: number = null)
 		: Promise<ITimelineItem[]> {
 	'use strict';
-	itemTypes = itemTypes ? itemTypes : ['status', 'status-repost'];
-	limit = limit ? limit : 10;
 
 	return new Promise((resolve: (timeline: ITimelineItem[]) => void, reject: (err: any) => void) => {
 		// タイムライン取得用のクエリを生成
@@ -44,7 +42,7 @@ export default function(userIds: string[], itemTypes?: string[], limit?: number,
 		// クエリを発行してタイムラインを取得
 		TimelineItem.find(query).sort('-createdAt').limit(limit)
 				.exec((err: any, timeline: ITimelineItem[]) => {
-			if (err) {
+			if (err !== null) {
 				reject(err);
 			} else {
 				resolve(timeline);
