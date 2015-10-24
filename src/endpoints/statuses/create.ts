@@ -1,5 +1,5 @@
 import {Status, IStatus} from '../../models/status';
-import {Application, IApplication} from '../../models/application';
+import {IApplication} from '../../models/application';
 
 /**
  * Statusを作成します
@@ -13,7 +13,7 @@ export default function(app: IApplication, userId: string, text: string, inReply
 		: Promise<Object> {
 	'use strict';
 
-	const maxTextLength = 300;
+	const maxTextLength: number = 300;
 	text = text.trim();
 
 	return new Promise((resolve: (status: Object) => void, reject: (err: any) => void) => {
@@ -42,7 +42,7 @@ export default function(app: IApplication, userId: string, text: string, inReply
 						reject(findReplyTargetErr);
 						return;
 					}
-					
+
 					if (replyTarget === null) {
 						reject('reply-target-not-found');
 					} else {
@@ -53,7 +53,7 @@ export default function(app: IApplication, userId: string, text: string, inReply
 				create();
 			}
 		});
-		
+
 		function create(): void {
 			Status.create({
 				appId: app !== null ? app.id : null,

@@ -4,6 +4,7 @@ import * as bodyParser from 'body-parser';
 import * as multer from 'multer';
 import { MisskeyExpressRequest } from './misskeyExpressRequest';
 import { MisskeyExpressResponse } from './misskeyExpressResponse';
+import {User, IUser} from './models/user';
 import config from './config';
 import router from './router';
 
@@ -32,10 +33,12 @@ app.use((req: MisskeyExpressRequest, res: MisskeyExpressResponse, next: () => vo
 		if (req.headers['passkey'] === config.apiPasskey) {
 			req.misskeyApp = null;
 			if (req.headers['user-id'] !== null) {
-				req.misskeyUserId = req.headers['user-id'];
-				next();
+				User.findById(req.headers['user-id'], (err: any, user: IUser) => {
+					req.misskeyUser = user;
+					next();
+				});
 			} else {
-				req.misskeyUserId = null;
+				req.misskeyUser = null;
 				next();
 			}
 		} else {
