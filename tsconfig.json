@@ -23,6 +23,7 @@
 		"src/core/getTimeline.ts",
 		"src/core/serializeTimeline.ts",
 		"src/core/getStatusStargazers.ts",
+		"src/core/publishStreamingMessage.ts",
 		"src/endpoints/login.ts",
 		"src/endpoints/screenname-available.ts",
 		"src/endpoints/account/create.ts",

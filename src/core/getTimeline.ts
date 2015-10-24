@@ -8,7 +8,12 @@ import {TimelineItem, ITimelineItem} from '../models/timelineItem';
  * @sinceCursor: 取得するコンテンツを、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
  * @maxCursor: 取得するコンテンツを、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
  */
-export default function(userIds: string[], itemTypes: string[] = ['status', 'status-repost'], limit: number = 10, sinceCursor: number = null, maxCursor: number = null)
+export default function(
+	userIds: string[],
+	itemTypes: string[] = ['status', 'status-repost'],
+	limit: number = 10,
+	sinceCursor: number = null,
+	maxCursor: number = null)
 		: Promise<ITimelineItem[]> {
 	'use strict';
 

@@ -23,6 +23,10 @@ export interface IConfig {
 			pass: string;
 		};
 	};
+	redis: {
+		host: string,
+		port: number;
+	};
 	apiPasskey: string;
 	port: {
 		internal: number;
@@ -38,6 +42,10 @@ export const defaultConfig: IConfig = {
 			user: "himawari",
 			pass: "sakurako0907"
 		}
+	},
+	redis: {
+		host: "localhost",
+		port: 6379
 	},
 	apiPasskey: "",
 	port: {
