@@ -25,8 +25,8 @@ if (!(<any>schema).options.toObject) {
 	delete ret.__v;
 };
 
-export function entityizeTimelineItem(timelineItem: any): Promise<any> {
-	return new Promise((resolve: (entity: any) => void, reject: (err: any) => void) => {
+export function entityizeTimelineItem(timelineItem: any): Promise<mongoose.Document> {
+	return new Promise((resolve: (entity: mongoose.Document) => void, reject: (err: any) => void) => {
 		switch (timelineItem.contentType) {
 			case 'status':
 				Status.findById(timelineItem.contentId.toString(), (err: any, status: IStatus) => {
