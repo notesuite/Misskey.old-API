@@ -41,6 +41,7 @@ if (!(<any>schema).options.toObject) {
 	ret.id = doc.id;
 	delete ret._id;
 	delete ret.__v;
+	delete ret.screenNameLower;
 	delete ret.encryptedPassword;
 };
 

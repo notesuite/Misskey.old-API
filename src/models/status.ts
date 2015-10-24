@@ -75,8 +75,6 @@ export function serializeStatus(status: IStatus, options: {
 							getAuthorResolve(user.toObject());
 						}
 					});
-				} else {
-					getAuthorResolve(undefined);
 				}
 			}),
 			// Get reply target
@@ -104,8 +102,6 @@ export function serializeStatus(status: IStatus, options: {
 					} else {
 						getReplyTargetResolve(undefined);
 					}
-				} else {
-					getReplyTargetResolve(undefined);
 				}
 			}),
 			// Get stargazers
@@ -122,15 +118,19 @@ export function serializeStatus(status: IStatus, options: {
 					}, (getStargazersErr: any) => {
 						getStargazersReject(getStargazersErr);
 					});
-				} else {
-					getStargazersResolve(undefined);
 				}
 			}),
 		]).then((results: any[]) => {
 			const serializedStatus: any = status.toObject();
-			serializedStatus.user = results[0];
-			serializedStatus.replyTarget = results[1];
-			serializedStatus.stargazers = results[2];
+			if (options.includeAuthor && results[0] !== undefined) {
+				serializedStatus.user = results[0];
+			}
+			if (options.includeReplyTarget && results[1] !== undefined) {
+				serializedStatus.replyTarget = results[1];
+			}
+			if (options.includeStargazers && results[2] !== undefined) {
+				serializedStatus.stargazers = results[2];
+			}
 			resolve(serializedStatus);
 		},
 		(serializedErr: any) => {
