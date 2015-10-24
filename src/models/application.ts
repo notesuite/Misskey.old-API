@@ -19,10 +19,9 @@ const schema: mongoose.Schema = new Schema({
 
 // schema.virtual('iconUrl').get(() => `${config.imageServerUrl}/${this.icon}`);
 
-export const Applications: mongoose.Model<mongoose.Document> = db.model('Application', schema);
+export const Application: mongoose.Model<mongoose.Document> = db.model('Application', schema);
 
-export interface Application {
-	id: mongoose.Types.ObjectId;
+export interface IApplication {
 	createdAt: Date;
 	userId: mongoose.Types.ObjectId;
 	appKey: string;

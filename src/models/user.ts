@@ -21,9 +21,9 @@ const schema: mongoose.Schema = new Schema({
 	credit: { type: Number, required: true },
 	pinnedStatusId: { type: Schema.Types.ObjectId, required: false, default: null },
 	birthday: { type: Date, required: false, default: null },
-	iconId: { type: Schema.Types.ObjectId, required: false, default: null },
-	bannerId: { type: Schema.Types.ObjectId, required: false, default: null },
-	wallpaperId: { type: Schema.Types.ObjectId, required: false, default: null },
+	icon: { type: String, required: false, default: null },
+	banner: { type: String, required: false, default: null },
+	wallpaper: { type: String, required: false, default: null },
 	isVerfied: { type: Boolean, required: false, default: false },
 	isEmailVerified: { type: Boolean, required: false, default: false },
 	isPro: { type: Boolean, required: false, default: false },
@@ -63,9 +63,9 @@ export interface IUser extends mongoose.Document {
 	credit: Number;
 	pinnedStatusId: mongoose.Types.ObjectId;
 	birthday: Date;
-	iconId: mongoose.Types.ObjectId;
-	bannerId: mongoose.Types.ObjectId;
-	wallpaperId: mongoose.Types.ObjectId;
+	icon: string;
+	banner: string;
+	wallpaper: string;
 	isVerfied: Boolean;
 	isEmailVerified: Boolean;
 	isPro: Boolean;
