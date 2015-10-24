@@ -1,7 +1,7 @@
 // import mongooseAutoIncrement from 'mongoose-auto-increment';
 const mongooseAutoIncrement: any = require('mongoose-auto-increment');
 import * as mongoose from 'mongoose';
-import {User, IUser, serializeUser} from '../models/user';
+import {User, IUser} from '../models/user';
 import getStatusStargazers from '../core/getStatusStargazers';
 import config from '../config';
 
