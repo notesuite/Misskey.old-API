@@ -2,6 +2,7 @@ import {UserFollowing, IUserFollowing} from '../../models/userFollowing';
 import {TimelineItem, ITimelineItem} from '../../models/timelineItem';
 import {Status, IStatus} from '../../models/status';
 import {StatusRepost, IStatusRepost} from '../../models/statusRepost';
+import getUserTimeline from '../../core/getUserTimeline';
 
 /**
  * ユーザーのStatusタイムラインを取得します
@@ -31,33 +32,9 @@ export default function(userId: string, limit?: number, sinceCursor?: number, ma
 					}).concat([userId])
 					: [userId];
 
-				// タイムライン取得用のクエリを生成
-				const query: any = ((): any => {
-					if (sinceCursor === null && maxCursor === null) {
-						return {userId: {$in: followingIds}};
-					} else if (sinceCursor) {
-						return {$and: [{userId: {$in: followingIds}}, {cursor: {$gt: sinceCursor}}]};
-					} else if (maxCursor) {
-						return {$and: [{userId: {$in: followingIds}}, {cursor: {$lt: maxCursor}}]};
-					}
-				})();
-
-				// クエリを発行してタイムラインを取得
-				TimelineItem.find(query).sort('-createdAt').limit(limit).exec((err: any, timeline: ITimelineItem[]) => {
-					if (err) {
-						reject(err);
-					} else {
-						
-						resolve(statuses.map((status: IStatus): Object => {
-							return status.toObject({
-								userId,
-								includeUserEntity,
-								includeApplicationEntity: true,
-								includeIsFavorited: true,
-								includeIsReposted: true,
-							});
-						}));
-					}
+				getUserTimeline(followingIds, ['status', 'status-repost'], limit, sinceCursor, maxCursor)
+						.then((timeline: Object[]) => {
+					resolve(timeline);
 				});
 			}
 		});

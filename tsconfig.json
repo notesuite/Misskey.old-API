@@ -20,6 +20,7 @@
 		"src/router.ts",
 		"src/misskeyExpressRequest.ts",
 		"src/misskeyExpressResponse.ts",
+		"src/core/getUserTimeline.ts",
 		"src/endpoints/login.ts",
 		"src/endpoints/screenname-available.ts",
 		"src/endpoints/account/create.ts",
