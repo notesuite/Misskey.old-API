@@ -11,11 +11,9 @@ import serializeTimeline from '../../core/serializeTimeline';
  * @maxCursor: 取得するStatusを、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
  * @includeUserEntity: Statusを作成したユーザーのUserオブジェクトを含めるかどうか
  */
-export default function(userId: string, limit?: number, sinceCursor?: number, maxCursor?: number, includeUserEntity?: boolean)
+export default function(userId: string, limit: number = 10, sinceCursor: number = null, maxCursor: number = null)
 		: Promise<Object[]> {
 	'use strict';
-	limit = limit ? limit : 10;
-	includeUserEntity = includeUserEntity ? includeUserEntity : true;
 
 	return new Promise((resolve: (statuses: Object[]) => void, reject: (err: any) => void) => {
 		// 自分がフォローしているユーザーの関係を取得
@@ -41,6 +39,8 @@ export default function(userId: string, limit?: number, sinceCursor?: number, ma
 							reject(serializeErr);
 						});
 					}
+				}, (getTimelineErr: any) => {
+					reject(getTimelineErr);
 				});
 			}
 		});

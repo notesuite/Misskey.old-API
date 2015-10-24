@@ -23,13 +23,13 @@ export default function(
 			if (sinceCursor === null && maxCursor === null) {
 				return {$and: [
 					{userId: {$in: userIds}},
-					{contentType: {$in: [itemTypes]}}
+					{contentType: {$in: itemTypes}}
 				]};
 			} else if (sinceCursor) {
 				return {$and: [
 					{$and: [
 						{userId: {$in: userIds}},
-						{contentType: {$in: [itemTypes]}}
+						{contentType: {$in: itemTypes}}
 					]},
 					{cursor: {$gt: sinceCursor}}
 				]};
@@ -37,7 +37,7 @@ export default function(
 				return {$and: [
 					{$and: [
 						{userId: {$in: userIds}},
-						{contentType: {$in: [itemTypes]}}
+						{contentType: {$in: itemTypes}}
 					]},
 					{cursor: {$lt: maxCursor}}
 				]};

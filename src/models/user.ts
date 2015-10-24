@@ -42,7 +42,6 @@ if (!(<any>schema).options.toObject) {
 	delete ret._id;
 	delete ret.__v;
 	delete ret.encryptedPassword;
-	return ret;
 };
 
 export const User: mongoose.Model<mongoose.Document> = db.model('User', schema);

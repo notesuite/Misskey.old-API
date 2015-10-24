@@ -1,4 +1,5 @@
 import {Status, IStatus} from '../../models/status';
+import {TimelineItem, ITimelineItem} from '../../models/timelineItem';
 import {IApplication} from '../../models/application';
 import {UserFollowing, IUserFollowing} from '../../models/userFollowing';
 import publishStreamingMessage from '../../core/publishStreamingMessage';
@@ -84,6 +85,18 @@ export default function(app: IApplication, userId: string, text: string, inReply
 						followers.forEach((follower: IUserFollowing) => {
 							publishStreamingMessage(`userStream:${follower.followerId}`, streamMessage);
 						});
+					});
+
+					// タイムラインに追加
+					TimelineItem.create({
+						userId,
+						cursor: createdStatus.cursor,
+						contentType: 'status',
+						contentId: createdStatus.id
+					}, (timelineItemCreateErr: any, createdTimelineItem: ITimelineItem) => {
+						if (timelineItemCreateErr !== null) {
+							reject(timelineItemCreateErr);
+						}
 					});
 				}
 			});

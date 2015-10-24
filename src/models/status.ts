@@ -69,7 +69,7 @@ export function serializeStatus(status: IStatus, options: {
 			new Promise((getAuthorResolve: (author: Object) => void, getAuthorReject: (err: any) => void) => {
 				if (options.includeAuthor) {
 					User.findById(status.userId.toString(), (findErr: any, user: IUser) => {
-						if (findErr) {
+						if (findErr !== null) {
 							getAuthorReject(findErr);
 						} else {
 							getAuthorResolve(user.toObject());
@@ -84,7 +84,7 @@ export function serializeStatus(status: IStatus, options: {
 				if (options.includeReplyTarget) {
 					if (status.inReplyToStatusId !== null) {
 						Status.findById(status.inReplyToStatusId.toString(), (findErr: any, replyTargetStatus: IStatus) => {
-							if (findErr) {
+							if (findErr !== null) {
 								getReplyTargetReject(findErr);
 							} else if (replyTargetStatus !== null) {
 								serializeStatus(replyTargetStatus, {
@@ -112,9 +112,13 @@ export function serializeStatus(status: IStatus, options: {
 			new Promise((getStargazersResolve: (stargazers: Object[]) => void, getStargazersReject: (err: any) => void) => {
 				if (options.includeStargazers) {
 					getStatusStargazers(status.id, 10).then((stargazers: IUser[]) => {
-						getStargazersResolve(stargazers.map((stargazer: IUser) => {
-							return stargazer.toObject();
-						}));
+						if (stargazers !== null && stargazers.length > 0) {
+							getStargazersResolve(stargazers.map((stargazer: IUser) => {
+								return stargazer.toObject();
+							}));
+						} else {
+							getStargazersResolve(null);
+						}
 					}, (getStargazersErr: any) => {
 						getStargazersReject(getStargazersErr);
 					});
