@@ -1,5 +1,7 @@
 import {Status, IStatus} from '../../models/status';
 import {IApplication} from '../../models/application';
+import {UserFollowing, IUserFollowing} from '../../models/userFollowing';
+import publishStreamingMessage from '../../core/publishStreamingMessage';
 
 /**
  * Statusを作成します
@@ -65,6 +67,24 @@ export default function(app: IApplication, userId: string, text: string, inReply
 					reject(err);
 				} else {
 					resolve(createdStatus.toObject());
+
+					// ストリーミングイベント用メッセージオブジェクト
+					const streamMessage: string = JSON.stringify({
+						type: 'status',
+						value: {
+							id: createdStatus.id
+						}
+					});
+
+					// 自分のストリーム
+					publishStreamingMessage(`userStream:${userId}`, streamMessage);
+
+					// 自分のフォロワーのストリーム
+					UserFollowing.find({followeeId: userId}, (followerFindErr: any, followers: IUserFollowing[]) => {
+						followers.forEach((follower: IUserFollowing) => {
+							publishStreamingMessage(`userStream:${follower.followerId}`, streamMessage);
+						});
+					});
 				}
 			});
 		}
