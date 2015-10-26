@@ -11,16 +11,25 @@ const db: mongoose.Connection = mongoose.createConnection(config.mongo.uri, conf
 
 mongooseAutoIncrement.initialize(db);
 
-const schema: mongoose.Schema = new Schema({
-	appId: { type: Schema.Types.ObjectId, required: false, default: null },
+const postBase: Object = {
+	app: { type: Schema.Types.ObjectId, required: false, default: null },
 	createdAt: { type: Date, required: true, default: Date.now },
 	cursor: { type: Number },
 	favoritesCount: { type: Number, required: false, default: 0 },
 	isDeleted: { type: Boolean, required: false, default: false },
 	repliesCount: { type: Number, required: false, default: 0 },
 	repostsCount: { type: Number, required: false, default: 0 },
-	userId: { type: Schema.Types.ObjectId, required: true }
-});
+	user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
+};
+
+const postStatus: Object = {
+	text: { type: String, required: false, default: null },
+	attachedFiles: [{ type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFile' }],
+	inReplyToPost: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Post' },
+	isContentModified: { type: Boolean, required: false, default: false }
+};
+
+const postBaseSchema: mongoose.Schema = new Schema(PostBase);
 
 if (!(<any>schema).options.toObject) {
 	(<any>schema).options.toObject = {};
@@ -49,6 +58,13 @@ export interface IPost extends mongoose.Document {
 	repliesCount: number;
 	repostsCount: number;
 	userId: mongoose.Types.ObjectId;
+}
+
+export interface IPostStatus extends IPost {
+	text: string;
+	attachedFileIds: mongoose.Types.ObjectId[];
+	inReplyToStatusId: mongoose.Types.ObjectId;
+	isContentModified: boolean;
 }
 
 export function serializeStatus(status: IStatus, options: {
