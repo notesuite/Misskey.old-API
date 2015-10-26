@@ -22,12 +22,12 @@ const postBase: Object = {
 	user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
 };
 
-const postStatus: Object = {
+const postStatus: Object = Object.assign({
 	text: { type: String, required: false, default: null },
 	attachedFiles: [{ type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFile' }],
 	inReplyToPost: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Post' },
 	isContentModified: { type: Boolean, required: false, default: false }
-};
+}, postBase);
 
 const postBaseSchema: mongoose.Schema = new Schema(PostBase);
 
@@ -47,7 +47,7 @@ schema.plugin(mongooseAutoIncrement.plugin, {
 	field: 'cursor'
 });
 
-export const Status: mongoose.Model<mongoose.Document> = db.model('Post', schema);
+export const Status: mongoose.Model<mongoose.Document> = db.model('PostBase', schema, 'Post');
 
 export interface IPost extends mongoose.Document {
 	appId: mongoose.Types.ObjectId;
