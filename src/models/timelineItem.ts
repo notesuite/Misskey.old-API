@@ -1,3 +1,4 @@
+const mongooseAutoIncrement: any = require('mongoose-auto-increment');
 import * as mongoose from 'mongoose';
 import config from '../config';
 
@@ -5,10 +6,12 @@ const Schema: typeof mongoose.Schema = mongoose.Schema;
 
 const db: mongoose.Connection = mongoose.createConnection(config.mongo.uri, config.mongo.options);
 
+mongooseAutoIncrement.initialize(db);
+
 const schema: mongoose.Schema = new Schema({
 	userId: { type: Schema.Types.ObjectId, required: true },
 	createdAt: { type: Date, required: true, default: Date.now },
-	cursor: { type: Number, required: true },
+	cursor: { type: Number },
 	contentType: { type: String, required: true },
 	contentId: { type: Schema.Types.ObjectId, required: true },
 	isContentDeleted: { type: Boolean, required: false, default: false }
@@ -22,6 +25,12 @@ if (!(<any>schema).options.toObject) {
 	delete ret._id;
 	delete ret.__v;
 };
+
+// Auto increment
+schema.plugin(mongooseAutoIncrement.plugin, {
+	model: 'TimelineItem',
+	field: 'cursor'
+});
 
 export const TimelineItem: mongoose.Model<mongoose.Document> = db.model('TimelineItem', schema);
 

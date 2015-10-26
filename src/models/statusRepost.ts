@@ -31,7 +31,7 @@ if (!(<any>schema).options.toObject) {
 
 // Auto increment
 schema.plugin(mongooseAutoIncrement.plugin, {
-	model: 'Timeline',
+	model: 'StatusRepost',
 	field: 'cursor'
 });
 

@@ -90,7 +90,6 @@ export default function(app: IApplication, userId: string, text: string, inReply
 					// タイムラインに追加
 					TimelineItem.create({
 						userId,
-						cursor: createdStatus.cursor,
 						contentType: 'status',
 						contentId: createdStatus.id
 					}, (timelineItemCreateErr: any, createdTimelineItem: ITimelineItem) => {

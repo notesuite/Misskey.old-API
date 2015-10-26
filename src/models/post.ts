@@ -12,15 +12,14 @@ const db: mongoose.Connection = mongoose.createConnection(config.mongo.uri, conf
 mongooseAutoIncrement.initialize(db);
 
 const schema: mongoose.Schema = new Schema({
-	userId: { type: Schema.Types.ObjectId, required: true },
 	appId: { type: Schema.Types.ObjectId, required: false, default: null },
 	createdAt: { type: Date, required: true, default: Date.now },
 	cursor: { type: Number },
-	text: { type: String, required: false, default: null },
-	attachedFileIds: { type: [Schema.Types.ObjectId], required: false, default: [] },
-	inReplyToStatusId: { type: Schema.Types.ObjectId, required: false, default: null },
-	isContentModified: { type: Boolean, required: false, default: false },
-	isDeleted: { type: Boolean, required: false, default: false }
+	favoritesCount: { type: Number, required: false, default: 0 },
+	isDeleted: { type: Boolean, required: false, default: false },
+	repliesCount: { type: Number, required: false, default: 0 },
+	repostsCount: { type: Number, required: false, default: 0 },
+	userId: { type: Schema.Types.ObjectId, required: true }
 });
 
 if (!(<any>schema).options.toObject) {
@@ -35,11 +34,11 @@ if (!(<any>schema).options.toObject) {
 
 // Auto increment
 schema.plugin(mongooseAutoIncrement.plugin, {
-	model: 'Timeline',
+	model: 'Post',
 	field: 'cursor'
 });
 
-export const Status: mongoose.Model<mongoose.Document> = db.model('Status', schema);
+export const Status: mongoose.Model<mongoose.Document> = db.model('Post', schema);
 
 export interface IStatus extends mongoose.Document {
 	userId: mongoose.Types.ObjectId;
