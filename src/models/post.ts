@@ -29,12 +29,12 @@ const postStatus: Object = Object.assign({
 	isContentModified: { type: Boolean, required: false, default: false }
 }, postBase);
 
-const postBaseSchema: mongoose.Schema = new Schema(PostBase);
+const postStatusSchema: mongoose.Schema = new Schema(postStatus);
 
-if (!(<any>schema).options.toObject) {
-	(<any>schema).options.toObject = {};
+if (!(<any>postStatusSchema).options.toObject) {
+	(<any>postStatusSchema).options.toObject = {};
 }
-(<any>schema).options.toObject.transform = (doc: any, ret: any) => {
+(<any>postStatusSchema).options.toObject.transform = (doc: any, ret: any) => {
 	ret.id = doc.id;
 	delete ret._id;
 	delete ret.__v;
@@ -42,12 +42,12 @@ if (!(<any>schema).options.toObject) {
 };
 
 // Auto increment
-schema.plugin(mongooseAutoIncrement.plugin, {
+postStatusSchema.plugin(mongooseAutoIncrement.plugin, {
 	model: 'Post',
 	field: 'cursor'
 });
 
-export const Status: mongoose.Model<mongoose.Document> = db.model('PostBase', schema, 'Post');
+export const Status: mongoose.Model<mongoose.Document> = db.model('PostStatus', postStatusSchema, 'Post');
 
 export interface IPost extends mongoose.Document {
 	appId: mongoose.Types.ObjectId;
