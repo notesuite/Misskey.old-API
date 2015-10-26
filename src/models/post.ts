@@ -3,6 +3,7 @@ const mongooseAutoIncrement: any = require('mongoose-auto-increment');
 import * as mongoose from 'mongoose';
 import {User, IUser} from '../models/user';
 import {Application, IApplication} from '../models/application';
+import {AlbumFile, IAlbumFile} from '../models/albumFile';
 import getStatusStargazers from '../core/getStatusStargazers';
 import config from '../config';
 
@@ -12,6 +13,7 @@ const db: mongoose.Connection = mongoose.createConnection(config.mongo.uri, conf
 
 mongooseAutoIncrement.initialize(db);
 
+// Common schema
 const postBase: Object = {
 	app: { type: Schema.Types.ObjectId, required: false, default: null },
 	createdAt: { type: Date, required: true, default: Date.now },
@@ -69,12 +71,8 @@ export interface IPostStatus extends IPost {
 }
 
 export function serializeStatus(status: IPostStatus, options: {
-	includeAuthor: boolean;
-	includeReplyTarget: boolean;
 	includeStargazers: boolean;
 } = {
-	includeAuthor: true,
-	includeReplyTarget: true,
 	includeStargazers: true
 }): Promise<Object> {
 	'use strict';
@@ -95,7 +93,7 @@ export function serializeStatus(status: IPostStatus, options: {
 						getStargazersReject(getStargazersErr);
 					});
 				}
-			}),
+			})
 		]).then((results: any[]) => {
 			const serializedStatus: any = status.toObject();
 			if (options.includeStargazers && results[0] !== undefined) {
