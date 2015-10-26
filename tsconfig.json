@@ -43,6 +43,7 @@
 		"src/models/post.ts",
 		"src/models/favorite.ts",
 		"src/models/application.ts",
-		"src/models/albumFile.ts"
+		"src/models/albumFile.ts",
+		"src/models/albumFolder.ts"
 	]
 }

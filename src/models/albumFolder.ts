@@ -2,7 +2,6 @@
 const mongooseAutoIncrement: any = require('mongoose-auto-increment');
 import * as mongoose from 'mongoose';
 import {User, IUser} from '../models/user';
-import {AlbumFolder, IAlbumFolder} from '../models/albumFolder';
 import config from '../config';
 
 const Schema: typeof mongoose.Schema = mongoose.Schema;
@@ -14,14 +13,8 @@ mongooseAutoIncrement.initialize(db);
 const schema: mongoose.Schema = new Schema({
 	createdAt: { type: Date, required: true, default: Date.now },
 	cursor: { type: Number },
-	dataSize: { type: Number, required: true },
-	folder: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFolder' },
-	format: { type: String, required: true },
-	hash: { type: String, required: true },
-	isDeleted: { type: Boolean, required: false, default: false },
-	isPrivate: { type: Boolean, required: false, default: false },
 	name: { type: String, required: true },
-	serverPath: { type: String, required: true },
+	parent: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFolder' },
 	user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
 });
 
@@ -36,22 +29,16 @@ if (!(<any>schema).options.toObject) {
 
 // Auto increment
 schema.plugin(mongooseAutoIncrement.plugin, {
-	model: 'AlbumFile',
+	model: 'AlbumFolder',
 	field: 'cursor'
 });
 
-export const AlbumFile: mongoose.Model<mongoose.Document> = db.model('AlbumFile', schema, 'AlbumFile');
+export const AlbumFolder: mongoose.Model<mongoose.Document> = db.model('AlbumFolder', schema, 'AlbumFolder');
 
-export interface IAlbumFile extends mongoose.Document {
+export interface IAlbumFolder extends mongoose.Document {
 	createdAt: Date;
 	cursor: number;
-	dataSize: number;
-	folder: mongoose.Types.ObjectId | IAlbumFolder;
-	format: string;
-	hash: string;
-	isDeleted: boolean;
-	isPrivate: boolean;
 	name: string;
-	serverPath: string;
+	parent: mongoose.Types.ObjectId | IAlbumFolder;
 	user: mongoose.Types.ObjectId | IUser;
 }
