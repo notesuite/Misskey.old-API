@@ -2,6 +2,7 @@
 const mongooseAutoIncrement: any = require('mongoose-auto-increment');
 import * as mongoose from 'mongoose';
 import {User, IUser} from '../models/user';
+import {Application, IApplication} from '../models/application';
 import getStatusStargazers from '../core/getStatusStargazers';
 import config from '../config';
 
@@ -22,6 +23,7 @@ const postBase: Object = {
 	user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
 };
 
+// Extend post base
 const postStatus: Object = Object.assign({
 	text: { type: String, required: false, default: null },
 	attachedFiles: [{ type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFile' }],
@@ -38,7 +40,6 @@ if (!(<any>postStatusSchema).options.toObject) {
 	ret.id = doc.id;
 	delete ret._id;
 	delete ret.__v;
-	return ret;
 };
 
 // Auto increment
@@ -50,24 +51,24 @@ postStatusSchema.plugin(mongooseAutoIncrement.plugin, {
 export const Status: mongoose.Model<mongoose.Document> = db.model('PostStatus', postStatusSchema, 'Post');
 
 export interface IPost extends mongoose.Document {
-	appId: mongoose.Types.ObjectId;
+	app: mongoose.Types.ObjectId | IApplication;
 	createdAt: Date;
 	cursor: number;
 	favoritesCount: number;
 	isDeleted: boolean;
 	repliesCount: number;
 	repostsCount: number;
-	userId: mongoose.Types.ObjectId;
+	user: mongoose.Types.ObjectId | IUser;
 }
 
 export interface IPostStatus extends IPost {
 	text: string;
-	attachedFileIds: mongoose.Types.ObjectId[];
-	inReplyToStatusId: mongoose.Types.ObjectId;
+	attachedFiles: mongoose.Types.ObjectId[] | IAlbumFile[];
+	inReplyToStatus: mongoose.Types.ObjectId | IPostStatus;
 	isContentModified: boolean;
 }
 
-export function serializeStatus(status: IStatus, options: {
+export function serializeStatus(status: IPostStatus, options: {
 	includeAuthor: boolean;
 	includeReplyTarget: boolean;
 	includeStargazers: boolean;
@@ -79,45 +80,6 @@ export function serializeStatus(status: IStatus, options: {
 	'use strict';
 	return new Promise((resolve: (serializedStatus: Object) => void, reject: (err: any) => void) => {
 		Promise.all([
-			// Get author
-			new Promise((getAuthorResolve: (author: Object) => void, getAuthorReject: (err: any) => void) => {
-				if (options.includeAuthor) {
-					User.findById(status.userId.toString(), (findErr: any, user: IUser) => {
-						if (findErr !== null) {
-							getAuthorReject(findErr);
-						} else {
-							getAuthorResolve(user.toObject());
-						}
-					});
-				}
-			}),
-			// Get reply target
-			new Promise((getReplyTargetResolve: (replyTarget: Object) => void, getReplyTargetReject: (err: any) => void) => {
-				if (options.includeReplyTarget) {
-					if (status.inReplyToStatusId !== null) {
-						Status.findById(status.inReplyToStatusId.toString(), (findErr: any, replyTargetStatus: IStatus) => {
-							if (findErr !== null) {
-								getReplyTargetReject(findErr);
-							} else if (replyTargetStatus !== null) {
-								serializeStatus(replyTargetStatus, {
-									includeAuthor: true,
-									includeReplyTarget: false,
-									includeStargazers: false
-								}).then((serializedStatus: Object) => {
-									getReplyTargetResolve(serializedStatus);
-								},
-								(serializedStatusErr: any) => {
-									getReplyTargetReject(serializedStatusErr);
-								});
-							} else {
-								getReplyTargetResolve(null);
-							}
-						});
-					} else {
-						getReplyTargetResolve(undefined);
-					}
-				}
-			}),
 			// Get stargazers
 			new Promise((getStargazersResolve: (stargazers: Object[]) => void, getStargazersReject: (err: any) => void) => {
 				if (options.includeStargazers) {
@@ -136,14 +98,8 @@ export function serializeStatus(status: IStatus, options: {
 			}),
 		]).then((results: any[]) => {
 			const serializedStatus: any = status.toObject();
-			if (options.includeAuthor && results[0] !== undefined) {
-				serializedStatus.user = results[0];
-			}
-			if (options.includeReplyTarget && results[1] !== undefined) {
-				serializedStatus.replyTarget = results[1];
-			}
-			if (options.includeStargazers && results[2] !== undefined) {
-				serializedStatus.stargazers = results[2];
+			if (options.includeStargazers && results[0] !== undefined) {
+				serializedStatus.stargazers = results[0];
 			}
 			resolve(serializedStatus);
 		},
