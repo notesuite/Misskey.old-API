@@ -40,16 +40,15 @@ schema.plugin(mongooseAutoIncrement.plugin, {
 
 export const Status: mongoose.Model<mongoose.Document> = db.model('Post', schema);
 
-export interface IStatus extends mongoose.Document {
-	userId: mongoose.Types.ObjectId;
+export interface IPost extends mongoose.Document {
 	appId: mongoose.Types.ObjectId;
 	createdAt: Date;
 	cursor: number;
-	text: string;
-	attachedFileIds: mongoose.Types.ObjectId[];
-	inReplyToStatusId: mongoose.Types.ObjectId;
-	isContentModified: boolean;
+	favoritesCount: number;
 	isDeleted: boolean;
+	repliesCount: number;
+	repostsCount: number;
+	userId: mongoose.Types.ObjectId;
 }
 
 export function serializeStatus(status: IStatus, options: {
