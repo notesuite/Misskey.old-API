@@ -1,6 +1,5 @@
 import {Post, IPost} from '../models/post';
 import {UserFollowing, IUserFollowing} from '../models/userFollowing';
-import getTimeline from '../core/getTimeline';
 import serializeTimeline from '../core/serializeTimeline';
 
 /**
