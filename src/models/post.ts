@@ -22,6 +22,7 @@ const postBase: Object = {
 	isDeleted: { type: Boolean, required: false, default: false },
 	repliesCount: { type: Number, required: false, default: 0 },
 	repostsCount: { type: Number, required: false, default: 0 },
+	type: { type: String, required: true },
 	user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
 };
 
@@ -50,7 +51,7 @@ postStatusSchema.plugin(mongooseAutoIncrement.plugin, {
 	field: 'cursor'
 });
 
-export const Status: mongoose.Model<mongoose.Document> = db.model('PostStatus', postStatusSchema, 'Post');
+export const PostStatus: mongoose.Model<mongoose.Document> = db.model('PostStatus', postStatusSchema, 'Post');
 
 export interface IPost extends mongoose.Document {
 	app: mongoose.Types.ObjectId | IApplication;

@@ -1,5 +1,4 @@
-import {Status, IStatus} from '../../models/status';
-import {TimelineItem, ITimelineItem} from '../../models/timelineItem';
+import {PostStatus, IPostStatus} from '../../models/post';
 import {IApplication} from '../../models/application';
 import {UserFollowing, IUserFollowing} from '../../models/userFollowing';
 import publishStreamingMessage from '../../core/publishStreamingMessage';
@@ -25,80 +24,35 @@ export default function(app: IApplication, userId: string, text: string, inReply
 			return;
 		}
 
-		// 直近のStatusを取得
-		Status.findOne({userId}).sort('-createdAt').exec((recentStatusFindErr: any, recentStatus: IStatus) => {
-			if (recentStatusFindErr !== null) {
-				reject(recentStatusFindErr);
-				return;
-			}
+		PostStatus.create({
+			app: app !== null ? app.id : null,
+			user: userId,
+			inReplyToStatus: inReplyToStatusId,
+			text
+		}, (err: any, createdStatus: IPostStatus) => {
+			if (err !== null) {
+				reject(err);
+			} else {
+				resolve(createdStatus.toObject());
 
-			// 内容が重複していた場合はエラー
-			if (recentStatus !== null && recentStatus.text === text) {
-				reject('duplicate-content');
-				return;
-			}
-
-			// 返信先が指定されている場合、返信先のStatusが本当に存在するか確認する
-			if (inReplyToStatusId !== undefined && inReplyToStatusId !== null) {
-				Status.findById(inReplyToStatusId, (findReplyTargetErr: any, replyTarget: IStatus) => {
-					if (findReplyTargetErr !== null) {
-						reject(findReplyTargetErr);
-						return;
-					}
-
-					if (replyTarget === null) {
-						reject('reply-target-not-found');
-					} else {
-						create();
+				// ストリーミングイベント用メッセージオブジェクト
+				const streamMessage: string = JSON.stringify({
+					type: 'post',
+					value: {
+						id: createdStatus.id
 					}
 				});
-			} else {
-				create();
+
+				// 自分のストリーム
+				publishStreamingMessage(`userStream:${userId}`, streamMessage);
+
+				// 自分のフォロワーのストリーム
+				UserFollowing.find({followeeId: userId}, (followerFindErr: any, followers: IUserFollowing[]) => {
+					followers.forEach((follower: IUserFollowing) => {
+						publishStreamingMessage(`userStream:${follower.followerId}`, streamMessage);
+					});
+				});
 			}
 		});
-
-		function create(): void {
-			Status.create({
-				appId: app !== null ? app.id : null,
-				userId,
-				inReplyToStatusId,
-				text
-			}, (err: any, createdStatus: IStatus) => {
-				if (err !== null) {
-					reject(err);
-				} else {
-					resolve(createdStatus.toObject());
-
-					// ストリーミングイベント用メッセージオブジェクト
-					const streamMessage: string = JSON.stringify({
-						type: 'status',
-						value: {
-							id: createdStatus.id
-						}
-					});
-
-					// 自分のストリーム
-					publishStreamingMessage(`userStream:${userId}`, streamMessage);
-
-					// 自分のフォロワーのストリーム
-					UserFollowing.find({followeeId: userId}, (followerFindErr: any, followers: IUserFollowing[]) => {
-						followers.forEach((follower: IUserFollowing) => {
-							publishStreamingMessage(`userStream:${follower.followerId}`, streamMessage);
-						});
-					});
-
-					// タイムラインに追加
-					TimelineItem.create({
-						userId,
-						contentType: 'status',
-						contentId: createdStatus.id
-					}, (timelineItemCreateErr: any, createdTimelineItem: ITimelineItem) => {
-						if (timelineItemCreateErr !== null) {
-							reject(timelineItemCreateErr);
-						}
-					});
-				}
-			});
-		}
 	});
 }
