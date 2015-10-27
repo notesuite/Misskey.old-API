@@ -28,6 +28,7 @@ export interface IConfig {
 		port: number;
 	};
 	apiPasskey: string;
+	userContentsServerPasskey: string;
 	port: {
 		internal: number;
 		http: number;
@@ -48,6 +49,7 @@ export const defaultConfig: IConfig = {
 		port: 6379
 	},
 	apiPasskey: "",
+	userContentsServerPasskey: "",
 	port: {
 		internal: 616,
 		http: 80,
