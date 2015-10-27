@@ -33,7 +33,7 @@ schema.plugin(mongooseAutoIncrement.plugin, {
 	field: 'cursor'
 });
 
-export const Favorite: mongoose.Model<mongoose.Document> = db.model('Favorite', schema);
+export const Favorite: mongoose.Model<mongoose.Document> = db.model('Favorite', schema, 'Favorites');
 
 export interface IFavorite extends mongoose.Document {
 	post: mongoose.Types.ObjectId | IPost;
