@@ -27,8 +27,13 @@ export interface IConfig {
 		host: string,
 		port: number;
 	};
+	userContentsServer: {
+		passkey: string;
+		url: string;
+		ip: string;
+		port: number;
+	};
 	apiPasskey: string;
-	userContentsServerPasskey: string;
 	port: {
 		internal: number;
 		http: number;
@@ -48,8 +53,13 @@ export const defaultConfig: IConfig = {
 		host: "localhost",
 		port: 6379
 	},
+	userContentsServer: {
+		passkey: "",
+		url: "http://usercontents.misskey.xyz",
+		ip: "192.168.0.2",
+		port: 616
+	},
 	apiPasskey: "",
-	userContentsServerPasskey: "",
 	port: {
 		internal: 616,
 		http: 80,

@@ -4,12 +4,12 @@ import {IApplication} from '../models/application';
 import config from '../config';
 
 export default function(fileName: string, file: Buffer)
-		: Promise<Object> {
+		: Promise<string> {
 	'use strict';
 
-	return new Promise((resolve: (status: Object) => void, reject: (err: any) => void) => {
+	return new Promise((resolve: (path: string) => void, reject: (err: any) => void) => {
 		const requestData: Object = {
-			passkey: config.userContentsServerPasskey,
+			passkey: config.userContentsServer.passkey,
 			file: {
 				value: Buffer,
 				options: {
@@ -18,11 +18,11 @@ export default function(fileName: string, file: Buffer)
 			}
 		};
 
-		const url = `http://${config.imageServerIp}:${config.imageServerPort}/register`;
+		const url = `http://${config.userContentsServer.ip}:${config.userContentsServer.port}/register`;
 		request.post({
-			url: url,
+			url,
 			formData: requestData
-		}, (err, res, path) => {
+		}, (err: any, _: any, path: any) => {
 			if (err !== null) {
 				reject(err);
 			} else {
