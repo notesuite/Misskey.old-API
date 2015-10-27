@@ -11,7 +11,7 @@ const schema: mongoose.Schema = new Schema({
 	followerId: { type: Schema.Types.ObjectId, required: true }
 });
 
-export const UserFollowing: mongoose.Model<mongoose.Document> = db.model('UserFollowing', schema);
+export const UserFollowing: mongoose.Model<mongoose.Document> = db.model('UserFollowing', schema, 'UserFollowings');
 
 export interface IUserFollowing extends mongoose.Document {
 	createdAt: Date;

@@ -45,7 +45,7 @@ if (!(<any>schema).options.toObject) {
 	delete ret.encryptedPassword;
 };
 
-export const User: mongoose.Model<mongoose.Document> = db.model('User', schema);
+export const User: mongoose.Model<mongoose.Document> = db.model('User', schema, 'Users');
 
 export interface IUser extends mongoose.Document {
 	name: string;

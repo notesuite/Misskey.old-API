@@ -23,7 +23,7 @@ const postBase: Object = {
 	repliesCount: { type: Number, required: false, default: 0 },
 	repostsCount: { type: Number, required: false, default: 0 },
 	type: { type: String, required: true },
-	user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
+	user: { type: Schema.Types.ObjectId, required: true, ref: 'Users' }
 };
 
 export interface IPost extends mongoose.Document {
@@ -40,13 +40,13 @@ export interface IPost extends mongoose.Document {
 
 const postBaseSchema: mongoose.Schema = new Schema(postBase);
 
-export const Post: mongoose.Model<mongoose.Document> = db.model('Post', postBaseSchema, 'Post');
+export const Post: mongoose.Model<mongoose.Document> = db.model('Post', postBaseSchema, 'Posts');
 
 // Extend post base
 const postStatus: Object = Object.assign({
 	text: { type: String, required: false, default: null },
-	attachedFiles: [{ type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFile' }],
-	inReplyToPost: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Post' },
+	attachedFiles: [{ type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFiles' }],
+	inReplyToPost: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Posts' },
 	isContentModified: { type: Boolean, required: false, default: false }
 }, postBase);
 
@@ -74,7 +74,7 @@ postStatusSchema.plugin(mongooseAutoIncrement.plugin, {
 	field: 'cursor'
 });
 
-export const PostStatus: mongoose.Model<mongoose.Document> = db.model('PostStatus', postStatusSchema, 'Post');
+export const PostStatus: mongoose.Model<mongoose.Document> = db.model('PostStatus', postStatusSchema, 'Posts');
 
 export function serializeStatus(status: IPostStatus, options: {
 	includeStargazers: boolean;
@@ -112,3 +112,31 @@ export function serializeStatus(status: IPostStatus, options: {
 		});
 	});
 }
+
+// Extend post base
+const postRepost: Object = Object.assign({
+	post: { type: Schema.Types.ObjectId, required: true, ref: 'Posts' }
+}, postBase);
+
+export interface IPostRepost extends IPost {
+	post: mongoose.Types.ObjectId | IPostRepost;
+}
+
+const postRepostSchema: mongoose.Schema = new Schema(postRepost);
+
+if (!(<any>postRepostSchema).options.toObject) {
+	(<any>postRepostSchema).options.toObject = {};
+}
+(<any>postRepostSchema).options.toObject.transform = (doc: any, ret: any) => {
+	ret.id = doc.id;
+	delete ret._id;
+	delete ret.__v;
+};
+
+// Auto increment
+postRepostSchema.plugin(mongooseAutoIncrement.plugin, {
+	model: 'Post',
+	field: 'cursor'
+});
+
+export const PostRepost: mongoose.Model<mongoose.Document> = db.model('PostRepost', postRepostSchema, 'Posts');

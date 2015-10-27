@@ -25,6 +25,7 @@ export default function(app: IApplication, userId: string, text: string, inReply
 		}
 
 		PostStatus.create({
+			type: 'status',
 			app: app !== null ? app.id : null,
 			user: userId,
 			inReplyToStatus: inReplyToStatusId,

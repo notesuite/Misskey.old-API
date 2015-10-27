@@ -14,8 +14,8 @@ const schema: mongoose.Schema = new Schema({
 	createdAt: { type: Date, required: true, default: Date.now },
 	cursor: { type: Number },
 	name: { type: String, required: true },
-	parent: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFolder' },
-	user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
+	parent: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFolders' },
+	user: { type: Schema.Types.ObjectId, required: true, ref: 'Users' }
 });
 
 if (!(<any>schema).options.toObject) {
@@ -33,7 +33,7 @@ schema.plugin(mongooseAutoIncrement.plugin, {
 	field: 'cursor'
 });
 
-export const AlbumFolder: mongoose.Model<mongoose.Document> = db.model('AlbumFolder', schema, 'AlbumFolder');
+export const AlbumFolder: mongoose.Model<mongoose.Document> = db.model('AlbumFolder', schema, 'AlbumFolders');
 
 export interface IAlbumFolder extends mongoose.Document {
 	createdAt: Date;

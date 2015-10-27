@@ -15,14 +15,14 @@ const schema: mongoose.Schema = new Schema({
 	createdAt: { type: Date, required: true, default: Date.now },
 	cursor: { type: Number },
 	dataSize: { type: Number, required: true },
-	folder: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFolder' },
+	folder: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFolders' },
 	format: { type: String, required: true },
 	hash: { type: String, required: true },
 	isDeleted: { type: Boolean, required: false, default: false },
 	isPrivate: { type: Boolean, required: false, default: false },
 	name: { type: String, required: true },
 	serverPath: { type: String, required: true },
-	user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
+	user: { type: Schema.Types.ObjectId, required: true, ref: 'Users' }
 });
 
 if (!(<any>schema).options.toObject) {
@@ -40,7 +40,7 @@ schema.plugin(mongooseAutoIncrement.plugin, {
 	field: 'cursor'
 });
 
-export const AlbumFile: mongoose.Model<mongoose.Document> = db.model('AlbumFile', schema, 'AlbumFile');
+export const AlbumFile: mongoose.Model<mongoose.Document> = db.model('AlbumFile', schema, 'AlbumFiles');
 
 export interface IAlbumFile extends mongoose.Document {
 	createdAt: Date;
