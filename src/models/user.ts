@@ -1,4 +1,6 @@
 import * as mongoose from 'mongoose';
+import {IPost} from '../models/post';
+import {IAlbumFile} from '../models/albumFile';
 import config from '../config';
 
 const Schema: typeof mongoose.Schema = mongoose.Schema;
@@ -19,11 +21,14 @@ const schema: mongoose.Schema = new Schema({
 	email: { type: String, required: false, sparse: true, default: null },
 	encryptedPassword: { type: String, required: true },
 	credit: { type: Number, required: true },
-	pinnedStatusId: { type: Schema.Types.ObjectId, required: false, default: null },
+	pinnedPost: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Posts' },
 	birthday: { type: Date, required: false, default: null },
-	icon: { type: String, required: false, default: null },
-	banner: { type: String, required: false, default: null },
-	wallpaper: { type: String, required: false, default: null },
+	icon: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFiles' },
+	banner: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFiles' },
+	wallpaper: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFiles' },
+	iconPath: { type: String, required: false, default: null },
+	bannerPath: { type: String, required: false, default: null },
+	wallpaperPath: { type: String, required: false, default: null },
 	isVerfied: { type: Boolean, required: false, default: false },
 	isEmailVerified: { type: Boolean, required: false, default: false },
 	isPro: { type: Boolean, required: false, default: false },
@@ -61,15 +66,18 @@ export interface IUser extends mongoose.Document {
 	email: string;
 	encryptedPassword: string;
 	credit: Number;
-	pinnedStatusId: mongoose.Types.ObjectId;
+	pinnedPost: mongoose.Types.ObjectId | IPost;
 	birthday: Date;
-	icon: string;
-	banner: string;
-	wallpaper: string;
+	icon: mongoose.Types.ObjectId | IAlbumFile;
+	banner: mongoose.Types.ObjectId | IAlbumFile;
+	wallpaper: mongoose.Types.ObjectId | IAlbumFile;
+	iconPath: string;
+	bannerPath: string;
+	wallpaperPath: string;
 	isVerfied: Boolean;
 	isEmailVerified: Boolean;
 	isPro: Boolean;
-	isPrivate: mongoose.Types.ObjectId;
-	isDeleted: mongoose.Types.ObjectId;
-	isSuspended: mongoose.Types.ObjectId;
+	isPrivate: Boolean;
+	isDeleted: Boolean;
+	isSuspended: Boolean;
 }
