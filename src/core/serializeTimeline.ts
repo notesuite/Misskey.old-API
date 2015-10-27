@@ -1,31 +1,20 @@
-import {ITimelineItem} from '../models/timelineItem';
-import {Status, IStatus, serializeStatus} from '../models/status';
-import {StatusRepost, IStatusRepost, serializeStatusRepost} from '../models/statusRepost';
+import {IPost, IPostStatus, serializeStatus} from '../models/post';
 
-export default function(timeline: ITimelineItem[]): Promise<Object[]> {
+export default function(timeline: IPost[]): Promise<Object[]> {
 	'use strict';
-	return Promise.all(timeline.map((item: ITimelineItem) => {
-		const type: string = item.contentType;
-		const id: string = item.contentId.toString();
+	return Promise.all(timeline.map((post: IPost) => {
+		const type: string = post.type;
 		return new Promise((resolve: (obj: Object) => void, reject: (err: any) => void) => {
 			switch (type) {
 				case 'status':
-					Status.findById(id, (err: any, status: IStatus) => {
-						serializeStatus(status).then((serializedStatus: Object) => {
-							resolve(serializedStatus);
-						}, (serializeErr: any) => {
-							reject(serializeErr);
-						});
+					serializeStatus(<IPostStatus>post).then((serializedStatus: Object) => {
+						resolve(serializedStatus);
+					}, (serializeErr: any) => {
+						reject(serializeErr);
 					});
 					break;
 				case 'status-repost':
-					StatusRepost.findById(id, (err: any, statusRepost: IStatusRepost) => {
-						serializeStatusRepost(statusRepost).then((serializedStatusRepost: Object) => {
-							resolve(serializedStatusRepost);
-						}, (serializeErr: any) => {
-							reject(serializeErr);
-						});
-					});
+					resolve(post);
 					break;
 				default:
 					reject('unknown-timeline-item-type');

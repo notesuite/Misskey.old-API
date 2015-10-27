@@ -26,6 +26,18 @@ const postBase: Object = {
 	user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
 };
 
+export interface IPost extends mongoose.Document {
+	app: mongoose.Types.ObjectId | IApplication;
+	createdAt: Date;
+	cursor: number;
+	favoritesCount: number;
+	isDeleted: boolean;
+	repliesCount: number;
+	repostsCount: number;
+	type: string;
+	user: mongoose.Types.ObjectId | IUser;
+}
+
 const postBaseSchema: mongoose.Schema = new Schema(postBase);
 
 export const Post: mongoose.Model<mongoose.Document> = db.model('Post', postBaseSchema, 'Post');
@@ -37,6 +49,13 @@ const postStatus: Object = Object.assign({
 	inReplyToPost: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Post' },
 	isContentModified: { type: Boolean, required: false, default: false }
 }, postBase);
+
+export interface IPostStatus extends IPost {
+	text: string;
+	attachedFiles: mongoose.Types.ObjectId[] | IAlbumFile[];
+	inReplyToStatus: mongoose.Types.ObjectId | IPostStatus;
+	isContentModified: boolean;
+}
 
 const postStatusSchema: mongoose.Schema = new Schema(postStatus);
 
@@ -56,24 +75,6 @@ postStatusSchema.plugin(mongooseAutoIncrement.plugin, {
 });
 
 export const PostStatus: mongoose.Model<mongoose.Document> = db.model('PostStatus', postStatusSchema, 'Post');
-
-export interface IPost extends mongoose.Document {
-	app: mongoose.Types.ObjectId | IApplication;
-	createdAt: Date;
-	cursor: number;
-	favoritesCount: number;
-	isDeleted: boolean;
-	repliesCount: number;
-	repostsCount: number;
-	user: mongoose.Types.ObjectId | IUser;
-}
-
-export interface IPostStatus extends IPost {
-	text: string;
-	attachedFiles: mongoose.Types.ObjectId[] | IAlbumFile[];
-	inReplyToStatus: mongoose.Types.ObjectId | IPostStatus;
-	isContentModified: boolean;
-}
 
 export function serializeStatus(status: IPostStatus, options: {
 	includeStargazers: boolean;
