@@ -22,6 +22,7 @@ const schema: mongoose.Schema = new Schema({
 	isHidden: { type: Boolean, required: false, default: false },
 	isPrivate: { type: Boolean, required: false, default: false },
 	name: { type: String, required: true },
+	properties: { type: Schema.Types.Mixed, required: false, default: null },
 	serverPath: { type: String, required: true },
 	user: { type: Schema.Types.ObjectId, required: true, ref: 'Users' }
 });
@@ -54,6 +55,7 @@ export interface IAlbumFile extends mongoose.Document {
 	isHidden: boolean;
 	isPrivate: boolean;
 	name: string;
+	properties: Object;
 	serverPath: string;
 	user: mongoose.Types.ObjectId | IUser;
 }
