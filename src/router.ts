@@ -8,10 +8,10 @@ interface IRoute {
 const routing: Array<IRoute> = [
 	{method: 'get', endpoint: 'login'},
 	{method: 'get', endpoint: 'screenname-available'},
+	{method: 'get', endpoint: 'timeline'},
 	{method: 'post', endpoint: 'account/create'},
 	{method: 'get', endpoint: 'users/show'},
-	{method: 'post', endpoint: 'statuses/create'},
-	{method: 'get', endpoint: 'statuses/timeline'}
+	{method: 'post', endpoint: 'statuses/create'}
 ];
 
 export default function(app: express.Express): void {
