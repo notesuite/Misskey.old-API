@@ -15,7 +15,7 @@ mongooseAutoIncrement.initialize(db);
 
 // Common schema
 const postBase: Object = {
-	app: { type: Schema.Types.ObjectId, required: false, default: null },
+	app: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Applications' },
 	createdAt: { type: Date, required: true, default: Date.now },
 	cursor: { type: Number },
 	favoritesCount: { type: Number, required: false, default: 0 },

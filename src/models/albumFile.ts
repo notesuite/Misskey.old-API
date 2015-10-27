@@ -2,6 +2,7 @@
 const mongooseAutoIncrement: any = require('mongoose-auto-increment');
 import * as mongoose from 'mongoose';
 import {IUser} from '../models/user';
+import {IApplication} from '../models/application';
 import {IAlbumFolder} from '../models/albumFolder';
 import config from '../config';
 
@@ -12,11 +13,12 @@ const db: mongoose.Connection = mongoose.createConnection(config.mongo.uri, conf
 mongooseAutoIncrement.initialize(db);
 
 const schema: mongoose.Schema = new Schema({
+	app: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Applications' },
 	createdAt: { type: Date, required: true, default: Date.now },
 	cursor: { type: Number },
 	dataSize: { type: Number, required: true },
 	folder: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFolders' },
-	format: { type: String, required: true },
+	mimeType: { type: String, required: true },
 	hash: { type: String, required: true },
 	isDeleted: { type: Boolean, required: false, default: false },
 	isHidden: { type: Boolean, required: false, default: false },
@@ -45,11 +47,12 @@ schema.plugin(mongooseAutoIncrement.plugin, {
 export const AlbumFile: mongoose.Model<mongoose.Document> = db.model('AlbumFile', schema, 'AlbumFiles');
 
 export interface IAlbumFile extends mongoose.Document {
+	app: mongoose.Types.ObjectId | IApplication;
 	createdAt: Date;
 	cursor: number;
 	dataSize: number;
 	folder: mongoose.Types.ObjectId | IAlbumFolder;
-	format: string;
+	mimeType: string;
 	hash: string;
 	isDeleted: boolean;
 	isHidden: boolean;
