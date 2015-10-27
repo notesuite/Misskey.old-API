@@ -1,5 +1,5 @@
+import {Post, IPost} from '../../models/post';
 import {UserFollowing, IUserFollowing} from '../../models/userFollowing';
-import {ITimelineItem} from '../../models/timelineItem';
 import getTimeline from '../../core/getTimeline';
 import serializeTimeline from '../../core/serializeTimeline';
 
@@ -27,11 +27,29 @@ export default function(userId: string, limit: number = 10, sinceCursor: number 
 						return following.followeeId.toString();
 					}).concat([userId])
 					: [userId];
-
-				getTimeline(followingIds, ['status', 'status-repost'], limit, sinceCursor, maxCursor)
-						.then((timeline: ITimelineItem[]) => {
-					if (timeline === null || timeline.length === 0) {
-						resolve(null);
+				
+				// タイムライン取得用のクエリを生成
+				const query: any = ((): any => {
+					if (sinceCursor === null && maxCursor === null) {
+						return {userId: {$in: followingIds}};
+					} else if (sinceCursor) {
+						return {$and: [
+							{userId: {$in: followingIds}},
+							{cursor: {$gt: sinceCursor}}
+						]};
+					} else if (maxCursor) {
+						return {$and: [
+							{userId: {$in: followingIds}},
+							{cursor: {$lt: maxCursor}}
+						]};
+					}
+				})();
+		
+				// クエリを発行してタイムラインを取得
+				Post.find(query).sort('-createdAt').limit(limit)
+						.exec((err: any, timeline: IPost[]) => {
+					if (err !== null) {
+						reject(err);
 					} else {
 						serializeTimeline(timeline).then((serializedTimeline: Object[]) => {
 							resolve(serializedTimeline);
@@ -39,8 +57,6 @@ export default function(userId: string, limit: number = 10, sinceCursor: number 
 							reject(serializeErr);
 						});
 					}
-				}, (getTimelineErr: any) => {
-					reject(getTimelineErr);
 				});
 			}
 		});

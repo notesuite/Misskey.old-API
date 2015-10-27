@@ -1,10 +1,10 @@
 // import mongooseAutoIncrement from 'mongoose-auto-increment';
 const mongooseAutoIncrement: any = require('mongoose-auto-increment');
 import * as mongoose from 'mongoose';
-import {User, IUser} from '../models/user';
-import {Application, IApplication} from '../models/application';
-import {AlbumFile, IAlbumFile} from '../models/albumFile';
-import getStatusStargazers from '../core/getStatusStargazers';
+import {IUser} from '../models/user';
+import {IApplication} from '../models/application';
+import {IAlbumFile} from '../models/albumFile';
+import getPostStargazers from '../core/getPostStargazers';
 import config from '../config';
 
 const Schema: typeof mongoose.Schema = mongoose.Schema;
@@ -25,6 +25,10 @@ const postBase: Object = {
 	type: { type: String, required: true },
 	user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
 };
+
+const postBaseSchema: mongoose.Schema = new Schema(postBase);
+
+export const Post: mongoose.Model<mongoose.Document> = db.model('Post', postBaseSchema, 'Post');
 
 // Extend post base
 const postStatus: Object = Object.assign({
@@ -82,7 +86,7 @@ export function serializeStatus(status: IPostStatus, options: {
 			// Get stargazers
 			new Promise((getStargazersResolve: (stargazers: Object[]) => void, getStargazersReject: (err: any) => void) => {
 				if (options.includeStargazers) {
-					getStatusStargazers(status.id, 10).then((stargazers: IUser[]) => {
+					getPostStargazers(status.id, 10).then((stargazers: IUser[]) => {
 						if (stargazers !== null && stargazers.length > 0) {
 							getStargazersResolve(stargazers.map((stargazer: IUser) => {
 								return stargazer.toObject();

@@ -1,6 +1,8 @@
 // import mongooseAutoIncrement from 'mongoose-auto-increment';
 const mongooseAutoIncrement: any = require('mongoose-auto-increment');
 import * as mongoose from 'mongoose';
+import {IUser} from '../models/user';
+import {IPost} from '../models/post';
 import config from '../config';
 
 const Schema: typeof mongoose.Schema = mongoose.Schema;
@@ -10,10 +12,10 @@ const db: mongoose.Connection = mongoose.createConnection(config.mongo.uri, conf
 mongooseAutoIncrement.initialize(db);
 
 const schema: mongoose.Schema = new Schema({
-	userId: { type: Schema.Types.ObjectId, required: true },
 	createdAt: { type: Date, required: true, default: Date.now },
 	cursor: { type: Number },
-	statusId: { type: Schema.Types.ObjectId, required: true }
+	post: { type: Schema.Types.ObjectId, required: true, ref: 'Post' },
+	user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
 });
 
 if (!(<any>schema).options.toObject) {
@@ -23,20 +25,19 @@ if (!(<any>schema).options.toObject) {
 	ret.id = doc.id;
 	delete ret._id;
 	delete ret.__v;
-	return ret;
 };
 
 // Auto increment
 schema.plugin(mongooseAutoIncrement.plugin, {
-	model: 'Timeline',
+	model: 'Favorite',
 	field: 'cursor'
 });
 
-export const StatusFavorite: mongoose.Model<mongoose.Document> = db.model('StatusFavorite', schema);
+export const Favorite: mongoose.Model<mongoose.Document> = db.model('Favorite', schema);
 
-export interface IStatusFavorite extends mongoose.Document {
-	userId: mongoose.Types.ObjectId;
-	statusId: mongoose.Types.ObjectId;
+export interface IFavorite extends mongoose.Document {
+	post: mongoose.Types.ObjectId | IPost;
+	user: mongoose.Types.ObjectId | IUser;
 	createdAt: Date;
 	cursor: number;
 }

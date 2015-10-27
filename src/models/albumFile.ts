@@ -1,8 +1,8 @@
 // import mongooseAutoIncrement from 'mongoose-auto-increment';
 const mongooseAutoIncrement: any = require('mongoose-auto-increment');
 import * as mongoose from 'mongoose';
-import {User, IUser} from '../models/user';
-import {AlbumFolder, IAlbumFolder} from '../models/albumFolder';
+import {IUser} from '../models/user';
+import {IAlbumFolder} from '../models/albumFolder';
 import config from '../config';
 
 const Schema: typeof mongoose.Schema = mongoose.Schema;
