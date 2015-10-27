@@ -27,7 +27,7 @@ export default function(userId: string, limit: number = 10, sinceCursor: number 
 						return following.followeeId.toString();
 					}).concat([userId])
 					: [userId];
-				
+
 				// タイムライン取得用のクエリを生成
 				const query: any = ((): any => {
 					if (sinceCursor === null && maxCursor === null) {
@@ -44,7 +44,7 @@ export default function(userId: string, limit: number = 10, sinceCursor: number 
 						]};
 					}
 				})();
-		
+
 				// クエリを発行してタイムラインを取得
 				Post.find(query).sort('-createdAt').limit(limit)
 						.exec((err: any, timeline: IPost[]) => {
