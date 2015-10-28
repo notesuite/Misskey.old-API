@@ -3,6 +3,9 @@ import {AlbumFile, IAlbumFile} from '../models/albumFile';
 import {IApplication} from '../models/application';
 import config from '../config';
 
+/**
+ * ファイルサーバーにファイルをアップロードします
+ */
 export default function(fileName: string, file: Buffer)
 		: Promise<string> {
 	'use strict';
