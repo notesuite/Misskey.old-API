@@ -23,7 +23,7 @@
 		"src/core/serializeTimeline.ts",
 		"src/core/getPostStargazers.ts",
 		"src/core/publishStreamingMessage.ts",
-		"src/core/uploadFileToContentsServer.ts",
+		"src/core/addFileToAlbum.ts",
 		"src/endpoints/login.ts",
 		"src/endpoints/screenname-available.ts",
 		"src/endpoints/account/create.ts",

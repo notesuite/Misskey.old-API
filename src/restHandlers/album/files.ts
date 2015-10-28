@@ -4,7 +4,7 @@ import files from '../../endpoints/album/files';
 
 module.exports = (req: MisskeyExpressRequest, res: MisskeyExpressResponse): void => {
 	'use strict';
-	files(req.misskeyUser.id, req.query['folder']).then((files: Object[]) => {
+	files(req.misskeyUser, req.query['folder']).then((files: Object[]) => {
 		res.apiRender(files);
 	}, (err: any) => {
 		res.apiError(500, err);
