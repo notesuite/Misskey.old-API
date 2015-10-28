@@ -10,6 +10,8 @@ const routing: Array<IRoute> = [
 	{method: 'get', endpoint: 'screenname-available'},
 	{method: 'get', endpoint: 'timeline'},
 	{method: 'post', endpoint: 'account/create'},
+	{method: 'post', endpoint: 'album/upload'},
+	{method: 'get', endpoint: 'album/files'},
 	{method: 'get', endpoint: 'users/show'},
 	{method: 'post', endpoint: 'statuses/create'}
 ];
