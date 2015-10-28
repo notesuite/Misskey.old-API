@@ -27,7 +27,7 @@ app.use((req: MisskeyExpressRequest, res: MisskeyExpressResponse, next: () => vo
 		});
 	};
 
-	console.log(req.path);
+	console.log(req.method + ' ' + req.path);
 
 	if (req.headers['passkey'] !== null) {
 		if (req.headers['passkey'] === config.apiPasskey) {

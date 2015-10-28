@@ -40,7 +40,7 @@ export default function(appId: string, userId: string, fileName: string, mimetyp
 					formData: {
 						passkey: config.userContentsServer.passkey,
 						file: {
-							value: Buffer,
+							value: file,
 							options: {
 								filename: fileName
 							}
