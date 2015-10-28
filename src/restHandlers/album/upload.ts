@@ -11,9 +11,10 @@ module.exports = (req: MisskeyExpressRequest, res: MisskeyExpressResponse): void
 		const name: string = file.originalname;
 		const mimetype: string = file.mimetype;
 		const fileBuffer: Buffer = fs.readFileSync(path);
+		const size: number = file.size;
 		fs.unlink(path);
 
-		upload(req.misskeyApp, req.misskeyUser.id, name, mimetype, fileBuffer).then((status: Object) => {
+		upload(req.misskeyApp, req.misskeyUser.id, name, mimetype, fileBuffer, size).then((status: Object) => {
 			res.apiRender(status);
 		}, (err: any) => {
 			res.apiError(500, err);

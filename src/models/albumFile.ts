@@ -19,7 +19,7 @@ const schema: mongoose.Schema = new Schema({
 	dataSize: { type: Number, required: true },
 	folder: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFolders' },
 	mimeType: { type: String, required: true },
-	hash: { type: String, required: true },
+	hash: { type: String, required: false, default: null },
 	isDeleted: { type: Boolean, required: false, default: false },
 	isHidden: { type: Boolean, required: false, default: false },
 	isPrivate: { type: Boolean, required: false, default: false },
