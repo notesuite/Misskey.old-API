@@ -34,6 +34,7 @@ if (!(<any>schema).options.toObject) {
 }
 (<any>schema).options.toObject.transform = (doc: any, ret: any) => {
 	ret.id = doc.id;
+	ret.url = `${config.userContentsServer.url}/${doc.path}`;
 	delete ret._id;
 	delete ret.__v;
 };
