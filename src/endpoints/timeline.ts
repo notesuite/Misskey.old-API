@@ -30,23 +30,27 @@ export default function(userId: string, limit: number = 10, sinceCursor: number 
 				// タイムライン取得用のクエリを生成
 				const query: any = ((): any => {
 					if (sinceCursor === null && maxCursor === null) {
-						return {userId: {$in: followingIds}};
-					} else if (sinceCursor) {
+						return {user: {$in: followingIds}};
+					} else if (sinceCursor !== null) {
 						return {$and: [
-							{userId: {$in: followingIds}},
+							{user: {$in: followingIds}},
 							{cursor: {$gt: sinceCursor}}
 						]};
-					} else if (maxCursor) {
+					} else if (maxCursor !== null) {
 						return {$and: [
-							{userId: {$in: followingIds}},
+							{user: {$in: followingIds}},
 							{cursor: {$lt: maxCursor}}
 						]};
 					}
 				})();
 
 				// クエリを発行してタイムラインを取得
-				Post.find(query).sort('-createdAt').limit(limit)
-						.exec((err: any, timeline: IPost[]) => {
+				Post
+					.find(query)
+					.sort('-createdAt')
+					.limit(limit)
+					.populate('user')
+					.exec((err: any, timeline: IPost[]) => {
 					if (err !== null) {
 						reject(err);
 					} else {

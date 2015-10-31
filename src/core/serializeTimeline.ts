@@ -13,8 +13,8 @@ export default function(timeline: IPost[]): Promise<Object[]> {
 						reject(serializeErr);
 					});
 					break;
-				case 'status-repost':
-					resolve(post);
+				case 'repost':
+					resolve(post.toObject());
 					break;
 				default:
 					reject('unknown-timeline-item-type');
