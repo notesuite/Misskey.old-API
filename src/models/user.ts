@@ -44,6 +44,25 @@ if (!(<any>schema).options.toObject) {
 }
 (<any>schema).options.toObject.transform = (doc: any, ret: any) => {
 	ret.id = doc.id;
+
+	delete ret.icon;
+	delete ret.iconPath;
+	ret.iconUrl = doc.icon !== null
+		? `${config.userContentsServer.url}/${doc.iconPath}`
+		: `${config.userContentsServer.url}/defaults/icon.jpg`;
+
+	delete ret.banner;
+	delete ret.bannerPath;
+	ret.bannerUrl = doc.banner !== null
+		? `${config.userContentsServer.url}/${doc.bannerPath}`
+		: `${config.userContentsServer.url}/defaults/banner.jpg`;
+
+	delete ret.wallpaper;
+	delete ret.wallpaperPath;
+	ret.wallpaperUrl = doc.wallpaper !== null
+		? `${config.userContentsServer.url}/${doc.wallpaperPath}`
+		: `${config.userContentsServer.url}/defaults/wallpaper.jpg`;
+
 	delete ret._id;
 	delete ret.__v;
 	delete ret.screenNameLower;
