@@ -1,35 +1,31 @@
+import * as mongoose from 'mongoose';
 // import mongooseAutoIncrement from 'mongoose-auto-increment';
 const mongooseAutoIncrement: any = require('mongoose-auto-increment');
-import * as mongoose from 'mongoose';
-import {IUser} from '../models/user';
-import {IApplication} from '../models/application';
-import {IAlbumFile} from '../models/albumFile';
-import getPostStargazers from '../core/getPostStargazers';
+
 import config from '../config';
 
 const Schema: typeof mongoose.Schema = mongoose.Schema;
 
-const db: mongoose.Connection = mongoose.createConnection(config.mongo.uri, config.mongo.options);
-
-mongooseAutoIncrement.initialize(db);
-
-// Common schema
-const postBase: Object = {
-	app: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Applications' },
-	createdAt: { type: Date, required: true, default: Date.now },
-	cursor: { type: Number },
-	favoritesCount: { type: Number, required: false, default: 0 },
-	isDeleted: { type: Boolean, required: false, default: false },
-	repliesCount: { type: Number, required: false, default: 0 },
-	repostsCount: { type: Number, required: false, default: 0 },
-	type: { type: String, required: true },
-	user: { type: Schema.Types.ObjectId, required: true, ref: 'Users' }
-};
-
-const postBaseSchema: mongoose.Schema = new Schema(postBase);
-
-export const Post: mongoose.Model<mongoose.Document> = db.model('Post', postBaseSchema, 'Posts');
-
+export default (db: mongoose.Connection) => {
+	mongooseAutoIncrement.initialize(db);
+	
+	// Common schema
+	const postBase: Object = {
+		app: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Applications' },
+		createdAt: { type: Date, required: true, default: Date.now },
+		cursor: { type: Number },
+		favoritesCount: { type: Number, required: false, default: 0 },
+		isDeleted: { type: Boolean, required: false, default: false },
+		repliesCount: { type: Number, required: false, default: 0 },
+		repostsCount: { type: Number, required: false, default: 0 },
+		type: { type: String, required: true },
+		user: { type: Schema.Types.ObjectId, required: true, ref: 'Users' }
+	};
+	
+	const postBaseSchema: mongoose.Schema = new Schema(postBase);
+	
+	return db.model('Post', postBaseSchema, 'Posts');
+}
 // Extend post base
 const postStatus: Object = Object.assign({
 	text: { type: String, required: false, default: null },
