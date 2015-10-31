@@ -46,20 +46,3 @@ schema.plugin(mongooseAutoIncrement.plugin, {
 });
 
 export const AlbumFile: mongoose.Model<mongoose.Document> = db.model('AlbumFile', schema, 'AlbumFiles');
-
-export interface IAlbumFile extends mongoose.Document {
-	app: mongoose.Types.ObjectId | IApplication;
-	createdAt: Date;
-	cursor: number;
-	dataSize: number;
-	folder: mongoose.Types.ObjectId | IAlbumFolder;
-	mimeType: string;
-	hash: string;
-	isDeleted: boolean;
-	isHidden: boolean;
-	isPrivate: boolean;
-	name: string;
-	properties: Object;
-	serverPath: string;
-	user: mongoose.Types.ObjectId | IUser;
-}

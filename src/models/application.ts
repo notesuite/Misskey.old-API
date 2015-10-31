@@ -20,15 +20,3 @@ const schema: mongoose.Schema = new Schema({
 // schema.virtual('iconUrl').get(() => `${config.imageServerUrl}/${this.icon}`);
 
 export const Application: mongoose.Model<mongoose.Document> = db.model('Application', schema);
-
-export interface IApplication extends mongoose.Document {
-	createdAt: Date;
-	userId: mongoose.Types.ObjectId;
-	appKey: string;
-	callbackUrl: string;
-	description: string;
-	iconId: mongoose.Types.ObjectId;
-	permissions: string[];
-	isSuspended: boolean;
-	idDeleted: boolean;
-}

@@ -34,11 +34,3 @@ schema.plugin(mongooseAutoIncrement.plugin, {
 });
 
 export const AlbumFolder: mongoose.Model<mongoose.Document> = db.model('AlbumFolder', schema, 'AlbumFolders');
-
-export interface IAlbumFolder extends mongoose.Document {
-	createdAt: Date;
-	cursor: number;
-	name: string;
-	parent: mongoose.Types.ObjectId | IAlbumFolder;
-	user: mongoose.Types.ObjectId | IUser;
-}

@@ -7,14 +7,8 @@ const db: mongoose.Connection = mongoose.createConnection(config.mongo.uri, conf
 
 const schema: mongoose.Schema = new Schema({
 	createdAt: { type: Date, required: true, default: Date.now },
-	followeeId: { type: Schema.Types.ObjectId, required: true },
-	followerId: { type: Schema.Types.ObjectId, required: true }
+	followee: { type: Schema.Types.ObjectId, required: true },
+	follower: { type: Schema.Types.ObjectId, required: true }
 });
 
 export const UserFollowing: mongoose.Model<mongoose.Document> = db.model('UserFollowing', schema, 'UserFollowings');
-
-export interface IUserFollowing extends mongoose.Document {
-	createdAt: Date;
-	followeeId: mongoose.Types.ObjectId;
-	followerId: mongoose.Types.ObjectId;
-}

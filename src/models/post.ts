@@ -26,18 +26,6 @@ const postBase: Object = {
 	user: { type: Schema.Types.ObjectId, required: true, ref: 'Users' }
 };
 
-export interface IPost extends mongoose.Document {
-	app: mongoose.Types.ObjectId | IApplication;
-	createdAt: Date;
-	cursor: number;
-	favoritesCount: number;
-	isDeleted: boolean;
-	repliesCount: number;
-	repostsCount: number;
-	type: string;
-	user: mongoose.Types.ObjectId | IUser;
-}
-
 const postBaseSchema: mongoose.Schema = new Schema(postBase);
 
 export const Post: mongoose.Model<mongoose.Document> = db.model('Post', postBaseSchema, 'Posts');
@@ -49,13 +37,6 @@ const postStatus: Object = Object.assign({
 	inReplyToPost: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Posts' },
 	isContentModified: { type: Boolean, required: false, default: false }
 }, postBase);
-
-export interface IPostStatus extends IPost {
-	text: string;
-	attachedFiles: mongoose.Types.ObjectId[] | IAlbumFile[];
-	inReplyToStatus: mongoose.Types.ObjectId | IPostStatus;
-	isContentModified: boolean;
-}
 
 const postStatusSchema: mongoose.Schema = new Schema(postStatus);
 
@@ -117,10 +98,6 @@ export function serializeStatus(status: IPostStatus, options: {
 const postRepost: Object = Object.assign({
 	post: { type: Schema.Types.ObjectId, required: true, ref: 'Posts' }
 }, postBase);
-
-export interface IPostRepost extends IPost {
-	post: mongoose.Types.ObjectId | IPostRepost;
-}
 
 const postRepostSchema: mongoose.Schema = new Schema(postRepost);
 
