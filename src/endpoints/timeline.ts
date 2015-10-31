@@ -1,3 +1,4 @@
+import {User, IUser} from '../models/user';
 import {Post, IPost} from '../models/post';
 import {UserFollowing, IUserFollowing} from '../models/userFollowing';
 import serializeTimeline from '../core/serializeTimeline';
