@@ -1,6 +1,7 @@
 import * as crypto from 'crypto';
 import * as request from 'request';
-import {AlbumFile, IAlbumFile} from '../models/albumFile';
+import {AlbumFile} from '../models';
+import {IAlbumFile} from '../interfaces';
 import config from '../config';
 
 /**

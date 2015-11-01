@@ -1,11 +1,11 @@
-import {IUser, IPostStatus} from '../interfaces';
+import {IUser, IStatus} from '../interfaces';
 import getPostStargazers from './getPostStargazers';
 
-export function serializeStatus(status: IPostStatus, options: {
+export default (status: IStatus, options: {
 	includeStargazers: boolean;
 } = {
 	includeStargazers: true
-}): Promise<Object> {
+}): Promise<Object> => {
 	'use strict';
 	return new Promise((resolve: (serializedStatus: Object) => void, reject: (err: any) => void) => {
 		Promise.all([

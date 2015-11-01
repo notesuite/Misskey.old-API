@@ -1,5 +1,5 @@
-import {IUser} from '../models/user';
-import {Favorite, IFavorite} from '../models/favorite';
+import {PostFavorite} from '../models';
+import {IUser, IPostFavorite} from '../interfaces';
 
 export default function(postId: string, limit: number = 10, sinceCursor: number = null, maxCursor: number = null)
 		: Promise<IUser[]> {
@@ -24,17 +24,17 @@ export default function(postId: string, limit: number = 10, sinceCursor: number 
 		})();
 
 		// クエリを発行してFavoriteを取得
-		Favorite.find(query)
+		PostFavorite.find(query)
 				.sort('-createdAt')
 				.limit(limit)
 				.populate('user')
-				.exec((favoritesFindErr: any, favorites: IFavorite[]) => {
+				.exec((favoritesFindErr: any, favorites: IPostFavorite[]) => {
 			if (favoritesFindErr !== null) {
 				reject(favoritesFindErr);
 			} else if (favorites.length === 0) {
 				resolve(null);
 			} else {
-				resolve(favorites.map((favorite: IFavorite) => {
+				resolve(favorites.map((favorite: IPostFavorite) => {
 					return <IUser>favorite.user;
 				}));
 			}

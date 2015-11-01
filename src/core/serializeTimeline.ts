@@ -1,4 +1,5 @@
-import {IPost, IPostStatus, serializeStatus} from '../models/post';
+import serializeStatus from './serializeStatus';
+import {IPost, IStatus} from '../interfaces';
 
 export default function(timeline: IPost[]): Promise<Object[]> {
 	'use strict';
@@ -7,7 +8,7 @@ export default function(timeline: IPost[]): Promise<Object[]> {
 		return new Promise((resolve: (obj: Object) => void, reject: (err: any) => void) => {
 			switch (type) {
 				case 'status':
-					serializeStatus(<IPostStatus>post).then((serializedStatus: Object) => {
+					serializeStatus(<IStatus>post).then((serializedStatus: Object) => {
 						resolve(serializedStatus);
 					}, (serializeErr: any) => {
 						reject(serializeErr);

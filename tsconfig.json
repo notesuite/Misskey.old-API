@@ -30,7 +30,7 @@
 		"src/models/albumFile.ts",
 		"src/models/albumFolder.ts",
 		"src/core/serializeTimeline.ts",
-		"src/core/serializePostStatus.ts",
+		"src/core/serializeStatus.ts",
 		"src/core/getPostStargazers.ts",
 		"src/core/publishStreamingMessage.ts",
 		"src/core/addFileToAlbum.ts",

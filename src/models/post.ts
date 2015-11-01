@@ -28,7 +28,7 @@ export function post(db: mongoose.Connection): mongoose.Model<mongoose.Document>
 	return db.model('Post', postBaseSchema, 'Posts');
 }
 
-export function postStatus(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
+export function status(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
 	'use strict';
 	mongooseAutoIncrement.initialize(db);
 
@@ -56,10 +56,10 @@ export function postStatus(db: mongoose.Connection): mongoose.Model<mongoose.Doc
 		field: 'cursor'
 	});
 
-	return db.model('PostStatus', postStatusSchema, 'Posts');
+	return db.model('Status', postStatusSchema, 'Posts');
 }
 
-export function postRepost(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
+export function repost(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
 	'use strict';
 	const postRepost: Object = Object.assign({
 		post: { type: Schema.Types.ObjectId, required: true, ref: 'Posts' }
@@ -82,5 +82,5 @@ export function postRepost(db: mongoose.Connection): mongoose.Model<mongoose.Doc
 		field: 'cursor'
 	});
 
-	return db.model('PostRepost', postRepostSchema, 'Posts');
+	return db.model('Repost', postRepostSchema, 'Posts');
 }
