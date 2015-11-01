@@ -1,5 +1,5 @@
 import {Post, UserFollowing} from '../models';
-import {IUserFollowing, IPost} from '../interfaces';
+import {IUser, IUserFollowing, IPost} from '../interfaces';
 import serializeTimeline from '../core/serializeTimeline';
 
 /**
@@ -10,13 +10,13 @@ import serializeTimeline from '../core/serializeTimeline';
  * @maxCursor: 取得する投稿を、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
  * @includeUserEntity: 投稿を作成したユーザーのUserオブジェクトを含めるかどうか
  */
-export default function(userId: string, limit: number = 10, sinceCursor: number = null, maxCursor: number = null)
+export default function(user: IUser, limit: number = 10, sinceCursor: number = null, maxCursor: number = null)
 		: Promise<Object[]> {
 	'use strict';
 
 	return new Promise((resolve: (statuses: Object[]) => void, reject: (err: any) => void) => {
 		// 自分がフォローしているユーザーの関係を取得
-		UserFollowing.find({followerId: userId}, (followingsFindErr: any, followings: IUserFollowing[]) => {
+		UserFollowing.find({followerId: user.id}, (followingsFindErr: any, followings: IUserFollowing[]) => {
 			if (followingsFindErr) {
 				reject(followingsFindErr);
 			} else {
@@ -24,8 +24,8 @@ export default function(userId: string, limit: number = 10, sinceCursor: number 
 				const followingIds: string[] = (followings.length > 0)
 					? followings.map((following: IUserFollowing) => {
 						return following.followee.toString();
-					}).concat([userId])
-					: [userId];
+					}).concat([user.id])
+					: [user.id];
 
 				// タイムライン取得用のクエリを生成
 				const query: any = ((): any => {
@@ -54,7 +54,7 @@ export default function(userId: string, limit: number = 10, sinceCursor: number 
 					if (err !== null) {
 						reject(err);
 					} else {
-						serializeTimeline(timeline).then((serializedTimeline: Object[]) => {
+						serializeTimeline(timeline, user).then((serializedTimeline: Object[]) => {
 							resolve(serializedTimeline);
 						}, (serializeErr: any) => {
 							reject(serializeErr);

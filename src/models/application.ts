@@ -26,4 +26,4 @@ module.exports = (db: mongoose.Connection) => {
 	};
 
 	return db.model('Application', schema, 'Applications');
-}
+};

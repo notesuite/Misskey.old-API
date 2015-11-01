@@ -32,4 +32,4 @@ module.exports = (db: mongoose.Connection) => {
 	});
 
 	return db.model('AlbumFolder', schema, 'AlbumFolders');
-}
+};

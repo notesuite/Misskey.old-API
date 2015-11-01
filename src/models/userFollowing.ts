@@ -21,4 +21,4 @@ module.exports = (db: mongoose.Connection) => {
 	});
 
 	return db.model('UserFollowing', schema, 'UserFollowings');
-}
+};

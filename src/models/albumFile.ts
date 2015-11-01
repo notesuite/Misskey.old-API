@@ -42,4 +42,4 @@ module.exports = (db: mongoose.Connection) => {
 	});
 
 	return db.model('AlbumFile', schema, 'AlbumFiles');
-}
+};

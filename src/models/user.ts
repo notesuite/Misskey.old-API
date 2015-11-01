@@ -65,4 +65,4 @@ module.exports = (db: mongoose.Connection) => {
 	};
 
 	return db.model('User', schema, 'Users');
-}
+};

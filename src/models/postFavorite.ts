@@ -31,4 +31,4 @@ module.exports = (db: mongoose.Connection) => {
 	});
 
 	return db.model('PostFavorite', schema, 'PostFavorites');
-}
+};
