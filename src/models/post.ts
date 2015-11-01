@@ -21,11 +21,19 @@ const postBase: Object = {
 
 export function post(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
 	'use strict';
-	mongooseAutoIncrement.initialize(db);
 
-	const postBaseSchema: mongoose.Schema = new Schema(postBase);
+	const schema: mongoose.Schema = new Schema(postBase);
 
-	return db.model('Post', postBaseSchema, 'Posts');
+	if (!(<any>schema).options.toObject) {
+		(<any>schema).options.toObject = {};
+	}
+	(<any>schema).options.toObject.transform = (doc: any, ret: any) => {
+		ret.id = doc.id;
+		delete ret._id;
+		delete ret.__v;
+	};
+
+	return db.model('Post', schema, 'Posts');
 }
 
 export function status(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
@@ -39,24 +47,15 @@ export function status(db: mongoose.Connection): mongoose.Model<mongoose.Documen
 		isContentModified: { type: Boolean, required: false, default: false }
 	}, postBase);
 
-	const postStatusSchema: mongoose.Schema = new Schema(postStatus);
-
-	if (!(<any>postStatusSchema).options.toObject) {
-		(<any>postStatusSchema).options.toObject = {};
-	}
-	(<any>postStatusSchema).options.toObject.transform = (doc: any, ret: any) => {
-		ret.id = doc.id;
-		delete ret._id;
-		delete ret.__v;
-	};
+	const schema: mongoose.Schema = new Schema(postStatus);
 
 	// Auto increment
-	postStatusSchema.plugin(mongooseAutoIncrement.plugin, {
+	schema.plugin(mongooseAutoIncrement.plugin, {
 		model: 'Post',
 		field: 'cursor'
 	});
 
-	return db.model('Status', postStatusSchema, 'Posts');
+	return db.model('Status', schema, 'Posts');
 }
 
 export function repost(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
@@ -65,22 +64,13 @@ export function repost(db: mongoose.Connection): mongoose.Model<mongoose.Documen
 		post: { type: Schema.Types.ObjectId, required: true, ref: 'Post' }
 	}, postBase);
 
-	const postRepostSchema: mongoose.Schema = new Schema(postRepost);
-
-	if (!(<any>postRepostSchema).options.toObject) {
-		(<any>postRepostSchema).options.toObject = {};
-	}
-	(<any>postRepostSchema).options.toObject.transform = (doc: any, ret: any) => {
-		ret.id = doc.id;
-		delete ret._id;
-		delete ret.__v;
-	};
+	const schema: mongoose.Schema = new Schema(postRepost);
 
 	// Auto increment
-	postRepostSchema.plugin(mongooseAutoIncrement.plugin, {
+	schema.plugin(mongooseAutoIncrement.plugin, {
 		model: 'Post',
 		field: 'cursor'
 	});
 
-	return db.model('Repost', postRepostSchema, 'Posts');
+	return db.model('Repost', schema, 'Posts');
 }
