@@ -13,13 +13,11 @@ export default function(user: IUser, folderId: string = null)
 	return new Promise((resolve: (files: Object[]) => void, reject: (err: any) => void) => {
 		AlbumFile.find({$and: [{user: user.id}, {folder: folderId}]}, (filesFindErr: any, files: IAlbumFile[]) => {
 			if (filesFindErr !== null) {
-				reject(filesFindErr);
-				return;
+				return reject(filesFindErr);
 			}
 			AlbumFolder.find({$and: [{user: user.id}, {parent: folderId}]}, (foldersFindErr: any, folders: IAlbumFolder[]) => {
 				if (foldersFindErr !== null) {
-					reject(foldersFindErr);
-					return;
+					return reject(foldersFindErr);
 				}
 				const fileObjs: Object[] = files.map((file: IAlbumFile) => {
 					const obj: any = file.toObject();
