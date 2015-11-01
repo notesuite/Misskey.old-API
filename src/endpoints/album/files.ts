@@ -1,4 +1,4 @@
-import {User, AlbumFile, AlbumFolder} from '../../models';
+import {AlbumFile, AlbumFolder} from '../../models';
 import {IUser, IAlbumFile, IAlbumFolder} from '../../interfaces';
 
 /**

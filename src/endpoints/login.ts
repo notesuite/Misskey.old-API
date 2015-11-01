@@ -1,5 +1,6 @@
 import * as bcrypt from 'bcrypt';
-import {User, IUser} from '../models/user';
+import {User} from '../models';
+import {IUser} from '../interfaces';
 
 export default function(screenName: string, password: string): Promise<boolean> {
 	'use strict';

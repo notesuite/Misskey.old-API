@@ -1,6 +1,4 @@
-import {IAlbumFile} from '../../models/albumFile';
-import {IUser} from '../../models/user';
-import {IApplication} from '../../models/application';
+import {IApplication, IUser, IAlbumFile} from '../../interfaces';
 import add from '../../core/addFileToAlbum';
 
 /**

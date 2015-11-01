@@ -2,7 +2,7 @@
 import { MisskeyExpressRequest } from '../../misskeyExpressRequest';
 import { MisskeyExpressResponse } from '../../misskeyExpressResponse';
 import createAccount from '../../endpoints/account/create';
-import {IUser} from '../../models/user';
+import {IUser} from '../../interfaces';
 
 module.exports = (req: MisskeyExpressRequest, res: MisskeyExpressResponse): void => {
 	'use strict';

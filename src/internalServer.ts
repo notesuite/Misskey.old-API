@@ -4,7 +4,8 @@ import * as bodyParser from 'body-parser';
 import * as multer from 'multer';
 import { MisskeyExpressRequest } from './misskeyExpressRequest';
 import { MisskeyExpressResponse } from './misskeyExpressResponse';
-import {User, IUser} from './models/user';
+import {User} from './models';
+import {IUser} from './interfaces';
 import config from './config';
 import router from './router';
 

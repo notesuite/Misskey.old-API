@@ -1,7 +1,8 @@
 // import * as express from 'express';
 import { MisskeyExpressRequest } from '../misskeyExpressRequest';
 import { MisskeyExpressResponse } from '../misskeyExpressResponse';
-import {User, IUser} from '../models/user';
+import {User} from '../models';
+import {IUser} from '../interfaces';
 import doLogin from '../endpoints/login';
 
 module.exports = (req: MisskeyExpressRequest, res: MisskeyExpressResponse): void => {

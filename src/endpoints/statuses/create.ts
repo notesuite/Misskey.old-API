@@ -1,6 +1,5 @@
-import {PostStatus, IPostStatus} from '../../models/post';
-import {IApplication} from '../../models/application';
-import {UserFollowing, IUserFollowing} from '../../models/userFollowing';
+import {Status, UserFollowing} from '../../models';
+import {IApplication, IStatus, IUserFollowing} from '../../interfaces';
 import publishStreamingMessage from '../../core/publishStreamingMessage';
 
 /**
@@ -24,13 +23,13 @@ export default function(app: IApplication, userId: string, text: string, inReply
 			return;
 		}
 
-		PostStatus.create({
+		Status.create({
 			type: 'status',
 			app: app !== null ? app.id : null,
 			user: userId,
 			inReplyToStatus: inReplyToStatusId,
 			text
-		}, (err: any, createdStatus: IPostStatus) => {
+		}, (err: any, createdStatus: IStatus) => {
 			if (err !== null) {
 				reject(err);
 			} else {
@@ -50,7 +49,7 @@ export default function(app: IApplication, userId: string, text: string, inReply
 				// 自分のフォロワーのストリーム
 				UserFollowing.find({followeeId: userId}, (followerFindErr: any, followers: IUserFollowing[]) => {
 					followers.forEach((follower: IUserFollowing) => {
-						publishStreamingMessage(`userStream:${follower.followerId}`, streamMessage);
+						publishStreamingMessage(`userStream:${follower.follower}`, streamMessage);
 					});
 				});
 			}

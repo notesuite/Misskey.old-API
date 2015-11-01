@@ -1,6 +1,5 @@
 import * as express from 'express';
-import {IApplication} from './models/application';
-import {IUser} from './models/user';
+import {IApplication, IUser} from './interfaces';
 
 export interface MisskeyExpressRequest extends express.Request {
 	misskeyApp: IApplication;
