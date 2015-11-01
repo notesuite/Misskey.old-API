@@ -64,7 +64,7 @@ export interface IPost extends mongoose.Document {
 export interface IStatus extends IPost {
 	text: string;
 	attachedFiles: mongoose.Types.ObjectId[] | IAlbumFile[];
-	inReplyToStatus: mongoose.Types.ObjectId | IStatus;
+	inReplyToPost: mongoose.Types.ObjectId | IPost;
 	isContentModified: boolean;
 }
 

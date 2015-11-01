@@ -50,6 +50,18 @@ export default (status: IStatus, me: IUser = null, options: {
 						getStargazersReject(getStargazersErr);
 					});
 				}
+			}),
+			// Get replies
+			new Promise((getRepliesResolve: (replies: any) => void, getRepliesReject: (err: any) => void) => {
+				Post.find({
+					type: 'status',
+					inReplyToPost: status.id,
+				}).limit(10).exec((repliesFindErr: any, replies: IStatus[]) => {
+					if (repliesFindErr !== null) {
+						return getRepliesReject(repliesFindErr);
+					}
+					getRepliesResolve(replies);
+				});
 			})
 		]).then((results: any[]) => {
 			const serializedStatus: any = status.toObject();
@@ -58,6 +70,7 @@ export default (status: IStatus, me: IUser = null, options: {
 			if (options.includeStargazers) {
 				serializedStatus.stargazers = results[2];
 			}
+			serializedStatus.replies = results[3];
 			resolve(serializedStatus);
 		},
 		(serializedErr: any) => {
