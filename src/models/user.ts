@@ -26,7 +26,7 @@ module.exports = (db: mongoose.Connection) => {
 		iconPath: { type: String, required: false, default: null },
 		bannerPath: { type: String, required: false, default: null },
 		wallpaperPath: { type: String, required: false, default: null },
-		isVerfied: { type: Boolean, required: false, default: false },
+		isVerified: { type: Boolean, required: false, default: false },
 		isEmailVerified: { type: Boolean, required: false, default: false },
 		isPro: { type: Boolean, required: false, default: false },
 		isPrivate: { type: Boolean, required: false, default: false },

@@ -22,7 +22,7 @@ export interface IUser extends mongoose.Document {
 	iconPath: string;
 	bannerPath: string;
 	wallpaperPath: string;
-	isVerfied: Boolean;
+	isVerified: Boolean;
 	isEmailVerified: Boolean;
 	isPro: Boolean;
 	isPrivate: Boolean;
