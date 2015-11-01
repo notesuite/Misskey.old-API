@@ -1,14 +1,25 @@
 import * as mongoose from 'mongoose';
+// import mongooseAutoIncrement from 'mongoose-auto-increment';
+const mongooseAutoIncrement: any = require('mongoose-auto-increment');
 import config from '../config';
 
 const Schema: typeof mongoose.Schema = mongoose.Schema;
 
-const db: mongoose.Connection = mongoose.createConnection(config.mongo.uri, config.mongo.options);
+export default (db: mongoose.Connection) => {
+	mongooseAutoIncrement.initialize(db);
 
-const schema: mongoose.Schema = new Schema({
-	createdAt: { type: Date, required: true, default: Date.now },
-	followee: { type: Schema.Types.ObjectId, required: true },
-	follower: { type: Schema.Types.ObjectId, required: true }
-});
+	const schema: mongoose.Schema = new Schema({
+		createdAt: { type: Date, required: true, default: Date.now },
+		cursor: { type: Number },
+		followee: { type: Schema.Types.ObjectId, required: true },
+		follower: { type: Schema.Types.ObjectId, required: true }
+	});
 
-export const UserFollowing: mongoose.Model<mongoose.Document> = db.model('UserFollowing', schema, 'UserFollowings');
+	// Auto increment
+	schema.plugin(mongooseAutoIncrement.plugin, {
+		model: 'UserFollowing',
+		field: 'cursor'
+	});
+
+	return db.model('UserFollowing', schema, 'UserFollowings');
+}

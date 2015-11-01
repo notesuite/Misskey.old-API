@@ -32,6 +32,7 @@ export interface IUser extends mongoose.Document {
 
 export interface IUserFollowing extends mongoose.Document {
 	createdAt: Date;
+	cursor: number;
 	followee: mongoose.Types.ObjectId;
 	follower: mongoose.Types.ObjectId;
 }
@@ -69,6 +70,13 @@ export interface IPost_Status extends IPost {
 
 export interface IPost_Repost extends IPost {
 	post: mongoose.Types.ObjectId | IPost;
+}
+
+export interface IFavorite extends mongoose.Document {
+	createdAt: Date;
+	cursor: number;
+	post: mongoose.Types.ObjectId | IPost;
+	user: mongoose.Types.ObjectId | IUser;
 }
 
 export interface IAlbumFile extends mongoose.Document {
