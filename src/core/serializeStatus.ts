@@ -1,4 +1,4 @@
-import {PostFavorite} from '../models';
+import {Post, PostFavorite} from '../models';
 import {IUser, IStatus} from '../interfaces';
 import getPostStargazers from './getPostStargazers';
 
@@ -22,6 +22,19 @@ export default (status: IStatus, me: IUser = null, options: {
 					getIsFavoritedResolve(count > 0);
 				});
 			}),
+			// Get is reposted
+			new Promise((getIsRepostedResolve: (same: any) => void, getIsRepostedReject: (err: any) => void) => {
+				Post.find({
+					type: 'repost',
+					post: status.id,
+					user: me.id
+				}).limit(1).count((countErr: any, count: number) => {
+					if (countErr !== null) {
+						return getIsRepostedReject(countErr);
+					}
+					getIsRepostedResolve(count > 0);
+				});
+			}),
 			// Get stargazers
 			new Promise((getStargazersResolve: (stargazers: any) => void, getStargazersReject: (err: any) => void) => {
 				if (options.includeStargazers) {
@@ -41,8 +54,9 @@ export default (status: IStatus, me: IUser = null, options: {
 		]).then((results: any[]) => {
 			const serializedStatus: any = status.toObject();
 			serializedStatus.isFavorited = results[0];
+			serializedStatus.isReposted = results[1];
 			if (options.includeStargazers) {
-				serializedStatus.stargazers = results[1];
+				serializedStatus.stargazers = results[2];
 			}
 			resolve(serializedStatus);
 		},
