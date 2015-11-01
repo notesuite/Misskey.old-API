@@ -1,3 +1,6 @@
+import {IUser, IPostStatus} from '../interfaces';
+import getPostStargazers from './getPostStargazers';
+
 export function serializeStatus(status: IPostStatus, options: {
 	includeStargazers: boolean;
 } = {

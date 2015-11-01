@@ -2,7 +2,7 @@ import * as mongoose from 'mongoose';
 // import mongooseAutoIncrement from 'mongoose-auto-increment';
 const mongooseAutoIncrement: any = require('mongoose-auto-increment');
 
-import config from '../config';
+// import config from '../config';
 
 const Schema: typeof mongoose.Schema = mongoose.Schema;
 
@@ -19,7 +19,8 @@ const postBase: Object = {
 	user: { type: Schema.Types.ObjectId, required: true, ref: 'Users' }
 };
 
-export function post(db: mongoose.Connection) {
+export function post(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
+	'use strict';
 	mongooseAutoIncrement.initialize(db);
 
 	const postBaseSchema: mongoose.Schema = new Schema(postBase);
@@ -27,7 +28,8 @@ export function post(db: mongoose.Connection) {
 	return db.model('Post', postBaseSchema, 'Posts');
 }
 
-export function postStatus(db: mongoose.Connection) {
+export function postStatus(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
+	'use strict';
 	mongooseAutoIncrement.initialize(db);
 
 	const postStatus: Object = Object.assign({
@@ -57,7 +59,8 @@ export function postStatus(db: mongoose.Connection) {
 	return db.model('PostStatus', postStatusSchema, 'Posts');
 }
 
-export function postRepost(db: mongoose.Connection) {
+export function postRepost(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
+	'use strict';
 	const postRepost: Object = Object.assign({
 		post: { type: Schema.Types.ObjectId, required: true, ref: 'Posts' }
 	}, postBase);

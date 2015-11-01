@@ -1,6 +1,5 @@
-import {User, IUser} from '../models/user';
-import {Post, IPost} from '../models/post';
-import {UserFollowing, IUserFollowing} from '../models/userFollowing';
+import {Post, UserFollowing} from '../models';
+import {IUserFollowing, IPost} from '../interfaces';
 import serializeTimeline from '../core/serializeTimeline';
 
 /**
@@ -24,7 +23,7 @@ export default function(userId: string, limit: number = 10, sinceCursor: number 
 				// 自分と自分がフォローしているユーザーのIDのリストを生成
 				const followingIds: string[] = (followings.length > 0)
 					? followings.map((following: IUserFollowing) => {
-						return following.followeeId.toString();
+						return following.followee.toString();
 					}).concat([userId])
 					: [userId];
 

@@ -61,14 +61,14 @@ export interface IPost extends mongoose.Document {
 	user: mongoose.Types.ObjectId | IUser;
 }
 
-export interface IPost_Status extends IPost {
+export interface IPostStatus extends IPost {
 	text: string;
 	attachedFiles: mongoose.Types.ObjectId[] | IAlbumFile[];
-	inReplyToStatus: mongoose.Types.ObjectId | IPost_Status;
+	inReplyToStatus: mongoose.Types.ObjectId | IPostStatus;
 	isContentModified: boolean;
 }
 
-export interface IPost_Repost extends IPost {
+export interface IPostRepost extends IPost {
 	post: mongoose.Types.ObjectId | IPost;
 }
 

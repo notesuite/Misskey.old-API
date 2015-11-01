@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
 // import mongooseAutoIncrement from 'mongoose-auto-increment';
 const mongooseAutoIncrement: any = require('mongoose-auto-increment');
-import config from '../config';
+// import config from '../config';
 
 const Schema: typeof mongoose.Schema = mongoose.Schema;
 
@@ -26,9 +26,9 @@ export default (db: mongoose.Connection) => {
 
 	// Auto increment
 	schema.plugin(mongooseAutoIncrement.plugin, {
-		model: 'Favorite',
+		model: 'PostFavorite',
 		field: 'cursor'
 	});
 
-	return db.model('Favorite', schema, 'Favorites');
+	return db.model('PostFavorite', schema, 'PostFavorites');
 }
