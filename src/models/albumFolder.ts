@@ -5,15 +5,15 @@ const mongooseAutoIncrement: any = require('mongoose-auto-increment');
 
 const Schema: typeof mongoose.Schema = mongoose.Schema;
 
-export default (db: mongoose.Connection) => {
+module.exports = (db: mongoose.Connection) => {
 	mongooseAutoIncrement.initialize(db);
 
 	const schema: mongoose.Schema = new Schema({
 		createdAt: { type: Date, required: true, default: Date.now },
 		cursor: { type: Number },
 		name: { type: String, required: true },
-		parent: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFolders' },
-		user: { type: Schema.Types.ObjectId, required: true, ref: 'Users' }
+		parent: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFolder' },
+		user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
 	});
 
 	if (!(<any>schema).options.toObject) {

@@ -8,7 +8,7 @@ const Schema: typeof mongoose.Schema = mongoose.Schema;
 
 // Common schema
 const postBase: Object = {
-	app: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Applications' },
+	app: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Application' },
 	createdAt: { type: Date, required: true, default: Date.now },
 	cursor: { type: Number },
 	favoritesCount: { type: Number, required: false, default: 0 },
@@ -16,7 +16,7 @@ const postBase: Object = {
 	repliesCount: { type: Number, required: false, default: 0 },
 	repostsCount: { type: Number, required: false, default: 0 },
 	type: { type: String, required: true },
-	user: { type: Schema.Types.ObjectId, required: true, ref: 'Users' }
+	user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
 };
 
 export function post(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
@@ -34,8 +34,8 @@ export function status(db: mongoose.Connection): mongoose.Model<mongoose.Documen
 
 	const postStatus: Object = Object.assign({
 		text: { type: String, required: false, default: null },
-		attachedFiles: [{ type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFiles' }],
-		inReplyToPost: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Posts' },
+		attachedFiles: [{ type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFile' }],
+		inReplyToPost: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Post' },
 		isContentModified: { type: Boolean, required: false, default: false }
 	}, postBase);
 
@@ -62,7 +62,7 @@ export function status(db: mongoose.Connection): mongoose.Model<mongoose.Documen
 export function repost(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
 	'use strict';
 	const postRepost: Object = Object.assign({
-		post: { type: Schema.Types.ObjectId, required: true, ref: 'Posts' }
+		post: { type: Schema.Types.ObjectId, required: true, ref: 'Post' }
 	}, postBase);
 
 	const postRepostSchema: mongoose.Schema = new Schema(postRepost);

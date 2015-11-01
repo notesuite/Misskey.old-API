@@ -5,7 +5,7 @@ const mongooseAutoIncrement: any = require('mongoose-auto-increment');
 
 const Schema: typeof mongoose.Schema = mongoose.Schema;
 
-export default (db: mongoose.Connection) => {
+module.exports = (db: mongoose.Connection) => {
 	mongooseAutoIncrement.initialize(db);
 
 	const schema: mongoose.Schema = new Schema({

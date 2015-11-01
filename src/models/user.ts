@@ -3,7 +3,7 @@ import config from '../config';
 
 const Schema: typeof mongoose.Schema = mongoose.Schema;
 
-export default (db: mongoose.Connection) => {
+module.exports = (db: mongoose.Connection) => {
 	const schema: mongoose.Schema = new Schema({
 		name: { type: String, required: true },
 		createdAt: { type: Date, required: true, default: Date.now },

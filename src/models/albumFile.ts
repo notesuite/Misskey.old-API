@@ -5,15 +5,15 @@ import config from '../config';
 
 const Schema: typeof mongoose.Schema = mongoose.Schema;
 
-export default (db: mongoose.Connection) => {
+module.exports = (db: mongoose.Connection) => {
 	mongooseAutoIncrement.initialize(db);
 
 	const schema: mongoose.Schema = new Schema({
-		app: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Applications' },
+		app: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Application' },
 		createdAt: { type: Date, required: true, default: Date.now },
 		cursor: { type: Number },
 		dataSize: { type: Number, required: true },
-		folder: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFolders' },
+		folder: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFolder' },
 		mimeType: { type: String, required: true },
 		hash: { type: String, required: false, default: null },
 		isDeleted: { type: Boolean, required: false, default: false },
@@ -22,7 +22,7 @@ export default (db: mongoose.Connection) => {
 		name: { type: String, required: true },
 		properties: { type: Schema.Types.Mixed, required: false, default: null },
 		serverPath: { type: String, required: true },
-		user: { type: Schema.Types.ObjectId, required: true, ref: 'Users' }
+		user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
 	});
 
 	if (!(<any>schema).options.toObject) {

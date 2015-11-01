@@ -1,5 +1,5 @@
-import {User} from '../models';
-import {IUser} from '../interfaces';
+import {User} from '../../models';
+import {IUser} from '../../interfaces';
 
 export default function(id?: string, screenName?: string): Promise<Object> {
 	'use strict';

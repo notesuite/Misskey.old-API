@@ -4,14 +4,14 @@ const mongooseAutoIncrement: any = require('mongoose-auto-increment');
 
 const Schema: typeof mongoose.Schema = mongoose.Schema;
 
-export default (db: mongoose.Connection) => {
+module.exports = (db: mongoose.Connection) => {
 	mongooseAutoIncrement.initialize(db);
 
 	const schema: mongoose.Schema = new Schema({
 		createdAt: { type: Date, required: true, default: Date.now },
 		cursor: { type: Number },
-		followee: { type: Schema.Types.ObjectId, required: true },
-		follower: { type: Schema.Types.ObjectId, required: true }
+		followee: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
+		follower: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
 	});
 
 	// Auto increment
