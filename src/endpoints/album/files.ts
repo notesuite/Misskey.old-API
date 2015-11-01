@@ -1,6 +1,5 @@
-import {AlbumFile, IAlbumFile} from '../../models/albumFile';
-import {AlbumFolder, IAlbumFolder} from '../../models/albumFolder';
-import {IUser} from '../../models/user';
+import {User, AlbumFile, AlbumFolder} from '../../models';
+import {IUser, IAlbumFile, IAlbumFolder} from '../../interfaces';
 
 /**
  * アルバムのファイルを取得します
