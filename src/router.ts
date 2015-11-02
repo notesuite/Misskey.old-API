@@ -9,6 +9,7 @@ const routing: Array<IRoute> = [
 	{method: 'get', endpoint: 'login'},
 	{method: 'get', endpoint: 'screenname-available'},
 	{method: 'get', endpoint: 'timeline'},
+	{method: 'get', endpoint: 'posts/show'},
 	{method: 'post', endpoint: 'account/create'},
 	{method: 'post', endpoint: 'album/upload'},
 	{method: 'get', endpoint: 'album/files'},

@@ -29,6 +29,7 @@
 		"src/models/application.ts",
 		"src/models/albumFile.ts",
 		"src/models/albumFolder.ts",
+		"src/core/serializePost.ts",
 		"src/core/serializeTimeline.ts",
 		"src/core/serializeStatus.ts",
 		"src/core/getPostStargazers.ts",
@@ -40,6 +41,7 @@
 		"src/endpoints/users/show.ts",
 		"src/endpoints/statuses/create.ts",
 		"src/endpoints/timeline.ts",
+		"src/endpoints/posts/show.ts",
 		"src/endpoints/album/upload.ts",
 		"src/endpoints/album/files.ts",
 		"src/restHandlers/login.ts",
@@ -48,6 +50,7 @@
 		"src/restHandlers/users/show.ts",
 		"src/restHandlers/statuses/create.ts",
 		"src/restHandlers/timeline.ts",
+		"src/restHandlers/posts/show.ts",
 		"src/restHandlers/album/upload.ts",
 		"src/restHandlers/album/files.ts"
 	]
