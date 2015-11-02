@@ -10,7 +10,7 @@ import publishStreamingMessage from '../../core/publishStreamingMessage';
  * @inReplyToStatusId: 返信先StatusのID。nullを設定すると通常のStatusになります
  * @attachFileIds: 添付ファイルのIDの配列
  */
-export default function(app: IApplication, userId: string, text: string, inReplyToStatusId: string = null, attachFileIds: string = null)
+export default function(app: IApplication, userId: string, text: string, inReplyToPostId: string = null, attachFileIds: string = null)
 		: Promise<Object> {
 	'use strict';
 
@@ -27,7 +27,7 @@ export default function(app: IApplication, userId: string, text: string, inReply
 			type: 'status',
 			app: app !== null ? app.id : null,
 			user: userId,
-			inReplyToStatus: inReplyToStatusId,
+			inReplyToPost: inReplyToPostId,
 			text
 		}, (err: any, createdStatus: IStatus) => {
 			if (err !== null) {

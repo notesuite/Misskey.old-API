@@ -14,7 +14,7 @@ const routing: Array<IRoute> = [
 	{method: 'post', endpoint: 'album/upload'},
 	{method: 'get', endpoint: 'album/files'},
 	{method: 'get', endpoint: 'users/show'},
-	{method: 'post', endpoint: 'statuses/create'}
+	{method: 'post', endpoint: 'statuses/update'}
 ];
 
 export default function(app: express.Express): void {
