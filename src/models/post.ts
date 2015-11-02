@@ -44,7 +44,8 @@ export function status(db: mongoose.Connection): mongoose.Model<mongoose.Documen
 		text: { type: String, required: false, default: null },
 		attachedFiles: [{ type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFile' }],
 		inReplyToPost: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Post' },
-		isContentModified: { type: Boolean, required: false, default: false }
+		isContentModified: { type: Boolean, required: false, default: false },
+		isPlain: { type: Boolean, required: false, default: false }
 	}, postBase);
 
 	const schema: mongoose.Schema = new Schema(postStatus);
