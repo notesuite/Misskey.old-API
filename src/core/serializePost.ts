@@ -1,7 +1,7 @@
 import serializeStatus from './serializeStatus';
 import {IUser, IPost, IStatus} from '../interfaces';
 
-export default function(post: IPost, me: IUser = null): Promise<Object> {
+export default function(post: any, me: IUser = null): Promise<Object> {
 	'use strict';
 	const type: string = post.type;
 	return new Promise((resolve: (obj: Object) => void, reject: (err: any) => void) => {
@@ -14,7 +14,7 @@ export default function(post: IPost, me: IUser = null): Promise<Object> {
 				});
 				break;
 			case 'repost':
-				resolve(post.toObject());
+				resolve(post);
 				break;
 			default:
 				reject('unknown-timeline-item-type');

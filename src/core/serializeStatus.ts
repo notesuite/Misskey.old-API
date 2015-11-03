@@ -2,7 +2,7 @@ import {Post, PostFavorite} from '../models';
 import {IUser, IStatus} from '../interfaces';
 import getPostStargazers from './getPostStargazers';
 
-export default (status: IStatus, me: IUser = null, options: {
+export default (status: any, me: IUser = null, options: {
 	includeStargazers: boolean;
 } = {
 	includeStargazers: true
@@ -64,7 +64,7 @@ export default (status: IStatus, me: IUser = null, options: {
 				});
 			})
 		]).then((results: any[]) => {
-			const serializedStatus: any = status.toObject();
+			const serializedStatus: any = status;
 			serializedStatus.isFavorited = results[0];
 			serializedStatus.isReposted = results[1];
 			if (options.includeStargazers) {
