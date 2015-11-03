@@ -18,7 +18,7 @@ export default function(user: IUser, limit: number = 10, sinceCursor: number = n
 	return new Promise((resolve: (statuses: Object[]) => void, reject: (err: any) => void) => {
 		// 自分がフォローしているユーザーの関係を取得
 		UserFollowing.find({follower: user.id}, (followingsFindErr: any, followings: IUserFollowing[]) => {
-			if (followingsFindErr) {
+			if (followingsFindErr !== null) {
 				reject(followingsFindErr);
 			} else {
 				// 自分と自分がフォローしているユーザーのIDのリストを生成
