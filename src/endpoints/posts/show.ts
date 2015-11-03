@@ -18,7 +18,7 @@ export default function(shower: IUser, id: string): Promise<Object> {
 				});
 			}, (populatedErr: any) => {
 				reject(populatedErr);
-			});;
+			});
 		});
 	});
 }

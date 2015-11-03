@@ -1,6 +1,6 @@
-import { MisskeyExpressRequest } from '../misskeyExpressRequest';
-import { MisskeyExpressResponse } from '../misskeyExpressResponse';
-import getTimeline from '../endpoints/timeline';
+import { MisskeyExpressRequest } from '../../misskeyExpressRequest';
+import { MisskeyExpressResponse } from '../../misskeyExpressResponse';
+import getTimeline from '../../endpoints/posts/timeline';
 
 module.exports = (req: MisskeyExpressRequest, res: MisskeyExpressResponse): void => {
 	'use strict';

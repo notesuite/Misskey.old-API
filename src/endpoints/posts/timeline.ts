@@ -1,7 +1,7 @@
-import {Post, UserFollowing} from '../models';
-import {IUser, IUserFollowing, IPost} from '../interfaces';
-import serializeTimeline from '../core/serializeTimeline';
-import populateAll from '../core/postPopulateAll';
+import {Post, UserFollowing} from '../../models';
+import {IUser, IUserFollowing, IPost} from '../../interfaces';
+import serializeTimeline from '../../core/serializeTimeline';
+import populateAll from '../../core/postPopulateAll';
 
 /**
  * タイムラインを取得します

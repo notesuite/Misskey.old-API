@@ -1,6 +1,6 @@
-import {Status, UserFollowing} from '../../models';
-import {IApplication, IStatus, IUserFollowing} from '../../interfaces';
-import publishStreamingMessage from '../../core/publishStreamingMessage';
+import {Status} from '../../models';
+import {IApplication, IStatus} from '../../interfaces';
+import publishUserStream from '../../core/publishUserStream';
 
 /**
  * Statusを作成します
@@ -35,22 +35,11 @@ export default function(app: IApplication, userId: string, text: string, inReply
 			} else {
 				resolve(createdStatus.toObject());
 
-				// ストリーミングイベント用メッセージオブジェクト
-				const streamMessage: string = JSON.stringify({
+				publishUserStream(userId, {
 					type: 'post',
 					value: {
 						id: createdStatus.id
 					}
-				});
-
-				// 自分のストリーム
-				publishStreamingMessage(`userStream:${userId}`, streamMessage);
-
-				// 自分のフォロワーのストリーム
-				UserFollowing.find({followeeId: userId}, (followerFindErr: any, followers: IUserFollowing[]) => {
-					followers.forEach((follower: IUserFollowing) => {
-						publishStreamingMessage(`userStream:${follower.follower}`, streamMessage);
-					});
 				});
 			}
 		});

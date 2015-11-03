@@ -1,7 +1,8 @@
-import {User, Post, Status} from '../models';
+import {User, Status} from '../models';
 import {IPost} from '../interfaces';
 
 export default function postPopulateAll(post: IPost): Promise<IPost> {
+	'use strict';
 	return new Promise((resolve: (post: IPost) => void, reject: (err: any) => void) => {
 		switch (post.type) {
 			case 'status':
