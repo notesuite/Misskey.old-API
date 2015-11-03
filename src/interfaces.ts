@@ -99,6 +99,7 @@ export interface IAlbumFile extends mongoose.Document {
 
 export interface IAlbumFolder extends mongoose.Document {
 	createdAt: Date;
+	color: string;
 	cursor: number;
 	name: string;
 	parent: mongoose.Types.ObjectId | IAlbumFolder;

@@ -10,6 +10,7 @@ module.exports = (db: mongoose.Connection) => {
 
 	const schema: mongoose.Schema = new Schema({
 		createdAt: { type: Date, required: true, default: Date.now },
+		color: { type: String, required: true },
 		cursor: { type: Number },
 		name: { type: String, required: true },
 		parent: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFolder' },
