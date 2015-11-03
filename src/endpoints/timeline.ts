@@ -1,6 +1,7 @@
 import {Post, UserFollowing} from '../models';
 import {IUser, IUserFollowing, IPost} from '../interfaces';
 import serializeTimeline from '../core/serializeTimeline';
+import populateAll from '../core/postPopulateAll';
 
 /**
  * タイムラインを取得します
@@ -49,17 +50,23 @@ export default function(user: IUser, limit: number = 10, sinceCursor: number = n
 					.find(query)
 					.sort('-createdAt')
 					.limit(limit)
-					.populate('user')
 					.exec((err: any, timeline: IPost[]) => {
 					if (err !== null) {
-						reject(err);
-					} else {
-						serializeTimeline(timeline, user).then((serializedTimeline: Object[]) => {
+						return reject(err);
+					}
+					// すべてpopulateする
+					Promise.all(timeline.map((post: IPost) => {
+						return populateAll(post);
+					})).then((populatedTimeline: IPost[]) => {
+						// 整形
+						serializeTimeline(populatedTimeline, user).then((serializedTimeline: Object[]) => {
 							resolve(serializedTimeline);
 						}, (serializeErr: any) => {
 							reject(serializeErr);
 						});
-					}
+					}, (populatedErr: any) => {
+						reject(populatedErr);
+					});
 				});
 			}
 		});

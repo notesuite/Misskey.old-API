@@ -37,6 +37,7 @@
     "express": "4.13.3",
     "mongoose": "4.2.2",
     "mongoose-auto-increment": "5.0.1",
+    "mongoose-deep-populate": "2.0.3",
     "request": "2.65.0",
     "multer": "0.1.8",
     "redis": "2.2.5"
