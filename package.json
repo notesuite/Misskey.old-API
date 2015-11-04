@@ -31,16 +31,16 @@
     "typescript-require": "^0.2.9"
   },
   "dependencies": {
-    "bcrypt": "0.8.5",
-    "body-parser": "1.14.1",
-    "connect-redis": "3.0.1",
-    "express": "4.13.3",
-    "mongoose": "4.2.2",
-    "mongoose-auto-increment": "5.0.1",
-    "mongoose-deep-populate": "2.0.3",
-    "request": "2.65.0",
-    "multer": "0.1.8",
-    "redis": "2.2.5"
+    "bcrypt": "^0.8.5",
+    "body-parser": "^1.14.1",
+    "connect-redis": "^3.0.1",
+    "express": "^4.13.3",
+    "mongoose": "^4.2.2",
+    "mongoose-auto-increment": "^5.0.1",
+    "mongoose-deep-populate": "^2.0.3",
+    "request": "^2.65.0",
+    "multer": "^0.1.8",
+    "redis": "^2.2.5"
   },
   "private": true
 }
