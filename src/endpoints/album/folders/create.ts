@@ -17,6 +17,7 @@ export default function(user: IUser, parentFolderId: string, name: string = null
 				} else {
 					AlbumFolder.create({
 						user: user.id,
+						name: name,
 						color: '#57aee5',
 						parent: parent
 					}, (createErr: any, folder: IAlbumFolder) => {
@@ -31,6 +32,7 @@ export default function(user: IUser, parentFolderId: string, name: string = null
 		} else {
 			AlbumFolder.create({
 				user: user.id,
+				name: name,
 				color: '#57aee5'
 			}, (createErr: any, folder: IAlbumFolder) => {
 				if (createErr !== null) {
