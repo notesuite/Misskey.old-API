@@ -4,6 +4,10 @@ import {IUser, IAlbumFile, IAlbumFolder} from '../../../interfaces';
 export default function(user: IUser, parentFolderId: string, name: string = null): Promise<Object> {
 	'use strict';
 
+	if (name !== null && name.length > 100) {
+		return <Promise<any>>Promise.reject('too-long-name');
+	}
+
 	return new Promise<Object>((resolve, reject) => {
 		if (parentFolderId !== undefined && parentFolderId !== null) {
 			AlbumFolder.findOne({

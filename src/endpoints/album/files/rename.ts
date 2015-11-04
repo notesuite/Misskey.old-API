@@ -6,6 +6,10 @@ import config from '../../../config';
 export default function(user: IUser, fileId: string, name: string): Promise<Object> {
 	'use strict';
 
+	if (name.length > 100) {
+		return <Promise<any>>Promise.reject('too-long-filename');
+	}
+
 	return new Promise<Object>((resolve, reject) => {
 		AlbumFile.findById(fileId, (findErr: any, file: IAlbumFile) => {
 			if (findErr !== null) {
