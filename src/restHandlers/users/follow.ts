@@ -4,7 +4,7 @@ import follow from '../../endpoints/users/follow';
 
 module.exports = (req: MisskeyExpressRequest, res: MisskeyExpressResponse): void => {
 	'use strict';
-	follow(req.query['user-id'], req.misskeyUser.id).then(() => {
+	follow(req.body['user-id'], req.misskeyUser.id).then(() => {
 		res.apiRender({kyoppie:'yuppie'});
 	}, (err: any) => {
 		res.apiError(500, err);
