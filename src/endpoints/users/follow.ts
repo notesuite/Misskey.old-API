@@ -12,19 +12,19 @@ export default function(followee: string, follower: string): Promise<void> {
 	return new Promise((resolve: () => void, reject: (err:any) => void) => {
 		if (followee !== undefined && followee !== null) {
 			if (followee === follower) {
-				reject("followee-is-you");
+				reject('followee-is-you');
 			} else {
 				User.findById(followee, (userFindErr: any, user: IUser) => {
 					if (userFindErr !== null) {
 						reject(userFindErr);
 					} else if (user === null){
-						reject("followee-not-found");
+						reject('followee-not-found');
 					} else {
 						UserFollowing.findOne({followee,follower}, (followingFindErr: any, UserFollowing: IUserFollowing) => {
 							if (followingFindErr !== null) {
 								reject(followingFindErr);
 							} else if(UserFollowing !== null) {
-								reject("already-following");
+								reject('already-following');
 							} else {
 								UserFollowing.create({
 									followee,
@@ -42,7 +42,7 @@ export default function(followee: string, follower: string): Promise<void> {
 				});
 			}
 		} else {
-			reject("empty-folowee-id");
+			reject('empty-folowee-id');
 		}
 	});
 }
