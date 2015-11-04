@@ -17,7 +17,7 @@ export default function(appId: string, userId: string, fileName: string, mimetyp
 		: Promise<IAlbumFile> {
 	'use strict';
 
-	return new Promise((resolve: (albumFile: IAlbumFile) => void, reject: (err: any) => void) => {
+	return new Promise<IAlbumFile>((resolve, reject) => {
 
 		// アルバム使用量を取得するためにすべてのファイルを取得
 		AlbumFile.find({user: userId}, (albumFilesFindErr: any, albumFiles: IAlbumFile[]) => {

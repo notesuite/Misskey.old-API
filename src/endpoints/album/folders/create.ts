@@ -1,11 +1,9 @@
 import {AlbumFile, AlbumFolder} from '../../models';
 import {IUser, IAlbumFile, IAlbumFolder} from '../../interfaces';
 
-export default function(user: IUser, name: string = null)
-		: Promise<Object> {
+export default function(user: IUser, name: string = null): Promise<Object> {
 	'use strict';
 
-	return new Promise((resolve: (files: Object[]) => void, reject: (err: any) => void) => {
-		
+	return new Promise<Object[]>(resolve, reject) => {
 	});
 }

@@ -7,11 +7,10 @@ import {IUser, IAlbumFile, IAlbumFolder} from '../../../interfaces';
  * @folderId: 対象フォルダID(nullでルート)
  * @includeFolders: フォルダを含めるか
  */
-export default function(user: IUser, folderId: string = null, includeFolders = true)
-		: Promise<Object[]> {
+export default function(user: IUser, folderId: string = null, includeFolders = true): Promise<Object[]> {
 	'use strict';
 
-	return new Promise((resolve: (files: Object[]) => void, reject: (err: any) => void) => {
+	return new Promise<Object[]>((resolve, reject) => {
 		AlbumFile.find({$and: [{user: user.id}, {folder: folderId}]}, (filesFindErr: any, files: IAlbumFile[]) => {
 			if (filesFindErr !== null) {
 				return reject(filesFindErr);
@@ -34,9 +33,7 @@ export default function(user: IUser, folderId: string = null, includeFolders = t
 					resolve(fileObjs.concat(folderObjs));
 				});
 			} else {
-				resolve(files.map((file: IAlbumFile) => {
-					return file.toObject();
-				}));
+				resolve(files.map<Object>(file => file.toObject()));
 			}
 		});
 	});
