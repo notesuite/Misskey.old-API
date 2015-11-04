@@ -12,7 +12,7 @@ module.exports = (db: mongoose.Connection) => {
 		createdAt: { type: Date, required: true, default: Date.now },
 		color: { type: String, required: true },
 		cursor: { type: Number },
-		name: { type: String, required: true },
+		name: { type: String, required: false, default: '' },
 		parent: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFolder' },
 		user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
 	});

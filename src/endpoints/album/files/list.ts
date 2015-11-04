@@ -1,12 +1,13 @@
-import {AlbumFile, AlbumFolder} from '../../models';
-import {IUser, IAlbumFile, IAlbumFolder} from '../../interfaces';
+import {AlbumFile, AlbumFolder} from '../../../models';
+import {IUser, IAlbumFile, IAlbumFolder} from '../../../interfaces';
 
 /**
  * アルバムのファイルを取得します
  * @user: API利用ユーザー
  * @folderId: 対象フォルダID(nullでルート)
+ * @includeFolders: フォルダを含めるか
  */
-export default function(user: IUser, folderId: string = null)
+export default function(user: IUser, folderId: string = null, includeFolders = true)
 		: Promise<Object[]> {
 	'use strict';
 
