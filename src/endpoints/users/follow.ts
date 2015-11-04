@@ -1,5 +1,6 @@
 import {UserFollowing,User} from '../../models';
 import {IUserFollowing,IUser} from '../../interfaces';
+
 /**
  * ユーザーをフォローします
  * @followeeId: フォローされるユーザーID
