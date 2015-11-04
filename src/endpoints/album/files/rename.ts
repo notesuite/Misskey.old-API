@@ -16,7 +16,7 @@ export default function(user: IUser, fileId: string, name: string): Promise<Obje
 				reject('file-not-found');
 			} else {
 				file.name = name;
-				request.post({
+				request.put({
 					url: `http://${config.userContentsServer.ip}:${config.userContentsServer.port}/rename`,
 					formData: {
 						passkey: config.userContentsServer.passkey,
