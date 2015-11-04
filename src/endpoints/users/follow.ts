@@ -7,7 +7,7 @@ import { IUserFollowing, IUser } from '../../interfaces';
  * @follower: フォローするユーザーID
  */
 
-export default function(followee: string, follower: string) : Promise<void> {
+export default function(followee: string, follower: string): Promise<void> {
 	'use strict';
 	return new Promise((resolve: () => void, reject: (err:any) => void) => {
 		if (followee !== undefined && followee !== null) {
@@ -30,7 +30,7 @@ export default function(followee: string, follower: string) : Promise<void> {
 									followee,
 									follower
 								}, (createErr: any, createdUserFollowing) => {
-									if (createErr) {
+									if (createErr !== null) {
 										reject(createErr);
 									} else {
 										resolve();
