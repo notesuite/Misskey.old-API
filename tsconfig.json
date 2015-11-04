@@ -29,6 +29,8 @@
 		"src/models/application.ts",
 		"src/models/albumFile.ts",
 		"src/models/albumFolder.ts",
+		"src/models/bbsTopic.ts",
+		"src/models/bbsPost.ts",
 		"src/core/postPopulateAll.ts",
 		"src/core/serializePost.ts",
 		"src/core/serializeTimeline.ts",

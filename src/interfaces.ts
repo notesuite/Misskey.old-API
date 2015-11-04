@@ -106,3 +106,24 @@ export interface IAlbumFolder extends mongoose.Document {
 	user: mongoose.Types.ObjectId | IUser;
 }
 
+export interface IBBSTopic extends mongoose.Document {
+	createdAt: Date;
+	cursor: number;
+	title: string;
+	user: mongoose.Types.ObjectId | IUser;
+}
+
+export interface IBBSPost extends mongoose.Document {
+	app: mongoose.Types.ObjectId | IApplication;
+	attachedFiles: mongoose.Types.ObjectId[] | IAlbumFile[];
+	createdAt: Date;
+	cursor: number;
+	inReplyToPost: mongoose.Types.ObjectId | IBBSPost;
+	isContentModified: boolean;
+	isDeleted: boolean;
+	isPlain: boolean;
+	plusonesCount: number;
+	text: string;
+	topic: mongoose.Types.ObjectId | IBBSTopic;
+	user: mongoose.Types.ObjectId | IUser;
+}
