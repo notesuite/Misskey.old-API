@@ -13,24 +13,24 @@ export default function(followeeId: string,followerId: string) :Promise<IUserFol
 			if (followeeId === followerId) {
 				reject("followee-is-you");
 			} else {
-				User.findById(followeeId, (err: any, user: IUser) => {
-					if (err !== null) {
-						reject(err);
+				User.findById(followeeId, (userFindErr: any, user: IUser) => {
+					if (userFindErr !== null) {
+						reject(userFindErr);
 					} else if (user === null){
 						reject("followee-not-found");
 					} else {
-						UserFollowing.findOne({followee:followeeId,follower:followerId}, (err: any, UserFollowing: IUserFollowing) => {
-							if (err !== null) {
-								reject(err);
+						UserFollowing.findOne({followee:followeeId,follower:followerId}, (followingFindErr: any, UserFollowing: IUserFollowing) => {
+							if (followingFindErr !== null) {
+								reject(followingFindErr);
 							} else if(UserFollowing !== null) {
 								reject("already-following");
 							} else {
 								UserFollowing.create({
-									followeeId:followeeId,
-									followerId:followerId
-								}, (err: any, createdUserFollowing) => {
-									if (err) {
-										reject(err);
+									followeeId,
+									followerId
+								}, (createErr: any, createdUserFollowing) => {
+									if (createErr) {
+										reject(createErr);
 									} else {
 										resolve();
 									}
