@@ -10,15 +10,8 @@ import add from '../../../core/addFileToAlbum';
  * @file: 内容
  */
 export default function(app: IApplication, user: IUser, fileName: string, mimetype: string, file: Buffer, size: number)
-		: Promise<IAlbumFile> {
+	: Promise<IAlbumFile> {
 	'use strict';
-
-	return new Promise((resolve: (albumFile: IAlbumFile) => void, reject: (err: any) => void) => {
-		const appId: string = app !== null ? app.id : null;
-		add(appId, user.id, fileName, mimetype, file, size).then((albumFile: IAlbumFile) => {
-			resolve(albumFile);
-		}, (err: any) => {
-			reject(err);
-		});
-	});
+	const appId: string = app !== null ? app.id : null;
+	return add(appId, user.id, fileName, mimetype, file, size);
 }
