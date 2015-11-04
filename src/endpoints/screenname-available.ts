@@ -3,7 +3,7 @@ import {IUser} from '../interfaces';
 
 export default function(screenName: string): Promise<boolean> {
 	'use strict';
-	return new Promise((resolve: (value: boolean) => void, reject: (err: any) => void) => {
+	return new Promise<boolean>((resolve, reject) => {
 		if (screenName) {
 			User.find({
 				screenNameLower: screenName.toLowerCase()
