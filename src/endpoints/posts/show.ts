@@ -5,20 +5,23 @@ import populateAll from '../../core/postPopulateAll';
 
 export default function(shower: IUser, id: string): Promise<Object> {
 	'use strict';
-	return new Promise((resolve: (post: Object) => void, reject: (err: any) => void) => {
+	return new Promise<Object>((resolve, reject) => {
 		Post.findById(id, (findErr: any, post: IPost) => {
-			if (findErr) {
-				return reject(findErr);
-			}
-			populateAll(post).then((populatedPost: IPost) => {
-				serializePost(populatedPost, shower).then((serializedPost: any) => {
-					resolve(serializedPost);
-				}, (err: any) => {
-					reject(err);
+			if (findErr !== null) {
+				reject(findErr);
+			} else if (post === null) {
+				reject('not-found');
+			} else {
+				populateAll(post).then((populatedPost: IPost) => {
+					serializePost(populatedPost, shower).then((serializedPost: any) => {
+						resolve(serializedPost);
+					}, (err: any) => {
+						reject(err);
+					});
+				}, (populatedErr: any) => {
+					reject(populatedErr);
 				});
-			}, (populatedErr: any) => {
-				reject(populatedErr);
-			});
+			}
 		});
 	});
 }
