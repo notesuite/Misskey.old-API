@@ -21,9 +21,7 @@ app.use((req: MisskeyExpressRequest, res: MisskeyExpressResponse, next: () => vo
 
 	res.apiError = (httpStatusCode: number, error: any) => {
 		res.status(httpStatusCode);
-		res.apiRender({
-			error: error
-		});
+		res.apiRender({error});
 	};
 	next();
 });
