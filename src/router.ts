@@ -1,38 +1,45 @@
 import * as express from 'express';
 
+enum Method {
+	GET,
+	POST,
+	DELETE,
+	PUT
+}
+
 interface IRoute {
-	method: string;
+	method: Method;
 	endpoint: string;
 }
 
 const routing: Array<IRoute> = [
-	{method: 'get', endpoint: 'login'},
-	{method: 'get', endpoint: 'screenname-available'},
+	{ method: Method.GET, endpoint: 'login' },
+	{ method: Method.GET, endpoint: 'screenname-available' },
 
-	{method: 'post', endpoint: 'account/create'},
-	{method: 'get', endpoint: 'account/show'},
+	{ method: Method.POST, endpoint: 'account/create' },
+	{ method: Method.GET, endpoint: 'account/show' },
 
-	{method: 'get', endpoint: 'users/show'},
-	{method: 'post', endpoint: 'users/follow'},
-	{method: 'delete', endpoint: 'users/unfollow'},
-	{method: 'get', endpoint: 'users/followings'},
-	{method: 'get', endpoint: 'users/followers'},
+	{ method: Method.GET, endpoint: 'users/show' },
+	{ method: Method.POST, endpoint: 'users/follow' },
+	{ method: Method.DELETE, endpoint: 'users/unfollow' },
+	{ method: Method.GET, endpoint: 'users/followings' },
+	{ method: Method.GET, endpoint: 'users/followers' },
 
-	{method: 'get', endpoint: 'posts/timeline'},
-	{method: 'get', endpoint: 'posts/show'},
+	{ method: Method.GET, endpoint: 'posts/timeline' },
+	{ method: Method.GET, endpoint: 'posts/show' },
 
-	{method: 'post', endpoint: 'reposts/create'},
+	{ method: Method.POST, endpoint: 'reposts/create' },
 
-	{method: 'post', endpoint: 'statuses/update'},
+	{ method: Method.POST, endpoint: 'statuses/update' },
 
-	{method: 'post', endpoint: 'album/files/upload'},
-	{method: 'get', endpoint: 'album/files/list'},
-	{method: 'put', endpoint: 'album/files/move'},
-	{method: 'put', endpoint: 'album/files/rename'},
-	{method: 'delete', endpoint: 'album/files/delete'},
-	{method: 'post', endpoint: 'album/folders/create'},
-	{method: 'put', endpoint: 'album/folders/move'},
-	{method: 'put', endpoint: 'album/folders/rename'}
+	{ method: Method.POST, endpoint: 'album/files/upload' },
+	{ method: Method.GET, endpoint: 'album/files/list' },
+	{ method: Method.PUT, endpoint: 'album/files/move' },
+	{ method: Method.PUT, endpoint: 'album/files/rename' },
+	{ method: Method.DELETE, endpoint: 'album/files/delete' },
+	{ method: Method.POST, endpoint: 'album/folders/create' },
+	{ method: Method.PUT, endpoint: 'album/folders/move' },
+	{ method: Method.PUT, endpoint: 'album/folders/rename' }
 ];
 
 export default function(app: express.Express): void {
@@ -44,6 +51,18 @@ export default function(app: express.Express): void {
 	});
 
 	routing.forEach((route: IRoute) => {
-		(<any>app)[route.method]('/' + route.endpoint, require(`${__dirname}/restHandlers/${route.endpoint}`));
+		const method = (() => {
+			switch (route.method) {
+				case Method.GET:
+					return app.put;
+				case Method.POST:
+					return app.post;
+				case Method.DELETE:
+					return app.delete;
+				case Method.PUT:
+					return app.put;
+			}
+		})();
+		method('/' + route.endpoint, require(`${__dirname}/restHandlers/${route.endpoint}`));
 	});
 }
