@@ -11,14 +11,15 @@ import {IUser, IUserFollowing} from '../../interfaces';
 export default function(user: IUser, limit: number = 30, sinceCursor: number = null, maxCursor: number = null): Promise<Object[]> {
 	'use strict';
 	return new Promise((resolve: (user: Object[]) => void, reject: (err: any) => void) => {
-		var query: any;
-		if (sinceCursor !== null) {
-			query = { follower: user.id, cursor: { $gt: sinceCursor } };
-		} else if (maxCursor !== null) {
-			query = { follower: user.id, cursor: { $lt: maxCursor } };
-		} else {
-			query = { follower: user.id };
-		}
+		const query: any = ((): any => {
+			if (sinceCursor !== null) {
+				return { follower: user.id, cursor: { $gt: sinceCursor } };
+			} else if (maxCursor !== null) {
+				return { follower: user.id, cursor: { $lt: maxCursor } };
+			} else {
+				return { follower: user.id };
+			}
+		})();
 		UserFollowing
 			.find(query)
 			.sort('-createdAt')
