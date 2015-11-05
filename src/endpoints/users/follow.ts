@@ -8,7 +8,7 @@ import { IUserFollowing, IUser } from '../../interfaces';
  */
 export default function(followee: string, follower: string): Promise<void> {
 	'use strict';
-	return new Promise((resolve: () => void, reject: (err:any) => void) => {
+	return new Promise((resolve: () => void, reject: (err: any) => void) => {
 		if (followee !== undefined && followee !== null) {
 			if (followee === follower) {
 				reject('followee-is-you');
