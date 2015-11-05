@@ -41,6 +41,8 @@
 		"src/endpoints/screenname-available.ts",
 		"src/endpoints/account/create.ts",
 		"src/endpoints/users/show.ts",
+		"src/endpoints/users/followers.ts",
+		"src/endpoints/users/followings.ts",
 		"src/endpoints/statuses/update.ts",
 		"src/endpoints/posts/timeline.ts",
 		"src/endpoints/posts/show.ts",
