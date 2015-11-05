@@ -11,6 +11,9 @@
 4. `npm run dtsm`
 5. `npm run build`
 
+## How to test
+`npm run test`
+
 ## How to start Misskey API server
 `npm start`
 
