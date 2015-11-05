@@ -25,6 +25,7 @@ const routing: Array<IRoute> = [
 	{ method: Method.GET, endpoint: 'users/followings' },
 	{ method: Method.GET, endpoint: 'users/followers' },
 
+	{ method: Method.POST, endpoint: 'posts/favorite' },
 	{ method: Method.GET, endpoint: 'posts/timeline' },
 	{ method: Method.GET, endpoint: 'posts/show' },
 
