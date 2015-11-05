@@ -15,11 +15,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer());
 
 app.use((req: MisskeyExpressRequest, res: MisskeyExpressResponse, next: () => void) => {
-	res.apiRender = (data: any) => {
+	res.apiRender = (data: Object) => {
 		res.json(data);
 	};
 
-	res.apiError = (httpStatusCode: number, error: any) => {
+	res.apiError = (httpStatusCode: number, error: Object) => {
 		res.status(httpStatusCode);
 		res.apiRender({error});
 	};
