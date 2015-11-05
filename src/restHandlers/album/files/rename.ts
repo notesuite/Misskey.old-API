@@ -1,11 +1,13 @@
-import {AlbumFile, AlbumFolder} from '../../../models';
-import {IUser, IAlbumFile, IAlbumFolder} from '../../../interfaces';
+import { MisskeyExpressRequest } from '../../../misskeyExpressRequest';
+import { MisskeyExpressResponse } from '../../../misskeyExpressResponse';
+import rename from '../../../endpoints/album/files/rename';
 
-export default function(user: IUser, fileId: string, name: string): Promise<Object[]> {
+module.exports = (req: MisskeyExpressRequest, res: MisskeyExpressResponse): void => {
 	'use strict';
 
-	return new Promise<Object[]>((resolve, reject) => {
-		AlbumFile.findById(fileId, (findErr: any, file: IFile) => {
-		});
+	rename(req.misskeyUser, req.body['file-id'], req.body['name']).then((file: Object) => {
+		res.apiRender(file);
+	}, (err: any) => {
+		res.apiError(500, err);
 	});
-}
+};

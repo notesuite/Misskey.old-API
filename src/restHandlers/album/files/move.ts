@@ -1,10 +1,13 @@
-import {AlbumFile, AlbumFolder} from '../../models';
-import {IUser, IAlbumFile, IAlbumFolder} from '../../interfaces';
+import { MisskeyExpressRequest } from '../../../misskeyExpressRequest';
+import { MisskeyExpressResponse } from '../../../misskeyExpressResponse';
+import move from '../../../endpoints/album/files/move';
 
-export default function(user: IUser, folderId: string = null)
-		: Promise<Object[]> {
+module.exports = (req: MisskeyExpressRequest, res: MisskeyExpressResponse): void => {
 	'use strict';
 
-	return new Promise<Object[]>((resolve, reject) => {
+	move(req.misskeyUser, req.body['file-id'], req.body['folder-id']).then((file: Object) => {
+		res.apiRender(file);
+	}, (err: any) => {
+		res.apiError(500, err);
 	});
-}
+};

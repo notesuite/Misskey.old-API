@@ -1,7 +1,7 @@
 import * as fs from 'fs';
-import { MisskeyExpressRequest } from '../../misskeyExpressRequest';
-import { MisskeyExpressResponse } from '../../misskeyExpressResponse';
-import upload from '../../endpoints/album/upload';
+import { MisskeyExpressRequest } from '../../../misskeyExpressRequest';
+import { MisskeyExpressResponse } from '../../../misskeyExpressResponse';
+import upload from '../../../endpoints/album/files/upload';
 
 export default function(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
 	'use strict';
