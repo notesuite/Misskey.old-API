@@ -53,6 +53,8 @@
 		"src/restHandlers/screenname-available.ts",
 		"src/restHandlers/account/create.ts",
 		"src/restHandlers/users/show.ts",
+		"src/restHandlers/users/followers.ts",
+		"src/restHandlers/users/followings.ts",
 		"src/restHandlers/statuses/update.ts",
 		"src/restHandlers/posts/timeline.ts",
 		"src/restHandlers/posts/show.ts",
