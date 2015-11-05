@@ -12,6 +12,8 @@ module.exports = (db: mongoose.Connection) => {
 		comment: { type: String, required: false, default: null },
 		color: { type: String, required: false, default: null },
 		description: { type: String, required: false, default: null },
+		followingsCount: { type: Number, required: false, default: 0 },
+		followersCount: { type: Number, required: false, default: 0 },
 		location: { type: String, required: false, default: null },
 		websiteUrl: { type: String, required: false, default: null },
 		lang: { type: String, required: true },

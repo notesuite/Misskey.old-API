@@ -8,6 +8,8 @@ export interface IUser extends mongoose.Document {
 	comment: string;
 	color: string;
 	description: string;
+	followingsCount: number,
+	followersCount: number,
 	location: string;
 	websiteUrl: string;
 	lang: string;

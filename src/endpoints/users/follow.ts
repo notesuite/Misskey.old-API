@@ -3,45 +3,48 @@ import { IUserFollowing, IUser } from '../../interfaces';
 
 /**
  * ユーザーをフォローします
- * @followee: フォローされるユーザーID
- * @follower: フォローするユーザーID
+ * @follower: フォローするユーザー
+ * @followeeId: フォローされるユーザーID
  */
-export default function(followee: string, follower: string): Promise<void> {
+export default function(follower: IUser, followeeId: string): Promise<void> {
 	'use strict';
 	return new Promise((resolve: () => void, reject: (err: any) => void) => {
-		if (followee !== undefined && followee !== null) {
-			if (followee === follower) {
-				reject('followee-is-you');
-			} else {
-				User.findById(followee, (userFindErr: any, user: IUser) => {
-					if (userFindErr !== null) {
-						reject(userFindErr);
-					} else if (user === null){
-						reject('followee-not-found');
-					} else {
-						UserFollowing.findOne({followee, follower}, (followingFindErr: any, UserFollowing: IUserFollowing) => {
-							if (followingFindErr !== null) {
-								reject(followingFindErr);
-							} else if(UserFollowing !== null) {
-								reject('already-following');
-							} else {
-								UserFollowing.create({
-									followee,
-									follower
-								}, (createErr: any, createdUserFollowing: IUserFollowing) => {
-									if (createErr !== null) {
-										reject(createErr);
-									} else {
-										resolve();
-									}
-								});
-							}
-						});
-					}
-				});
-			}
+		if (follower.id.toString() === followeeId) {
+			reject('followee-is-you');
 		} else {
-			reject('empty-folowee-id');
+			User.findById(followeeId, (userFindErr: any, followee: IUser) => {
+				if (userFindErr !== null) {
+					reject(userFindErr);
+				} else if (followee === null){
+					reject('followee-not-found');
+				} else {
+					UserFollowing.findOne({
+						followee: followeeId,
+						follower: follower.id
+					}, (followingFindErr: any, UserFollowing: IUserFollowing) => {
+						if (followingFindErr !== null) {
+							reject(followingFindErr);
+						} else if (UserFollowing !== null) {
+							reject('already-following');
+						} else {
+							UserFollowing.create({
+								followee: followeeId,
+								follower: follower.id
+							}, (createErr: any, createdUserFollowing: IUserFollowing) => {
+								if (createErr !== null) {
+									reject(createErr);
+								} else {
+									follower.followingsCount++;
+									follower.save();
+									followee.followersCount++;
+									followee.save();
+									resolve();
+								}
+							});
+						}
+					});
+				}
+			});
 		}
 	});
 }
