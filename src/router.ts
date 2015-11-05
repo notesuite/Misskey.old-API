@@ -27,10 +27,8 @@ const routing: Array<IRoute> = [
 
 	{ method: Method.GET, endpoint: 'posts/timeline' },
 	{ method: Method.GET, endpoint: 'posts/show' },
-
-	{ method: Method.POST, endpoint: 'reposts/create' },
-
-	{ method: Method.POST, endpoint: 'statuses/update' },
+	{ method: Method.POST, endpoint: 'posts/status' },
+	{ method: Method.POST, endpoint: 'posts/repost' },
 
 	{ method: Method.POST, endpoint: 'album/files/upload' },
 	{ method: Method.GET, endpoint: 'album/files/list' },
