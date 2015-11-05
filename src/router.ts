@@ -8,10 +8,11 @@ interface IRoute {
 const routing: Array<IRoute> = [
 	{method: 'get', endpoint: 'login'},
 	{method: 'get', endpoint: 'screenname-available'},
+	{method: 'post', endpoint: 'account/create'},
+	{method: 'get', endpoint: 'account/show'},
 	{method: 'get', endpoint: 'posts/timeline'},
 	{method: 'get', endpoint: 'posts/show'},
 	{method: 'post', endpoint: 'reposts/create'},
-	{method: 'post', endpoint: 'account/create'},
 	{method: 'post', endpoint: 'album/files/upload'},
 	{method: 'get', endpoint: 'album/files/list'},
 	{method: 'put', endpoint: 'album/files/move'},
