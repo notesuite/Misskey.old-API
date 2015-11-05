@@ -1,4 +1,4 @@
-import {User, UserFollowing} from '../../models';
+import {UserFollowing} from '../../models';
 import {IUser, IUserFollowing} from '../../interfaces';
 
 /**
@@ -8,7 +8,8 @@ import {IUser, IUserFollowing} from '../../interfaces';
  * @sinceCursor: 取得するユーザーを、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
  * @maxCursor: 取得するユーザーを、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
  */
-export default function(user: IUser, limit: number = 30, sinceCursor: number = null, maxCursor: number = null): Promise<Object[]> {
+export default function(user: IUser, limit: number = 30, sinceCursor: number = null, maxCursor: number = null)
+		: Promise<Object[]> {
 	'use strict';
 	return new Promise((resolve: (user: Object[]) => void, reject: (err: any) => void) => {
 		const query: any = ((): any => {
@@ -28,7 +29,7 @@ export default function(user: IUser, limit: number = 30, sinceCursor: number = n
 			.exec((err: any, userFollowings: IUserFollowing[]) => {
 				if (err === null) {
 					const followers: any[] = (userFollowings.length > 0)
-						? userFollowings.map((userFollowing: IUserFollowing) => userFollowing.follower.toObject())
+						? userFollowings.map((userFollowing) => (<IUser>userFollowing.follower).toObject())
 						: [];
 					resolve(followers);
 				} else {

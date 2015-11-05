@@ -1,7 +1,8 @@
 import * as mongoose from 'mongoose';
 import config from '../config';
 
-const Schema: typeof mongoose.Schema = mongoose.Schema;
+/* tslint:disable:variable-name */
+const Schema = mongoose.Schema;
 
 module.exports = (db: mongoose.Connection) => {
 	const schema: mongoose.Schema = new Schema({

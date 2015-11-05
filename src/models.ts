@@ -3,6 +3,7 @@ import config from './config';
 
 const db: mongoose.Connection = mongoose.createConnection(config.mongo.uri, config.mongo.options);
 
+/* tslint:disable:variable-name */
 export const Application: mongoose.Model<mongoose.Document> = require('./models/application')(db);
 export const AlbumFile: mongoose.Model<mongoose.Document> = require('./models/albumFile')(db);
 export const AlbumFolder: mongoose.Model<mongoose.Document> = require('./models/albumFolder')(db);

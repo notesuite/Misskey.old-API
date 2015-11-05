@@ -5,7 +5,7 @@ import fileDel from '../files/delete';
 export default function(user: IUser, folderId: string = null): Promise<void> {
 	'use strict';
 
-	return new Promise<Object[]>((resolve, reject) => {
+	return new Promise<void>((resolve, reject) => {
 		AlbumFolder.findOne({
 			_id: folderId,
 			user: user.id
@@ -24,7 +24,7 @@ export default function(user: IUser, folderId: string = null): Promise<void> {
 					Promise.all(files.map((file: IAlbumFile) => {
 						return fileDel(user, file.id);
 					})).then(() => {
-						folder.remove((removeErr: any, removed: IAlbumFolder) => {
+						folder.remove((removeErr: any) => {
 							if (removeErr !== null) {
 								return reject(removeErr);
 							}

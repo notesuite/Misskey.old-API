@@ -1,5 +1,5 @@
-import {AlbumFile, AlbumFolder} from '../../../models';
-import {IUser, IAlbumFile, IAlbumFolder} from '../../../interfaces';
+import {AlbumFolder} from '../../../models';
+import {IUser, IAlbumFolder} from '../../../interfaces';
 
 export default function(user: IUser, folderId: string, name: string): Promise<Object> {
 	'use strict';

@@ -15,16 +15,16 @@ export default function(follower: IUser, followeeId: string): Promise<void> {
 			User.findById(followeeId, (userFindErr: any, followee: IUser) => {
 				if (userFindErr !== null) {
 					reject(userFindErr);
-				} else if (followee === null){
+				} else if (followee === null) {
 					reject('followee-not-found');
 				} else {
 					UserFollowing.findOne({
 						followee: followeeId,
 						follower: follower.id
-					}, (followingFindErr: any, UserFollowing: IUserFollowing) => {
+					}, (followingFindErr: any, userFollowing: IUserFollowing) => {
 						if (followingFindErr !== null) {
 							reject(followingFindErr);
-						} else if (UserFollowing !== null) {
+						} else if (userFollowing !== null) {
 							reject('already-following');
 						} else {
 							UserFollowing.create({

@@ -1,5 +1,5 @@
 import {Status} from '../../models';
-import {IApplication, IStatus} from '../../interfaces';
+import {IApplication, IUser, IStatus} from '../../interfaces';
 import publishUserStream from '../../core/publishUserStream';
 
 /**
@@ -10,7 +10,7 @@ import publishUserStream from '../../core/publishUserStream';
  * @inReplyToPostId: 返信先投稿のID。nullを設定すると通常の投稿になります
  * @attachFileIds: 添付ファイルのIDの配列
  */
-export default function(app: IApplication, user: string, text: string, inReplyToPostId: string = null, attachFileIds: string = null)
+export default function(app: IApplication, user: IUser, text: string, inReplyToPostId: string = null, attachFileIds: string = null)
 		: Promise<Object> {
 	'use strict';
 
@@ -37,7 +37,7 @@ export default function(app: IApplication, user: string, text: string, inReplyTo
 				user.postsCount++;
 				user.save();
 
-				publishUserStream(userId, {
+				publishUserStream(user.id, {
 					type: 'post',
 					value: {
 						id: createdStatus.id

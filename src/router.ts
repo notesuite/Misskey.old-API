@@ -59,6 +59,8 @@ export default function(app: express.Express): void {
 					return app.delete;
 				case Method.PUT:
 					return app.put;
+				default:
+					break;
 			}
 		})();
 		method('/' + route.endpoint, require(`${__dirname}/restHandlers/${route.endpoint}`));

@@ -36,8 +36,8 @@ export interface IUser extends mongoose.Document {
 export interface IUserFollowing extends mongoose.Document {
 	createdAt: Date;
 	cursor: number;
-	followee: string | mongoose.Types.ObjectId;
-	follower: string | mongoose.Types.ObjectId;
+	followee: string | mongoose.Types.ObjectId | IUser;
+	follower: string | mongoose.Types.ObjectId | IUser;
 }
 
 export interface IApplication extends mongoose.Document {
