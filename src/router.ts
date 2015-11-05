@@ -12,9 +12,16 @@ const routing: Array<IRoute> = [
 	{method: 'get', endpoint: 'posts/show'},
 	{method: 'post', endpoint: 'reposts/create'},
 	{method: 'post', endpoint: 'account/create'},
-	{method: 'post', endpoint: 'album/upload'},
-	{method: 'get', endpoint: 'album/files'},
+	{method: 'post', endpoint: 'album/files/upload'},
+	{method: 'get', endpoint: 'album/files/list'},
+	{method: 'put', endpoint: 'album/files/move'},
+	{method: 'put', endpoint: 'album/files/rename'},
+	{method: 'delete', endpoint: 'album/files/delete'},
 	{method: 'get', endpoint: 'users/show'},
+	{method: 'post', endpoint: 'users/follow'},
+	{method: 'delete', endpoint: 'users/unfollow'},
+	{method: 'get', endpoint: 'users/followings'},
+	{method: 'get', endpoint: 'users/followers'},
 	{method: 'post', endpoint: 'statuses/update'}
 ];
 
