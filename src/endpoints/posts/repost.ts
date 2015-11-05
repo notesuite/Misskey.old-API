@@ -1,27 +1,42 @@
-import {Repost} from '../../models';
-import {IApplication, IRepost} from '../../interfaces';
+import {Post, Repost} from '../../models';
+import {IApplication, IPost, IRepost} from '../../interfaces';
 import publishUserStream from '../../core/publishUserStream';
 
 export default function(app: IApplication, userId: string, targetPostId: string)
 		: Promise<Object> {
 	'use strict';
 
-	return new Promise((resolve: (status: Object) => void, reject: (err: any) => void) => {
-		Repost.create({
-			type: 'repost',
-			app: app !== null ? app.id : null,
-			user: userId,
-			post: targetPostId
-		}, (err: any, createdRepost: IRepost) => {
-			if (err !== null) {
-				reject(err);
+	return new Promise<Object>((resolve, reject) => {
+		Post.findById(targetPostId, (findErr: any, post: IPost) => {
+			if (findErr !== null) {
+				reject(findErr);
+			} else if (post === null) {
+				reject('not-found');
+			} else if (post.user === userId) {
+				reject('your-post');
+			} else if (post.type === 'repost') {
+				reject('no-rerepost');
 			} else {
-				resolve(createdRepost.toObject());
+				Repost.create({
+					type: 'repost',
+					app: app !== null ? app.id : null,
+					user: userId,
+					post: targetPostId
+				}, (err: any, createdRepost: IRepost) => {
+					if (err !== null) {
+						reject(err);
+					} else {
+						resolve(createdRepost.toObject());
 
-				publishUserStream(userId, {
-					type: 'post',
-					value: {
-						id: createdRepost.id
+						post.repostsCount++;
+						post.save();
+
+						publishUserStream(userId, {
+							type: 'post',
+							value: {
+								id: createdRepost.id
+							}
+						});
 					}
 				});
 			}
