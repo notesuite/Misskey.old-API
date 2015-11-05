@@ -14,7 +14,7 @@ const routing: Array<IRoute> = [
 
 	{ method: 'get', endpoint: 'users/show' },
 	{ method: 'post', endpoint: 'users/follow' },
-	{ method: 'delete', endpoint: 'users/unfollow' },
+	// { method: 'delete', endpoint: 'users/unfollow' },
 	{ method: 'get', endpoint: 'users/followings' },
 	{ method: 'get', endpoint: 'users/followers' },
 
@@ -42,6 +42,12 @@ export default function(app: express.Express): void {
 	});
 
 	routing.forEach((route: IRoute) => {
-		(<any>app)[route.method]('/' + route.endpoint, require(`${__dirname}/restHandlers/${route.endpoint}`));
+		console.log('- load: ' + route.endpoint);
+		const handler: any = require(`${__dirname}/restHandlers/${route.endpoint}`);
+		if (handler.hasOwnProperty('default')) {
+			(<any>app)[route.method]('/' + route.endpoint, handler.default);
+		} else {
+			(<any>app)[route.method]('/' + route.endpoint, handler);
+		}
 	});
 }
