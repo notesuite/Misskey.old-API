@@ -28,7 +28,7 @@ export default function(user: IUser, limit: number = 30, sinceCursor: number = n
 			.exec((err: any, userFollowings: IUserFollowing[]) => {
 				if (err === null) {
 					const followers: any[] = (userFollowings.length > 0)
-						? userFollowings.map((userFollowing: IUserFollowing) => userFollowing.follower)
+						? userFollowings.map((userFollowing: IUserFollowing) => userFollowing.follower.toObject())
 						: [];
 					resolve(followers);
 				} else {
