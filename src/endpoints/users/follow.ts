@@ -28,7 +28,7 @@ export default function(followee: string, follower: string): Promise<void> {
 								UserFollowing.create({
 									followee,
 									follower
-								}, (createErr: any, createdUserFollowing) => {
+								}, (createErr: any, createdUserFollowing: IUserFollowing) => {
 									if (createErr !== null) {
 										reject(createErr);
 									} else {
