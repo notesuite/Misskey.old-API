@@ -29,7 +29,7 @@ export default function(appId: string, userId: string, fileName: string, mimetyp
 			const used: number = albumFiles.length > 0
 				? albumFiles.map((albumFile: IAlbumFile) => {
 					return albumFile.dataSize;
-				}).reduce((x: number, y: number) => { return x + y; })
+				}).reduce((x: number, y: number) => x + y)
 				: 0;
 
 			// 100MBを超える場合
