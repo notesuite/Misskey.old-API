@@ -8,29 +8,26 @@ import { IUserFollowing, IUser } from '../../interfaces';
  */
 export default function(follower: IUser, followeeId: string): Promise<void> {
 	'use strict';
-	return new Promise((resolve: () => void, reject: (err: any) => void) => {
+	return new Promise<void>((resolve, reject) => {
 		if (follower.id.toString() === followeeId) {
 			reject('followee-is-you');
 		} else {
 			User.findById(followeeId, (userFindErr: any, followee: IUser) => {
 				if (userFindErr !== null) {
 					reject(userFindErr);
-				} else if(followee === null) {
+				} else if (followee === null) {
 					reject('followee-not-found');
 				} else {
 					UserFollowing.findOne({
 						followee: followeeId,
 						follower: follower.id
-					}, (followingFindErr: any, UserFollowing: IUserFollowing) => {
+					}, (followingFindErr: any, userFollowing: IUserFollowing) => {
 						if (followingFindErr !== null) {
 							reject(followingFindErr);
-						} else if( UserFollowing === null) {
+						} else if (userFollowing === null) {
 							reject("not-following");
 						} else {
-							UserFollowing.findOneAndRemove({
-								followee: followeeId,
-								follower: follower.id
-							}, (followingRemoveErr: any) => {
+							userFollowing.remove((followingRemoveErr: any) => {
 								if (followingRemoveErr !== null) {
 									reject(followingRemoveErr);
 								} else {
