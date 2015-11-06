@@ -2,9 +2,9 @@ import { MisskeyExpressRequest } from '../../misskeyExpressRequest';
 import { MisskeyExpressResponse } from '../../misskeyExpressResponse';
 import favorite from '../../endpoints/posts/favorite';
 
-module.exports = (req: MisskeyExpressRequest, res: MisskeyExpressResponse): void => {
+export default function(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void => {
 	'use strict';
-	favorite(req.misskeyUser, req.query['post-id']).then(() => {
+	favorite(req.misskeyUser, req.body['post-id']).then(() => {
 		res.apiRender({ kyoppie: "yuppie" });
 	}, (err: any) => {
 		const statuscode: number = (() => {

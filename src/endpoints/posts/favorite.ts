@@ -10,19 +10,19 @@ export default function(user: IUser, targetPostId: string): Promise<void> {
 	'use strict';
 	return new Promise((resolve: () => void, reject: (err: any) => void) => {
 		Post.findById(targetPostId, (err: any, targetPost: IPost) => {
-			if (err == null) {
-				if (targetPost != null) {
+			if (err === null) {
+				if (targetPost !== null) {
 					PostFavorite.findOne({
-						post: targetPost,
-						user: user
+						post: targetPost.id,
+						user: user.id
 					}, (postFavoriteFindErr: any, postFavorite: IPostFavorite) => {
-						if (postFavoriteFindErr == null) {
-							if (postFavorite == null) {
+						if (postFavoriteFindErr === null) {
+							if (postFavorite === null) {
 								PostFavorite.Create({
-									post: targetPost,
-									user: user
+									post: targetPost.id,
+									user: user.id
 								}, (createErr: any, createdPostFavorite: IPostFavorite) => {
-									if (createErr == null) {
+									if (createErr === null) {
 										resolve();
 									} else {
 										reject(createErr);
