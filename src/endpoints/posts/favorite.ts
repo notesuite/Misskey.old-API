@@ -8,7 +8,7 @@ import {IUser, IPost, IPostFavorite} from '../../interfaces';
  */
 export default function(user: IUser, targetPostId: string): Promise<void> {
 	'use strict';
-	return new Promise((resolve: () => void, reject: (err: any) => void) => {
+	return new Promise<void>((resolve: () => void, reject: (err: any) => void) => {
 		Post.findById(targetPostId, (err: any, targetPost: IPost) => {
 			if (err === null) {
 				if (targetPost !== null) {
@@ -18,7 +18,7 @@ export default function(user: IUser, targetPostId: string): Promise<void> {
 					}, (postFavoriteFindErr: any, postFavorite: IPostFavorite) => {
 						if (postFavoriteFindErr === null) {
 							if (postFavorite === null) {
-								PostFavorite.Create({
+								PostFavorite.create({
 									post: targetPost.id,
 									user: user.id
 								}, (createErr: any, createdPostFavorite: IPostFavorite) => {
