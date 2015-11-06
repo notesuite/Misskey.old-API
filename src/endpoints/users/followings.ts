@@ -1,4 +1,4 @@
-import {User, UserFollowing} from '../../models';
+import {UserFollowing} from '../../models';
 import {IUser, IUserFollowing} from '../../interfaces';
 
 /**
@@ -28,7 +28,7 @@ export default function(user: IUser, limit: number = 30, sinceCursor: number = n
 			.exec((err: any, userFollowings: IUserFollowing[]) => {
 				if (err === null) {
 					const followees: any[] = (userFollowings.length > 0)
-						? userFollowings.map((userFollowing: IUserFollowing) => userFollowing.followee.toObject())
+						? userFollowings.map((userFollowing) => (<IUser>userFollowing.followee).toObject())
 						: [];
 					resolve(followees);
 				} else {

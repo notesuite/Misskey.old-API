@@ -1,6 +1,6 @@
 import * as request from 'request';
-import {AlbumFile, AlbumFolder} from '../../../models';
-import {IUser, IAlbumFile, IAlbumFolder} from '../../../interfaces';
+import {AlbumFile} from '../../../models';
+import {IUser, IAlbumFile} from '../../../interfaces';
 import config from '../../../config';
 
 export default function(user: IUser, fileId: string): Promise<Object> {

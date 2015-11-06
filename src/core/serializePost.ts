@@ -1,5 +1,5 @@
 import serializeStatus from './serializeStatus';
-import {IUser, IPost, IStatus} from '../interfaces';
+import {IUser, IStatus} from '../interfaces';
 
 export default function serializePost(post: any, me: IUser = null): Promise<Object> {
 	'use strict';
@@ -14,8 +14,8 @@ export default function serializePost(post: any, me: IUser = null): Promise<Obje
 				});
 				break;
 			case 'repost':
-				serializePost(post.post, me).then((_post: any) => {
-					post.post = _post;
+				serializePost(post.post, me).then((serializedPost: any) => {
+					post.post = serializedPost;
 					resolve(post);
 				});
 				break;

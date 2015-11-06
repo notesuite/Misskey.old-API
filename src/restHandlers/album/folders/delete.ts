@@ -1,9 +1,15 @@
-import {AlbumFile, AlbumFolder} from '../../models';
-import {IUser, IAlbumFile, IAlbumFolder} from '../../interfaces';
+import { MisskeyExpressRequest } from '../../../misskeyExpressRequest';
+import { MisskeyExpressResponse } from '../../../misskeyExpressResponse';
+import del from '../../../endpoints/album/folders/delete';
 
-export default function(user: IUser, folderId: string = null): Promise<Object[]> {
+module.exports = (req: MisskeyExpressRequest, res: MisskeyExpressResponse): void => {
 	'use strict';
 
-	return new Promise<Object[]>((resolve, reject) => {
+	del(req.misskeyUser, req.body['folder-id']).then(() => {
+		res.apiRender({
+			status: 'success'
+		});
+	}, (err: any) => {
+		res.apiError(500, err);
 	});
-}
+};

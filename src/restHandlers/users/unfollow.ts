@@ -1,13 +1,13 @@
 import { MisskeyExpressRequest } from '../../misskeyExpressRequest';
 import { MisskeyExpressResponse } from '../../misskeyExpressResponse';
-import follow from '../../endpoints/users/follow';
+import unfollow from '../../endpoints/users/unfollow';
 
 export default function(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
 	'use strict';
 	if (req.body['user-id'] === undefined || req.body['user-id'] === null) {
 		res.apiError(500, "user-id-is-empty");
 	} else {
-		follow(req.misskeyUser, req.body['user-id']).then(() => {
+		unfollow(req.misskeyUser, req.body['user-id']).then(() => {
 			res.apiRender({kyoppie: 'yuppie'});
 		}, (err: any) => {
 			res.apiError(500, err);

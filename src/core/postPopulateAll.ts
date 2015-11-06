@@ -1,6 +1,7 @@
 import {User, Status, Repost} from '../models';
 import {IPost} from '../interfaces';
 
+/* tslint:disable:variable-name */
 export default function postPopulateAll(sourcePost: IPost): Promise<IPost> {
 	'use strict';
 	const post: any = sourcePost.toObject();

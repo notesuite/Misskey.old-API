@@ -1,42 +1,43 @@
 import * as mongoose from 'mongoose';
 
 export interface IUser extends mongoose.Document {
-	name: string;
-	createdAt: Date;
-	screenName: string;
-	screenNameLower: string;
-	comment: string;
+	banner: string | mongoose.Types.ObjectId | IAlbumFile;
+	bannerPath: string;
+	birthday: Date;
 	color: string;
+	comment: string;
+	createdAt: Date;
+	credit: Number;
 	description: string;
-	followingsCount: number,
-	followersCount: number,
-	location: string;
-	websiteUrl: string;
-	lang: string;
 	email: string;
 	encryptedPassword: string;
-	credit: Number;
-	pinnedPost: string | mongoose.Types.ObjectId | IPost;
-	birthday: Date;
+	followersCount: number;
+	followingsCount: number;
 	icon: string | mongoose.Types.ObjectId | IAlbumFile;
-	banner: string | mongoose.Types.ObjectId | IAlbumFile;
-	wallpaper: string | mongoose.Types.ObjectId | IAlbumFile;
 	iconPath: string;
-	bannerPath: string;
-	wallpaperPath: string;
-	isVerified: Boolean;
-	isEmailVerified: Boolean;
-	isPro: Boolean;
-	isPrivate: Boolean;
 	isDeleted: Boolean;
+	isEmailVerified: Boolean;
+	isPrivate: Boolean;
+	isPro: Boolean;
 	isSuspended: Boolean;
+	isVerified: Boolean;
+	lang: string;
+	location: string;
+	name: string;
+	pinnedPost: string | mongoose.Types.ObjectId | IPost;
+	postsCount: number;
+	screenName: string;
+	screenNameLower: string;
+	wallpaper: string | mongoose.Types.ObjectId | IAlbumFile;
+	wallpaperPath: string;
+	websiteUrl: string;
 }
 
 export interface IUserFollowing extends mongoose.Document {
 	createdAt: Date;
 	cursor: number;
-	followee: string | mongoose.Types.ObjectId;
-	follower: string | mongoose.Types.ObjectId;
+	followee: string | mongoose.Types.ObjectId | IUser;
+	follower: string | mongoose.Types.ObjectId | IUser;
 }
 
 export interface IApplication extends mongoose.Document {

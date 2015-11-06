@@ -1,6 +1,6 @@
 import { MisskeyExpressRequest } from '../../misskeyExpressRequest';
 import { MisskeyExpressResponse } from '../../misskeyExpressResponse';
-import create from '../../endpoints/reposts/create';
+import create from '../../endpoints/posts/repost';
 
 module.exports = (req: MisskeyExpressRequest, res: MisskeyExpressResponse): void => {
 	'use strict';

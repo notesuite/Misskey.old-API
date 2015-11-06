@@ -2,9 +2,9 @@ import { UserFollowing, User } from '../../models';
 import { IUserFollowing, IUser } from '../../interfaces';
 
 /**
- * ユーザーをフォローします
- * @follower: フォローするユーザー
- * @followeeId: フォローされるユーザーID
+ * ユーザーのフォローを解除します
+ * @follower: フォローを解除するユーザー
+ * @followeeId: フォローを解除されるユーザー
  */
 export default function(follower: IUser, followeeId: string): Promise<void> {
 	'use strict';
@@ -24,19 +24,16 @@ export default function(follower: IUser, followeeId: string): Promise<void> {
 					}, (followingFindErr: any, userFollowing: IUserFollowing) => {
 						if (followingFindErr !== null) {
 							reject(followingFindErr);
-						} else if (userFollowing !== null) {
-							reject('already-following');
+						} else if (userFollowing === null) {
+							reject("not-following");
 						} else {
-							UserFollowing.create({
-								followee: followeeId,
-								follower: follower.id
-							}, (createErr: any, createdUserFollowing: IUserFollowing) => {
-								if (createErr !== null) {
-									reject(createErr);
+							userFollowing.remove((followingRemoveErr: any) => {
+								if (followingRemoveErr !== null) {
+									reject(followingRemoveErr);
 								} else {
-									follower.followingsCount++;
+									follower.followingsCount--;
 									follower.save();
-									followee.followersCount++;
+									followee.followersCount--;
 									followee.save();
 									resolve();
 								}

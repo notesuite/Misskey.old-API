@@ -2,7 +2,8 @@ import * as mongoose from 'mongoose';
 // import mongooseAutoIncrement from 'mongoose-auto-increment';
 const mongooseAutoIncrement: any = require('mongoose-auto-increment');
 
-const Schema: typeof mongoose.Schema = mongoose.Schema;
+/* tslint:disable:variable-name */
+const Schema = mongoose.Schema;
 
 module.exports = (db: mongoose.Connection) => {
 	mongooseAutoIncrement.initialize(db);
