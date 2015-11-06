@@ -14,7 +14,7 @@ const routing: Array<IRoute> = [
 
 	{ method: 'get', endpoint: 'users/show' },
 	{ method: 'post', endpoint: 'users/follow' },
-	// { method: 'delete', endpoint: 'users/unfollow' },
+	{ method: 'delete', endpoint: 'users/unfollow' },
 	{ method: 'get', endpoint: 'users/followings' },
 	{ method: 'get', endpoint: 'users/followers' },
 
