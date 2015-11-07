@@ -1,4 +1,3 @@
-import {User} from '../../models';
 import {IUser} from '../../interfaces';
 
 /**
