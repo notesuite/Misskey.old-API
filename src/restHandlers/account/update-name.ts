@@ -4,8 +4,8 @@ import updateName from '../../endpoints/account/update-name';
 
 export default function(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void => {
 	'use strict';
-	
-	rename(req.misskeyUser, req.body['name']).then((user: Object) => {
+
+	updateName(req.misskeyUser, req.body['name']).then((user: Object) => {
 		res.apiRender(user);
 	}, (err: any) => {
 		res.apiError(500,err);

@@ -8,18 +8,18 @@ import {IUser} from '../../interfaces';
  */
 export default function(user: IUser, name: string): Promise<IUser> {
 	'use strict';
-	
+
 	name = name.trim();
-	
+
 	if (name === "") {
 		return <Promise<any>>Promise.reject('empty-name');
 	}
-	
+
 	if (name.length > 30) {
 		return <Promise<any>>Promise.reject('too-long-name');
 	}
-	
-	return new Promise<Object>((resolve,reject) => {
+
+	return new Promise<Object>((resolve, reject) => {
 		user.name = name;
 		user.save((saveErr: any, afterUser: IUser) => {
 			if (saveErr !== null) {
