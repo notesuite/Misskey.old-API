@@ -5,7 +5,7 @@ interface IRoute {
 	endpoint: string;
 }
 
-const routing: Array<IRoute> = [
+const routing: IRoute[] = [
 	{ method: 'get', endpoint: 'login' },
 	{ method: 'get', endpoint: 'screenname-available' },
 
