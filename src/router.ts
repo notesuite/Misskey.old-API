@@ -11,6 +11,7 @@ const routing: Array<IRoute> = [
 
 	{ method: 'post', endpoint: 'account/create' },
 	{ method: 'get', endpoint: 'account/show' },
+	{ method: 'put', endpoint: 'account/update-name' },
 
 	{ method: 'get', endpoint: 'users/show' },
 	{ method: 'post', endpoint: 'users/follow' },
