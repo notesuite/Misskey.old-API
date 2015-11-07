@@ -109,6 +109,27 @@ export interface IAlbumFolder extends mongoose.Document {
 	user: string | mongoose.Types.ObjectId | IUser;
 }
 
+export interface ITalkMessage extends mongoose.Document {
+	app: string | mongoose.Types.ObjectId | IApplication;
+	attachedFiles: string | mongoose.Types.ObjectId[] | IAlbumFile[];
+	createdAt: Date;
+	cursor: number;
+	isContentModified: boolean;
+	isDeleted: boolean;
+	isPlain: boolean;
+	isRead: boolean;
+	otherparty: string | mongoose.Types.ObjectId | IUser;
+	text: string;
+	user: string | mongoose.Types.ObjectId | IUser;
+}
+
+export interface ITalkHistory extends mongoose.Document {
+	updatedAt: Date;
+	message: string | mongoose.Types.ObjectId | ITalkMessage;
+	otherparty: string | mongoose.Types.ObjectId | IUser;
+	user: string | mongoose.Types.ObjectId | IUser;
+}
+
 export interface IBBSTopic extends mongoose.Document {
 	createdAt: Date;
 	cursor: number;
