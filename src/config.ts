@@ -17,27 +17,27 @@ function loadConfig(): IConfig {
 
 export interface IConfig {
 	mongo: {
-		uri: string;
+		uri: string,
 		options: {
-			user: string;
-			pass: string;
-		};
+			user: string,
+			pass: string
+		}
 	};
 	redis: {
 		host: string,
-		port: number;
+		port: number
 	};
 	userContentsServer: {
-		passkey: string;
-		url: string;
-		ip: string;
-		port: number;
+		passkey: string,
+		url: string,
+		ip: string,
+		port: number
 	};
 	apiPasskey: string;
 	port: {
-		internal: number;
-		http: number;
-		https: number;
+		internal: number,
+		http: number,
+		https: number
 	};
 }
 
