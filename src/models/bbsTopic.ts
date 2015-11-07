@@ -6,7 +6,9 @@ const mongooseAutoIncrement: any = require('mongoose-auto-increment');
 /* tslint:disable:variable-name */
 const Schema = mongoose.Schema;
 
-module.exports = (db: mongoose.Connection) => {
+export default function(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
+	'use strict';
+
 	mongooseAutoIncrement.initialize(db);
 
 	const schema: mongoose.Schema = new Schema({
@@ -32,4 +34,4 @@ module.exports = (db: mongoose.Connection) => {
 	});
 
 	return db.model('BBSTopic', schema, 'BBSTopics');
-};
+}

@@ -2,7 +2,7 @@ import { MisskeyExpressRequest } from '../../../misskeyExpressRequest';
 import { MisskeyExpressResponse } from '../../../misskeyExpressResponse';
 import files from '../../../endpoints/album/files/list';
 
-module.exports = (req: MisskeyExpressRequest, res: MisskeyExpressResponse): void => {
+export default function(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
 	'use strict';
 
 	files(req.misskeyUser, req.query['folder-id'], req.query['include-folders']).then((files: Object[]) => {
@@ -10,4 +10,4 @@ module.exports = (req: MisskeyExpressRequest, res: MisskeyExpressResponse): void
 	}, (err: any) => {
 		res.apiError(500, err);
 	});
-};
+}

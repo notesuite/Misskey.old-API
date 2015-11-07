@@ -4,7 +4,9 @@ import config from '../config';
 /* tslint:disable:variable-name */
 const Schema = mongoose.Schema;
 
-module.exports = (db: mongoose.Connection) => {
+export default function(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
+	'use strict';
+
 	const schema: mongoose.Schema = new Schema({
 		banner: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFiles' },
 		bannerPath: { type: String, required: false, default: null },
@@ -69,4 +71,4 @@ module.exports = (db: mongoose.Connection) => {
 	};
 
 	return db.model('User', schema, 'Users');
-};
+}

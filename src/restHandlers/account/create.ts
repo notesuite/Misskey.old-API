@@ -4,7 +4,7 @@ import { MisskeyExpressResponse } from '../../misskeyExpressResponse';
 import createAccount from '../../endpoints/account/create';
 import {IUser} from '../../interfaces';
 
-module.exports = (req: MisskeyExpressRequest, res: MisskeyExpressResponse): void => {
+export default function(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
 	'use strict';
 	createAccount(req.body['screen-name'], req.body['password']).then((user: IUser) => {
 		res.apiRender({
@@ -25,4 +25,4 @@ module.exports = (req: MisskeyExpressRequest, res: MisskeyExpressResponse): void
 		})();
 		res.apiError(statuscode, err);
 	});
-};
+}

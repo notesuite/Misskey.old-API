@@ -5,7 +5,7 @@ import {User} from '../models';
 import {IUser} from '../interfaces';
 import doLogin from '../endpoints/login';
 
-module.exports = (req: MisskeyExpressRequest, res: MisskeyExpressResponse): void => {
+export default function(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
 	'use strict';
 	const screenName: string = req.query['screen-name'];
 	const password: string = req.query['password'];
@@ -31,4 +31,4 @@ module.exports = (req: MisskeyExpressRequest, res: MisskeyExpressResponse): void
 	}, (err: any) => {
 		res.apiError(400, err);
 	});
-};
+}

@@ -2,7 +2,7 @@ import { MisskeyExpressRequest } from '../../../misskeyExpressRequest';
 import { MisskeyExpressResponse } from '../../../misskeyExpressResponse';
 import del from '../../../endpoints/album/folders/delete';
 
-module.exports = (req: MisskeyExpressRequest, res: MisskeyExpressResponse): void => {
+export default function(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
 	'use strict';
 
 	del(req.misskeyUser, req.body['folder-id']).then(() => {
@@ -12,4 +12,4 @@ module.exports = (req: MisskeyExpressRequest, res: MisskeyExpressResponse): void
 	}, (err: any) => {
 		res.apiError(500, err);
 	});
-};
+}

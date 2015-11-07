@@ -3,7 +3,7 @@ import { MisskeyExpressRequest } from '../misskeyExpressRequest';
 import { MisskeyExpressResponse } from '../misskeyExpressResponse';
 import screennameAvailable from '../endpoints/screenname-available';
 
-module.exports = (req: MisskeyExpressRequest, res: MisskeyExpressResponse): void => {
+export default function(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
 	'use strict';
 	screennameAvailable(req.query['screen-name']).then((available: boolean) => {
 		res.apiRender({
@@ -13,4 +13,4 @@ module.exports = (req: MisskeyExpressRequest, res: MisskeyExpressResponse): void
 		// TODO: エラーコードを判別して適切なHTTPステータスコードを返す
 		res.apiError(500, err);
 	});
-};
+}

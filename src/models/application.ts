@@ -4,7 +4,9 @@ import * as mongoose from 'mongoose';
 /* tslint:disable:variable-name */
 const Schema = mongoose.Schema;
 
-module.exports = (db: mongoose.Connection) => {
+export default function(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
+	'use strict';
+
 	const schema: mongoose.Schema = new Schema({
 		createdAt: { type: Date, required: true, default: Date.now },
 		userId: { type: Schema.Types.ObjectId, required: true },
@@ -27,4 +29,4 @@ module.exports = (db: mongoose.Connection) => {
 	};
 
 	return db.model('Application', schema, 'Applications');
-};
+}
