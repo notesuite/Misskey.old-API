@@ -43,23 +43,23 @@ export interface IConfig {
 
 export const defaultConfig: IConfig = {
 	mongo: {
-		uri: "mongodb://localhost/Misskey",
+		uri: 'mongodb://localhost/Misskey',
 		options: {
-			user: "himawari",
-			pass: "sakurako0907"
+			user: 'himawari',
+			pass: 'sakurako0907'
 		}
 	},
 	redis: {
-		host: "localhost",
+		host: 'localhost',
 		port: 6379
 	},
 	userContentsServer: {
-		passkey: "",
-		url: "http://usercontents.misskey.xyz",
-		ip: "192.168.0.2",
+		passkey: '',
+		url: 'http://usercontents.misskey.xyz',
+		ip: '192.168.0.2',
 		port: 616
 	},
-	apiPasskey: "",
+	apiPasskey: '',
 	port: {
 		internal: 616,
 		http: 80,
