@@ -5,7 +5,7 @@ import {IUser} from '../../interfaces';
  * @user: API利用ユーザー
  * @name: 新しい名前
  */
-export default function(user: IUser, name: string): Promise<IUser> {
+export default function(user: IUser, name: string): Promise<Object> {
 	'use strict';
 
 	name = name.trim();
