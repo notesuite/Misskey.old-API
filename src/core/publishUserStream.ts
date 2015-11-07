@@ -2,9 +2,9 @@ import {UserFollowing} from '../models';
 import {IUserFollowing} from '../interfaces';
 import publishStreamingMessage from './publishStreamingMessage';
 
-export default function(publisherId: string, msg: Object): void {
+export default function<T>(publisherId: string, message: T): void {
 	'use strict';
-	const streamMessage: string = JSON.stringify(msg);
+	const streamMessage: string = JSON.stringify(message);
 
 	// 自分のストリーム
 	publishStreamingMessage(`userStream:${publisherId}`, streamMessage);
