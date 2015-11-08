@@ -23,6 +23,7 @@
 		"src/misskeyExpressRequest.ts",
 		"src/misskeyExpressResponse.ts",
 		"src/models/user.ts",
+		"src/models/userKey.ts",
 		"src/models/userFollowing.ts",
 		"src/models/post.ts",
 		"src/models/postFavorite.ts",

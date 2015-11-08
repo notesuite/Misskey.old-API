@@ -40,6 +40,12 @@ export interface IUserFollowing extends mongoose.Document {
 	follower: string | mongoose.Types.ObjectId | IUser;
 }
 
+export interface IUserKey extends mongoose.Document {
+	app: string | mongoose.Types.ObjectId | IApplication;
+	key: string;
+	user: string | mongoose.Types.ObjectId | IUser;
+}
+
 export interface IApplication extends mongoose.Document {
 	createdAt: Date;
 	userId: string | mongoose.Types.ObjectId;
