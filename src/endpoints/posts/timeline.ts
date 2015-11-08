@@ -5,7 +5,7 @@ import populateAll from '../../core/postPopulateAll';
 
 /**
  * タイムラインを取得します
- * @userId: ユーザーID
+ * @user: API利用ユーザー
  * @limit: 取得する投稿の最大数
  * @sinceCursor: 取得する投稿を、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
  * @maxCursor: 取得する投稿を、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
