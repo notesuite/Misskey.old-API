@@ -109,6 +109,16 @@ export interface IAlbumFolder extends mongoose.Document {
 	user: string | mongoose.Types.ObjectId | IUser;
 }
 
+export interface INotification extends mongoose.Document {
+	app: string | mongoose.Types.ObjectId | IApplication;
+	content: Object;
+	createdAt: Date;
+	cursor: number;
+	isRead: boolean;
+	type: string;
+	user: string | mongoose.Types.ObjectId | IUser;
+}
+
 export interface ITalkMessage extends mongoose.Document {
 	app: string | mongoose.Types.ObjectId | IApplication;
 	attachedFiles: string | mongoose.Types.ObjectId[] | IAlbumFile[];
