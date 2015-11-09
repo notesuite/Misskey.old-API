@@ -5,7 +5,7 @@ import show from '../../endpoints/users/show';
 
 export default function(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
 	'use strict';
-	show(req.query['user-id'], req.query['screen-name']).then((user: Object) => {
+	show(req.misskeyUser, req.query['user-id'], req.query['screen-name']).then((user: Object) => {
 		res.apiRender(user);
 	}, (err: any) => {
 		res.apiError(500, err);
