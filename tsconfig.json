@@ -43,6 +43,7 @@
 		"src/core/publishStreamingMessage.ts",
 		"src/core/publishUserStream.ts",
 		"src/core/addFileToAlbum.ts",
+		"src/core/lookupFollowState.ts",
 		"src/endpoints/login.ts",
 		"src/endpoints/screenname-available.ts",
 		"src/endpoints/account/create.ts",

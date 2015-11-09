@@ -1,15 +1,41 @@
 import {User} from '../../models';
 import {IUser} from '../../interfaces';
+import lookupFollowState from '../../core/lookupFollowState';
 
-export default function(id?: string, screenName?: string): Promise<Object> {
+/**
+ * ユーザー情報を取得します
+ * @me: API利用ユーザー
+ * @id?: 対象ユーザーのID
+ * @screenName?: 対象ユーザーのScreen name
+ */
+export default function(me: IUser, id?: string, screenName?: string): Promise<Object> {
 	'use strict';
-	return new Promise((resolve: (user: Object) => void, reject: (err: any) => void) => {
+	return new Promise<Object>((resolve, reject) => {
+		function resolver(user: IUser) {
+			const userObj: any = user.toObject();
+			if (me !== null) {
+				lookupFollowState(me.id, user.id).then((isFollowing: boolean) => {
+					lookupFollowState(user.id, me.id).then((isFollowMyself: boolean) => {
+						userObj.isFollowing = isFollowing;
+						userObj.isFollowMyself = isFollowMyself;
+						resolve(userObj);
+					}, (err: any) => {
+						reject(err);
+					});
+				}, (err: any) => {
+					reject(err);
+				});
+			} else {
+				resolve(userObj);
+			}
+		}
+
 		if (id !== undefined && id !== null) {
 			User.findById(id, (err: any, user: IUser) => {
 				if (err !== null) {
 					reject(err);
 				} else {
-					resolve(user.toObject());
+					resolver(user);
 				}
 			});
 		} else if (screenName !== undefined && screenName !== null) {
@@ -17,7 +43,7 @@ export default function(id?: string, screenName?: string): Promise<Object> {
 				if (err !== null) {
 					reject(err);
 				} else {
-					resolve(user.toObject());
+					resolver(user);
 				}
 			});
 		} else {
