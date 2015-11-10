@@ -11,7 +11,7 @@ export default function(meId: string, otherpartyId: string): Promise<boolean> {
 			if (followingFindErr !== null) {
 				reject(followingFindErr);
 			} else {
-				reject(userFollowing !== null);
+				resolve(userFollowing !== null);
 			}
 		});
 	});
