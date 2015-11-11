@@ -10,7 +10,7 @@ export default function<T>(publisherId: string, message: T): void {
 	publishStreamingMessage(`userStream:${publisherId}`, streamMessage);
 
 	// 自分のフォロワーのストリーム
-	UserFollowing.find({followeeId: publisherId}, (followerFindErr: any, followers: IUserFollowing[]) => {
+	UserFollowing.find({followee: publisherId}, (followerFindErr: any, followers: IUserFollowing[]) => {
 		followers.forEach((follower: IUserFollowing) => {
 			publishStreamingMessage(`userStream:${follower.follower}`, streamMessage);
 		});
