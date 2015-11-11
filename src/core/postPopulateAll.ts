@@ -8,6 +8,15 @@ export default function postPopulateAll(sourcePost: IPost): Promise<IPost> {
 	return new Promise((resolve: (post: IPost) => void, reject: (err: any) => void) => {
 		switch (post.type) {
 			case 'status':
+				Status.populate(post, 'user', (err: any, _post: any) => {
+					if (err !== null) {
+						return reject(err);
+					}
+					_post.user = _post.user.toObject();
+					resolve(_post);
+				});
+				break;
+			case 'reply':
 				Status.populate(post, 'user inReplyToPost', (err: any, _post: any) => {
 					if (err !== null) {
 						return reject(err);
