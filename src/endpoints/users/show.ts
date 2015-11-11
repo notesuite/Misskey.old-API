@@ -13,7 +13,7 @@ export default function(me: IUser, id?: string, screenName?: string): Promise<Ob
 	return new Promise<Object>((resolve, reject) => {
 		function resolver(user: IUser): void {
 			if (user === null) {
-				return reject('user-not-found');
+				return reject('not-found');
 			}
 			const userObj: any = user.toObject();
 			if (me !== null) {
