@@ -65,7 +65,7 @@ export function reply(db: mongoose.Connection): mongoose.Model<mongoose.Document
 	const postReply: Object = Object.assign({
 		text: { type: String, required: false, default: null },
 		attachedFiles: [{ type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFile' }],
-		inReplyToPost: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Post' },
+		inReplyToPost: { type: Schema.Types.ObjectId, required: true, ref: 'Post' },
 		isContentModified: { type: Boolean, required: false, default: false },
 		isPlain: { type: Boolean, required: false, default: false }
 	}, postBase);

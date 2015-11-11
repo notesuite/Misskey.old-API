@@ -22,18 +22,14 @@ export default function postPopulateAll(sourcePost: IPost): Promise<IPost> {
 						return reject(err);
 					}
 					_post.user = _post.user.toObject();
-					if (_post.inReplyToPost !== null) {
-						_post.inReplyToPost = _post.inReplyToPost.toObject();
-						User.populate(_post, 'inReplyToPost.user', (_err: any, __post: any) => {
-							if (_err !== null) {
-								return reject(_err);
-							}
-							__post.inReplyToPost.user = __post.inReplyToPost.user.toObject();
-							resolve(__post);
-						});
-					} else {
-						resolve(_post);
-					}
+					_post.inReplyToPost = _post.inReplyToPost.toObject();
+					User.populate(_post, 'inReplyToPost.user', (_err: any, __post: any) => {
+						if (_err !== null) {
+							return reject(_err);
+						}
+						__post.inReplyToPost.user = __post.inReplyToPost.user.toObject();
+						resolve(__post);
+					});
 				});
 				break;
 			case 'repost':
