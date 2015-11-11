@@ -1,4 +1,4 @@
-import {User, Status, Repost} from '../models';
+import {User, Status, Reply, Repost} from '../models';
 import {IPost} from '../interfaces';
 
 /* tslint:disable:variable-name */
@@ -17,7 +17,7 @@ export default function postPopulateAll(sourcePost: IPost): Promise<IPost> {
 				});
 				break;
 			case 'reply':
-				Status.populate(post, 'user inReplyToPost', (err: any, _post: any) => {
+				Reply.populate(post, 'user inReplyToPost', (err: any, _post: any) => {
 					if (err !== null) {
 						return reject(err);
 					}
