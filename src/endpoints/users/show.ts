@@ -11,7 +11,7 @@ import lookupFollowState from '../../core/lookupFollowState';
 export default function(me: IUser, id?: string, screenName?: string): Promise<Object> {
 	'use strict';
 	return new Promise<Object>((resolve, reject) => {
-		function resolver(user: IUser) {
+		function resolver(user: IUser): void {
 			const userObj: any = user.toObject();
 			if (me !== null) {
 				lookupFollowState(me.id, user.id).then((isFollowing: boolean) => {

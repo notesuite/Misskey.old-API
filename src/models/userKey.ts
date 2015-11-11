@@ -1,5 +1,4 @@
 import * as mongoose from 'mongoose';
-import config from '../config';
 
 /* tslint:disable:variable-name */
 const Schema = mongoose.Schema;

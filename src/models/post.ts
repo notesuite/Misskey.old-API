@@ -43,7 +43,6 @@ export function status(db: mongoose.Connection): mongoose.Model<mongoose.Documen
 	const postStatus: Object = Object.assign({
 		text: { type: String, required: false, default: null },
 		attachedFiles: [{ type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFile' }],
-		inReplyToPost: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Post' },
 		isContentModified: { type: Boolean, required: false, default: false },
 		isPlain: { type: Boolean, required: false, default: false }
 	}, postBase);
@@ -57,6 +56,29 @@ export function status(db: mongoose.Connection): mongoose.Model<mongoose.Documen
 	});
 
 	return db.model('Status', schema, 'Posts');
+}
+
+export function reply(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
+	'use strict';
+	mongooseAutoIncrement.initialize(db);
+
+	const postReply: Object = Object.assign({
+		text: { type: String, required: false, default: null },
+		attachedFiles: [{ type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFile' }],
+		inReplyToPost: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Post' },
+		isContentModified: { type: Boolean, required: false, default: false },
+		isPlain: { type: Boolean, required: false, default: false }
+	}, postBase);
+
+	const schema: mongoose.Schema = new Schema(postReply);
+
+	// Auto increment
+	schema.plugin(mongooseAutoIncrement.plugin, {
+		model: 'Post',
+		field: 'cursor'
+	});
+
+	return db.model('Reply', schema, 'Posts');
 }
 
 export function repost(db: mongoose.Connection): mongoose.Model<mongoose.Document> {

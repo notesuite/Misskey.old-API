@@ -3,13 +3,14 @@ import {IApplication, IUser, IStatus} from '../../interfaces';
 import publishUserStream from '../../core/publishUserStream';
 
 /**
- * Statusを作成します
+ * 返信を作成します
  * @app: API利用App
  * @user: API利用ユーザー
  * @text: 本文
+ * @inReplyToPostId: 返信先投稿のID
  * @attachFileIds: 添付ファイルのIDの配列
  */
-export default function(app: IApplication, user: IUser, text: string, attachFileIds: string = null)
+export default function(app: IApplication, user: IUser, text: string, inReplyToPostId: string, attachFileIds: string = null)
 		: Promise<Object> {
 	'use strict';
 
@@ -22,15 +23,16 @@ export default function(app: IApplication, user: IUser, text: string, attachFile
 
 	return new Promise<Object>((resolve, reject) => {
 		Status.create({
-			type: 'status',
+			type: 'reply',
 			app: app !== null ? app.id : null,
 			user: user.id,
+			inReplyToPost: inReplyToPostId,
 			text
-		}, (err: any, createdStatus: IStatus) => {
+		}, (err: any, createdReply: IStatus) => {
 			if (err !== null) {
 				reject(err);
 			} else {
-				resolve(createdStatus.toObject());
+				resolve(createdReply.toObject());
 
 				user.postsCount++;
 				user.save();
@@ -38,7 +40,7 @@ export default function(app: IApplication, user: IUser, text: string, attachFile
 				publishUserStream(user.id, {
 					type: 'post',
 					value: {
-						id: createdStatus.id
+						id: createdReply.id
 					}
 				});
 			}
