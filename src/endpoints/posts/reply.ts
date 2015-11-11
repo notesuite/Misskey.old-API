@@ -1,5 +1,5 @@
-import {Status} from '../../models';
-import {IApplication, IUser, IStatus} from '../../interfaces';
+import {Reply} from '../../models';
+import {IApplication, IUser, IReply} from '../../interfaces';
 import publishUserStream from '../../core/publishUserStream';
 
 /**
@@ -22,13 +22,13 @@ export default function(app: IApplication, user: IUser, text: string, inReplyToP
 	}
 
 	return new Promise<Object>((resolve, reject) => {
-		Status.create({
+		Reply.create({
 			type: 'reply',
 			app: app !== null ? app.id : null,
 			user: user.id,
 			inReplyToPost: inReplyToPostId,
 			text
-		}, (err: any, createdReply: IStatus) => {
+		}, (err: any, createdReply: IReply) => {
 			if (err !== null) {
 				reject(err);
 			} else {
