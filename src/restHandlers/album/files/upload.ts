@@ -15,8 +15,8 @@ export default function(req: MisskeyExpressRequest, res: MisskeyExpressResponse)
 		const size: number = file.size;
 		fs.unlink(path);
 
-		upload(req.misskeyApp, req.misskeyUser, name, mimetype, fileBuffer, size).then((status: Object) => {
-			res.apiRender(status);
+		upload(req.misskeyApp, req.misskeyUser, name, mimetype, fileBuffer, size).then((albumFile: Object) => {
+			res.apiRender(albumFile);
 		}, (err: any) => {
 			res.apiError(500, err);
 		});
