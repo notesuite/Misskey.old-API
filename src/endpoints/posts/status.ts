@@ -7,9 +7,8 @@ import publishUserStream from '../../core/publishUserStream';
  * @app: API利用App
  * @user: API利用ユーザー
  * @text: 本文
- * @attachFileIds: 添付ファイルのIDの配列
  */
-export default function(app: IApplication, user: IUser, text: string, attachFileIds: string = null)
+export default function(app: IApplication, user: IUser, text: string)
 		: Promise<Object> {
 	'use strict';
 
