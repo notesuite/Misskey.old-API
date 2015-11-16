@@ -4,7 +4,11 @@ import create from '../../endpoints/posts/status';
 
 export default function(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
 	'use strict';
-	create(req.misskeyApp, req.misskeyUser, req.body['text']).then((status: Object) => {
+	const text: string = req.body['text'];
+	if (text === undefined) {
+		return res.apiError(400, 'text is required');
+	}
+	create(req.misskeyApp, req.misskeyUser, text).then((status: Object) => {
 		res.apiRender(status);
 	}, (err: any) => {
 		res.apiError(500, err);
