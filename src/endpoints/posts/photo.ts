@@ -17,7 +17,7 @@ export default function(app: IApplication, user: IUser, photos: string[], text: 
 	const maxTextLength: number = 300;
 	if (text !== null) {
 		text = text.trim();
-	
+
 		if (text.length > maxTextLength) {
 			return <Promise<any>>Promise.reject('too-long-text');
 		}

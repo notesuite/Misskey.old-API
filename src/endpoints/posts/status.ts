@@ -49,10 +49,10 @@ export default function(app: IApplication, user: IUser, text: string, inReplyToP
 					reject(createErr);
 				} else {
 					resolve(createdStatus.toObject());
-	
+
 					user.postsCount++;
 					user.save();
-	
+
 					publishUserStream(user.id, {
 						type: 'post',
 						value: {
