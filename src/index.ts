@@ -1,24 +1,21 @@
 import * as cluster from 'cluster';
+import { Task, print } from 'powerful';
 
-if (cluster.isMaster) {
-	console.log('Welcome to Misskey API!');
+const numberOfCpu = require('os').cpus().length;
 
-	// Count the machine's CPUs
-	const cpuCount: number = require('os').cpus().length;
+const fork = Task.sync<void>(() => cluster.fork());
 
-	// Create a worker for each CPU
-	for (var i = 0; i < cpuCount; i += 1) {
-		cluster.fork();
-	}
-} else {
+const forkForEachCpu = Task.repeat(numberOfCpu, () => fork);
+
+const loadServer = Task.sync(() => {
 	require('./server');
 	require('./internalServer');
-}
+});
 
-// Listen for dying workers
+(cluster.isMaster ? print('Welcome to Misskey API!').next(() => forkForEachCpu) : loadServer).run();
+
+// Fork when a worker died.
 cluster.on('exit', (worker: cluster.Worker) => {
-	// Replace the dead worker,
-	// we're not sentimental
 	console.log(`Worker ${worker.id} died :(`);
 	cluster.fork();
 });
