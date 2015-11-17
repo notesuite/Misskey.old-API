@@ -10,15 +10,17 @@ import publishUserStream from '../../core/publishUserStream';
  * @text: 本文
  * @inReplyToPostId: 返信先投稿のID
  */
-export default function(app: IApplication, user: IUser, photos: string[], text: string, inReplyToPostId: string = null)
+export default function(app: IApplication, user: IUser, photos: string[], text: string = null, inReplyToPostId: string = null)
 		: Promise<Object> {
 	'use strict';
 
 	const maxTextLength: number = 300;
-	text = text.trim();
-
-	if (text.length > maxTextLength) {
-		return <Promise<any>>Promise.reject('too-long-text');
+	if (text !== null) {
+		text = text.trim();
+	
+		if (text.length > maxTextLength) {
+			return <Promise<any>>Promise.reject('too-long-text');
+		}
 	}
 
 	if (photos === undefined || photos === null || photos.length === 0) {
