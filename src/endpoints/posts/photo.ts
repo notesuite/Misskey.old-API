@@ -1,6 +1,7 @@
 import {AlbumFile, Post, PhotoPost} from '../../models';
 import {IApplication, IAlbumFile, IUser, IPost, IPhotoPost} from '../../interfaces';
 import publishUserStream from '../../core/publishUserStream';
+import populateAll from '../../core/postPopulateAll';
 
 /**
  * PhotoPostを作成します
@@ -83,7 +84,11 @@ export default function(app: IApplication, user: IUser, photos: string[], text: 
 				if (createErr !== null) {
 					reject(createErr);
 				} else {
-					resolve(createdPhotoPost.toObject());
+					populateAll(createdPhotoPost, false).then((populated: Object) => {
+						resolve(populated);
+					}, (populateErr: any) => {
+						reject(populateErr);
+					});
 
 					user.postsCount++;
 					user.save();

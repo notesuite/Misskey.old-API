@@ -8,7 +8,7 @@ export default function postPopulateAll(sourcePost: IPost, populateReply: boolea
 	return new Promise((resolve: (post: IPost) => void, reject: (err: any) => void) => {
 		switch (post.type) {
 			case 'status':
-				StatusPost.populate(post, 'user inReplyToPost', (err: any, _post: any) => {
+				StatusPost.populate(post, `user ${populateReply ? 'inReplyToPost' : ''}`.trim(), (err: any, _post: any) => {
 					if (err !== null) {
 						return reject(err);
 					}
@@ -26,7 +26,7 @@ export default function postPopulateAll(sourcePost: IPost, populateReply: boolea
 				});
 				break;
 			case 'photo':
-				PhotoPost.populate(post, 'user inReplyToPost', (err: any, _post: any) => {
+				PhotoPost.populate(post, `user ${populateReply ? 'inReplyToPost' : ''}`.trim(), (err: any, _post: any) => {
 					if (err !== null) {
 						return reject(err);
 					}

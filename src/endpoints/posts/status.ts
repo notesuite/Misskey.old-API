@@ -51,7 +51,7 @@ export default function(app: IApplication, user: IUser, text: string, inReplyToP
 				if (createErr !== null) {
 					reject(createErr);
 				} else {
-					populateAll(createdStatus).then((populated: Object) => {
+					populateAll(createdStatus, false).then((populated: Object) => {
 						resolve(populated);
 					}, (populateErr: any) => {
 						reject(populateErr);
