@@ -12,25 +12,13 @@ const postBase: Object = {
 	createdAt: { type: Date, required: true, default: Date.now },
 	cursor: { type: Number },
 	favoritesCount: { type: Number, required: false, default: 0 },
+	inReplyToPost: { type: Schema.Types.ObjectId, required: true, ref: 'Post' },
 	isDeleted: { type: Boolean, required: false, default: false },
 	repliesCount: { type: Number, required: false, default: 0 },
 	repostsCount: { type: Number, required: false, default: 0 },
 	type: { type: String, required: true },
 	user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
 };
-
-const statusBase: Object = Object.assign({
-	text: { type: String, required: false, default: null },
-	isContentModified: { type: Boolean, required: false, default: false },
-	isPlain: { type: Boolean, required: false, default: false }
-}, postBase);
-
-const replyBase: Object = Object.assign({
-	text: { type: String, required: false, default: null },
-	inReplyToPost: { type: Schema.Types.ObjectId, required: true, ref: 'Post' },
-	isContentModified: { type: Boolean, required: false, default: false },
-	isPlain: { type: Boolean, required: false, default: false }
-}, postBase);
 
 export function post(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
 	'use strict';
@@ -53,7 +41,10 @@ export function status(db: mongoose.Connection): mongoose.Model<mongoose.Documen
 	'use strict';
 	mongooseAutoIncrement.initialize(db);
 
-	const schema: mongoose.Schema = new Schema(statusBase);
+	const schema: mongoose.Schema = new Schema(Object.assign({
+		text: { type: String, required: false, default: null },
+		isPlain: { type: Boolean, required: false, default: false },
+	}, postBase));
 
 	// Auto increment
 	schema.plugin(mongooseAutoIncrement.plugin, {
@@ -64,15 +55,15 @@ export function status(db: mongoose.Connection): mongoose.Model<mongoose.Documen
 	return db.model('Status', schema, 'Posts');
 }
 
-export function photoStatus(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
+export function photo(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
 	'use strict';
 	mongooseAutoIncrement.initialize(db);
 
-	const photoStatus: Object = Object.assign({
-		attachedPhotos: [{ type: Schema.Types.ObjectId, required: true, ref: 'AlbumFile' }]
-	}, statusBase);
-
-	const schema: mongoose.Schema = new Schema(photoStatus);
+	const schema: mongoose.Schema = new Schema(Object.assign({
+		photos: [{ type: Schema.Types.ObjectId, required: true, ref: 'AlbumFile' }],
+		text: { type: String, required: false, default: null },
+		isPlain: { type: Boolean, required: false, default: false },
+	}, postBase));
 
 	// Auto increment
 	schema.plugin(mongooseAutoIncrement.plugin, {
@@ -80,41 +71,7 @@ export function photoStatus(db: mongoose.Connection): mongoose.Model<mongoose.Do
 		field: 'cursor'
 	});
 
-	return db.model('PhotoStatus', schema, 'Posts');
-}
-
-export function reply(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
-	'use strict';
-	mongooseAutoIncrement.initialize(db);
-
-	const schema: mongoose.Schema = new Schema(replyBase);
-
-	// Auto increment
-	schema.plugin(mongooseAutoIncrement.plugin, {
-		model: 'Post',
-		field: 'cursor'
-	});
-
-	return db.model('Reply', schema, 'Posts');
-}
-
-export function photoReply(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
-	'use strict';
-	mongooseAutoIncrement.initialize(db);
-
-	const postReply: Object = Object.assign({
-		attachedPhotos: [{ type: Schema.Types.ObjectId, required: true, ref: 'AlbumFile' }]
-	}, replyBase);
-
-	const schema: mongoose.Schema = new Schema(postReply);
-
-	// Auto increment
-	schema.plugin(mongooseAutoIncrement.plugin, {
-		model: 'Post',
-		field: 'cursor'
-	});
-
-	return db.model('PhotoReply', schema, 'Posts');
+	return db.model('Photo', schema, 'Posts');
 }
 
 export function repost(db: mongoose.Connection): mongoose.Model<mongoose.Document> {

@@ -53,9 +53,9 @@ export interface IApplication extends mongoose.Document {
 	callbackUrl: string;
 	description: string;
 	iconId: string | mongoose.Types.ObjectId;
-	permissions: string[];
+	isDeleted: boolean;
 	isSuspended: boolean;
-	idDeleted: boolean;
+	permissions: string[];
 }
 
 export interface IPost extends mongoose.Document {
@@ -63,6 +63,7 @@ export interface IPost extends mongoose.Document {
 	createdAt: Date;
 	cursor: number;
 	favoritesCount: number;
+	inReplyToPost: string | mongoose.Types.ObjectId | IPost;
 	isDeleted: boolean;
 	repliesCount: number;
 	repostsCount: number;
@@ -70,25 +71,15 @@ export interface IPost extends mongoose.Document {
 	user: string | mongoose.Types.ObjectId | IUser;
 }
 
-export interface IStatus extends IPost {
-	text: string;
-	isContentModified: boolean;
+export interface IStatusPost extends IPost {
 	isPlain: boolean;
-}
-
-export interface IPhotoStatus extends IStatus {
-	attachedPhotos: string | mongoose.Types.ObjectId[] | IAlbumFile[];
-}
-
-export interface IReply extends IPost {
 	text: string;
-	inReplyToPost: string | mongoose.Types.ObjectId | IPost;
-	isContentModified: boolean;
-	isPlain: boolean;
 }
 
-export interface IPhotoReply extends IReply {
-	attachedPhotos: string | mongoose.Types.ObjectId[] | IAlbumFile[];
+export interface IPhotoPost extends IPost {
+	isPlain: boolean;
+	photos: string | mongoose.Types.ObjectId[] | IAlbumFile[];
+	text: string;
 }
 
 export interface IRepost extends IPost {
