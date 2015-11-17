@@ -12,7 +12,7 @@ const postBase: Object = {
 	createdAt: { type: Date, required: true, default: Date.now },
 	cursor: { type: Number },
 	favoritesCount: { type: Number, required: false, default: 0 },
-	inReplyToPost: { type: Schema.Types.ObjectId, required: true, ref: 'Post' },
+	inReplyToPost: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Post' },
 	isDeleted: { type: Boolean, required: false, default: false },
 	repliesCount: { type: Number, required: false, default: 0 },
 	repostsCount: { type: Number, required: false, default: 0 },
