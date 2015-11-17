@@ -82,8 +82,14 @@ export interface IPhotoPost extends IPost {
 	text: string;
 }
 
-export interface IRepost extends IPost {
+export interface IRepost extends mongoose.Document {
+	app: string | mongoose.Types.ObjectId | IApplication;
+	createdAt: Date;
+	cursor: number;
+	isDeleted: boolean;
 	post: string | mongoose.Types.ObjectId | IPost;
+	type: string;
+	user: string | mongoose.Types.ObjectId | IUser;
 }
 
 export interface IPostFavorite extends mongoose.Document {

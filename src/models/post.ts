@@ -76,11 +76,16 @@ export function photo(db: mongoose.Connection): mongoose.Model<mongoose.Document
 
 export function repost(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
 	'use strict';
-	const postRepost: Object = Object.assign({
-		post: { type: Schema.Types.ObjectId, required: true, ref: 'Post' }
-	}, postBase);
 
-	const schema: mongoose.Schema = new Schema(postRepost);
+	const schema: mongoose.Schema = new Schema({
+		app: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Application' },
+		createdAt: { type: Date, required: true, default: Date.now },
+		cursor: { type: Number },
+		isDeleted: { type: Boolean, required: false, default: false },
+		post: { type: Schema.Types.ObjectId, required: true, ref: 'Post' },
+		type: { type: String, required: true },
+		user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
+	});
 
 	// Auto increment
 	schema.plugin(mongooseAutoIncrement.plugin, {

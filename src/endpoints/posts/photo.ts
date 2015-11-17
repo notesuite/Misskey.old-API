@@ -20,11 +20,15 @@ export default function(app: IApplication, user: IUser, photos: string[], text: 
 	if (text.length > maxTextLength) {
 		return <Promise<any>>Promise.reject('too-long-text');
 	}
+	
+	if (photos === undefined || photos === null || photos.length === 0) {
+		return <Promise<any>>Promise.reject('photos-required');
+	}
 
 	return new Promise<Object>((resolve, reject) => {
 		if (inReplyToPostId !== null) {
 			// リプライ先に指定されている投稿が実在するかチェック
-			StatusPost.findById(inReplyToPostId, (err: any, reply: IStatusPost) => {
+			Post.findById(inReplyToPostId, (err: any, reply: IPost) => {
 				if (err !== null) {
 					reject(err);
 				} else if (reply === null) {
@@ -40,7 +44,11 @@ export default function(app: IApplication, user: IUser, photos: string[], text: 
 		}
 		
 		function checkPhotos() {
-
+			Promise.all(photos.map((photo: string) => {
+				return new Promise<Object>((resolve, reject) => {
+					
+				});
+			}));
 		}
 		
 		function create() {

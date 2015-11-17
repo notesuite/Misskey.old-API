@@ -1,5 +1,5 @@
-import {StatusPost} from '../../models';
-import {IApplication, IUser, IStatusPost} from '../../interfaces';
+import {Post, StatusPost} from '../../models';
+import {IApplication, IUser, IPost, IStatusPost} from '../../interfaces';
 import publishUserStream from '../../core/publishUserStream';
 
 /**
@@ -23,7 +23,7 @@ export default function(app: IApplication, user: IUser, text: string, inReplyToP
 	return new Promise<Object>((resolve, reject) => {
 		if (inReplyToPostId !== null) {
 			// リプライ先に指定されている投稿が実在するかチェック
-			StatusPost.findById(inReplyToPostId, (err: any, reply: IStatusPost) => {
+			Post.findById(inReplyToPostId, (err: any, reply: IPost) => {
 				if (err !== null) {
 					reject(err);
 				} else if (reply === null) {
