@@ -1,16 +1,16 @@
 import {Post, PostFavorite} from '../models';
-import {IUser, IStatus, IReply} from '../interfaces';
+import {IUser, IPost, IStatusPost} from '../interfaces';
 import serializeStatus from './serializeStatus';
 import serializeReply from './serializeReply';
 import getPostStargazers from './getPostStargazers';
 
-export default function serializePost(post: any, me: IUser = null): Promise<Object> {
+export default function serializePost(post: any, me: IUser = null, serializeReply = true): Promise<Object> {
 	'use strict';
 	const type: string = post.type;
-	return new Promise((resolve: (obj: Object) => void, reject: (err: any) => void) => {
+	return new Promise<Object>((resolve, reject) => {
 		switch (type) {
 			case 'status':
-				common(<IStatus>post, me).then((serialized: Object) => {
+				common(<IStatusPost>post, me, serializeReply).then((serialized: Object) => {
 					serializeStatus(serialized, me).then((serializedStatus: Object) => {
 						resolve(serializedStatus);
 					}, (serializeErr: any) => {
@@ -20,21 +20,12 @@ export default function serializePost(post: any, me: IUser = null): Promise<Obje
 					reject(serializeErr);
 				});
 				break;
-			case 'reply':
-				common(<IReply>post, me).then((serialized: Object) => {
-					serializeReply(serialized, me).then((serializedReply: Object) => {
-						resolve(serializedReply);
-					}, (serializeErr: any) => {
-						reject(serializeErr);
-					});
-				}, (serializeErr: any) => {
-					reject(serializeErr);
-				});
-				break;
 			case 'repost':
-				serializePost(post.post, me).then((serializedPost: any) => {
+				serializePost(post.post, me, serializeReply).then((serializedPost: any) => {
 					post.post = serializedPost;
 					resolve(post);
+				}, (err: any) => {
+					reject(err);
 				});
 				break;
 			default:
@@ -44,12 +35,29 @@ export default function serializePost(post: any, me: IUser = null): Promise<Obje
 	});
 }
 
-function common(post: any, me: IUser = null): Promise<Object> {
+function common(post: any, me: IUser = null, serializeReply = true): Promise<Object> {
 	'use strict';
 	return new Promise<Object>((resolve, reject) => {
 		Promise.all([
+			// Get reply source
+			new Promise<Object>((getDestinationResolve, getDestinationReject) => {
+				if (post.inReplyToPost !== null && serializeReply) {
+					Post.findById(post.inReplyToPost, (findErr: any, source: IPost) => {
+						if (findErr !== null) {
+							return getDestinationReject(findErr);
+						}
+						serializePost(source, me, false).then((serializedReply: Object) => {
+							getDestinationResolve(serializedReply);
+						}, (serializedReplyErr: any) => {
+							getDestinationReject(serializedReplyErr);
+						});
+					});
+				} else {
+					getDestinationResolve(null);
+				}
+			}),
 			// Get is favorited
-			new Promise((getIsFavoritedResolve: (same: any) => void, getIsFavoritedReject: (err: any) => void) => {
+			new Promise<boolean>((getIsFavoritedResolve, getIsFavoritedReject) => {
 				PostFavorite.find({
 					post: post.id,
 					user: me.id
@@ -61,7 +69,7 @@ function common(post: any, me: IUser = null): Promise<Object> {
 				});
 			}),
 			// Get is reposted
-			new Promise((getIsRepostedResolve: (same: any) => void, getIsRepostedReject: (err: any) => void) => {
+			new Promise<boolean>((getIsRepostedResolve, getIsRepostedReject) => {
 				Post.find({
 					type: 'repost',
 					post: post.id,
@@ -74,7 +82,7 @@ function common(post: any, me: IUser = null): Promise<Object> {
 				});
 			}),
 			// Get stargazers
-			new Promise((getStargazersResolve: (stargazers: any) => void, getStargazersReject: (err: any) => void) => {
+			new Promise<Object[]>((getStargazersResolve, getStargazersReject) => {
 				getPostStargazers(post.id, 10).then((stargazers: IUser[]) => {
 					if (stargazers !== null && stargazers.length > 0) {
 						getStargazersResolve(stargazers.map((stargazer: IUser) => {
@@ -88,11 +96,10 @@ function common(post: any, me: IUser = null): Promise<Object> {
 				});
 			}),
 			// Get replies
-			new Promise((getRepliesResolve: (replies: any) => void, getRepliesReject: (err: any) => void) => {
+			new Promise<Object[]>((getRepliesResolve, getRepliesReject) => {
 				Post.find({
-					type: 'reply',
 					inReplyToPost: post.id
-				}).limit(10).exec((repliesFindErr: any, replies: IReply[]) => {
+				}).limit(10).exec((repliesFindErr: any, replies: IPost[]) => {
 					if (repliesFindErr !== null) {
 						return getRepliesReject(repliesFindErr);
 					}
@@ -101,10 +108,11 @@ function common(post: any, me: IUser = null): Promise<Object> {
 			})
 		]).then((results: any[]) => {
 			const serialized: any = post;
-			serialized.isFavorited = results[0];
-			serialized.isReposted = results[1];
-			serialized.stargazers = results[2];
-			serialized.replies = results[3];
+			serialized.inReplyToPost = (post.inReplyToPost !== null && serializeReply) ? results[0] : post.inReplyToPost;
+			serialized.isFavorited = results[1];
+			serialized.isReposted = results[2];
+			serialized.stargazers = results[3];
+			serialized.replies = results[4];
 			resolve(serialized);
 		},
 		(serializedErr: any) => {
