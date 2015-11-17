@@ -43,7 +43,7 @@ export function status(db: mongoose.Connection): mongoose.Model<mongoose.Documen
 
 	const schema: mongoose.Schema = new Schema(Object.assign({
 		text: { type: String, required: false, default: null },
-		isPlain: { type: Boolean, required: false, default: false },
+		isPlain: { type: Boolean, required: false, default: false }
 	}, postBase));
 
 	// Auto increment
@@ -62,7 +62,7 @@ export function photo(db: mongoose.Connection): mongoose.Model<mongoose.Document
 	const schema: mongoose.Schema = new Schema(Object.assign({
 		photos: [{ type: Schema.Types.ObjectId, required: true, ref: 'AlbumFile' }],
 		text: { type: String, required: false, default: null },
-		isPlain: { type: Boolean, required: false, default: false },
+		isPlain: { type: Boolean, required: false, default: false }
 	}, postBase));
 
 	// Auto increment
