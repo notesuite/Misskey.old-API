@@ -30,6 +30,8 @@ export default function(app: IApplication, user: IUser, text: string, inReplyToP
 					reject('reply-source-not-found');
 				} else if (reply.isDeleted) {
 					reject('reply-source-not-found');
+				} else if (reply.type === 'repost') {
+					reject('reply-to-repost-is-not-allowed');
 				} else {
 					create();
 				}

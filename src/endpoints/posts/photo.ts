@@ -37,6 +37,8 @@ export default function(app: IApplication, user: IUser, photos: string[], text: 
 					reject('reply-source-not-found');
 				} else if (reply.isDeleted) {
 					reject('reply-source-not-found');
+				} else if (reply.type === 'repost') {
+					reject('reply-to-repost-is-not-allowed');
 				} else {
 					checkPhotos();
 				}
