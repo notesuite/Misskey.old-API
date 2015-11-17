@@ -1,15 +1,14 @@
 import { MisskeyExpressRequest } from '../../misskeyExpressRequest';
 import { MisskeyExpressResponse } from '../../misskeyExpressResponse';
-import create from '../../endpoints/posts/status';
+import photo from '../../endpoints/posts/photo';
 
 export default function(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
 	'use strict';
 	const text: string = req.body['text'];
-	if (text === undefined) {
-		return res.apiError(400, 'text is required');
-	}
-	create(req.misskeyApp, req.misskeyUser, text, req.body['in-reply-to-post-id']).then((status: Object) => {
-		res.apiRender(status);
+	const photos: string[] = req.body['photos'];
+	const inReplyToPostId: string = req.body['in-reply-to-post-id'];
+	photo(req.misskeyApp, req.misskeyUser, photos, text, inReplyToPostId).then((photoPost: Object) => {
+		res.apiRender(photoPost);
 	}, (err: any) => {
 		res.apiError(500, err);
 	});
