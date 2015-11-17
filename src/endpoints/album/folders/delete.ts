@@ -1,5 +1,5 @@
-import {AlbumFile, AlbumFolder} from '../../models';
-import {IUser, IAlbumFile, IAlbumFolder} from '../../interfaces';
+import {AlbumFile, AlbumFolder} from '../../../models';
+import {IUser, IAlbumFile, IAlbumFolder} from '../../../interfaces';
 import fileDel from '../files/delete';
 
 export default function(user: IUser, folderId: string = null): Promise<void> {

@@ -1,4 +1,4 @@
-import {User, StatusPost, PhotoPost, Repost} from '../models';
+import {StatusPost, PhotoPost, Repost} from '../models';
 import {IPost} from '../interfaces';
 
 /* tslint:disable:variable-name */

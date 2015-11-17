@@ -47,20 +47,20 @@ export default function(app: IApplication, user: IUser, photos: string[], text: 
 			checkPhotos();
 		}
 
-		function checkPhotos() {
+		function checkPhotos(): void {
 			Promise.all(photos.map((photo: string) => {
-				return new Promise<Object>((resolve, reject) => {
+				return new Promise<Object>((checkFileResolve, checkFileReject) => {
 					AlbumFile.findById(photo, (findErr: any, file: IAlbumFile) => {
 						if (findErr !== null) {
-							reject(findErr);
+							checkFileReject(findErr);
 						} else if (file === null) {
-							reject('file-not-found');
+							checkFileReject('file-not-found');
 						} else if (file.user.toString() !== user.id.toString()) {
-							reject('file-not-found');
+							checkFileReject('file-not-found');
 						} else if (file.isDeleted) {
-							reject('file-not-found');
+							checkFileReject('file-not-found');
 						} else {
-							resolve(file);
+							checkFileResolve(file);
 						}
 					});
 				});
@@ -71,7 +71,7 @@ export default function(app: IApplication, user: IUser, photos: string[], text: 
 			});
 		}
 
-		function create() {
+		function create(): void {
 			PhotoPost.create({
 				type: 'photo',
 				app: app !== null ? app.id : null,

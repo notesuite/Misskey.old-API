@@ -39,7 +39,7 @@ export default function(app: IApplication, user: IUser, text: string, inReplyToP
 		} else {
 			create();
 		}
-		function create() {
+		function create(): void {
 			StatusPost.create({
 				type: 'status',
 				app: app !== null ? app.id : null,

@@ -17,8 +17,8 @@ export default function(app: IApplication, user: IUser, fileName: string, mimety
 	} else {
 		return new Promise<Object>((resolve, reject) => {
 			const appId: string = app !== null ? app.id : null;
-			add(appId, user.id, fileName, mimetype, file, size).then((file: IAlbumFile) => {
-				resolve(file.toObject());
+			add(appId, user.id, fileName, mimetype, file, size).then((createdFile: IAlbumFile) => {
+				resolve(createdFile.toObject());
 			}, (err: any) => {
 				reject(err);
 			});

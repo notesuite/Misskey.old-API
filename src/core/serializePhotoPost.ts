@@ -5,12 +5,12 @@ export default (photoPost: any, me: IUser = null): Promise<Object> => {
 	'use strict';
 	return new Promise<Object>((resolve, reject) => {
 		Promise.all(photoPost.photos.map((photo: string) => {
-			return new Promise<Object>((resolve, reject) => {
+			return new Promise<Object>((fileResolve, fileReject) => {
 				AlbumFile.findById(photo, (findErr: any, file: IAlbumFile) => {
 					if (findErr !== null) {
-						reject(findErr);
+						fileReject(findErr);
 					} else {
-						resolve(file.toObject());
+						fileResolve(file.toObject());
 					}
 				});
 			});
