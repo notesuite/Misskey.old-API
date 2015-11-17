@@ -53,7 +53,7 @@ export default function(app: IApplication, user: IUser, photos: string[], text: 
 							reject(findErr);
 						} else if (file === null) {
 							reject('file-not-found');
-						} else if (file.user !== user.id) {
+						} else if (file.user.toString() !== user.id.toString()) {
 							reject('file-not-found');
 						} else if (file.isDeleted) {
 							reject('file-not-found');
