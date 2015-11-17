@@ -1,5 +1,5 @@
-import {PhotoPost} from '../../models';
-import {IApplication, IUser, IPhotoPost} from '../../interfaces';
+import {AlbumFile, Post, PhotoPost} from '../../models';
+import {IApplication, IAlbumFile, IUser, IPost, IPhotoPost} from '../../interfaces';
 import publishUserStream from '../../core/publishUserStream';
 
 /**
@@ -20,7 +20,7 @@ export default function(app: IApplication, user: IUser, photos: string[], text: 
 	if (text.length > maxTextLength) {
 		return <Promise<any>>Promise.reject('too-long-text');
 	}
-	
+
 	if (photos === undefined || photos === null || photos.length === 0) {
 		return <Promise<any>>Promise.reject('photos-required');
 	}
@@ -42,35 +42,52 @@ export default function(app: IApplication, user: IUser, photos: string[], text: 
 		} else {
 			checkPhotos();
 		}
-		
+
 		function checkPhotos() {
 			Promise.all(photos.map((photo: string) => {
 				return new Promise<Object>((resolve, reject) => {
-					
+					AlbumFile.findById(photo, (findErr: any, file: IAlbumFile) => {
+						if (findErr !== null) {
+							reject(findErr);
+						} else if (file === null) {
+							reject('file-not-found');
+						} else if (file.user !== user.id) {
+							reject('file-not-found');
+						} else if (file.isDeleted) {
+							reject('file-not-found');
+						} else {
+							resolve(file);
+						}
+					});
 				});
-			}));
+			})).then((photoFiles: IAlbumFile[]) => {
+				create();
+			}, (photosCheckErr: any) => {
+				reject(photosCheckErr);
+			});
 		}
-		
+
 		function create() {
 			PhotoPost.create({
 				type: 'photo',
 				app: app !== null ? app.id : null,
 				user: user.id,
 				inReplyToPost: inReplyToPostId,
+				photos,
 				text
-			}, (createErr: any, createdStatus: IStatusPost) => {
+			}, (createErr: any, createdPhotoPost: IPhotoPost) => {
 				if (createErr !== null) {
 					reject(createErr);
 				} else {
-					resolve(createdStatus.toObject());
-	
+					resolve(createdPhotoPost.toObject());
+
 					user.postsCount++;
 					user.save();
-	
+
 					publishUserStream(user.id, {
 						type: 'post',
 						value: {
-							id: createdStatus.id
+							id: createdPhotoPost.id
 						}
 					});
 				}
