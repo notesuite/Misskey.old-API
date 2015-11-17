@@ -52,6 +52,15 @@ export function status(db: mongoose.Connection): mongoose.Model<mongoose.Documen
 		field: 'cursor'
 	});
 
+	if (!(<any>schema).options.toObject) {
+		(<any>schema).options.toObject = {};
+	}
+	(<any>schema).options.toObject.transform = (doc: any, ret: any) => {
+		ret.id = doc.id;
+		delete ret._id;
+		delete ret.__v;
+	};
+
 	return db.model('Status', schema, 'Posts');
 }
 
@@ -70,6 +79,15 @@ export function photo(db: mongoose.Connection): mongoose.Model<mongoose.Document
 		model: 'Post',
 		field: 'cursor'
 	});
+
+	if (!(<any>schema).options.toObject) {
+		(<any>schema).options.toObject = {};
+	}
+	(<any>schema).options.toObject.transform = (doc: any, ret: any) => {
+		ret.id = doc.id;
+		delete ret._id;
+		delete ret.__v;
+	};
 
 	return db.model('Photo', schema, 'Posts');
 }
@@ -92,6 +110,15 @@ export function repost(db: mongoose.Connection): mongoose.Model<mongoose.Documen
 		model: 'Post',
 		field: 'cursor'
 	});
+
+	if (!(<any>schema).options.toObject) {
+		(<any>schema).options.toObject = {};
+	}
+	(<any>schema).options.toObject.transform = (doc: any, ret: any) => {
+		ret.id = doc.id;
+		delete ret._id;
+		delete ret.__v;
+	};
 
 	return db.model('Repost', schema, 'Posts');
 }

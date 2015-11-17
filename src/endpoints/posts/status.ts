@@ -1,6 +1,7 @@
 import {Post, StatusPost} from '../../models';
 import {IApplication, IUser, IPost, IStatusPost} from '../../interfaces';
 import publishUserStream from '../../core/publishUserStream';
+import populateAll from '../../core/postPopulateAll';
 
 /**
  * Statusを作成します
@@ -50,7 +51,11 @@ export default function(app: IApplication, user: IUser, text: string, inReplyToP
 				if (createErr !== null) {
 					reject(createErr);
 				} else {
-					resolve(createdStatus.toObject());
+					populateAll(createdStatus).then((populated: Object) => {
+						resolve(populated);
+					}, (populateErr: any) => {
+						reject(populateErr);
+					});
 
 					user.postsCount++;
 					user.save();
