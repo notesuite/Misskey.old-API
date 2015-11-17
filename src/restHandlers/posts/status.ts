@@ -8,7 +8,7 @@ export default function(req: MisskeyExpressRequest, res: MisskeyExpressResponse)
 	if (text === undefined) {
 		return res.apiError(400, 'text is required');
 	}
-	create(req.misskeyApp, req.misskeyUser, text).then((status: Object) => {
+	create(req.misskeyApp, req.misskeyUser, text, req.body['in-reply-to-post-id']).then((status: Object) => {
 		res.apiRender(status);
 	}, (err: any) => {
 		res.apiError(500, err);

@@ -24,7 +24,6 @@ const routing: IRoute[] = [
 	{ method: 'get', endpoint: 'posts/user-timeline' },
 	{ method: 'get', endpoint: 'posts/show' },
 	{ method: 'post', endpoint: 'posts/status' },
-	{ method: 'post', endpoint: 'posts/reply' },
 	{ method: 'post', endpoint: 'posts/favorite' },
 	{ method: 'post', endpoint: 'posts/repost' },
 
