@@ -4,7 +4,7 @@ import serializeStatus from './serializeStatus';
 import serializePhotoPost from './serializePhotoPost';
 import getPostStargazers from './getPostStargazers';
 
-export default function serializePost(post: any, me: IUser = null, serializeReply = true): Promise<Object> {
+export default function serializePost(post: any, me: IUser = null, serializeReply: boolean = true): Promise<Object> {
 	'use strict';
 	const type: string = post.type;
 	return new Promise<Object>((resolve, reject) => {
@@ -32,7 +32,7 @@ export default function serializePost(post: any, me: IUser = null, serializeRepl
 				});
 				break;
 			case 'repost':
-				serializePost(post.post, me, serializeReply).then((serializedPost: any) => {
+				serializePost(post.post, me).then((serializedPost: any) => {
 					post.post = serializedPost;
 					resolve(post);
 				}, (err: any) => {
@@ -46,22 +46,17 @@ export default function serializePost(post: any, me: IUser = null, serializeRepl
 	});
 }
 
-function common(post: any, me: IUser = null, serializeReply = true): Promise<Object> {
+function common(post: any, me: IUser = null, serializeReply: boolean = true): Promise<Object> {
 	'use strict';
 	return new Promise<Object>((resolve, reject) => {
 		Promise.all([
 			// Get reply source
 			new Promise<Object>((getDestinationResolve, getDestinationReject) => {
 				if (post.inReplyToPost !== null && serializeReply) {
-					Post.findById(post.inReplyToPost, (findErr: any, source: IPost) => {
-						if (findErr !== null) {
-							return getDestinationReject(findErr);
-						}
-						serializePost(source, me, false).then((serializedReply: Object) => {
-							getDestinationResolve(serializedReply);
-						}, (serializedReplyErr: any) => {
-							getDestinationReject(serializedReplyErr);
-						});
+					serializePost(post.inReplyToPost, me, false).then((serializedReply: Object) => {
+						getDestinationResolve(serializedReply);
+					}, (serializedReplyErr: any) => {
+						getDestinationReject(serializedReplyErr);
 					});
 				} else {
 					getDestinationResolve(null);

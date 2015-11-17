@@ -2,27 +2,45 @@ import {StatusPost, PhotoPost, Repost} from '../models';
 import {IPost} from '../interfaces';
 
 /* tslint:disable:variable-name */
-export default function postPopulateAll(sourcePost: IPost): Promise<IPost> {
+export default function postPopulateAll(sourcePost: IPost, populateReply: boolean = true): Promise<IPost> {
 	'use strict';
 	const post: any = sourcePost.toObject();
 	return new Promise((resolve: (post: IPost) => void, reject: (err: any) => void) => {
 		switch (post.type) {
 			case 'status':
-				StatusPost.populate(post, 'user', (err: any, _post: any) => {
+				StatusPost.populate(post, 'user inReplyToPost', (err: any, _post: any) => {
 					if (err !== null) {
 						return reject(err);
 					}
 					_post.user = _post.user.toObject();
-					resolve(_post);
+					if (_post.inReplyToPost !== null && populateReply) {
+						postPopulateAll(_post.inReplyToPost, false).then((__post: any) => {
+							_post.inReplyToPost = __post;
+							resolve(_post);
+						}, (_err: any) => {
+							reject(_err);
+						});
+					} else {
+						resolve(_post);
+					}
 				});
 				break;
 			case 'photo':
-				PhotoPost.populate(post, 'user', (err: any, _post: any) => {
+				PhotoPost.populate(post, 'user inReplyToPost', (err: any, _post: any) => {
 					if (err !== null) {
 						return reject(err);
 					}
 					_post.user = _post.user.toObject();
-					resolve(_post);
+					if (_post.inReplyToPost !== null && populateReply) {
+						postPopulateAll(_post.inReplyToPost, false).then((__post: any) => {
+							_post.inReplyToPost = __post;
+							resolve(_post);
+						}, (_err: any) => {
+							reject(_err);
+						});
+					} else {
+						resolve(_post);
+					}
 				});
 				break;
 			case 'repost':
