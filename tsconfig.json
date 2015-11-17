@@ -39,7 +39,7 @@
 		"src/core/serializePost.ts",
 		"src/core/serializeTimeline.ts",
 		"src/core/serializeStatus.ts",
-		"src/core/serializeReply.ts",
+		"src/core/serializePhotoPost.ts",
 		"src/core/getPostStargazers.ts",
 		"src/core/publishStreamingMessage.ts",
 		"src/core/publishUserStream.ts",

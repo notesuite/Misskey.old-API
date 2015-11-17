@@ -1,7 +1,7 @@
 import {Post, PostFavorite} from '../models';
-import {IUser, IPost, IStatusPost} from '../interfaces';
+import {IUser, IPost, IStatusPost, IPhotoPost} from '../interfaces';
 import serializeStatus from './serializeStatus';
-import serializeReply from './serializeReply';
+import serializePhotoPost from './serializePhotoPost';
 import getPostStargazers from './getPostStargazers';
 
 export default function serializePost(post: any, me: IUser = null, serializeReply = true): Promise<Object> {
@@ -13,6 +13,17 @@ export default function serializePost(post: any, me: IUser = null, serializeRepl
 				common(<IStatusPost>post, me, serializeReply).then((serialized: Object) => {
 					serializeStatus(serialized, me).then((serializedStatus: Object) => {
 						resolve(serializedStatus);
+					}, (serializeErr: any) => {
+						reject(serializeErr);
+					});
+				}, (serializeErr: any) => {
+					reject(serializeErr);
+				});
+				break;
+			case 'photo':
+				common(<IPhotoPost>post, me, serializeReply).then((serialized: Object) => {
+					serializePhotoPost(serialized, me).then((serializedPhotoPost: Object) => {
+						resolve(serializedPhotoPost);
 					}, (serializeErr: any) => {
 						reject(serializeErr);
 					});
