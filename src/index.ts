@@ -1,7 +1,8 @@
 import * as cluster from 'cluster';
 import { Task, print } from 'powerful';
+import * as os from 'os';
 
-const numberOfCpu = require('os').cpus().length;
+const numberOfCpu = os.cpus().length;
 
 const fork = Task.sync<void>(() => cluster.fork());
 
