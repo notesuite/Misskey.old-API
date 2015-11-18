@@ -20,6 +20,26 @@ const postBase: Object = {
 	user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
 };
 
+const toObject: any = (doc: any, ret: any) => {
+	// General
+	ret.id = doc.id;
+	delete ret._id;
+	delete ret.__v;
+
+	switch (doc.type) {
+		case 'status':
+			ret.userId = ret.user;
+			ret.inReplyToPostId = ret.inReplyToPost;
+			break;
+		case 'photo':
+			ret.userId = ret.user;
+			ret.inReplyToPostId = ret.inReplyToPost;
+			break;
+		default:
+			break;
+	}
+};
+
 export function post(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
 	'use strict';
 
@@ -28,11 +48,7 @@ export function post(db: mongoose.Connection): mongoose.Model<mongoose.Document>
 	if (!(<any>schema).options.toObject) {
 		(<any>schema).options.toObject = {};
 	}
-	(<any>schema).options.toObject.transform = (doc: any, ret: any) => {
-		ret.id = doc.id;
-		delete ret._id;
-		delete ret.__v;
-	};
+	(<any>schema).options.toObject.transform = toObject;
 
 	return db.model('Post', schema, 'Posts');
 }
@@ -55,11 +71,7 @@ export function status(db: mongoose.Connection): mongoose.Model<mongoose.Documen
 	if (!(<any>schema).options.toObject) {
 		(<any>schema).options.toObject = {};
 	}
-	(<any>schema).options.toObject.transform = (doc: any, ret: any) => {
-		ret.id = doc.id;
-		delete ret._id;
-		delete ret.__v;
-	};
+	(<any>schema).options.toObject.transform = toObject;
 
 	return db.model('Status', schema, 'Posts');
 }
@@ -83,11 +95,7 @@ export function photo(db: mongoose.Connection): mongoose.Model<mongoose.Document
 	if (!(<any>schema).options.toObject) {
 		(<any>schema).options.toObject = {};
 	}
-	(<any>schema).options.toObject.transform = (doc: any, ret: any) => {
-		ret.id = doc.id;
-		delete ret._id;
-		delete ret.__v;
-	};
+	(<any>schema).options.toObject.transform = toObject;
 
 	return db.model('Photo', schema, 'Posts');
 }
@@ -114,11 +122,7 @@ export function repost(db: mongoose.Connection): mongoose.Model<mongoose.Documen
 	if (!(<any>schema).options.toObject) {
 		(<any>schema).options.toObject = {};
 	}
-	(<any>schema).options.toObject.transform = (doc: any, ret: any) => {
-		ret.id = doc.id;
-		delete ret._id;
-		delete ret.__v;
-	};
+	(<any>schema).options.toObject.transform = toObject;
 
 	return db.model('Repost', schema, 'Posts');
 }
