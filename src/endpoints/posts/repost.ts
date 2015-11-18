@@ -35,22 +35,21 @@ export default function(app: IApplication, userId: string, targetPostId: string)
 					post: targetPostId
 				}, (err: any, createdRepost: IRepost) => {
 					if (err !== null) {
-						reject(err);
-					} else {
-						populateAll(createdRepost).then((populated: Object) => {
-							resolve(populated);
-						}, (populateErr: any) => {
-							reject(populateErr);
-						});
-						post.repostsCount++;
-						post.save();
-						publishUserStream(userId, {
-							type: 'post',
-							value: {
-								id: createdRepost.id
-							}
-						});
+						return reject(err);
 					}
+					populateAll(createdRepost).then((populated: Object) => {
+						resolve(populated);
+					}, (populateErr: any) => {
+						reject(populateErr);
+					});
+					post.repostsCount++;
+					post.save();
+					publishUserStream(userId, {
+						type: 'post',
+						value: {
+							id: createdRepost.id
+						}
+					});
 				});
 			});
 		});

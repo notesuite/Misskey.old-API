@@ -34,13 +34,13 @@ export default function(app: IApplication, user: IUser, text: string, inReplyToP
 				} else if (reply.type === 'repost') {
 					reject('reply-to-repost-is-not-allowed');
 				} else {
-					create();
+					create(reply);
 				}
 			});
 		} else {
 			create();
 		}
-		function create(): void {
+		function create(reply: IPost = null): void {
 			StatusPost.create({
 				type: 'status',
 				app: app !== null ? app.id : null,
@@ -59,6 +59,11 @@ export default function(app: IApplication, user: IUser, text: string, inReplyToP
 
 					user.postsCount++;
 					user.save();
+
+					if (reply !== null) {
+						reply.repliesCount++;
+						reply.save();
+					}
 
 					publishUserStream(user.id, {
 						type: 'post',

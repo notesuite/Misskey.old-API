@@ -41,14 +41,14 @@ export default function(app: IApplication, user: IUser, photos: string[], text: 
 				} else if (reply.type === 'repost') {
 					reject('reply-to-repost-is-not-allowed');
 				} else {
-					checkPhotos();
+					checkPhotos(reply);
 				}
 			});
 		} else {
 			checkPhotos();
 		}
 
-		function checkPhotos(): void {
+		function checkPhotos(reply: IPost = null): void {
 			Promise.all(photos.map((photo: string) => {
 				return new Promise<Object>((checkFileResolve, checkFileReject) => {
 					AlbumFile.findById(photo, (findErr: any, file: IAlbumFile) => {
@@ -66,13 +66,13 @@ export default function(app: IApplication, user: IUser, photos: string[], text: 
 					});
 				});
 			})).then((photoFiles: IAlbumFile[]) => {
-				create();
+				create(reply);
 			}, (photosCheckErr: any) => {
 				reject(photosCheckErr);
 			});
 		}
 
-		function create(): void {
+		function create(reply: IPost = null): void {
 			PhotoPost.create({
 				type: 'photo',
 				app: app !== null ? app.id : null,
@@ -92,6 +92,11 @@ export default function(app: IApplication, user: IUser, photos: string[], text: 
 
 					user.postsCount++;
 					user.save();
+
+					if (reply !== null) {
+						reply.repliesCount++;
+						reply.save();
+					}
 
 					publishUserStream(user.id, {
 						type: 'post',
