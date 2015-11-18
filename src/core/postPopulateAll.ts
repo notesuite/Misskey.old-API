@@ -1,8 +1,8 @@
 import {StatusPost, PhotoPost, Repost} from '../models';
-import {IPost} from '../interfaces';
+import {IPost, IRepost} from '../interfaces';
 
 /* tslint:disable:variable-name */
-export default function postPopulateAll(sourcePost: IPost, populateReply: boolean = true): Promise<IPost> {
+export default function postPopulateAll(sourcePost: IPost | IRepost, populateReply: boolean = true): Promise<IPost> {
 	'use strict';
 	const post: any = sourcePost.toObject();
 	return new Promise((resolve: (post: IPost) => void, reject: (err: any) => void) => {
