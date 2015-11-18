@@ -25,7 +25,7 @@ export default function(app: IApplication, userId: string, targetPostId: string)
 			}, (findOldErr: any, oldRepost: IRepost) => {
 				if (findOldErr !== null) {
 					return reject(findOldErr);
-				} else if (post !== null) {
+				} else if (oldRepost !== null) {
 					return reject('already-reposted');
 				}
 				Repost.create({
