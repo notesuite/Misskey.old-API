@@ -16,7 +16,7 @@ export default function(me: IUser, id?: string, screenName?: string): Promise<Ob
 				return reject('not-found');
 			}
 			const userObj: any = user.toObject();
-			if (me !== null) {
+			if (me !== undefined && me !== null) {
 				lookupFollowState(me.id, user.id).then((isFollowing: boolean) => {
 					lookupFollowState(user.id, me.id).then((isFollowingMe: boolean) => {
 						userObj.isFollowing = isFollowing;
