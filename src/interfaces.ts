@@ -99,6 +99,13 @@ export interface IPostFavorite extends mongoose.Document {
 	user: string | mongoose.Types.ObjectId | IUser;
 }
 
+export interface IPostMention extends mongoose.Document {
+	createdAt: Date;
+	cursor: number;
+	post: string | mongoose.Types.ObjectId | IPost;
+	user: string | mongoose.Types.ObjectId | IUser;
+}
+
 export interface IAlbumFile extends mongoose.Document {
 	app: string | mongoose.Types.ObjectId | IApplication;
 	createdAt: Date;

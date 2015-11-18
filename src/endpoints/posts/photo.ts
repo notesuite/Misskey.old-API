@@ -2,6 +2,7 @@ import {AlbumFile, Post, PhotoPost} from '../../models';
 import {IApplication, IAlbumFile, IUser, IPost, IPhotoPost} from '../../interfaces';
 import publishUserStream from '../../core/publishUserStream';
 import populateAll from '../../core/postPopulateAll';
+import savePostMentions from '../../core/savePostMentions';
 
 /**
  * PhotoPostを作成します
@@ -97,6 +98,8 @@ export default function(app: IApplication, user: IUser, photos: string[], text: 
 						reply.repliesCount++;
 						reply.save();
 					}
+
+					savePostMentions(createdPhotoPost, text);
 
 					publishUserStream(user.id, {
 						type: 'post',

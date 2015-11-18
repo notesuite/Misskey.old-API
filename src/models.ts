@@ -10,6 +10,7 @@ export const Application: mongoose.Model<mongoose.Document> = require('./models/
 export const PhotoPost: mongoose.Model<mongoose.Document> = require('./models/post').photo(db);
 export const Post: mongoose.Model<mongoose.Document> = require('./models/post').post(db);
 export const PostFavorite: mongoose.Model<mongoose.Document> = require('./models/postFavorite').default(db);
+export const PostMention: mongoose.Model<mongoose.Document> = require('./models/postMention').default(db);
 export const Repost: mongoose.Model<mongoose.Document> = require('./models/post').repost(db);
 export const StatusPost: mongoose.Model<mongoose.Document> = require('./models/post').status(db);
 export const TalkMessage: mongoose.Model<mongoose.Document> = require('./models/talkMessage').default(db);

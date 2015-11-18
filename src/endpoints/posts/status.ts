@@ -2,6 +2,7 @@ import {Post, StatusPost} from '../../models';
 import {IApplication, IUser, IPost, IStatusPost} from '../../interfaces';
 import publishUserStream from '../../core/publishUserStream';
 import populateAll from '../../core/postPopulateAll';
+import savePostMentions from '../../core/savePostMentions';
 
 /**
  * Statusを作成します
@@ -64,6 +65,8 @@ export default function(app: IApplication, user: IUser, text: string, inReplyToP
 						reply.repliesCount++;
 						reply.save();
 					}
+
+					savePostMentions(createdStatus, text);
 
 					publishUserStream(user.id, {
 						type: 'post',
