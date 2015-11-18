@@ -39,7 +39,7 @@
     "mongoose-auto-increment": "^5.0.1",
     "mongoose-deep-populate": "^2.0.3",
     "multer": "^0.1.8",
-    "powerful": "^4.4.0",
+    "powerful": "^6.0.0",
     "redis": "^2.2.5",
     "request": "^2.65.0"
   },

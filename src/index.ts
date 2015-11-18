@@ -13,7 +13,7 @@ const loadServer = Task.sync(() => {
 	require('./internalServer');
 });
 
-(cluster.isMaster ? print('Welcome to Misskey API!').next(() => forkForEachCpu) : loadServer).run();
+(cluster.isMaster ? print('Welcome to Misskey API!').next(forkForEachCpu) : loadServer).run();
 
 // Fork when a worker died.
 cluster.on('exit', (worker: cluster.Worker) => {
