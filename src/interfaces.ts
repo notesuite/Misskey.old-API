@@ -62,9 +62,9 @@ export interface IPost extends mongoose.Document {
 	app: string | mongoose.Types.ObjectId | IApplication;
 	createdAt: Date;
 	cursor: number;
-	favoritesCount: number;
 	inReplyToPost: string | mongoose.Types.ObjectId | IPost;
 	isDeleted: boolean;
+	likesCount: number;
 	repliesCount: number;
 	repostsCount: number;
 	type: string;
@@ -92,7 +92,7 @@ export interface IRepost extends mongoose.Document {
 	user: string | mongoose.Types.ObjectId | IUser;
 }
 
-export interface IPostFavorite extends mongoose.Document {
+export interface IPostLike extends mongoose.Document {
 	createdAt: Date;
 	cursor: number;
 	post: string | mongoose.Types.ObjectId | IPost;

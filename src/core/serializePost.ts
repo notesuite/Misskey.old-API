@@ -1,8 +1,8 @@
-import {Post, PostFavorite} from '../models';
+import {Post, PostLike} from '../models';
 import {IUser, IPost, IStatusPost, IPhotoPost} from '../interfaces';
 import serializeStatus from './serializeStatus';
 import serializePhotoPost from './serializePhotoPost';
-import getPostStargazers from './getPostStargazers';
+import getPostLikers from './getPostLikers';
 
 export default function serializePost(post: any, me: IUser = null, serializeReply: boolean = true): Promise<Object> {
 	'use strict';
@@ -62,16 +62,16 @@ function common(post: any, me: IUser = null, serializeReply: boolean = true): Pr
 					getDestinationResolve(null);
 				}
 			}),
-			// Get is favorited
-			new Promise<boolean>((getIsFavoritedResolve, getIsFavoritedReject) => {
-				PostFavorite.find({
+			// Get is liked
+			new Promise<boolean>((getIsLikedResolve, getIsLikedReject) => {
+				PostLike.find({
 					post: post.id,
 					user: me.id
 				}).limit(1).count((countErr: any, count: number) => {
 					if (countErr !== null) {
-						return getIsFavoritedReject(countErr);
+						return getIsLikedReject(countErr);
 					}
-					getIsFavoritedResolve(count > 0);
+					getIsLikedResolve(count > 0);
 				});
 			}),
 			// Get is reposted
@@ -87,18 +87,18 @@ function common(post: any, me: IUser = null, serializeReply: boolean = true): Pr
 					getIsRepostedResolve(count > 0);
 				});
 			}),
-			// Get stargazers
-			new Promise<Object[]>((getStargazersResolve, getStargazersReject) => {
-				getPostStargazers(post.id, 10).then((stargazers: IUser[]) => {
-					if (stargazers !== null && stargazers.length > 0) {
-						getStargazersResolve(stargazers.map((stargazer: IUser) => {
-							return stargazer.toObject();
+			// Get likers
+			new Promise<Object[]>((getLikersResolve, getLikersReject) => {
+				getPostLikers(post.id, 10).then((likers: IUser[]) => {
+					if (likers !== null && likers.length > 0) {
+						getLikersResolve(likers.map((liker: IUser) => {
+							return liker.toObject();
 						}));
 					} else {
-						getStargazersResolve(null);
+						getLikersResolve(null);
 					}
-				}, (getStargazersErr: any) => {
-					getStargazersReject(getStargazersErr);
+				}, (getLikersErr: any) => {
+					getLikersReject(getLikersErr);
 				});
 			}),
 			// Get replies
@@ -115,9 +115,9 @@ function common(post: any, me: IUser = null, serializeReply: boolean = true): Pr
 		]).then((results: any[]) => {
 			const serialized: any = post;
 			serialized.inReplyToPost = (post.inReplyToPost !== null && serializeReply) ? results[0] : post.inReplyToPost;
-			serialized.isFavorited = results[1];
+			serialized.isLiked = results[1];
 			serialized.isReposted = results[2];
-			serialized.stargazers = results[3];
+			serialized.likers = results[3];
 			serialized.replies = results[4];
 			resolve(serialized);
 		},
