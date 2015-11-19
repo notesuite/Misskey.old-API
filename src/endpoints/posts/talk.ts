@@ -41,7 +41,7 @@ function get(id: string): Promise<IPost[]> {
 				resolve([post]);
 			} else {
 				get(<string>post.inReplyToPost).then((nextPosts: IPost[]) => {
-					resolve(nextPosts.concat([post]));
+					resolve([...nextPosts, post]);
 				}, (getErr: any) => {
 					reject(getErr);
 				});
