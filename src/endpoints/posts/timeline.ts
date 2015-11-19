@@ -33,15 +33,15 @@ export default function(user: IUser, limit: number = 10, sinceCursor: number = n
 					if (sinceCursor === null && maxCursor === null) {
 						return {user: {$in: followingIds}};
 					} else if (sinceCursor !== null) {
-						return {$and: [
-							{user: {$in: followingIds}},
-							{cursor: {$gt: sinceCursor}}
-						]};
+						return {
+							user: {$in: followingIds},
+							cursor: {$gt: sinceCursor}
+						};
 					} else if (maxCursor !== null) {
-						return {$and: [
-							{user: {$in: followingIds}},
-							{cursor: {$lt: maxCursor}}
-						]};
+						return {
+							user: {$in: followingIds},
+							cursor: {$lt: maxCursor}
+						};
 					}
 				})();
 

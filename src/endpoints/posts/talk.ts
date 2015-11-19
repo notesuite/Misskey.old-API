@@ -31,8 +31,9 @@ export default function(user: IUser, id: string, limit: number = 30): Promise<Ob
 		});
 	});
 }
-	
+
 function get(id: string): Promise<IPost[]> {
+	'use strict';
 	return new Promise<IPost[]>((resolve, reject) => {
 		Post.findById(id, (err: any, post: IPost) => {
 			if (err !== null) {
