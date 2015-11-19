@@ -67,6 +67,7 @@ export default function(db: mongoose.Connection): mongoose.Model<mongoose.Docume
 		delete ret._id;
 		delete ret.__v;
 		delete ret.screenNameLower;
+		delete ret.email;
 		delete ret.encryptedPassword;
 	};
 
