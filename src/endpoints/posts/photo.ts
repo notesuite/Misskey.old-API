@@ -2,6 +2,7 @@ import {AlbumFile, Post, PhotoPost} from '../../models';
 import {IApplication, IAlbumFile, IUser, IPost, IPhotoPost} from '../../interfaces';
 import publishUserStream from '../../core/publishUserStream';
 import populateAll from '../../core/postPopulateAll';
+import serializePost from '../../core/serializePost';
 import savePostMentions from '../../core/savePostMentions';
 
 /**
@@ -85,8 +86,12 @@ export default function(app: IApplication, user: IUser, photos: string[], text: 
 				if (createErr !== null) {
 					reject(createErr);
 				} else {
-					populateAll(createdPhotoPost, false).then((populated: Object) => {
-						resolve(populated);
+					populateAll(createdPhotoPost).then((populated: Object) => {
+						serializePost(populated, user).then((serialized: Object) => {
+							resolve(serialized);
+						}, (serializeErr: any) => {
+							reject(serializeErr);
+						});
 					}, (populateErr: any) => {
 						reject(populateErr);
 					});

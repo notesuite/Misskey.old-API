@@ -2,6 +2,7 @@ import {Post, StatusPost} from '../../models';
 import {IApplication, IUser, IPost, IStatusPost} from '../../interfaces';
 import publishUserStream from '../../core/publishUserStream';
 import populateAll from '../../core/postPopulateAll';
+import serializePost from '../../core/serializePost';
 import savePostMentions from '../../core/savePostMentions';
 
 /**
@@ -52,8 +53,12 @@ export default function(app: IApplication, user: IUser, text: string, inReplyToP
 				if (createErr !== null) {
 					reject(createErr);
 				} else {
-					populateAll(createdStatus, false).then((populated: Object) => {
-						resolve(populated);
+					populateAll(createdStatus).then((populated: Object) => {
+						serializePost(populated, user).then((serialized: Object) => {
+							resolve(serialized);
+						}, (serializeErr: any) => {
+							reject(serializeErr);
+						});
 					}, (populateErr: any) => {
 						reject(populateErr);
 					});
