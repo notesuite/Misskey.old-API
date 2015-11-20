@@ -12,22 +12,32 @@ import populateAll from '../../core/postPopulateAll';
 export default function(user: IUser, id: string, limit: number = 30): Promise<Object[]> {
 	'use strict';
 	return new Promise<Object[]>((resolve, reject) => {
-		get(id).then((posts: IPost[]) => {
-			// すべてpopulateする
-			Promise.all(posts.map((post: IPost) => {
-				return populateAll(post);
-			})).then((populatedTimeline: IPost[]) => {
-				// 整形
-				serializeTimeline(populatedTimeline, user).then((serializedTimeline: Object[]) => {
-					resolve(serializedTimeline);
-				}, (serializeErr: any) => {
-					reject(serializeErr);
+		Post.findById(id, (findErr: any, source: IPost) => {
+			if (findErr !== null) {
+				reject(findErr);
+			} else if (source === null) {
+				reject('not-found');
+			} else if (source.inReplyToPost === null) {
+				reject('not-reply');
+			} else {
+				get(<string>source.inReplyToPost).then((posts: IPost[]) => {
+					// すべてpopulateする
+					Promise.all(posts.map((post: IPost) => {
+						return populateAll(post);
+					})).then((populatedTimeline: IPost[]) => {
+						// 整形
+						serializeTimeline(populatedTimeline, user).then((serializedTimeline: Object[]) => {
+							resolve(serializedTimeline);
+						}, (serializeErr: any) => {
+							reject(serializeErr);
+						});
+					}, (populatedErr: any) => {
+						reject(populatedErr);
+					});
+				}, (err: any) => {
+					reject(err);
 				});
-			}, (populatedErr: any) => {
-				reject(populatedErr);
-			});
-		}, (err: any) => {
-			reject(err);
+			}
 		});
 	});
 }
