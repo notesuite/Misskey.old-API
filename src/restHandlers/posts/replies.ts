@@ -7,7 +7,7 @@ export default function(req: MisskeyExpressRequest, res: MisskeyExpressResponse)
 	'use strict';
 	replies(
 		req.misskeyUser,
-		req.query['id'],
+		req.query['post-id'],
 		req.query['limit'],
 		req.query['since-cursor'],
 		req.query['max-cursor']

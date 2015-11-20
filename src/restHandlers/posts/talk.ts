@@ -4,7 +4,7 @@ import talk from '../../endpoints/posts/talk';
 
 export default function(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
 	'use strict';
-	talk(req.misskeyUser, req.query['id'], req.query['limit']).then((posts: Object[]) => {
+	talk(req.misskeyUser, req.query['post-id'], req.query['limit']).then((posts: Object[]) => {
 		res.apiRender(posts);
 	}, (err: any) => {
 		res.apiError(500, err);
