@@ -31,6 +31,7 @@ const routing: IRoute[] = [
 	{ method: 'post', endpoint: 'posts/repost' },
 
 	{ method: 'post', endpoint: 'album/files/upload' },
+	{ method: 'get', endpoint: 'album/files/show' },
 	{ method: 'get', endpoint: 'album/files/list' },
 	{ method: 'put', endpoint: 'album/files/move' },
 	{ method: 'put', endpoint: 'album/files/rename' },
