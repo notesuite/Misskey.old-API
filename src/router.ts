@@ -20,6 +20,7 @@ const routing: IRoute[] = [
 	{ method: 'delete', endpoint: 'users/unfollow' },
 	{ method: 'get', endpoint: 'users/followings' },
 	{ method: 'get', endpoint: 'users/followers' },
+	{ method: 'get', endpoint: 'users/search' },
 
 	{ method: 'get', endpoint: 'posts/timeline' },
 	{ method: 'get', endpoint: 'posts/user-timeline' },

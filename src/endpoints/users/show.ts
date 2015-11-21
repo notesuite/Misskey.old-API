@@ -1,6 +1,6 @@
 import {User} from '../../models';
 import {IUser} from '../../interfaces';
-import lookupFollowState from '../../core/lookupFollowState';
+import serializeUser from '../../core/serializeUser';
 
 /**
  * ユーザー情報を取得します
@@ -15,22 +15,11 @@ export default function(me: IUser, id?: string, screenName?: string): Promise<Ob
 			if (user === null) {
 				return reject('not-found');
 			}
-			const userObj: any = user.toObject();
-			if (me !== undefined && me !== null) {
-				lookupFollowState(me.id, user.id).then((isFollowing: boolean) => {
-					lookupFollowState(user.id, me.id).then((isFollowingMe: boolean) => {
-						userObj.isFollowing = isFollowing;
-						userObj.isFollowingMe = isFollowingMe;
-						resolve(userObj);
-					}, (err: any) => {
-						reject(err);
-					});
-				}, (err: any) => {
-					reject(err);
-				});
-			} else {
-				resolve(userObj);
-			}
+			serializeUser(me, user).then((serializedUser: Object) => {
+				resolve(serializedUser);
+			}, (err: any) => {
+				reject('something-happened');
+			});
 		}
 
 		if (id !== undefined && id !== null) {

@@ -1,4 +1,3 @@
-import * as request from 'request';
 import {AlbumFile} from '../../models';
 import {IUser, IAlbumFile} from '../../interfaces';
 
