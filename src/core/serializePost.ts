@@ -1,16 +1,22 @@
 import {Post, PostLike} from '../models';
-import {IUser, IPost, IStatusPost, IPhotoPost} from '../interfaces';
+import {IUser, IStatusPost, IPhotoPost} from '../interfaces';
 import serializeStatus from './serializeStatus';
 import serializePhotoPost from './serializePhotoPost';
 import getPostLikers from './getPostLikers';
 
-export default function serializePost(post: any, me: IUser = null, serializeReply: boolean = true): Promise<Object> {
+export default function serializePost(
+		post: any,
+		me: IUser = null,
+		includeDestination: boolean = true)
+			: Promise<Object> {
 	'use strict';
+
 	const type: string = post.type;
+
 	return new Promise<Object>((resolve, reject) => {
 		switch (type) {
 			case 'status':
-				common(<IStatusPost>post, me, serializeReply).then((serialized: Object) => {
+				common(<IStatusPost>post, me, includeDestination).then((serialized: Object) => {
 					serializeStatus(serialized, me).then((serializedStatus: Object) => {
 						resolve(serializedStatus);
 					}, (serializeErr: any) => {
@@ -21,7 +27,7 @@ export default function serializePost(post: any, me: IUser = null, serializeRepl
 				});
 				break;
 			case 'photo':
-				common(<IPhotoPost>post, me, serializeReply).then((serialized: Object) => {
+				common(<IPhotoPost>post, me, includeDestination).then((serialized: Object) => {
 					serializePhotoPost(serialized, me).then((serializedPhotoPost: Object) => {
 						resolve(serializedPhotoPost);
 					}, (serializeErr: any) => {
@@ -46,13 +52,17 @@ export default function serializePost(post: any, me: IUser = null, serializeRepl
 	});
 }
 
-function common(post: any, me: IUser = null, serializeReply: boolean = true): Promise<Object> {
+function common(
+		post: any,
+		me: IUser = null,
+		includeDestination: boolean = true)
+			: Promise<Object> {
 	'use strict';
 	return new Promise<Object>((resolve, reject) => {
 		Promise.all([
 			// Get reply source
 			new Promise<Object>((getDestinationResolve, getDestinationReject) => {
-				if (post.inReplyToPost !== null && serializeReply) {
+				if (post.inReplyToPost !== null && includeDestination) {
 					serializePost(post.inReplyToPost, me, false).then((serializedReply: Object) => {
 						getDestinationResolve(serializedReply);
 					}, (serializedReplyErr: any) => {
@@ -100,25 +110,13 @@ function common(post: any, me: IUser = null, serializeReply: boolean = true): Pr
 				}, (getLikersErr: any) => {
 					getLikersReject(getLikersErr);
 				});
-			}),
-			// Get replies
-			new Promise<Object[]>((getRepliesResolve, getRepliesReject) => {
-				Post.find({
-					inReplyToPost: post.id
-				}).limit(10).exec((repliesFindErr: any, replies: IPost[]) => {
-					if (repliesFindErr !== null) {
-						return getRepliesReject(repliesFindErr);
-					}
-					getRepliesResolve(replies);
-				});
 			})
 		]).then((results: any[]) => {
 			const serialized: any = post;
-			serialized.inReplyToPost = (post.inReplyToPost !== null && serializeReply) ? results[0] : post.inReplyToPost;
+			serialized.inReplyToPost = (post.inReplyToPost !== null && includeDestination) ? results[0] : post.inReplyToPost;
 			serialized.isLiked = results[1];
 			serialized.isReposted = results[2];
 			serialized.likers = results[3];
-			serialized.replies = results[4];
 			resolve(serialized);
 		},
 		(serializedErr: any) => {

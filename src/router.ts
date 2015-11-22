@@ -41,7 +41,7 @@ const routing: IRoute[] = [
 	{ method: 'post', endpoint: 'album/folders/create' },
 	{ method: 'put', endpoint: 'album/folders/move' },
 	{ method: 'put', endpoint: 'album/folders/rename' },
-	
+
 	{ method: 'get', endpoint: 'search/hashtags' }
 ];
 
