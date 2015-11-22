@@ -11,7 +11,7 @@ import router from './router';
 
 console.log('Init server');
 
-const app: express.Express = express();
+const app = express();
 app.disable('x-powered-by');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer());
@@ -53,16 +53,13 @@ app.use((req: MisskeyExpressRequest, res: MisskeyExpressResponse, next: () => vo
 router(app);
 
 // Not found handler
-app.use((req: express.Request, res: express.Response) => {
+app.use((req, res) => {
 	res.status(404);
 	res.json({
 		error: 'API not found.'
 	});
 });
 
-const server: http.Server = app.listen(config.port.internal, () => {
-	const host: string = server.address().address;
-	const port: number = server.address().port;
-
-	console.log(`MisskeyAPI server listening at ${host}:${port}`);
+const server = app.listen(config.port.internal, () => {
+	console.log(`MisskeyAPI server listening at ${server.address().address}:${server.address().port}`);
 });

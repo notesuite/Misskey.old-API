@@ -53,7 +53,7 @@ export default function(app: express.Express): void {
 		res.status(200).send('Rain tree sketch');
 	});
 
-	routing.forEach((route: IRoute) => {
+	routing.forEach(route => {
 		console.log('- load: ' + route.endpoint);
 		const handler: any = require(`${__dirname}/restHandlers/${route.endpoint}`);
 		if (handler.hasOwnProperty('default')) {
