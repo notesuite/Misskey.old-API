@@ -9,10 +9,10 @@ import registerHashtags from '../../core/registerHashtags';
 
 /**
  * Statusを作成します
- * @app: API利用App
- * @user: API利用ユーザー
- * @text: 本文
- * @inReplyToPostId: 返信先投稿のID
+ * @param app API利用App
+ * @param user API利用ユーザー
+ * @param text 本文
+ * @param inReplyToPostId 返信先投稿のID
  */
 export default function(app: IApplication, user: IUser, text: string, inReplyToPostId: string = null)
 		: Promise<Object> {

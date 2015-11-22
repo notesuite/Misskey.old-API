@@ -5,11 +5,10 @@ import populateAll from '../../core/postPopulateAll';
 
 /**
  * タイムラインを取得します
- * @user: API利用ユーザー
- * @limit: 取得する投稿の最大数
- * @sinceCursor: 取得する投稿を、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
- * @maxCursor: 取得する投稿を、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
- * @includeUserEntity: 投稿を作成したユーザーのUserオブジェクトを含めるかどうか
+ * @param user API利用ユーザー
+ * @param limit 取得する投稿の最大数
+ * @param sinceCursor 取得する投稿を、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
+ * @param maxCursor 取得する投稿を、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
  */
 export default function(user: IUser, limit: number = 10, sinceCursor: number = null, maxCursor: number = null)
 		: Promise<Object[]> {

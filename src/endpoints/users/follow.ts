@@ -3,8 +3,8 @@ import { IUserFollowing, IUser } from '../../interfaces';
 
 /**
  * ユーザーをフォローします
- * @follower: フォローするユーザー
- * @followeeId: フォローされるユーザーID
+ * @param follower フォローするユーザー
+ * @param followeeId フォローされるユーザーID
  */
 export default function(follower: IUser, followeeId: string): Promise<void> {
 	'use strict';

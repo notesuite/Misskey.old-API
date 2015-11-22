@@ -5,9 +5,9 @@ import populateAll from '../../core/postPopulateAll';
 
 /**
  * 指定された投稿を起点とした場合のそれ以前の会話のストリームを取得します
- * @user: API利用ユーザー
- * @id: 投稿のID
- * @limit: 取得する投稿の最大数
+ * @param user API利用ユーザー
+ * @param id 投稿のID
+ * @param limit 取得する投稿の最大数
  */
 export default function(user: IUser, id: string, limit: number = 30): Promise<Object[]> {
 	'use strict';

@@ -9,11 +9,11 @@ import registerHashtags from '../../core/registerHashtags';
 
 /**
  * PhotoPostを作成します
- * @app: API利用App
- * @user: API利用ユーザー
- * @photos: 添付する写真のIDの配列
- * @text: 本文
- * @inReplyToPostId: 返信先投稿のID
+ * @param app API利用App
+ * @param user API利用ユーザー
+ * @param photos 添付する写真のIDの配列
+ * @param text 本文
+ * @param inReplyToPostId 返信先投稿のID
  */
 export default function(app: IApplication, user: IUser, photos: string[], text: string = null, inReplyToPostId: string = null)
 		: Promise<Object> {

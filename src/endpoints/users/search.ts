@@ -4,8 +4,8 @@ import serializeUser from '../../core/serializeUser';
 
 /**
  * ユーザーを検索します
- * @me: API利用ユーザー
- * @screenName: クエリ
+ * @param me API利用ユーザー
+ * @param screenName クエリ
  */
 export default function(me: IUser, screenName: string): Promise<Object[]> {
 	'use strict';

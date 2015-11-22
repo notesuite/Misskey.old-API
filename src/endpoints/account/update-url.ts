@@ -2,8 +2,8 @@ import {IUser} from '../../interfaces';
 
 /**
  * ユーザーのウェブサイトのURLを更新します
- * @user: API利用ユーザー
- * @url: 新しいURL
+ * @param user API利用ユーザー
+ * @param url 新しいURL
  */
 export default function(user: IUser, url: string): Promise<Object> {
 	'use strict';

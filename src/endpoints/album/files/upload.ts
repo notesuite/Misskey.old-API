@@ -3,11 +3,11 @@ import add from '../../../core/addFileToAlbum';
 
 /**
  * アルバムにファイルを追加します
- * @app: API利用App
- * @user: API利用ユーザー
- * @fileName: ファイル名
- * @mimetype: ファイルの種類
- * @file: 内容
+ * @param app API利用App
+ * @param user API利用ユーザー
+ * @param fileName ファイル名
+ * @param mimetype ファイルの種類
+ * @param file 内容
  */
 export default function(app: IApplication, user: IUser, fileName: string, mimetype: string, file: Buffer, size: number)
 	: Promise<Object> {

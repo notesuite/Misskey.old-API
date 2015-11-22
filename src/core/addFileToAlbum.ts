@@ -6,12 +6,12 @@ import config from '../config';
 
 /**
  * アルバムにファイルを追加します
- * @appId 経由AppのID
- * @userId 利用ユーザーのID
- * @fileName ファイル名
- * @mimetype ファイルのMIME Type
- * @file 内容
- * @size ファイルサイズ(byte)
+ * @param appId 経由AppのID
+ * @param userId 利用ユーザーのID
+ * @param fileName ファイル名
+ * @param mimetype ファイルのMIME Type
+ * @param file 内容
+ * @param size ファイルサイズ(byte)
  */
 export default function(appId: string, userId: string, fileName: string, mimetype: string, file: Buffer, size: number)
 		: Promise<IAlbumFile> {

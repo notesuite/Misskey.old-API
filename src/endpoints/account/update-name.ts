@@ -2,8 +2,8 @@ import {IUser} from '../../interfaces';
 
 /**
  * ユーザーの名前を更新します
- * @user: API利用ユーザー
- * @name: 新しい名前
+ * @param user: API利用ユーザー
+ * @param name: 新しい名前
  */
 export default function(user: IUser, name: string): Promise<Object> {
 	'use strict';

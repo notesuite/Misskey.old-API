@@ -3,10 +3,10 @@ import {IUser, IUserFollowing} from '../../interfaces';
 
 /**
  * 対象ユーザーがフォローしているユーザーの一覧を取得します。
- * @user: 対象ユーザー
- * @limit: 取得するユーザーの最大数
- * @sinceCursor: 取得するユーザーを、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
- * @maxCursor: 取得するユーザーを、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
+ * @param user 対象ユーザー
+ * @param limit 取得するユーザーの最大数
+ * @param sinceCursor 取得するユーザーを、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
+ * @param maxCursor 取得するユーザーを、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
  */
 export default function(user: IUser, limit: number = 30, sinceCursor: number = null, maxCursor: number = null): Promise<Object[]> {
 	'use strict';
