@@ -73,12 +73,14 @@ export interface IPost extends mongoose.Document {
 
 export interface IStatusPost extends IPost {
 	isPlain: boolean;
+	tags: string[];
 	text: string;
 }
 
 export interface IPhotoPost extends IPost {
 	isPlain: boolean;
 	photos: string | mongoose.Types.ObjectId[] | IAlbumFile[];
+	tags: string[];
 	text: string;
 }
 

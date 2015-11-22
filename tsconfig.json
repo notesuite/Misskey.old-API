@@ -49,6 +49,7 @@
 		"src/core/addFileToAlbum.ts",
 		"src/core/lookupFollowState.ts",
 		"src/core/extractMentions.ts",
+		"src/core/extractTags.ts",
 		"src/core/savePostMentions.ts",
 		"src/endpoints/login.ts",
 		"src/endpoints/screenname-available.ts",

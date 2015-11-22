@@ -4,6 +4,7 @@ import publishUserStream from '../../core/publishUserStream';
 import populateAll from '../../core/postPopulateAll';
 import serializePost from '../../core/serializePost';
 import savePostMentions from '../../core/savePostMentions';
+import extractTags from '../../core/extractTags';
 
 /**
  * PhotoPostを作成します
@@ -75,13 +76,15 @@ export default function(app: IApplication, user: IUser, photos: string[], text: 
 		}
 
 		function create(reply: IPost = null): void {
+			const tags: string[] = extractTags(text);
 			PhotoPost.create({
 				type: 'photo',
 				app: app !== null ? app.id : null,
 				user: user.id,
 				inReplyToPost: inReplyToPostId,
 				photos,
-				text
+				text,
+				tags
 			}, (createErr: any, createdPhotoPost: IPhotoPost) => {
 				if (createErr !== null) {
 					reject(createErr);

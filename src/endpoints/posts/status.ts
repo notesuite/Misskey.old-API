@@ -4,6 +4,7 @@ import publishUserStream from '../../core/publishUserStream';
 import populateAll from '../../core/postPopulateAll';
 import serializePost from '../../core/serializePost';
 import savePostMentions from '../../core/savePostMentions';
+import extractTags from '../../core/extractTags';
 
 /**
  * Statusを作成します
@@ -43,12 +44,14 @@ export default function(app: IApplication, user: IUser, text: string, inReplyToP
 			create();
 		}
 		function create(reply: IPost = null): void {
+			const tags: string[] = extractTags(text);
 			StatusPost.create({
 				type: 'status',
 				app: app !== null ? app.id : null,
 				user: user.id,
 				inReplyToPost: inReplyToPostId,
-				text
+				text,
+				tags
 			}, (createErr: any, createdStatus: IStatusPost) => {
 				if (createErr !== null) {
 					reject(createErr);
