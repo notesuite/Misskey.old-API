@@ -40,7 +40,9 @@ const routing: IRoute[] = [
 	{ method: 'delete', endpoint: 'album/files/delete' },
 	{ method: 'post', endpoint: 'album/folders/create' },
 	{ method: 'put', endpoint: 'album/folders/move' },
-	{ method: 'put', endpoint: 'album/folders/rename' }
+	{ method: 'put', endpoint: 'album/folders/rename' },
+	
+	{ method: 'get', endpoint: 'search/hashtags' }
 ];
 
 export default function(app: express.Express): void {
