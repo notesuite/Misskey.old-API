@@ -4,7 +4,8 @@ import publishUserStream from '../../core/publishUserStream';
 import populateAll from '../../core/postPopulateAll';
 import serializePost from '../../core/serializePost';
 import savePostMentions from '../../core/savePostMentions';
-import extractTags from '../../core/extractTags';
+import extractHashtags from '../../core/extractHashtags';
+import registerHashtags from '../../core/registerHashtags';
 
 /**
  * PhotoPostを作成します
@@ -76,7 +77,7 @@ export default function(app: IApplication, user: IUser, photos: string[], text: 
 		}
 
 		function create(reply: IPost = null): void {
-			const tags: string[] = extractTags(text);
+			const hashtags: string[] = extractHashtags(text);
 			PhotoPost.create({
 				type: 'photo',
 				app: app !== null ? app.id : null,
@@ -84,7 +85,7 @@ export default function(app: IApplication, user: IUser, photos: string[], text: 
 				inReplyToPost: inReplyToPostId,
 				photos,
 				text,
-				tags
+				hashtags
 			}, (createErr: any, createdPhotoPost: IPhotoPost) => {
 				if (createErr !== null) {
 					reject(createErr);
@@ -101,6 +102,8 @@ export default function(app: IApplication, user: IUser, photos: string[], text: 
 
 					user.postsCount++;
 					user.save();
+
+					registerHashtags(hashtags);
 
 					if (reply !== null) {
 						reply.repliesCount++;

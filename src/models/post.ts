@@ -58,7 +58,7 @@ export function status(db: mongoose.Connection): mongoose.Model<mongoose.Documen
 	mongooseAutoIncrement.initialize(db);
 
 	const schema: mongoose.Schema = new Schema(Object.assign({
-		tags: { type: [String], required: false, default: [] },
+		hashtags: { type: [String], required: false, default: [] },
 		text: { type: String, required: false, default: null },
 		isPlain: { type: Boolean, required: false, default: false }
 	}, postBase));
@@ -83,7 +83,7 @@ export function photo(db: mongoose.Connection): mongoose.Model<mongoose.Document
 
 	const schema: mongoose.Schema = new Schema(Object.assign({
 		photos: [{ type: Schema.Types.ObjectId, required: true, ref: 'AlbumFile' }],
-		tags: { type: [String], required: false, default: [] },
+		hashtags: { type: [String], required: false, default: [] },
 		text: { type: String, required: false, default: null },
 		isPlain: { type: Boolean, required: false, default: false }
 	}, postBase));

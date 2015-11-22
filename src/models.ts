@@ -7,6 +7,7 @@ const db: mongoose.Connection = mongoose.createConnection(config.mongo.uri, conf
 export const AlbumFile: mongoose.Model<mongoose.Document> = require('./models/albumFile').default(db);
 export const AlbumFolder: mongoose.Model<mongoose.Document> = require('./models/albumFolder').default(db);
 export const Application: mongoose.Model<mongoose.Document> = require('./models/application').default(db);
+export const Hashtag: mongoose.Model<mongoose.Document> = require('./models/hashtag').default(db);
 export const PhotoPost: mongoose.Model<mongoose.Document> = require('./models/post').photo(db);
 export const Post: mongoose.Model<mongoose.Document> = require('./models/post').post(db);
 export const PostLike: mongoose.Model<mongoose.Document> = require('./models/postLike').default(db);

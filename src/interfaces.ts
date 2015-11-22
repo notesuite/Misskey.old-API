@@ -58,6 +58,11 @@ export interface IApplication extends mongoose.Document {
 	permissions: string[];
 }
 
+export interface IHashtag extends mongoose.Document {
+	createdAt: Date;
+	name: string;
+}
+
 export interface IPost extends mongoose.Document {
 	app: string | mongoose.Types.ObjectId | IApplication;
 	createdAt: Date;
@@ -73,14 +78,14 @@ export interface IPost extends mongoose.Document {
 
 export interface IStatusPost extends IPost {
 	isPlain: boolean;
-	tags: string[];
+	hashtags: string[];
 	text: string;
 }
 
 export interface IPhotoPost extends IPost {
 	isPlain: boolean;
 	photos: string | mongoose.Types.ObjectId[] | IAlbumFile[];
-	tags: string[];
+	hashtags: string[];
 	text: string;
 }
 
