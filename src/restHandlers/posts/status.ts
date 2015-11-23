@@ -2,7 +2,7 @@ import { MisskeyExpressRequest } from '../../misskeyExpressRequest';
 import { MisskeyExpressResponse } from '../../misskeyExpressResponse';
 import create from '../../endpoints/posts/status';
 
-export default function(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
+export default function status(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
 	'use strict';
 	const text: string = req.body['text'];
 	if (text === undefined) {

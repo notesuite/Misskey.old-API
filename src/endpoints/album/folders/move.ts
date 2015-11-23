@@ -1,7 +1,7 @@
 import {AlbumFolder} from '../../../models';
 import {IUser, IAlbumFolder} from '../../../interfaces';
 
-export default function(user: IUser, folderId: string, destinationFolderId: string): Promise<Object> {
+export default function move(user: IUser, folderId: string, destinationFolderId: string): Promise<Object> {
 	'use strict';
 
 	return new Promise<Object>((resolve, reject) => {

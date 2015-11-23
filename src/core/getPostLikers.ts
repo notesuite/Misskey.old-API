@@ -1,7 +1,7 @@
 import {PostLike} from '../models';
 import {IUser, IPostLike} from '../interfaces';
 
-export default function(
+export default function getPostLikers(
 	postId: string,
 	limit: number = 10,
 	sinceCursor: number = null,

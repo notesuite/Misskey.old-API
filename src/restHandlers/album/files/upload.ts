@@ -3,7 +3,7 @@ import { MisskeyExpressRequest } from '../../../misskeyExpressRequest';
 import { MisskeyExpressResponse } from '../../../misskeyExpressResponse';
 import upload from '../../../endpoints/album/files/upload';
 
-export default function(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
+export default function uploadFile(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
 	'use strict';
 	const filesCount: number = Object.keys(req.files).length;
 	if (filesCount === 1) {

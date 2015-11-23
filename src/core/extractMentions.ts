@@ -1,7 +1,7 @@
 import { User } from '../models';
 import { IUser } from '../interfaces';
 
-export default function(text: string): Promise<IUser[]> {
+export default function extractMentions(text: string): Promise<IUser[]> {
 	'use strict';
 	const mentions = text.match(/@[a-zA-Z0-9\-]+/g);
 

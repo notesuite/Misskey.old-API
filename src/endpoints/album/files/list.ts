@@ -7,7 +7,7 @@ import {IUser, IAlbumFile, IAlbumFolder} from '../../../interfaces';
  * @param folderId 対象フォルダID(nullでルート)
  * @param includeFolders フォルダを含めるか
  */
-export default function(user: IUser, folderId: string = null, includeFolders = true): Promise<Object[]> {
+export default function list(user: IUser, folderId: string = null, includeFolders = true): Promise<Object[]> {
 	'use strict';
 
 	return new Promise<Object[]>((resolve, reject) => {

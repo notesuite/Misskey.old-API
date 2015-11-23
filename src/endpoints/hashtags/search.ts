@@ -1,7 +1,7 @@
 import {Hashtag} from '../../models';
 import {IHashtag} from '../../interfaces';
 
-export default function(query: string): Promise<string[]> {
+export default function search(query: string): Promise<string[]> {
 	'use strict';
 	return new Promise<string[]>((resolve, reject) => {
 		Hashtag.find({
@@ -12,9 +12,7 @@ export default function(query: string): Promise<string[]> {
 			} else if (hashtags.length === 0) {
 				resolve(null);
 			} else {
-				resolve(hashtags.map((hashtag: IHashtag) => {
-					return hashtag.name;
-				}));
+				resolve(hashtags.map(hashtag => hashtag.name));
 			}
 		});
 	});

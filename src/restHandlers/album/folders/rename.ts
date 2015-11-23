@@ -2,7 +2,7 @@ import { MisskeyExpressRequest } from '../../../misskeyExpressRequest';
 import { MisskeyExpressResponse } from '../../../misskeyExpressResponse';
 import rename from '../../../endpoints/album/folders/rename';
 
-export default function(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
+export default function renameFolder(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
 	'use strict';
 
 	rename(req.misskeyUser, req.body['folder-id'], req.body['name']).then((folder: Object) => {

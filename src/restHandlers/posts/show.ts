@@ -3,7 +3,7 @@ import { MisskeyExpressRequest } from '../../misskeyExpressRequest';
 import { MisskeyExpressResponse } from '../../misskeyExpressResponse';
 import show from '../../endpoints/posts/show';
 
-export default function(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
+export default function showPost(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
 	'use strict';
 	show(req.misskeyUser, req.query['post-id']).then((post: Object) => {
 		res.apiRender(post);

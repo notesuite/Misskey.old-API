@@ -1,7 +1,7 @@
 import {IUser} from '../interfaces';
 import lookupFollowState from './lookupFollowState';
 
-export default function(me: IUser, user: IUser): Promise<Object> {
+export default function serializeUser(me: IUser, user: IUser): Promise<Object> {
 	'use strict';
 	const userObj: any = user.toObject();
 	return (me !== undefined && me !== null) ?

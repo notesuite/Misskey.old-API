@@ -6,7 +6,7 @@ import { IUserFollowing, IUser } from '../../interfaces';
  * @param follower: フォローを解除するユーザー
  * @param followeeId: フォローを解除されるユーザー
  */
-export default function(follower: IUser, followeeId: string): Promise<void> {
+export default function unfollow(follower: IUser, followeeId: string): Promise<void> {
 	'use strict';
 	return new Promise<void>((resolve, reject) => {
 		if (follower.id.toString() === followeeId) {

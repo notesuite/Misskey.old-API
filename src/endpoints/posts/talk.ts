@@ -9,7 +9,7 @@ import populateAll from '../../core/postPopulateAll';
  * @param id 投稿のID
  * @param limit 取得する投稿の最大数
  */
-export default function(user: IUser, id: string, limit: number = 30): Promise<Object[]> {
+export default function talk(user: IUser, id: string, limit: number = 30): Promise<Object[]> {
 	'use strict';
 	return new Promise<Object[]>((resolve, reject) => {
 		Post.findById(id, (findErr: any, source: IPost) => {

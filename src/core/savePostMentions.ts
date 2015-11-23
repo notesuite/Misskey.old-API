@@ -3,7 +3,7 @@ import { IPost, IPostMention } from '../interfaces';
 import extractMentions from './extractMentions';
 import publishStreamingMessage from './publishStreamingMessage';
 
-export default function(post: IPost, text: string): void {
+export default function savePostMentions(post: IPost, text: string): void {
 	'use strict';
 	extractMentions(text).then(users => {
 		users.forEach(user => {

@@ -3,7 +3,7 @@ import {IApplication, IPost, IRepost} from '../../interfaces';
 import publishUserStream from '../../core/publishUserStream';
 import populateAll from '../../core/postPopulateAll';
 
-export default function(app: IApplication, userId: string, targetPostId: string)
+export default function repost(app: IApplication, userId: string, targetPostId: string)
 		: Promise<Object> {
 	'use strict';
 

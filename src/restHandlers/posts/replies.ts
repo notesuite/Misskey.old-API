@@ -3,7 +3,7 @@ import { MisskeyExpressRequest } from '../../misskeyExpressRequest';
 import { MisskeyExpressResponse } from '../../misskeyExpressResponse';
 import replies from '../../endpoints/posts/replies';
 
-export default function(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
+export default function replyPosts(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
 	'use strict';
 	replies(
 		req.misskeyUser,

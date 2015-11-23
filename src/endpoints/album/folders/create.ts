@@ -1,7 +1,7 @@
 import {AlbumFolder} from '../../../models';
 import {IUser, IAlbumFolder} from '../../../interfaces';
 
-export default function(user: IUser, parentFolderId: string, name: string = null): Promise<Object> {
+export default function create(user: IUser, parentFolderId: string, name: string = null): Promise<Object> {
 	'use strict';
 
 	if (name !== null && name.length > 100) {

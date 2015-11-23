@@ -9,7 +9,7 @@ import add from '../../../core/addFileToAlbum';
  * @param mimetype ファイルの種類
  * @param file 内容
  */
-export default function(app: IApplication, user: IUser, fileName: string, mimetype: string, file: Buffer, size: number)
+export default function upload(app: IApplication, user: IUser, fileName: string, mimetype: string, file: Buffer, size: number)
 	: Promise<Object> {
 	'use strict';
 	if (fileName.length > 100) {

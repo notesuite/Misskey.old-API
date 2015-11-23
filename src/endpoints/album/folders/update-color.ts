@@ -1,7 +1,7 @@
 import {AlbumFolder} from '../../../models';
 import {IUser, IAlbumFolder} from '../../../interfaces';
 
-export default function(user: IUser, folderId: string, color: string): Promise<Object> {
+export default function updateColor(user: IUser, folderId: string, color: string): Promise<Object> {
 	'use strict';
 
 	if (!/^#[a-fA-F0-9]{6}$/.exec(color)) {

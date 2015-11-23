@@ -7,7 +7,7 @@ import serializeUser from '../../core/serializeUser';
  * @param me API利用ユーザー
  * @param screenName クエリ
  */
-export default function(me: IUser, screenName: string): Promise<Object[]> {
+export default function search(me: IUser, screenName: string): Promise<Object[]> {
 	'use strict';
 	const screenNameLower: string = screenName.toLowerCase();
 	return new Promise<Object[]>((resolve, reject) => {

@@ -13,7 +13,7 @@ import config from '../config';
  * @param file 内容
  * @param size ファイルサイズ(byte)
  */
-export default function(appId: string, userId: string, fileName: string, mimetype: string, file: Buffer, size: number)
+export default function addFileToAlbum(appId: string, userId: string, fileName: string, mimetype: string, file: Buffer, size: number)
 		: Promise<IAlbumFile> {
 	'use strict';
 

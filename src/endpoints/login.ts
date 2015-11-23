@@ -2,7 +2,7 @@ import * as bcrypt from 'bcrypt';
 import {User} from '../models';
 import {IUser} from '../interfaces';
 
-export default function(screenName: string, password: string): Promise<boolean> {
+export default function login(screenName: string, password: string): Promise<boolean> {
 	'use strict';
 
 	return new Promise<boolean>((resolve, reject) => {

@@ -5,7 +5,7 @@ import {IUser} from '../../interfaces';
  * @param user API利用ユーザー
  * @param url 新しいURL
  */
-export default function(user: IUser, url: string): Promise<Object> {
+export default function updateUrl(user: IUser, url: string): Promise<Object> {
 	'use strict';
 
 	return new Promise<Object>((resolve, reject) => {

@@ -15,7 +15,7 @@ import registerHashtags from '../../core/registerHashtags';
  * @param text 本文
  * @param inReplyToPostId 返信先投稿のID
  */
-export default function(app: IApplication, user: IUser, photos: string[], text: string = null, inReplyToPostId: string = null)
+export default function photo(app: IApplication, user: IUser, photos: string[], text: string = null, inReplyToPostId: string = null)
 		: Promise<Object> {
 	'use strict';
 

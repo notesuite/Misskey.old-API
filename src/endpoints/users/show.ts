@@ -8,7 +8,7 @@ import serializeUser from '../../core/serializeUser';
  * @param id 対象ユーザーのID
  * @param screenName 対象ユーザーのScreen name
  */
-export default function(me: IUser, id?: string, screenName?: string): Promise<Object> {
+export default function show(me: IUser, id?: string, screenName?: string): Promise<Object> {
 	'use strict';
 	return new Promise<Object>((resolve, reject) => {
 		function resolver(user: IUser): void {

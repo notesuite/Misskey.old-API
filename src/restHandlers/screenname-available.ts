@@ -3,7 +3,7 @@ import { MisskeyExpressRequest } from '../misskeyExpressRequest';
 import { MisskeyExpressResponse } from '../misskeyExpressResponse';
 import screennameAvailable from '../endpoints/screenname-available';
 
-export default function(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
+export default function isScreennameAvailable(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
 	'use strict';
 	screennameAvailable(req.query['screen-name']).then((available: boolean) => {
 		res.apiRender({

@@ -5,7 +5,7 @@ const upload: any = multer({ dest: 'uploads/' });
 
 const handlerPath = `${__dirname}/restHandlers`;
 
-export default function(app: express.Express): void {
+export default function router(app: express.Express): void {
 	'use strict';
 	console.log('Init router');
 

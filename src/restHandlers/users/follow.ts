@@ -2,7 +2,7 @@ import { MisskeyExpressRequest } from '../../misskeyExpressRequest';
 import { MisskeyExpressResponse } from '../../misskeyExpressResponse';
 import follow from '../../endpoints/users/follow';
 
-export default function(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
+export default function followUser(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
 	'use strict';
 	if (req.body['user-id'] === undefined || req.body['user-id'] === null) {
 		res.apiError(400, "user-id-is-empty");

@@ -1,7 +1,7 @@
 import {AlbumFile} from '../../models';
 import {IUser, IAlbumFile} from '../../interfaces';
 
-export default function(user: IUser, fileId: string): Promise<Object> {
+export default function updateIcon(user: IUser, fileId: string): Promise<Object> {
 	'use strict';
 
 	return new Promise<Object>((resolve, reject) => {

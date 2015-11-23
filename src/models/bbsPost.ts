@@ -6,7 +6,7 @@ const mongooseAutoIncrement: any = require('mongoose-auto-increment');
 /* tslint:disable:variable-name */
 const Schema = mongoose.Schema;
 
-export default function(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
+export default function bbsPost(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
 	'use strict';
 
 	mongooseAutoIncrement.initialize(db);

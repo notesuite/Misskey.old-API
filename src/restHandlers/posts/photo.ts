@@ -2,7 +2,7 @@ import { MisskeyExpressRequest } from '../../misskeyExpressRequest';
 import { MisskeyExpressResponse } from '../../misskeyExpressResponse';
 import photo from '../../endpoints/posts/photo';
 
-export default function(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
+export default function photoPost(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
 	'use strict';
 	const text: string = req.body['text'];
 	const photosJson = req.body['photos'];

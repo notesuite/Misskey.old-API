@@ -3,7 +3,7 @@ import {IUser, IPost} from '../../interfaces';
 import serializePost from '../../core/serializePost';
 import populateAll from '../../core/postPopulateAll';
 
-export default function(shower: IUser, id: string): Promise<Object> {
+export default function show(shower: IUser, id: string): Promise<Object> {
 	'use strict';
 	return new Promise<Object>((resolve, reject) => {
 		Post.findById(id, (findErr: any, post: IPost) => {

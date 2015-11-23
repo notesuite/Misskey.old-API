@@ -6,7 +6,7 @@ import {IUser, IPost, IPostLike} from '../../interfaces';
  * @param user ユーザー
  * @param id 対象の投稿のID
  */
-export default function(user: IUser, id: string): Promise<void> {
+export default function like(user: IUser, id: string): Promise<void> {
 	'use strict';
 	return new Promise<void>((resolve, reject) => {
 		Post.findById(id, (err: any, post: IPost) => {
