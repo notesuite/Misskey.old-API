@@ -11,7 +11,12 @@ import populateAll from '../../core/postPopulateAll';
  * @param sinceCursor 取得する投稿を、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
  * @param maxCursor 取得する投稿を、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
  */
-export default function userTimeline(user: IUser, targetUserId: string, limit: number = 10, sinceCursor: number = null, maxCursor: number = null)
+export default function userTimeline(
+	user: IUser,
+	targetUserId: string,
+	limit: number = 10,
+	sinceCursor: number = null,
+	maxCursor: number = null)
 		: Promise<Object[]> {
 	'use strict';
 
