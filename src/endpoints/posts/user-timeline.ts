@@ -20,7 +20,7 @@ export default function userTimeline(
 		: Promise<Object[]> {
 	'use strict';
 
-	return new Promise((resolve: (statuses: Object[]) => void, reject: (err: any) => void) => {
+	return new Promise<Object[]>((resolve, reject) => {
 
 		// タイムライン取得用のクエリを生成
 		const query: any = ((): any => {

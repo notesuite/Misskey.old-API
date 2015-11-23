@@ -15,7 +15,7 @@ export default function followings(
 	maxCursor: number = null)
 		: Promise<Object[]> {
 	'use strict';
-	return new Promise((resolve: (user: Object[]) => void, reject: (err: any) => void) => {
+	return new Promise<Object[]>((resolve, reject) => {
 		const query: any = ((): any => {
 			if (sinceCursor !== null) {
 				return { follower: user.id, cursor: { $gt: sinceCursor } };

@@ -11,7 +11,7 @@ import {IUser, IUserFollowing} from '../../interfaces';
 export default function followers(user: IUser, limit: number = 30, sinceCursor: number = null, maxCursor: number = null)
 		: Promise<Object[]> {
 	'use strict';
-	return new Promise((resolve: (user: Object[]) => void, reject: (err: any) => void) => {
+	return new Promise<Object[]>((resolve, reject) => {
 		const query: any = ((): any => {
 			if (sinceCursor !== null) {
 				return { followee: user.id, cursor: { $gt: sinceCursor } };
