@@ -5,15 +5,15 @@ import * as ts from 'gulp-typescript';
 import * as tslint from 'gulp-tslint';
 const babel = require('gulp-babel');
 
-const tsProject = ts.createProject('tsconfig.json', <any>{
-	typescript: require('typescript')
-});
-
 task('build', ['build:ts']);
 
 task('build:ts', () => {
-	return tsProject.src()
-		.pipe(ts(tsProject))
+	const project = ts.createProject('tsconfig.json', <any>{
+		typescript: require('typescript')
+	});
+
+	return project.src()
+		.pipe(ts(project))
 		.pipe(babel({
 			presets: ['es2015']
 		}))
