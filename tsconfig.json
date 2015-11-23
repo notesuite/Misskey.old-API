@@ -4,6 +4,7 @@
 		"noImplicitAny": true,
 		"sourceMap": false,
 		"target": "ES6",
+		"module": "commonjs",
 		"moduleResolution": "node",
 		"removeComments": true,
 		"noLib": true,
