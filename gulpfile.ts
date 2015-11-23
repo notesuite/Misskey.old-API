@@ -8,7 +8,7 @@ const babel = require('gulp-babel');
 task('build', ['build:ts']);
 
 task('build:ts', () => {
-	const project = ts.createProject('tsconfig.json', <any>{
+	const project = ts.createProject('tsconfig.json', {
 		typescript: require('typescript')
 	});
 
