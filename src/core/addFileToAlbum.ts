@@ -13,7 +13,13 @@ import config from '../config';
  * @param file 内容
  * @param size ファイルサイズ(byte)
  */
-export default function addFileToAlbum(appId: string, userId: string, fileName: string, mimetype: string, file: Buffer, size: number)
+export default function addFileToAlbum(
+	appId: string,
+	userId: string,
+	fileName: string,
+	mimetype: string,
+	file: Buffer,
+	size: number)
 		: Promise<IAlbumFile> {
 	'use strict';
 
@@ -32,44 +38,50 @@ export default function addFileToAlbum(appId: string, userId: string, fileName: 
 				return reject('no-free-space-of-album');
 			}
 
-			// ファイルをサーバーにアップロード
-			request.post({
-				url: `http://${config.userContentsServer.ip}:${config.userContentsServer.port}/register`,
-				formData: {
-					passkey: config.userContentsServer.passkey,
-					file: {
-						value: file,
-						options: {
-							filename: fileName
+			// ハッシュ生成
+			const hash: string = crypto
+				.createHash('sha256')
+				.update(file)
+				.digest('hex');
+
+			// AlbumFileドキュメントを作成
+			AlbumFile.create({
+				app: appId !== null ? appId : null,
+				user: userId,
+				dataSize: size,
+				mimeType: mimetype,
+				name: fileName,
+				serverPath: null,
+				hash: hash
+			}, (albumFileCreateErr: any, albumFile: IAlbumFile) => {
+				if (albumFileCreateErr !== null) {
+					return reject(albumFileCreateErr);
+				}
+				// ファイルをサーバーにアップロード
+				request.post({
+					url: `http://${config.userContentsServer.ip}:${config.userContentsServer.port}/register`,
+					formData: {
+						fileId: albumFile.id,
+						passkey: config.userContentsServer.passkey,
+						file: {
+							value: file,
+							options: {
+								filename: fileName
+							}
 						}
 					}
-				}
-			}, (err: any, _: any, path: any) => {
-				if (err !== null) {
-					return reject(err);
-				}
-
-				// ハッシュ生成
-				const hash: string = crypto
-					.createHash('sha256')
-					.update(file)
-					.digest('hex');
-
-				// AlbumFileドキュメントを作成
-				AlbumFile.create({
-					app: appId !== null ? appId : null,
-					user: userId,
-					dataSize: size,
-					mimeType: mimetype,
-					name: fileName,
-					serverPath: path,
-					hash: hash
-				}, (albumFileCreateErr: any, albumFile: IAlbumFile) => {
-					if (albumFileCreateErr !== null) {
-						return reject(albumFileCreateErr);
+				}, (uploadErr: any, _: any, path: any) => {
+					if (uploadErr !== null) {
+						return reject(uploadErr);
 					}
-
-					resolve(albumFile);
+					// 最終的にファイルが登録されたサーバーのパスを保存
+					albumFile.serverPath = path;
+					albumFile.save((saveErr: any, saved: IAlbumFile) => {
+						if (saveErr !== null) {
+							return reject(saveErr);
+						}
+						resolve(saved);
+					});
 				});
 			});
 		});
