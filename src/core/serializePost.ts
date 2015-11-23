@@ -111,12 +111,12 @@ function common(
 					getLikersReject(getLikersErr);
 				});
 			})
-		]).then((results: any[]) => {
+		]).then(([inReplyToPost, isLiked, isReposted, likers]) => {
 			const serialized: any = post;
-			serialized.inReplyToPost = (post.inReplyToPost !== null && includeDestination) ? results[0] : post.inReplyToPost;
-			serialized.isLiked = results[1];
-			serialized.isReposted = results[2];
-			serialized.likers = results[3];
+			serialized.inReplyToPost = (post.inReplyToPost !== null && includeDestination) ? inReplyToPost : post.inReplyToPost;
+			serialized.isLiked = isLiked;
+			serialized.isReposted = isReposted;
+			serialized.likers = likers;
 			resolve(serialized);
 		},
 		(serializedErr: any) => {

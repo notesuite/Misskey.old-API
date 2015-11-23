@@ -9,9 +9,9 @@ export default function(text: string): Promise<IUser[]> {
 		return Promise.resolve(null);
 	}
 
-	return Promise.all(mentions.map((mention: string) => {
+	return Promise.all(mentions.map(mention => {
 		return new Promise<IUser>((resolve, reject) => {
-			const sn: string = mention.replace('@', '');
+			const sn = mention.replace('@', '');
 			User.findOne({screenNameLower: sn.toLowerCase()}, (err: any, user: IUser) => {
 				if (err !== null) {
 					reject(err);

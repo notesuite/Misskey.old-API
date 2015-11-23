@@ -27,18 +27,16 @@ export default function(
 		})();
 
 		PostLike.find(query)
-				.sort('-createdAt')
-				.limit(limit)
-				.populate('user')
-				.exec((likesFindErr: any, likes: IPostLike[]) => {
+		.sort('-createdAt')
+		.limit(limit)
+		.populate('user')
+		.exec((likesFindErr: any, likes: IPostLike[]) => {
 			if (likesFindErr !== null) {
 				reject(likesFindErr);
 			} else if (likes.length === 0) {
 				resolve(null);
 			} else {
-				resolve(likes.map((like: IPostLike) => {
-					return <IUser>like.user;
-				}));
+				resolve(likes.map(like => <IUser>like.user));
 			}
 		});
 	});

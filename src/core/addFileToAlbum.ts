@@ -26,7 +26,7 @@ export default function(appId: string, userId: string, fileName: string, mimetyp
 			}
 
 			// 現時点でのアルバム使用量を算出(byte)
-			const used: number = albumFiles.map(albumFile => albumFile.dataSize).reduce((x, y) => x + y, 0);
+			const used = albumFiles.map(albumFile => albumFile.dataSize).reduce((x, y) => x + y, 0);
 
 			// 100MBを超える場合
 			if (used + size > 100000000) {

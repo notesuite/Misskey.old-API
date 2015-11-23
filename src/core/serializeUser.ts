@@ -4,21 +4,14 @@ import lookupFollowState from './lookupFollowState';
 export default function(me: IUser, user: IUser): Promise<Object> {
 	'use strict';
 	const userObj: any = user.toObject();
-	return new Promise<Object>((resolve, reject) => {
-		if (me !== undefined && me !== null) {
-			lookupFollowState(me.id, user.id).then((isFollowing: boolean) => {
-				lookupFollowState(user.id, me.id).then((isFollowingMe: boolean) => {
-					userObj.isFollowing = isFollowing;
-					userObj.isFollowingMe = isFollowingMe;
-					resolve(userObj);
-				}, (err: any) => {
-					reject(err);
-				});
-			}, (err: any) => {
-				reject(err);
-			});
-		} else {
-			resolve(userObj);
-		}
-	});
+	return (me !== undefined && me !== null) ?
+		Promise.all([lookupFollowState(me.id, user.id), lookupFollowState(user.id, me.id)])
+		.then(([isFollowing, isFollowingMe]) => {
+				userObj.isFollowing = isFollowing;
+				userObj.isFollowingMe = isFollowingMe;
+				return userObj;
+		})
+	:
+		Promise.resolve(userObj);
+
 }
