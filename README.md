@@ -18,7 +18,7 @@
 1. `git clone git://github.com/MissKernel/Misskey-API.git`
 2. `cd Misskey-API`
 3. `npm install`
-4. `npm run dtsm`
+4. `npm run dts`
 5. `npm run build`
 
 ## How to test

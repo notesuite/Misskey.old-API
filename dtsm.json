@@ -22,9 +22,6 @@
     "gulp-tslint/gulp-tslint.d.ts": {
       "ref": "aed176536a202b9a2475ce1989ea6d2d0226a185"
     },
-    "del/del.d.ts": {
-      "ref": "aed176536a202b9a2475ce1989ea6d2d0226a185"
-    },
     "mongoose/mongoose.d.ts": {
       "ref": "aed176536a202b9a2475ce1989ea6d2d0226a185"
     },
