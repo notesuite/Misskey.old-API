@@ -1,7 +1,6 @@
 import * as http from 'http';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
-import * as multer from 'multer';
 import { MisskeyExpressRequest } from './misskeyExpressRequest';
 import { MisskeyExpressResponse } from './misskeyExpressResponse';
 import config from './config';
