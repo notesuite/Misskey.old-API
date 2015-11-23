@@ -1,9 +1,7 @@
 import * as express from 'express';
+import * as multer from 'multer';
 
-interface IRoute {
-	method: string;
-	endpoint: string;
-}
+const upload: any = multer({ dest: 'uploads/' });
 
 const handlerPath = `${__dirname}/restHandlers`;
 
@@ -41,7 +39,7 @@ export default function(app: express.Express): void {
 	app.post('/posts/favorite', require(`${handlerPath}/posts/favorite`).default);
 	app.post('/posts/repost', require(`${handlerPath}/posts/repost`).default);
 
-	app.post('/album/files/upload', require(`${handlerPath}/album/files/upload`).default);
+	app.post('/album/files/upload', upload.single('file'), require(`${handlerPath}/album/files/upload`).default);
 	app.get('/album/files/show', require(`${handlerPath}/album/files/show`).default);
 	app.get('/album/files/list', require(`${handlerPath}/album/files/list`).default);
 	app.put('/album/files/move', require(`${handlerPath}/album/files/move`).default);
