@@ -5,7 +5,7 @@ import {IPost, IRepost} from '../interfaces';
 export default function postPopulateAll(sourcePost: IPost | IRepost, populateReply: boolean = true): Promise<IPost> {
 	'use strict';
 	const post: any = sourcePost.toObject();
-	return new Promise((resolve: (post: IPost) => void, reject: (err: any) => void) => {
+	return new Promise<IPost>((resolve, reject) => {
 		switch (post.type) {
 			case 'status':
 				StatusPost.populate(post, `user ${populateReply ? 'inReplyToPost' : ''}`.trim(), (err: any, _post: any) => {
