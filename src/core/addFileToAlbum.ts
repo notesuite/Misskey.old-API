@@ -61,8 +61,8 @@ export default function addFileToAlbum(
 				request.post({
 					url: `http://${config.userContentsServer.ip}:${config.userContentsServer.port}/register`,
 					formData: {
-						fileId: albumFile.id,
-						passkey: config.userContentsServer.passkey,
+						'file-id': albumFile.id,
+						'passkey': config.userContentsServer.passkey,
 						file: {
 							value: file,
 							options: {
