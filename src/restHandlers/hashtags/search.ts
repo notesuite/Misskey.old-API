@@ -1,7 +1,7 @@
 // import * as express from 'express';
 import { MisskeyExpressRequest } from '../../misskeyExpressRequest';
 import { MisskeyExpressResponse } from '../../misskeyExpressResponse';
-import search from '../../endpoints/search/hashtags';
+import search from '../../endpoints/hashtags/search';
 
 export default function(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
 	'use strict';

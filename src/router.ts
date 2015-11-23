@@ -51,5 +51,5 @@ export default function(app: express.Express): void {
 	app.put('/album/folders/move', require(`${handlerPath}/album/folders/move`).default);
 	app.put('/album/folders/rename', require(`${handlerPath}/album/folders/rename`).default);
 
-	app.get('/search/hashtags', require(`${handlerPath}/search/hashtags`).default);
+	app.get('/hashtags/search', require(`${handlerPath}/hashtags/search`).default);
 }

@@ -87,7 +87,7 @@
 		"src/endpoints/album/folders/delete.ts",
 		"src/endpoints/album/folders/rename.ts",
 		"src/endpoints/album/folders/update-color.ts",
-		"src/endpoints/search/hashtags.ts",
+		"src/endpoints/hashtags/search.ts",
 		"src/restHandlers/login.ts",
 		"src/restHandlers/screenname-available.ts",
 		"src/restHandlers/account/create.ts",
@@ -122,6 +122,6 @@
 		"src/restHandlers/album/folders/delete.ts",
 		"src/restHandlers/album/folders/rename.ts",
 		"src/restHandlers/album/folders/update-color.ts",
-		"src/restHandlers/search/hashtags.ts"
+		"src/restHandlers/hashtags/search.ts"
 	]
 }
