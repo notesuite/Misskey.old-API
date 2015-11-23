@@ -14,9 +14,7 @@ task('build:ts', () => {
 
 	return project.src()
 		.pipe(ts(project))
-		.pipe(babel({
-			presets: ['es2015']
-		}))
+		.pipe(babel())
 		.pipe(dest('./built'));
 });
 
