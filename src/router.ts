@@ -50,4 +50,6 @@ export default function(app: express.Express): void {
 	app.put('/album/folders/rename', require(`${handlerPath}/album/folders/rename`).default);
 
 	app.get('/hashtags/search', require(`${handlerPath}/hashtags/search`).default);
+
+	console.log('routers loaded');
 }
