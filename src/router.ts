@@ -13,6 +13,7 @@ export default function router(app: express.Express): void {
 	app.get('/', (req: express.Request, res: express.Response) => {
 		res.status(200).send('Rain tree sketch');
 	});
+
 	app.get('/login', require(`${handlerPath}/login`).default);
 	app.get('/screenname-available', require(`${handlerPath}/screenname-available`).default);
 	app.post('/account/create', require(`${handlerPath}/account/create`).default);

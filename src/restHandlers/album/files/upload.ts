@@ -5,9 +5,8 @@ import upload from '../../../endpoints/album/files/upload';
 
 export default function uploadFile(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
 	'use strict';
-	const filesCount: number = Object.keys(req.files).length;
-	if (filesCount === 1) {
-		const file: Express.Multer.File = req.files['file'];
+	const file: Express.Multer.File = (<any>req).file;
+	if (file !== undefined && file !== null) {
 		const path: string = file.path;
 		const name: string = file.originalname;
 		const mimetype: string = file.mimetype;
@@ -20,9 +19,7 @@ export default function uploadFile(req: MisskeyExpressRequest, res: MisskeyExpre
 		}, (err: any) => {
 			res.apiError(500, err);
 		});
-	} else if (filesCount > 1) {
-		res.apiError(400, 'For now, we are accepting only one file');
 	} else {
-		res.apiError(400, 'no-attachd-file');
+		res.apiError(400, 'empty-file');
 	}
 };
