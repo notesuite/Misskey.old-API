@@ -5,45 +5,7 @@ interface IRoute {
 	endpoint: string;
 }
 
-const routing: IRoute[] = [
-	{ method: 'get', endpoint: 'login' },
-	{ method: 'get', endpoint: 'screenname-available' },
-
-	{ method: 'post', endpoint: 'account/create' },
-	{ method: 'get', endpoint: 'account/show' },
-	{ method: 'put', endpoint: 'account/update-name' },
-	{ method: 'put', endpoint: 'account/update-url' },
-	{ method: 'put', endpoint: 'account/update-icon' },
-
-	{ method: 'get', endpoint: 'users/show' },
-	{ method: 'post', endpoint: 'users/follow' },
-	{ method: 'delete', endpoint: 'users/unfollow' },
-	{ method: 'get', endpoint: 'users/followings' },
-	{ method: 'get', endpoint: 'users/followers' },
-	{ method: 'get', endpoint: 'users/search' },
-
-	{ method: 'get', endpoint: 'posts/timeline' },
-	{ method: 'get', endpoint: 'posts/user-timeline' },
-	{ method: 'get', endpoint: 'posts/show' },
-	{ method: 'get', endpoint: 'posts/talk' },
-	{ method: 'get', endpoint: 'posts/replies' },
-	{ method: 'post', endpoint: 'posts/status' },
-	{ method: 'post', endpoint: 'posts/photo' },
-	{ method: 'post', endpoint: 'posts/favorite' },
-	{ method: 'post', endpoint: 'posts/repost' },
-
-	{ method: 'post', endpoint: 'album/files/upload' },
-	{ method: 'get', endpoint: 'album/files/show' },
-	{ method: 'get', endpoint: 'album/files/list' },
-	{ method: 'put', endpoint: 'album/files/move' },
-	{ method: 'put', endpoint: 'album/files/rename' },
-	{ method: 'delete', endpoint: 'album/files/delete' },
-	{ method: 'post', endpoint: 'album/folders/create' },
-	{ method: 'put', endpoint: 'album/folders/move' },
-	{ method: 'put', endpoint: 'album/folders/rename' },
-
-	{ method: 'get', endpoint: 'search/hashtags' }
-];
+const handlerPath = `${__dirname}/restHandlers`;
 
 export default function(app: express.Express): void {
 	'use strict';
@@ -53,13 +15,41 @@ export default function(app: express.Express): void {
 		res.status(200).send('Rain tree sketch');
 	});
 
-	routing.forEach(route => {
-		console.log('- load: ' + route.endpoint);
-		const handler: any = require(`${__dirname}/restHandlers/${route.endpoint}`);
-		if (handler.hasOwnProperty('default')) {
-			(<any>app)[route.method]('/' + route.endpoint, handler.default);
-		} else {
-			(<any>app)[route.method]('/' + route.endpoint, handler);
-		}
-	});
+	app.get('/login', require(`${handlerPath}/login`).default);
+	app.get('/screenname-available', require(`${handlerPath}/screenname-available`).default);
+
+	app.post('/account/create', require(`${handlerPath}/account/create`).default);
+	app.get('/account/show', require(`${handlerPath}/account/show`).default);
+	app.put('/account/update-name', require(`${handlerPath}/account/update-name`).default);
+	app.put('/account/update-url', require(`${handlerPath}/account/update-url`).default);
+	app.put('/account/update-icon', require(`${handlerPath}/account/update-icon`).default);
+
+	app.get('/users/show', require(`${handlerPath}/users/show`).default);
+	app.post('/users/follow', require(`${handlerPath}/users/follow`).default);
+	app.delete('/users/unfollow', require(`${handlerPath}/users/unfollow`).default);
+	app.get('/users/followings', require(`${handlerPath}/users/followings`).default);
+	app.get('/users/followers', require(`${handlerPath}/users/followers`).default);
+	app.get('/users/search', require(`${handlerPath}/users/search`).default);
+
+	app.get('/posts/timeline', require(`${handlerPath}/posts/timeline`).default);
+	app.get('/posts/user-timeline', require(`${handlerPath}/posts/user-timeline`).default);
+	app.get('/posts/show', require(`${handlerPath}/posts/show`).default);
+	app.get('/posts/talk', require(`${handlerPath}/posts/talk`).default);
+	app.get('/posts/replies', require(`${handlerPath}/posts/replies`).default);
+	app.post('/posts/status', require(`${handlerPath}/posts/status`).default);
+	app.post('/posts/photo', require(`${handlerPath}/posts/photo`).default);
+	app.post('/posts/favorite', require(`${handlerPath}/posts/favorite`).default);
+	app.post('/posts/repost', require(`${handlerPath}/posts/repost`).default);
+
+	app.post('/album/files/upload', require(`${handlerPath}/album/files/upload`).default);
+	app.get('/album/files/show', require(`${handlerPath}/album/files/show`).default);
+	app.get('/album/files/list', require(`${handlerPath}/album/files/list`).default);
+	app.put('/album/files/move', require(`${handlerPath}/album/files/move`).default);
+	app.put('/album/files/rename', require(`${handlerPath}/album/files/rename`).default);
+	app.delete('/album/files/delete', require(`${handlerPath}/album/files/delete`).default);
+	app.post('/album/folders/create', require(`${handlerPath}/album/folders/create`).default);
+	app.put('/album/folders/move', require(`${handlerPath}/album/folders/move`).default);
+	app.put('/album/folders/rename', require(`${handlerPath}/album/folders/rename`).default);
+
+	app.get('/search/hashtags', require(`${handlerPath}/search/hashtags`).default);
 }

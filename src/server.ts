@@ -12,7 +12,6 @@ console.log('Init server');
 const app = express();
 app.disable('x-powered-by');
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(multer());
 
 app.use((req: MisskeyExpressRequest, res: MisskeyExpressResponse, next: () => void) => {
 	res.apiRender = data => {
