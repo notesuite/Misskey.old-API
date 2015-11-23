@@ -9,7 +9,7 @@ export default function getPostLikers(
 		: Promise<IUser[]> {
 	'use strict';
 
-	return new Promise<IUser>((resolve, reject) => {
+	return new Promise<IUser[]>((resolve, reject) => {
 		const query: any = ((): any => {
 			if (sinceCursor === null && maxCursor === null) {
 				return {post: postId};
