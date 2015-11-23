@@ -4,7 +4,17 @@
 [![][david-dev-badge]][david-dev-link]
 [![][mit-badge]][mit]
 
+## External dependencies
+* Node.js
+* npm
+* MongoDB
+* Redis
+
+## External devDependencies
+* dependencies of node-gyp - https://github.com/nodejs/node-gyp#installation
+
 ## How to build
+
 1. `git clone git://github.com/MissKernel/Misskey-API.git`
 2. `cd Misskey-API`
 3. `npm install`
