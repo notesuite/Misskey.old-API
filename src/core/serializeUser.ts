@@ -7,9 +7,9 @@ export default function(me: IUser, user: IUser): Promise<Object> {
 	return new Promise<Object>((resolve, reject) => {
 		if (me !== undefined && me !== null) {
 			lookupFollowState(me.id, user.id).then((isFollowing: boolean) => {
-				lookupFollowState(user.id, me.id).then((isFollowingMe: boolean) => {
+				lookupFollowState(user.id, me.id).then((isFollowed: boolean) => {
 					userObj.isFollowing = isFollowing;
-					userObj.isFollowingMe = isFollowingMe;
+					userObj.isFollowed = isFollowed;
 					resolve(userObj);
 				}, (err: any) => {
 					reject(err);
