@@ -18,7 +18,6 @@ export default function addFileToAlbum(appId: string, userId: string, fileName: 
 	'use strict';
 
 	return new Promise<IAlbumFile>((resolve, reject) => {
-
 		// アルバム使用量を取得するためにすべてのファイルを取得
 		AlbumFile.find({user: userId}, (albumFilesFindErr: any, albumFiles: IAlbumFile[]) => {
 			if (albumFilesFindErr !== null) {
