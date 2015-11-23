@@ -7,7 +7,7 @@ export default function likePost(req: MisskeyExpressRequest, res: MisskeyExpress
 	like(req.misskeyUser, req.body['post-id']).then(() => {
 		res.apiRender({ kyoppie: "yuppie" });
 	}, (err: any) => {
-		const statuscode: number = (() => {
+		const statusCode = (() => {
 			switch (err) {
 				case 'post-not-found':
 					return 400;
@@ -17,6 +17,6 @@ export default function likePost(req: MisskeyExpressRequest, res: MisskeyExpress
 					return 500;
 			}
 		})();
-		res.apiError(statuscode, err);
+		res.apiError(statusCode, err);
 	});
 };
