@@ -20,7 +20,7 @@ task('build:ts', () => {
 	return tsProject.src()
 		.pipe(ts(tsProject))
 		.pipe(babel({
-			modules: 'commonStrict'
+			presets: ['es2015']
 		}))
 		.pipe(dest('./built'));
 });
