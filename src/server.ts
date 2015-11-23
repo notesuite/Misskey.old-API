@@ -35,8 +35,5 @@ app.use((req, res) => {
 });
 
 const server: http.Server = app.listen(config.port.http, () => {
-	const host: string = server.address().address;
-	const port: number = server.address().port;
-
-	console.log(`MisskeyAPI server listening at ${host}:${port}`);
+	console.log(`MisskeyAPI server listening at ${server.address().address}:${server.address().port}`);
 });
