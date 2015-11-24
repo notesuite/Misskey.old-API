@@ -13,8 +13,8 @@ export default function updateIcon(user: IUser, fileId: string): Promise<Object>
 			} else if (file.user.toString() !== user.id) {
 				reject('file-not-found');
 			} else {
-				user.avatar = file.id;
-				user.avatarPath = file.serverPath;
+				user.icon = file.id;
+				user.iconPath = file.serverPath;
 				user.save((saveErr: any, saved: IUser) => {
 					if (saveErr !== null) {
 						reject(saveErr);

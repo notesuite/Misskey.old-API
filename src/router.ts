@@ -20,7 +20,7 @@ export default function router(app: express.Express): void {
 	app.get('/account/show', require(`${handlerPath}/account/show`).default);
 	app.put('/account/update-name', require(`${handlerPath}/account/update-name`).default);
 	app.put('/account/update-url', require(`${handlerPath}/account/update-url`).default);
-	app.put('/account/update-icon', require(`${handlerPath}/account/update-icon`).default);
+	app.put('/account/update-avatar', require(`${handlerPath}/account/update-avatar`).default);
 	app.get('/users/show', require(`${handlerPath}/users/show`).default);
 	app.post('/users/follow', require(`${handlerPath}/users/follow`).default);
 	app.delete('/users/unfollow', require(`${handlerPath}/users/unfollow`).default);

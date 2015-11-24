@@ -1,7 +1,7 @@
 // import * as express from 'express';
 import { MisskeyExpressRequest } from '../../misskeyExpressRequest';
 import { MisskeyExpressResponse } from '../../misskeyExpressResponse';
-import update from '../../endpoints/account/update-avatar';
+import update from '../../endpoints/account/update-icon';
 
 export default function updateIcon(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
 	'use strict';

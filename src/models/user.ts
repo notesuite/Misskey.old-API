@@ -20,8 +20,8 @@ export default function user(db: mongoose.Connection): mongoose.Model<mongoose.D
 		encryptedPassword: { type: String, required: true },
 		followersCount: { type: Number, required: false, default: 0 },
 		followingsCount: { type: Number, required: false, default: 0 },
-		icon: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFiles' },
-		iconPath: { type: String, required: false, default: null },
+		avatar: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFiles' },
+		avatarPath: { type: String, required: false, default: null },
 		isDeleted: { type: Boolean, required: false, default: false },
 		isEmailVerified: { type: Boolean, required: false, default: false },
 		isPrivate: { type: Boolean, required: false, default: false },
@@ -46,11 +46,11 @@ export default function user(db: mongoose.Connection): mongoose.Model<mongoose.D
 	(<any>schema).options.toObject.transform = (doc: any, ret: any) => {
 		ret.id = doc.id;
 
-		delete ret.icon;
-		delete ret.iconPath;
-		ret.iconUrl = doc.icon !== null
-			? `${config.userContentsServer.url}/${doc.iconPath}`
-			: `${config.userContentsServer.url}/defaults/icon.jpg`;
+		delete ret.avatar;
+		delete ret.avatarPath;
+		ret.avatarUrl = doc.avatar !== null
+			? `${config.userContentsServer.url}/${doc.avatarPath}`
+			: `${config.userContentsServer.url}/defaults/avatar.jpg`;
 
 		delete ret.banner;
 		delete ret.bannerPath;

@@ -13,8 +13,8 @@ export interface IUser extends mongoose.Document {
 	encryptedPassword: string;
 	followersCount: number;
 	followingsCount: number;
-	icon: string | mongoose.Types.ObjectId | IAlbumFile;
-	iconPath: string;
+	avatar: string | mongoose.Types.ObjectId | IAlbumFile;
+	avatarPath: string;
 	isDeleted: Boolean;
 	isEmailVerified: Boolean;
 	isPrivate: Boolean;
