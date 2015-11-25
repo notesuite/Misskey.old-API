@@ -2,6 +2,7 @@ import {Post, Repost} from '../../models';
 import {IApplication, IPost, IRepost} from '../../interfaces';
 import publishUserStream from '../../core/publishUserStream';
 import populateAll from '../../core/postPopulateAll';
+import createNotification from '../../core/create-notification';
 
 export default function repost(app: IApplication, userId: string, targetPostId: string)
 		: Promise<Object> {
@@ -13,6 +14,8 @@ export default function repost(app: IApplication, userId: string, targetPostId: 
 				return reject(findErr);
 			} else if (post === null) {
 				return reject('not-found');
+			} else if (post.isDeleted) {
+				return reject('post-is-deleted');
 			} else if (post.user === userId) {
 				return reject('your-post');
 			} else if (post.type === 'repost') {
@@ -44,11 +47,19 @@ export default function repost(app: IApplication, userId: string, targetPostId: 
 					});
 					post.repostsCount++;
 					post.save();
+
+					// User stream
 					publishUserStream(userId, {
 						type: 'post',
 						value: {
 							id: createdRepost.id
 						}
+					});
+
+					// 通知を作成
+					createNotification(null, <string>post.user, 'repost', {
+						postId: post.id,
+						userId: userId
 					});
 				});
 			});
