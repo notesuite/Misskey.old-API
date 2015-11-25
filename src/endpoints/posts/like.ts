@@ -15,10 +15,10 @@ export default function like(user: IUser, id: string): Promise<void> {
 				return reject(err);
 			}
 			if (post === null) {
-				return reject('post-not-found');	
+				return reject('post-not-found');
 			}
 			if (post.isDeleted) {
-				return reject('post-is-deleted');	
+				return reject('post-is-deleted');
 			}
 			PostLike.findOne({
 				post: post.id,
