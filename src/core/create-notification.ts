@@ -1,10 +1,10 @@
 import { Notification } from '../models';
-import { IApplication, IUser, INotification } from '../interfaces';
+import { IApplication, INotification } from '../interfaces';
 import publishStreamingMessage from './publishStreamingMessage';
 
 export default function createNotification(
 	app: IApplication,
-	user: IUser,
+	userId: string,
 	type: string,
 	content: any
 ): Promise<INotification> {
@@ -13,7 +13,7 @@ export default function createNotification(
 	return new Promise<INotification>((resolve, reject) => {
 		Notification.create({
 			app: app !== null ? app.id : null,
-			user: user.id,
+			user: userId,
 			type: type,
 			content: content
 		}, (createErr: any, createdNotification: INotification) => {
@@ -21,7 +21,7 @@ export default function createNotification(
 				reject(createErr);
 			} else {
 				resolve(createdNotification);
-				publishStreamingMessage(`userStream:${user.id}`, JSON.stringify({
+				publishStreamingMessage(`userStream:${userId}`, JSON.stringify({
 					type: 'notification',
 					value: createdNotification.toObject()
 				}));
