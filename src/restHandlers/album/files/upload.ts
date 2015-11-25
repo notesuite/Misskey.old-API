@@ -8,13 +8,13 @@ export default function uploadFile(req: MisskeyExpressRequest, res: MisskeyExpre
 	const file: Express.Multer.File = (<any>req).file;
 	if (file !== undefined && file !== null) {
 		const path: string = file.path;
-		const name: string = file.originalname;
+		const fileName: string = file.originalname;
 		const mimetype: string = file.mimetype;
 		const fileBuffer: Buffer = fs.readFileSync(path);
 		const size: number = file.size;
 		fs.unlink(path);
 
-		upload(req.misskeyApp, req.misskeyUser, name, mimetype, fileBuffer, size).then((albumFile: Object) => {
+		upload(req.misskeyApp, req.misskeyUser, fileName, mimetype, fileBuffer, size).then((albumFile: Object) => {
 			res.apiRender(albumFile);
 		}, (err: any) => {
 			res.apiError(500, err);

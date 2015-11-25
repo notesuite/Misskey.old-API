@@ -24,7 +24,7 @@ export default function albumFile(db: mongoose.Connection): mongoose.Model<mongo
 		isPrivate: { type: Boolean, required: false, default: false },
 		name: { type: String, required: true },
 		properties: { type: Schema.Types.Mixed, required: false, default: null },
-		serverPath: { type: String, required: true },
+		serverPath: { type: String, required: false },
 		user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
 	});
 
