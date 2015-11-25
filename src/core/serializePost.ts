@@ -1,4 +1,4 @@
-import {Post, PostLike} from '../models';
+import {Post, PostLike, Repost} from '../models';
 import {IUser, IStatusPost, IPhotoPost} from '../interfaces';
 import serializeStatus from './serializeStatus';
 import serializePhotoPost from './serializePhotoPost';
@@ -86,7 +86,7 @@ function common(
 			}),
 			// Get is reposted
 			new Promise<boolean>((getIsRepostedResolve, getIsRepostedReject) => {
-				Post.find({
+				Repost.find({
 					type: 'repost',
 					post: post.id,
 					user: me.id
