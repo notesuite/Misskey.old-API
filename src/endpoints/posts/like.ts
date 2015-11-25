@@ -1,5 +1,6 @@
 import {Post, PostLike} from '../../models';
 import {IUser, IPost, IPostLike} from '../../interfaces';
+import createNotification from '../../core/create-notification';
 
 /**
  * ふぁぼります
@@ -10,37 +11,41 @@ export default function like(user: IUser, id: string): Promise<void> {
 	'use strict';
 	return new Promise<void>((resolve, reject) => {
 		Post.findById(id, (err: any, post: IPost) => {
-			if (err === null) {
-				if (post !== null) {
-					PostLike.findOne({
-						post: post.id,
-						user: user.id
-					}, (postLikeFindErr: any, postLike: IPostLike) => {
-						if (postLikeFindErr === null) {
-							if (postLike === null) {
-								PostLike.create({
-									post: post.id,
-									user: user.id
-								}, (createErr: any, createdPostLike: IPostLike) => {
-									if (createErr === null) {
-										resolve();
-									} else {
-										reject(createErr);
-									}
-								});
-							} else {
-								reject('already-liked');
-							}
-						} else {
-							reject(postLikeFindErr);
-						}
-					});
-				} else {
-					reject('post-not-found');
-				}
-			} else {
-				reject(err);
+			if (err !== null) {
+				return reject(err);
 			}
+			if (post === null) {
+				return reject('post-not-found');	
+			}
+			if (post.isDeleted) {
+				return reject('post-is-deleted');	
+			}
+			PostLike.findOne({
+				post: post.id,
+				user: user.id
+			}, (postLikeFindErr: any, postLike: IPostLike) => {
+				if (postLikeFindErr !== null) {
+					return reject(postLikeFindErr);
+				}
+				if (postLike !== null) {
+					return reject('already-liked');
+				}
+				PostLike.create({
+					post: post.id,
+					user: user.id
+				}, (createErr: any, createdPostLike: IPostLike) => {
+					if (createErr !== null) {
+						return reject(createErr);
+					}
+					resolve();
+
+					// 通知を作成
+					createNotification(null, <string>post.user, 'like', {
+						postId: post.id,
+						userId: user.id
+					});
+				});
+			});
 		});
 	});
 }
