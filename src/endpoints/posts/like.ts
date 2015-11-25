@@ -39,6 +39,9 @@ export default function like(user: IUser, id: string): Promise<void> {
 					}
 					resolve();
 
+					post.likesCount++;
+					post.save();
+
 					// 通知を作成
 					createNotification(null, <string>post.user, 'like', {
 						postId: post.id,
