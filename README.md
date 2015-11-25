@@ -11,7 +11,7 @@
 * Redis
 
 ## External devDependencies
-* dependencies of node-gyp - https://github.com/nodejs/node-gyp#installation
+* node-gyp - https://github.com/nodejs/node-gyp#installation
 
 ## How to build
 
