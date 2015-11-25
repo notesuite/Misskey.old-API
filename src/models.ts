@@ -9,6 +9,7 @@ export const AlbumFile: Model<Document> = require('./models/albumFile').default(
 export const AlbumFolder: Model<Document> = require('./models/albumFolder').default(db);
 export const Application: Model<Document> = require('./models/application').default(db);
 export const Hashtag: Model<Document> = require('./models/hashtag').default(db);
+export const Notification: Model<Document> = require('./models/notification').default(db);
 export const PhotoPost: Model<Document> = require('./models/post').photo(db);
 export const Post: Model<Document> = require('./models/post').post(db);
 export const PostLike: Model<Document> = require('./models/postLike').default(db);
