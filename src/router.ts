@@ -29,6 +29,7 @@ export default function router(app: express.Express): void {
 	app.get('/users/search', require(`${handlerPath}/users/search`).default);
 	app.get('/posts/timeline', require(`${handlerPath}/posts/timeline`).default);
 	app.get('/posts/user-timeline', require(`${handlerPath}/posts/user-timeline`).default);
+	app.get('/posts/mentions', require(`${handlerPath}/posts/mentions`).default);
 	app.get('/posts/show', require(`${handlerPath}/posts/show`).default);
 	app.get('/posts/talk', require(`${handlerPath}/posts/talk`).default);
 	app.get('/posts/replies', require(`${handlerPath}/posts/replies`).default);
