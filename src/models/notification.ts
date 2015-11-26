@@ -7,7 +7,7 @@ export default function notification(db: mongoose.Connection): mongoose.Model<mo
 
 	mongooseAutoIncrement.initialize(db);
 
-	const schema: mongoose.Schema = new Schema({
+	const schema: Schema = new Schema({
 		app: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Application' },
 		content: { type: Schema.Types.Mixed, required: false, default: {} },
 		createdAt: { type: Date, required: true, default: Date.now },

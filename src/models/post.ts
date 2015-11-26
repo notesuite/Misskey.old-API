@@ -39,7 +39,7 @@ const toObject: any = (doc: any, ret: any) => {
 export function post(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
 	'use strict';
 
-	const schema: mongoose.Schema = new Schema(postBase);
+	const schema: Schema = new Schema(postBase);
 
 	if (!(<any>schema).options.toObject) {
 		(<any>schema).options.toObject = {};
@@ -53,7 +53,7 @@ export function status(db: mongoose.Connection): mongoose.Model<mongoose.Documen
 	'use strict';
 	mongooseAutoIncrement.initialize(db);
 
-	const schema: mongoose.Schema = new Schema(Object.assign({
+	const schema: Schema = new Schema(Object.assign({
 		hashtags: { type: [String], required: false, default: [] },
 		text: { type: String, required: false, default: null },
 		isPlain: { type: Boolean, required: false, default: false }
@@ -77,7 +77,7 @@ export function photo(db: mongoose.Connection): mongoose.Model<mongoose.Document
 	'use strict';
 	mongooseAutoIncrement.initialize(db);
 
-	const schema: mongoose.Schema = new Schema(Object.assign({
+	const schema: Schema = new Schema(Object.assign({
 		photos: [{ type: Schema.Types.ObjectId, required: true, ref: 'AlbumFile' }],
 		hashtags: { type: [String], required: false, default: [] },
 		text: { type: String, required: false, default: null },
@@ -101,7 +101,7 @@ export function photo(db: mongoose.Connection): mongoose.Model<mongoose.Document
 export function repost(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
 	'use strict';
 
-	const schema: mongoose.Schema = new Schema({
+	const schema: Schema = new Schema({
 		app: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Application' },
 		createdAt: { type: Date, required: true, default: Date.now },
 		cursor: { type: Number },

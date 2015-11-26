@@ -7,7 +7,7 @@ export default function bbsTopic(db: mongoose.Connection): mongoose.Model<mongoo
 
 	mongooseAutoIncrement.initialize(db);
 
-	const schema: mongoose.Schema = new Schema({
+	const schema: Schema = new Schema({
 		createdAt: { type: Date, required: true, default: Date.now },
 		cursor: { type: Number },
 		title: { type: String, required: true },

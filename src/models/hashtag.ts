@@ -4,7 +4,7 @@ import { Schema } from 'mongoose';
 export default function hashtag(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
 	'use strict';
 
-	const schema: mongoose.Schema = new Schema({
+	const schema: Schema = new Schema({
 		createdAt: { type: Date, required: true, default: Date.now },
 		name: { type: String, required: true, unique: true }
 	});

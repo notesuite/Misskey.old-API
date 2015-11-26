@@ -7,7 +7,7 @@ export default function talkMessage(db: mongoose.Connection): mongoose.Model<mon
 
 	mongooseAutoIncrement.initialize(db);
 
-	const schema: mongoose.Schema = new Schema({
+	const schema: Schema = new Schema({
 		app: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Application' },
 		attachedFiles: [{ type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFile' }],
 		createdAt: { type: Date, required: true, default: Date.now },
