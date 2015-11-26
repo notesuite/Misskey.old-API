@@ -1,6 +1,6 @@
 import { Notification } from '../models';
 import { IApplication, INotification } from '../interfaces';
-import publishStreamingMessage from './publishStreamingMessage';
+import publishStreamingMessage from './publish-streaming-message';
 
 export default function createNotification(
 	app: IApplication,

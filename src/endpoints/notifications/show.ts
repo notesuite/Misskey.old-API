@@ -1,6 +1,6 @@
 import {Notification} from '../../models';
 import {IUser, INotification} from '../../interfaces';
-import serializeNotification from '../../core/serializeNotification';
+import serializeNotification from '../../core/serialize-notification';
 
 export default function show(shower: IUser, id: string): Promise<Object> {
 	'use strict';

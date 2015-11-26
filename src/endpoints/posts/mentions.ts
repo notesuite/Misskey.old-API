@@ -1,7 +1,7 @@
 import {PostMention} from '../../models';
 import {IUser, IPost, IPostMention} from '../../interfaces';
-import serializeTimeline from '../../core/serializeTimeline';
-import populateAll from '../../core/postPopulateAll';
+import serializeTimeline from '../../core/serialize-timeline';
+import populateAll from '../../core/post-populate-all';
 
 /**
  * メンションを取得します

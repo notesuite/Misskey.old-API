@@ -1,5 +1,5 @@
 import {IApplication, IUser, IAlbumFile} from '../../../interfaces';
-import add from '../../../core/addFileToAlbum';
+import add from '../../../core/add-file-to-album';
 
 /**
  * アルバムにファイルを追加します

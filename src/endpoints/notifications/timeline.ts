@@ -1,6 +1,6 @@
 import {Notification} from '../../models';
 import {IUser, INotification} from '../../interfaces';
-import serializeNotification from '../../core/serializeNotification';
+import serializeNotification from '../../core/serialize-notification';
 
 /**
  * 通知を取得します

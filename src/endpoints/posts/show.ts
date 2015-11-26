@@ -1,7 +1,7 @@
 import {Post} from '../../models';
 import {IUser, IPost} from '../../interfaces';
-import serializePost from '../../core/serializePost';
-import populateAll from '../../core/postPopulateAll';
+import serializePost from '../../core/serialize-post';
+import populateAll from '../../core/post-populate-all';
 
 export default function show(shower: IUser, id: string): Promise<Object> {
 	'use strict';

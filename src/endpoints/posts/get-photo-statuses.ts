@@ -1,7 +1,7 @@
 import {Post} from '../../models';
 import {IUser, IPost} from '../../interfaces';
-import serializeTimeline from '../../core/serializeTimeline';
-import populateAll from '../../core/postPopulateAll';
+import serializeTimeline from '../../core/serialize-timeline';
+import populateAll from '../../core/post-populate-all';
 
 /**
  * 特定のユーザーの画像が添付された投稿のタイムラインを取得します

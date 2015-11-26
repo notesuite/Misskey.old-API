@@ -1,7 +1,7 @@
 import {Post, Repost} from '../../models';
 import {IApplication, IPost, IRepost} from '../../interfaces';
-import publishUserStream from '../../core/publishUserStream';
-import populateAll from '../../core/postPopulateAll';
+import publishUserStream from '../../core/publish-user-stream';
+import populateAll from '../../core/post-populate-all';
 import createNotification from '../../core/create-notification';
 
 export default function repost(app: IApplication, userId: string, targetPostId: string)

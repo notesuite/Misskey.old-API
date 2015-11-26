@@ -1,6 +1,6 @@
 import {User} from '../../models';
 import {IUser} from '../../interfaces';
-import serializeUser from '../../core/serializeUser';
+import serializeUser from '../../core/serialize-user';
 
 /**
  * ユーザー情報を取得します

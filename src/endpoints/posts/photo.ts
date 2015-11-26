@@ -1,11 +1,11 @@
 import {AlbumFile, Post, PhotoPost} from '../../models';
 import {IApplication, IAlbumFile, IUser, IPost, IPhotoPost} from '../../interfaces';
-import publishUserStream from '../../core/publishUserStream';
-import populateAll from '../../core/postPopulateAll';
-import serializePost from '../../core/serializePost';
-import savePostMentions from '../../core/savePostMentions';
-import extractHashtags from '../../core/extractHashtags';
-import registerHashtags from '../../core/registerHashtags';
+import publishUserStream from '../../core/publish-user-stream';
+import populateAll from '../../core/post-populate-all';
+import serializePost from '../../core/serialize-post';
+import savePostMentions from '../../core/save-post-mentions';
+import extractHashtags from '../../core/extract-hashtags';
+import registerHashtags from '../../core/register-hashtags';
 
 /**
  * PhotoPostを作成します

@@ -1,4 +1,4 @@
-import serializePost from './serializePost';
+import serializePost from './serialize-post';
 import {IUser, IPost} from '../interfaces';
 
 export default function serializeTimeline(timeline: IPost[], me: IUser = null): Promise<Object[]> {

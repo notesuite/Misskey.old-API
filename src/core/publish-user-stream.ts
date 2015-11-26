@@ -1,6 +1,6 @@
 import {UserFollowing} from '../models';
 import {IUserFollowing} from '../interfaces';
-import publishStreamingMessage from './publishStreamingMessage';
+import publishStreamingMessage from './publish-streaming-message';
 
 export default function publishUserStream<T>(publisherId: string, message: T): void {
 	'use strict';

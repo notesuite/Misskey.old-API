@@ -1,7 +1,7 @@
 import {Post} from '../../models';
 import {IUser, IPost} from '../../interfaces';
-import serializeTimeline from '../../core/serializeTimeline';
-import populateAll from '../../core/postPopulateAll';
+import serializeTimeline from '../../core/serialize-timeline';
+import populateAll from '../../core/post-populate-all';
 
 /**
  * 指定された投稿を起点とした場合のそれ以前の会話のストリームを取得します

@@ -1,5 +1,5 @@
 import {IUser} from '../interfaces';
-import lookupFollowState from './lookupFollowState';
+import lookupFollowState from './lookup-follow-state';
 
 export default function serializeUser(me: IUser, user: IUser): Promise<Object> {
 	'use strict';

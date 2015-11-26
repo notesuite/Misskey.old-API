@@ -1,8 +1,8 @@
 import {PostLike, Repost} from '../models';
 import {IUser, IStatusPost, IPhotoPost} from '../interfaces';
-import serializeStatus from './serializeStatus';
-import serializePhotoPost from './serializePhotoPost';
-import getPostLikers from './getPostLikers';
+import serializeStatus from './serialize-status';
+import serializePhotoPost from './serialize-photo-post';
+import getPostLikers from './get-post-likers';
 
 export default function serializePost(
 		post: any,

@@ -1,7 +1,7 @@
 import { PostMention } from '../models';
 import { IPost, IPostMention } from '../interfaces';
-import extractMentions from './extractMentions';
-import publishStreamingMessage from './publishStreamingMessage';
+import extractMentions from './extract-mentions';
+import publishStreamingMessage from './publish-streaming-message';
 
 export default function savePostMentions(post: IPost, text: string): void {
 	'use strict';

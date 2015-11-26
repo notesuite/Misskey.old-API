@@ -1,6 +1,6 @@
 import {User, UserFollowing} from '../../models';
 import {IUser, IUserFollowing} from '../../interfaces';
-import serializeUser from '../../core/serializeUser';
+import serializeUser from '../../core/serialize-user';
 
 /**
  * おすすめのユーザーを取得します(現在は未実装で、ただ最新のユーザーを取得します)
