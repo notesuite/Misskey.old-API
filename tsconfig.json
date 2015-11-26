@@ -73,6 +73,7 @@
 		"./src/endpoints/posts/timeline.ts",
 		"./src/endpoints/posts/user-timeline.ts",
 		"./src/endpoints/screenname-available.ts",
+		"./src/endpoints/talks/say.ts",
 		"./src/endpoints/users/follow.ts",
 		"./src/endpoints/users/followers.ts",
 		"./src/endpoints/users/followings.ts",
@@ -140,6 +141,7 @@
 		"./src/rest-handlers/users/search.ts",
 		"./src/rest-handlers/users/show.ts",
 		"./src/rest-handlers/users/unfollow.ts",
+		"./src/restHandlers/talks/say.ts",
 		"./src/router.ts",
 		"./src/server.ts"
 	]
