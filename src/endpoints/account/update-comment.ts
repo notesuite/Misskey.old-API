@@ -10,10 +10,6 @@ export default function updateComment(user: IUser, comment: string): Promise<Obj
 
 	comment = comment.trim();
 
-	if (comment === "") {
-		return <Promise<any>>Promise.reject('empty-comment');
-	}
-
 	if (comment.length > 50) {
 		return <Promise<any>>Promise.reject('too-long-comment');
 	}
