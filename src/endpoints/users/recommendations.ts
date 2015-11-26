@@ -9,7 +9,9 @@ import serializeUser from '../../core/serializeUser';
 export default function search(me: IUser): Promise<Object[]> {
 	'use strict';
 	return new Promise<Object[]>((resolve, reject) => {
-		User.find({})
+		User.find({
+			_id: { $not: me.id }
+		})
 		.sort('-createdAt')
 		.limit(4)
 		.exec((searchErr: any, users: IUser[]) => {
