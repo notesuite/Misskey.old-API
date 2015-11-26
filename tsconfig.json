@@ -81,6 +81,7 @@
 		"./src/endpoints/users/show.ts",
 		"./src/endpoints/users/unfollow.ts",
 		"./src/endpoints/users/recommendations.ts",
+		"./src/endpoints/talks/say.ts",
 		"./src/index.ts",
 		"./src/interfaces.ts",
 		"./src/internalServer.ts",
@@ -143,6 +144,7 @@
 		"./src/restHandlers/users/show.ts",
 		"./src/restHandlers/users/unfollow.ts",
 		"./src/restHandlers/users/recommendations.ts",
+		"./src/restHandlers/talks/say.ts",
 		"./src/router.ts",
 		"./src/server.ts"
 	]
