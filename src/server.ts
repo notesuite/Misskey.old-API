@@ -1,4 +1,3 @@
-import * as http from 'http';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import { MisskeyExpressRequest } from './misskeyExpressRequest';
@@ -34,6 +33,6 @@ app.use((req, res) => {
 	});
 });
 
-const server: http.Server = app.listen(config.port.http, () => {
+const server = app.listen(config.port.http, () => {
 	console.log(`MisskeyAPI server listening at ${server.address().address}:${server.address().port}`);
 });
