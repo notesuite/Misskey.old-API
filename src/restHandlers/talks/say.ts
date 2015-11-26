@@ -11,11 +11,11 @@ export default function say(req: MisskeyExpressRequest, res: MisskeyExpressRespo
 		return res.apiError(400, 'text-is-required');
 	}
 
-	if ( otherpartyId === undefined) {
+	if (otherpartyId === undefined) {
 		return res.apiError(400, 'otherparty-id-is-required');
 	}
 
-	say(req.misskeyApp, req.misskeyUser, otherpartyId, text).then((message: Object) => {
+	say(req.misskeyApp, req.misskeyUser, otherpartyId, text).then((message: any) => {
 		res.apiRender(message);
 	}, (err: any) => {
 		res.apiError(500, err);
