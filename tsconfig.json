@@ -134,6 +134,7 @@
 		"./src/rest-handlers/posts/timeline.ts",
 		"./src/rest-handlers/posts/user-timeline.ts",
 		"./src/rest-handlers/screenname-available.ts",
+		"./src/rest-handlers/talks/say.ts",
 		"./src/rest-handlers/users/follow.ts",
 		"./src/rest-handlers/users/followers.ts",
 		"./src/rest-handlers/users/followings.ts",
@@ -141,7 +142,6 @@
 		"./src/rest-handlers/users/search.ts",
 		"./src/rest-handlers/users/show.ts",
 		"./src/rest-handlers/users/unfollow.ts",
-		"./src/restHandlers/talks/say.ts",
 		"./src/router.ts",
 		"./src/server.ts"
 	]

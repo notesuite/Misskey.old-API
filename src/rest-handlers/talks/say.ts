@@ -1,8 +1,7 @@
-import { MisskeyExpressRequest } from '../../misskeyExpressRequest';
-import { MisskeyExpressResponse } from '../../misskeyExpressResponse';
+import { Request, Response } from '../../misskey-express';
 import say from '../../endpoints/talks/say';
 
-export default function say(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
+export default function sayInTalks(req: Request, res: Response): void {
 	'use strict';
 	const text: string = req.body['text'];
 	const otherpartyId: string = req.body['otherparty-id'];
