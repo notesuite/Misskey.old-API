@@ -1,6 +1,5 @@
 import * as mongoose from 'mongoose';
 import * as mongooseAutoIncrement from 'mongoose-auto-increment';
-// import config from '../config';
 
 /* tslint:disable:variable-name */
 const Schema = mongoose.Schema;
