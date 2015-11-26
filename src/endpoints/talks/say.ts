@@ -11,7 +11,7 @@ export default function say(app: IApplication, user: IUser, otherpartyId: string
 		: Promise<Object> {
 	'use strict';
 
-	const maxTextLength: number = 300;
+	const maxTextLength = 300;
 	text = text.trim();
 
 	if (text === "") {
