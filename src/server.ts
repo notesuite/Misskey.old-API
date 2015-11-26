@@ -1,3 +1,4 @@
+import * as cluster from 'cluster';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import misskeyExpress from './misskey-express';
@@ -7,7 +8,7 @@ import router from './router';
 export default function startServer(): void {
 	'use strict';
 
-	console.log('Init server');
+	console.log(`Initing server... (${cluster.worker.id})`);
 
 	const app = express();
 	app.disable('x-powered-by');
