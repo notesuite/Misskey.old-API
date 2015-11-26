@@ -1,6 +1,5 @@
 import {TalkMessage, TalkHistory, User} from '../../models';
-import {ITalkMessage, ITalkHistory, IApplication, IUser} from '.../../interfaces';
-
+import {ITalkMessage, ITalkHistory, IApplication, IUser} from '../../interfaces';
 /**
  * Talkを作成します
  * @param app API利用App
