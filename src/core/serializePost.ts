@@ -74,6 +74,9 @@ function common(
 			}),
 			// Get is liked
 			new Promise<boolean>((getIsLikedResolve, getIsLikedReject) => {
+				if (me === null) {
+					return getIsLikedResolve(null);
+				}
 				PostLike.find({
 					post: post.id,
 					user: me.id
@@ -86,6 +89,9 @@ function common(
 			}),
 			// Get is reposted
 			new Promise<boolean>((getIsRepostedResolve, getIsRepostedReject) => {
+				if (me === null) {
+					return getIsRepostedResolve(null);
+				}
 				Repost.find({
 					type: 'repost',
 					post: post.id,
