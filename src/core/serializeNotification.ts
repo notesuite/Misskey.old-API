@@ -16,15 +16,15 @@ export default function serializeNotification(
 			case 'repost':
 				User.findById(content.userId, (userErr: any, user: IUser) => {
 					Post.findById(content.postId, (postErr: any, post: IPost) => {
-						notification.content.user = user;
-						notification.content.post = post;
+						notification.content.user = user.toObject();
+						notification.content.post = post.toObject();
 						resolve(notification);
 					});
 				});
 				break;
 			case 'follow':
 				User.findById(content.userId, (userErr: any, user: IUser) => {
-					notification.content.user = user;
+					notification.content.user = user.toObject();
 					resolve(notification);
 				});
 				break;
