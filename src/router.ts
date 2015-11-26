@@ -28,6 +28,7 @@ export default function router(app: express.Express): void {
 	app.delete('/users/unfollow', require(`${handlerPath}/users/unfollow`).default);
 	app.get('/users/followings', require(`${handlerPath}/users/followings`).default);
 	app.get('/users/followers', require(`${handlerPath}/users/followers`).default);
+	app.get('/users/recommendations', require(`${handlerPath}/users/recommendations`).default);
 	app.get('/users/search', require(`${handlerPath}/users/search`).default);
 	app.get('/posts/timeline', require(`${handlerPath}/posts/timeline`).default);
 	app.get('/posts/user-timeline', require(`${handlerPath}/posts/user-timeline`).default);
