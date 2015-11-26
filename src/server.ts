@@ -14,6 +14,10 @@ app.use(misskeyExpress);
 router(app);
 app.use(notFoundHandler);
 
+const server = app.listen(config.port.http, () => {
+	console.log(`MisskeyAPI server listening at ${server.address().address}:${server.address().port}`);
+});
+
 function misskeyExpress(req: MisskeyExpressRequest, res: MisskeyExpressResponse, next: () => void): void {
 	'use strict';
 	res.apiRender = data => {
@@ -33,7 +37,3 @@ function notFoundHandler(req: express.Request, res: express.Response): void {
 		error: 'API not found.'
 	});
 }
-
-const server = app.listen(config.port.http, () => {
-	console.log(`MisskeyAPI server listening at ${server.address().address}:${server.address().port}`);
-});
