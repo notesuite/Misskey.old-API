@@ -21,6 +21,7 @@ export default function router(app: express.Express): void {
 	app.put('/account/update-name', require(`${handlerPath}/account/update-name`).default);
 	app.put('/account/update-url', require(`${handlerPath}/account/update-url`).default);
 	app.put('/account/update-avatar', require(`${handlerPath}/account/update-avatar`).default);
+	app.put('/account/update-comment', require(`${handlerPath}/account/update-comment`).default);
 	app.get('/notifications/show', require(`${handlerPath}/notifications/show`).default);
 	app.get('/notifications/timeline', require(`${handlerPath}/notifications/timeline`).default);
 	app.get('/users/show', require(`${handlerPath}/users/show`).default);
