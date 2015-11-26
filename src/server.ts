@@ -11,7 +11,14 @@ const app = express();
 app.disable('x-powered-by');
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use((req: MisskeyExpressRequest, res: MisskeyExpressResponse, next: () => void) => {
+app.use(misskeyExpress);
+
+router(app);
+
+app.use(notFoundHandler);
+
+function misskeyExpress(req: MisskeyExpressRequest, res: MisskeyExpressResponse, next: () => void): void {
+	'use strict';
 	res.apiRender = data => {
 		res.json(data);
 	};
@@ -21,11 +28,7 @@ app.use((req: MisskeyExpressRequest, res: MisskeyExpressResponse, next: () => vo
 		res.apiRender({error});
 	};
 	next();
-});
-
-router(app);
-
-app.use(notFoundHandler);
+}
 
 function notFoundHandler(req: express.Request, res: express.Response): void {
 	'use strict';
