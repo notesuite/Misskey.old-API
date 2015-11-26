@@ -1,8 +1,7 @@
-import { MisskeyExpressRequest } from '../../../misskeyExpressRequest';
-import { MisskeyExpressResponse } from '../../../misskeyExpressResponse';
+import { Request, Response } from '../../../misskey-express';
 import show from '../../../endpoints/album/files/show';
 
-export default function showFile(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
+export default function showFile(req: Request, res: Response): void {
 	'use strict';
 
 	show(req.misskeyUser, req.query['file-id']).then((file: Object) => {

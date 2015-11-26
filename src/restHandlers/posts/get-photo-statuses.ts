@@ -1,8 +1,7 @@
-import { MisskeyExpressRequest } from '../../misskeyExpressRequest';
-import { MisskeyExpressResponse } from '../../misskeyExpressResponse';
+import { Request, Response } from '../../misskey-express';
 import getPhotoStatuses from '../../endpoints/posts/get-photo-statuses';
 
-export default function getPostPhotoStatuses(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
+export default function getPostPhotoStatuses(req: Request, res: Response): void {
 	'use strict';
 	getPhotoStatuses(
 		req.misskeyUser,

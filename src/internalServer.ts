@@ -1,7 +1,6 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
-import { MisskeyExpressRequest } from './misskeyExpressRequest';
-import { MisskeyExpressResponse } from './misskeyExpressResponse';
+import { Request, Response } from './misskey-express';
 import {User} from './models';
 import {IUser} from './interfaces';
 import config from './config';
@@ -13,7 +12,7 @@ const app = express();
 app.disable('x-powered-by');
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use((req: MisskeyExpressRequest, res: MisskeyExpressResponse, next: () => void) => {
+app.use((req: Request, res: Response, next: () => void) => {
 	res.apiRender = (data: any) => {
 		res.json(data);
 	};

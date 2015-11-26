@@ -1,10 +1,9 @@
 // import * as express from 'express';
-import { MisskeyExpressRequest } from '../../misskeyExpressRequest';
-import { MisskeyExpressResponse } from '../../misskeyExpressResponse';
+import { Request, Response } from '../../misskey-express';
 import createAccount from '../../endpoints/account/create';
 import {IUser} from '../../interfaces';
 
-export default function create(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
+export default function create(req: Request, res: Response): void {
 	'use strict';
 	createAccount(req.body['screen-name'], req.body['password']).then((user: IUser) => {
 		res.apiRender({

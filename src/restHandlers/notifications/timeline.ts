@@ -1,8 +1,7 @@
-import { MisskeyExpressRequest } from '../../misskeyExpressRequest';
-import { MisskeyExpressResponse } from '../../misskeyExpressResponse';
+import { Request, Response } from '../../misskey-express';
 import getTimeline from '../../endpoints/notifications/timeline';
 
-export default function timeline(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
+export default function timeline(req: Request, res: Response): void {
 	'use strict';
 	getTimeline(req.misskeyUser, req.query['limit'], req.query['since-cursor'], req.query['max-cursor']).then((timeline: Object[]) => {
 		res.apiRender(timeline);

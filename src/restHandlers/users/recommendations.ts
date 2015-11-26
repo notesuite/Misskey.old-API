@@ -1,8 +1,7 @@
-import { MisskeyExpressRequest } from '../../misskeyExpressRequest';
-import { MisskeyExpressResponse } from '../../misskeyExpressResponse';
+import { Request, Response } from '../../misskey-express';
 import recommendations from '../../endpoints/users/recommendations';
 
-export default function userFollowings(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
+export default function userFollowings(req: Request, res: Response): void {
 	'use strict';
 	recommendations(
 		req.misskeyUser

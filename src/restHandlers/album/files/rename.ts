@@ -1,8 +1,7 @@
-import { MisskeyExpressRequest } from '../../../misskeyExpressRequest';
-import { MisskeyExpressResponse } from '../../../misskeyExpressResponse';
+import { Request, Response } from '../../../misskey-express';
 import rename from '../../../endpoints/album/files/rename';
 
-export default function renameFile(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
+export default function renameFile(req: Request, res: Response): void {
 	'use strict';
 
 	rename(req.misskeyUser, req.body['file-id'], req.body['name']).then((file: Object) => {

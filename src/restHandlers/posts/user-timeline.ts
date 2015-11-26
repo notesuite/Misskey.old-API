@@ -1,8 +1,7 @@
-import { MisskeyExpressRequest } from '../../misskeyExpressRequest';
-import { MisskeyExpressResponse } from '../../misskeyExpressResponse';
+import { Request, Response } from '../../misskey-express';
 import getTimeline from '../../endpoints/posts/user-timeline';
 
-export default function userTimeline(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
+export default function userTimeline(req: Request, res: Response): void {
 	'use strict';
 	getTimeline(
 		req.misskeyUser,

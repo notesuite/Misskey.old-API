@@ -1,8 +1,7 @@
-import { MisskeyExpressRequest } from '../../../misskeyExpressRequest';
-import { MisskeyExpressResponse } from '../../../misskeyExpressResponse';
+import { Request, Response } from '../../../misskey-express';
 import recolor from '../../../endpoints/album/folders/update-color';
 
-export default function updateColor(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
+export default function updateColor(req: Request, res: Response): void {
 	'use strict';
 
 	recolor(req.misskeyUser, req.body['folder-id'], req.body['color']).then((folder: Object) => {

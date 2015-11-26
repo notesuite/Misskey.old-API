@@ -1,8 +1,7 @@
-import { MisskeyExpressRequest } from '../../../misskeyExpressRequest';
-import { MisskeyExpressResponse } from '../../../misskeyExpressResponse';
+import { Request, Response } from '../../../misskey-express';
 import del from '../../../endpoints/album/files/delete';
 
-export default function deleteFile(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
+export default function deleteFile(req: Request, res: Response): void {
 	'use strict';
 
 	del(req.misskeyUser, req.body['file-id']).then((file: Object) => {

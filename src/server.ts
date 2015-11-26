@@ -1,7 +1,6 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
-import { MisskeyExpressRequest } from './misskeyExpressRequest';
-import { MisskeyExpressResponse } from './misskeyExpressResponse';
+import misskeyExpress from './misskey-express';
 import config from './config';
 import router from './router';
 
@@ -17,18 +16,6 @@ app.use(notFoundHandler);
 const server = app.listen(config.port.http, () => {
 	console.log(`MisskeyAPI server listening at ${server.address().address}:${server.address().port}`);
 });
-
-function misskeyExpress(req: MisskeyExpressRequest, res: MisskeyExpressResponse, next: () => void): void {
-	'use strict';
-	res.apiRender = data => {
-		res.json(data);
-	};
-	res.apiError = (httpStatusCode, error) => {
-		res.status(httpStatusCode);
-		res.apiRender({error});
-	};
-	next();
-}
 
 function notFoundHandler(req: express.Request, res: express.Response): void {
 	'use strict';

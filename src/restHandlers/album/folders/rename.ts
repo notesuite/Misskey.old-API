@@ -1,8 +1,7 @@
-import { MisskeyExpressRequest } from '../../../misskeyExpressRequest';
-import { MisskeyExpressResponse } from '../../../misskeyExpressResponse';
+import { Request, Response } from '../../../misskey-express';
 import rename from '../../../endpoints/album/folders/rename';
 
-export default function renameFolder(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
+export default function renameFolder(req: Request, res: Response): void {
 	'use strict';
 
 	rename(req.misskeyUser, req.body['folder-id'], req.body['name']).then((folder: Object) => {

@@ -1,9 +1,8 @@
 import * as fs from 'fs';
-import { MisskeyExpressRequest } from '../../../misskeyExpressRequest';
-import { MisskeyExpressResponse } from '../../../misskeyExpressResponse';
+import { Request, Response } from '../../../misskey-express';
 import upload from '../../../endpoints/album/files/upload';
 
-export default function uploadFile(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
+export default function uploadFile(req: Request, res: Response): void {
 	'use strict';
 	const file: Express.Multer.File = (<any>req).file;
 	if (file !== undefined && file !== null) {

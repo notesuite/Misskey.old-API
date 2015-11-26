@@ -1,9 +1,8 @@
 // import * as express from 'express';
-import { MisskeyExpressRequest } from '../../misskeyExpressRequest';
-import { MisskeyExpressResponse } from '../../misskeyExpressResponse';
+import { Request, Response } from '../../misskey-express';
 import replies from '../../endpoints/posts/replies';
 
-export default function replyPosts(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
+export default function replyPosts(req: Request, res: Response): void {
 	'use strict';
 	replies(
 		req.misskeyUser,

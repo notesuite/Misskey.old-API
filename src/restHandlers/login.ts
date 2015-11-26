@@ -1,11 +1,10 @@
 // import * as express from 'express';
-import { MisskeyExpressRequest } from '../misskeyExpressRequest';
-import { MisskeyExpressResponse } from '../misskeyExpressResponse';
+import { Request, Response } from '../misskey-express';
 import {User} from '../models';
 import {IUser} from '../interfaces';
 import doLogin from '../endpoints/login';
 
-export default function login(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
+export default function login(req: Request, res: Response): void {
 	'use strict';
 	const screenName: string = req.query['screen-name'];
 	const password: string = req.query['password'];

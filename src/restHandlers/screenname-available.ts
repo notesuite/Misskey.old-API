@@ -1,9 +1,8 @@
 // import * as express from 'express';
-import { MisskeyExpressRequest } from '../misskeyExpressRequest';
-import { MisskeyExpressResponse } from '../misskeyExpressResponse';
+import { Request, Response } from '../misskey-express';
 import screennameAvailable from '../endpoints/screenname-available';
 
-export default function isScreennameAvailable(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
+export default function isScreennameAvailable(req: Request, res: Response): void {
 	'use strict';
 	screennameAvailable(req.query['screen-name']).then((available: boolean) => {
 		res.apiRender({

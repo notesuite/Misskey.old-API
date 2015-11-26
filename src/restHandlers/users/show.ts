@@ -1,9 +1,8 @@
 // import * as express from 'express';
-import { MisskeyExpressRequest } from '../../misskeyExpressRequest';
-import { MisskeyExpressResponse } from '../../misskeyExpressResponse';
+import { Request, Response } from '../../misskey-express';
 import show from '../../endpoints/users/show';
 
-export default function showUser(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
+export default function showUser(req: Request, res: Response): void {
 	'use strict';
 	show(req.misskeyUser, req.query['user-id'], req.query['screen-name']).then((user: Object) => {
 		res.apiRender(user);

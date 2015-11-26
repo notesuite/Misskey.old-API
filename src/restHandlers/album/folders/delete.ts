@@ -1,8 +1,7 @@
-import { MisskeyExpressRequest } from '../../../misskeyExpressRequest';
-import { MisskeyExpressResponse } from '../../../misskeyExpressResponse';
+import { Request, Response } from '../../../misskey-express';
 import del from '../../../endpoints/album/folders/delete';
 
-export default function deleteFolder(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
+export default function deleteFolder(req: Request, res: Response): void {
 	'use strict';
 
 	del(req.misskeyUser, req.body['folder-id']).then(() => {

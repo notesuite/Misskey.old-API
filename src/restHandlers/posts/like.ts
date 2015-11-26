@@ -1,8 +1,7 @@
-import { MisskeyExpressRequest } from '../../misskeyExpressRequest';
-import { MisskeyExpressResponse } from '../../misskeyExpressResponse';
+import { Request, Response } from '../../misskey-express';
 import like from '../../endpoints/posts/like';
 
-export default function likePost(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
+export default function likePost(req: Request, res: Response): void {
 	'use strict';
 	like(req.misskeyUser, req.body['post-id']).then(() => {
 		res.apiRender({ kyoppie: "yuppie" });

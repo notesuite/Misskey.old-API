@@ -1,9 +1,8 @@
 // import * as express from 'express';
-import { MisskeyExpressRequest } from '../../misskeyExpressRequest';
-import { MisskeyExpressResponse } from '../../misskeyExpressResponse';
+import { Request, Response } from '../../misskey-express';
 import search from '../../endpoints/users/search';
 
-export default function searchUsers(req: MisskeyExpressRequest, res: MisskeyExpressResponse): void {
+export default function searchUsers(req: Request, res: Response): void {
 	'use strict';
 	search(req.misskeyUser, req.query['screen-name']).then((users: Object[]) => {
 		res.apiRender(users);
