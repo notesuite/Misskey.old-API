@@ -6,56 +6,60 @@ import {IUser} from './interfaces';
 import config from './config';
 import router from './router';
 
-console.log('Init server');
+export default function startInternalServer(): void {
+	'use strict';
 
-const app = express();
-app.disable('x-powered-by');
-app.use(bodyParser.urlencoded({ extended: true }));
+	console.log('Init server');
 
-app.use((req: Request, res: Response, next: () => void) => {
-	res.apiRender = (data: any) => {
-		res.json(data);
-	};
+	const app = express();
+	app.disable('x-powered-by');
+	app.use(bodyParser.urlencoded({ extended: true }));
 
-	res.apiError = (httpStatusCode: number, error: any) => {
-		res.status(httpStatusCode);
-		res.apiRender({
-			error: error
-		});
-	};
+	app.use((req: Request, res: Response, next: () => void) => {
+		res.apiRender = (data: any) => {
+			res.json(data);
+		};
 
-	console.log(`${req.method} ${req.path}`);
+		res.apiError = (httpStatusCode: number, error: any) => {
+			res.status(httpStatusCode);
+			res.apiRender({
+				error: error
+			});
+		};
 
-	if (req.headers['passkey'] !== null) {
-		if (req.headers['passkey'] === config.apiPasskey) {
-			req.misskeyApp = null;
-			if (req.headers['user-id'] !== null) {
-				User.findById(req.headers['user-id'], (err: any, user: IUser) => {
-					req.misskeyUser = user;
+		console.log(`${req.method} ${req.path}`);
+
+		if (req.headers['passkey'] !== null) {
+			if (req.headers['passkey'] === config.apiPasskey) {
+				req.misskeyApp = null;
+				if (req.headers['user-id'] !== null) {
+					User.findById(req.headers['user-id'], (err: any, user: IUser) => {
+						req.misskeyUser = user;
+						next();
+					});
+				} else {
+					req.misskeyUser = null;
 					next();
-				});
+				}
 			} else {
-				req.misskeyUser = null;
-				next();
+				res.send(403);
 			}
 		} else {
 			res.send(403);
 		}
-	} else {
-		res.send(403);
-	}
-});
-
-router(app);
-
-// Not found handler
-app.use((req, res) => {
-	res.status(404);
-	res.json({
-		error: 'API not found.'
 	});
-});
 
-const server = app.listen(config.port.internal, () => {
-	console.log(`MisskeyAPI server listening at ${server.address().address}:${server.address().port}`);
-});
+	router(app);
+
+	// Not found handler
+	app.use((req, res) => {
+		res.status(404);
+		res.json({
+			error: 'API not found.'
+		});
+	});
+
+	const server = app.listen(config.port.internal, () => {
+		console.log(`MisskeyAPI server listening at ${server.address().address}:${server.address().port}`);
+	});
+}
