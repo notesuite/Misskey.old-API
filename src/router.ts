@@ -51,6 +51,7 @@ export default function router(app: express.Express): void {
 	app.put('/album/folders/move', require(`${handlerPath}/album/folders/move`).default);
 	app.put('/album/folders/rename', require(`${handlerPath}/album/folders/rename`).default);
 	app.get('/hashtags/search', require(`${handlerPath}/hashtags/search`).default);
+	app.post('/talks/say', require(`${handlerPath}/talks/say`).default);
 
 	console.log(`routers loaded ${cluster.worker.id}`);
 }
