@@ -1,4 +1,3 @@
-// import * as express from 'express';
 import { Request, Response } from '../../misskey-express';
 import createAccount from '../../endpoints/account/create';
 import {IUser} from '../../interfaces';

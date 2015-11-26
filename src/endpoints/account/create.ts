@@ -1,4 +1,3 @@
-// import Core from 'misskey-core';
 import * as bcrypt from 'bcrypt';
 import {User} from '../../models';
 import {IUser} from '../../interfaces';
