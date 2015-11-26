@@ -10,11 +10,8 @@ console.log('Init server');
 const app = express();
 app.disable('x-powered-by');
 app.use(bodyParser.urlencoded({ extended: true }));
-
 app.use(misskeyExpress);
-
 router(app);
-
 app.use(notFoundHandler);
 
 function misskeyExpress(req: MisskeyExpressRequest, res: MisskeyExpressResponse, next: () => void): void {
@@ -22,7 +19,6 @@ function misskeyExpress(req: MisskeyExpressRequest, res: MisskeyExpressResponse,
 	res.apiRender = data => {
 		res.json(data);
 	};
-
 	res.apiError = (httpStatusCode, error) => {
 		res.status(httpStatusCode);
 		res.apiRender({error});
