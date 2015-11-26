@@ -22,7 +22,7 @@ export default function timeline(user: IUser, limit: number = 10, sinceCursor: n
 			} else {
 				// 自分と自分がフォローしているユーザーのIDのリストを生成
 				const followingIds: string[] = (followings.length > 0)
-					? followings.map((following: IUserFollowing) => {
+					? followings.map(following => {
 						return following.followee.toString();
 					}).concat([user.id])
 					: [user.id];
