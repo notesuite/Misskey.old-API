@@ -1,10 +1,8 @@
 import * as mongoose from 'mongoose';
+import { Schema } from 'mongoose';
 import * as mongooseAutoIncrement from 'mongoose-auto-increment';
 
 import config from '../config';
-
-/* tslint:disable:variable-name */
-const Schema = mongoose.Schema;
 
 export default function albumFile(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
 	'use strict';

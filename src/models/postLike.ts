@@ -1,8 +1,6 @@
 import * as mongoose from 'mongoose';
+import { Schema } from 'mongoose';
 import * as mongooseAutoIncrement from 'mongoose-auto-increment';
-
-/* tslint:disable:variable-name */
-const Schema = mongoose.Schema;
 
 export default function postLike(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
 	'use strict';

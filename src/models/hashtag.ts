@@ -1,7 +1,5 @@
 import * as mongoose from 'mongoose';
-
-/* tslint:disable:variable-name */
-const Schema = mongoose.Schema;
+import { Schema } from 'mongoose';
 
 export default function hashtag(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
 	'use strict';
