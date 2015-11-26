@@ -9,7 +9,7 @@ import {ITalkMessage, ITalkHistory, IApplication, IUser} from '.../../interfaces
  * @param text 本文
  */
 export default function say(app: IApplication, user: IUser, otherpartyId: string, text: string)
-		: Promise<Object>{
+		: Promise<Object> {
 	'use strict';
 
 	const maxTextLength: number = 300;
@@ -58,6 +58,6 @@ export default function say(app: IApplication, user: IUser, otherpartyId: string
 					}
 				});
 			}
-		}
+		});
 	});
 }
