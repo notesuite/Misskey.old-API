@@ -1,6 +1,5 @@
 import * as mongoose from 'mongoose';
-// import mongooseAutoIncrement from 'mongoose-auto-increment';
-const mongooseAutoIncrement: any = require('mongoose-auto-increment');
+import * as mongooseAutoIncrement from 'mongoose-auto-increment';
 // import config from '../config';
 
 /* tslint:disable:variable-name */

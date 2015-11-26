@@ -42,6 +42,9 @@
     },
     "request/request.d.ts": {
       "ref": "aed176536a202b9a2475ce1989ea6d2d0226a185"
+    },
+    "mongoose-auto-increment/mongoose-auto-increment.d.ts": {
+      "ref": "e48f0c7a0a5f9e9d35e9cfd7506461bab435cb49"
     }
   }
 }
