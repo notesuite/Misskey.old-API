@@ -8,7 +8,6 @@ const handlerPath = `${__dirname}/rest-handlers`;
 
 export default function router(app: express.Express): void {
 	'use strict';
-	console.log(`Init router lol ${cluster.worker.id}`);
 
 	app.get('/', (req: express.Request, res: express.Response) => {
 		res.status(200).send('Rain tree sketch');
@@ -51,6 +50,4 @@ export default function router(app: express.Express): void {
 	app.put('/album/folders/move', require(`${handlerPath}/album/folders/move`).default);
 	app.put('/album/folders/rename', require(`${handlerPath}/album/folders/rename`).default);
 	app.get('/hashtags/search', require(`${handlerPath}/hashtags/search`).default);
-
-	console.log(`routers loaded ${cluster.worker.id}`);
 }
