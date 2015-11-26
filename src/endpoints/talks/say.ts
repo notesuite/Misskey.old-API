@@ -1,4 +1,4 @@
-import {TalkMessage, TalkHistory} from '../../models';
+import {TalkMessage, TalkHistory, User} from '../../models';
 import {ITalkMessage, ITalkHistory, IApplication, IUser} from '.../../interfaces';
 
 /**

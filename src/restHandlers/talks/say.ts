@@ -15,7 +15,7 @@ export default function say(req: MisskeyExpressRequest, res: MisskeyExpressRespo
 		return res.apiError(400, 'otherparty-id-is-required');
 	}
 
-	say(req.misskeyApp, req.misskeyUser, text).then((message: Object) => {
+	say(req.misskeyApp, req.misskeyUser, otherpartyId, text).then((message: Object) => {
 		res.apiRender(message);
 	}, (err: any) => {
 		res.apiError(500, err);
