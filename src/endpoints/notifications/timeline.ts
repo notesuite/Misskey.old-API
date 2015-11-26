@@ -1,5 +1,6 @@
 import {Notification} from '../../models';
 import {IUser, INotification} from '../../interfaces';
+import serializeNotification from '../../core/serializeNotification';
 
 /**
  * 通知を取得します
@@ -44,7 +45,11 @@ export default function timeline(
 				return reject(err);
 			}
 
-			resolve(notifications.map(notification => notification.toObject()));
+			Promise.all(notifications.map(notification => {
+				return serializeNotification(notification.toObject(), user);
+			})).then(serializedNotifications => {
+				resolve(serializedNotifications);
+			});
 		});
 	});
 }

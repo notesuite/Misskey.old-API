@@ -39,6 +39,7 @@
 		"./src/core/serializeStatus.ts",
 		"./src/core/serializeTimeline.ts",
 		"./src/core/serializeUser.ts",
+		"./src/core/serializeNotification.ts",
 		"./src/endpoints/account/create.ts",
 		"./src/endpoints/account/show.ts",
 		"./src/endpoints/account/update-avatar.ts",

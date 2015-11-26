@@ -1,4 +1,4 @@
-import {Post, PostLike, Repost} from '../models';
+import {PostLike, Repost} from '../models';
 import {IUser, IStatusPost, IPhotoPost} from '../interfaces';
 import serializeStatus from './serializeStatus';
 import serializePhotoPost from './serializePhotoPost';
