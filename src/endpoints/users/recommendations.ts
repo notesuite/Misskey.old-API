@@ -11,7 +11,7 @@ export default function search(me: IUser): Promise<Object[]> {
 	return new Promise<Object[]>((resolve, reject) => {
 		User.find({})
 		.sort('-createdAt')
-		.limit(5)
+		.limit(4)
 		.exec((searchErr: any, users: IUser[]) => {
 			if (searchErr !== null) {
 				reject('something-happened');
