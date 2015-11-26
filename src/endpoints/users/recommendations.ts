@@ -1,5 +1,5 @@
-import {User} from '../../models';
-import {IUser} from '../../interfaces';
+import {User, UserFollowing} from '../../models';
+import {IUser, IUserFollowing} from '../../interfaces';
 import serializeUser from '../../core/serializeUser';
 
 /**
@@ -9,25 +9,38 @@ import serializeUser from '../../core/serializeUser';
 export default function search(me: IUser): Promise<Object[]> {
 	'use strict';
 	return new Promise<Object[]>((resolve, reject) => {
-		User.find({
-			_id: { $not: me.id }
-		})
-		.sort('-createdAt')
-		.limit(4)
-		.exec((searchErr: any, users: IUser[]) => {
-			if (searchErr !== null) {
-				reject('something-happened');
-			} else if (users.length === 0) {
-				resolve(null);
-			} else {
-				Promise.all(users.map((user: IUser) => {
-					return serializeUser(me, user);
-				})).then((serializedUsers: Object[]) => {
-					resolve(serializedUsers);
-				}, (err: any) => {
-					reject('something-happened');
-				});
+		// 自分がフォローしているユーザーの関係を取得
+		UserFollowing.find({follower: me.id}, (followingsFindErr: any, followings: IUserFollowing[]) => {
+			if (followingsFindErr !== null) {
+				return reject(followingsFindErr);
 			}
+
+			const ignoreIds: string[] = (followings.length > 0)
+				? followings.map(following => {
+					return following.followee.toString();
+				}).concat([me.id])
+				: [me.id];
+
+			User.find({
+				_id: { $nin: ignoreIds },
+			})
+			.sort('-createdAt')
+			.limit(4)
+			.exec((searchErr: any, users: IUser[]) => {
+				if (searchErr !== null) {
+					reject('something-happened');
+				} else if (users.length === 0) {
+					resolve(null);
+				} else {
+					Promise.all(users.map((user: IUser) => {
+						return serializeUser(me, user);
+					})).then((serializedUsers: Object[]) => {
+						resolve(serializedUsers);
+					}, (err: any) => {
+						reject('something-happened');
+					});
+				}
+			});
 		});
 	});
 }
