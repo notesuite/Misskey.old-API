@@ -22,6 +22,7 @@ export default function router(app: express.Express): void {
 	app.put('/account/update-comment', require(`${handlerPath}/account/update-comment`).default);
 	app.get('/notifications/show', require(`${handlerPath}/notifications/show`).default);
 	app.get('/notifications/timeline', require(`${handlerPath}/notifications/timeline`).default);
+	app.get('/notifications/unreads-count', require(`${handlerPath}/notifications/unreads-count`).default);
 	app.get('/users/show', require(`${handlerPath}/users/show`).default);
 	app.post('/users/follow', require(`${handlerPath}/users/follow`).default);
 	app.delete('/users/unfollow', require(`${handlerPath}/users/unfollow`).default);
