@@ -1,4 +1,3 @@
-import * as cluster from 'cluster';
 import * as express from 'express';
 import * as multer from 'multer';
 
