@@ -1,8 +1,8 @@
 import * as mongoose from 'mongoose';
-import { Model, Document, Connection } from 'mongoose';
+import { Model, Document } from 'mongoose';
 import config from './config';
 
-const db: Connection = mongoose.createConnection(config.mongo.uri, config.mongo.options);
+const db = mongoose.createConnection(config.mongo.uri, config.mongo.options);
 
 /* tslint:disable:variable-name */
 export const AlbumFile: Model<Document> = require('./models/albumFile').default(db);
