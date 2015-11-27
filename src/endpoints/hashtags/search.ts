@@ -10,7 +10,7 @@ export default function search(query: string): Promise<string[]> {
 			if (searchErr !== null) {
 				reject('something-happened');
 			} else if (hashtags.length === 0) {
-				resolve(null);
+				resolve([]);
 			} else {
 				resolve(hashtags.map(hashtag => hashtag.name));
 			}

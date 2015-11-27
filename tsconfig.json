@@ -22,6 +22,8 @@
 	"files": [
 		"./node_modules/typescript/lib/lib.es6.d.ts",
 		"./typings/bundle.d.ts",
+		"./src/api-handler.ts",
+		"./src/authorize.ts",
 		"./src/config.ts",
 		"./src/core/add-file-to-album.ts",
 		"./src/core/create-notification.ts",

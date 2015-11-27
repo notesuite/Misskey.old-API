@@ -1,12 +1,18 @@
-import { Request, Response } from '../../../misskey-express';
+import * as hapi from 'hapi';
+import { IApplication, IUser } from '../../../interfaces';
 import move from '../../../endpoints/album/files/move';
 
-export default function moveFile(req: Request, res: Response): void {
+export default function moveFile(
+	app: IApplication,
+	user: IUser,
+	req: hapi.Request,
+	res: hapi.IReply
+): void {
 	'use strict';
 
-	move(req.misskeyUser, req.body['file-id'], req.body['folder-id']).then((file: Object) => {
-		res.apiRender(file);
+	move(user, req.payload['file-id'], req.payload['folder-id']).then((file: Object) => {
+		res(file);
 	}, (err: any) => {
-		res.apiError(500, err);
+		res(err).code(500);
 	});
 }

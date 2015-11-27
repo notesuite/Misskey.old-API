@@ -1,12 +1,18 @@
-import { Request, Response } from '../../../misskey-express';
+import * as hapi from 'hapi';
+import { IApplication, IUser } from '../../../interfaces';
 import show from '../../../endpoints/album/files/show';
 
-export default function showFile(req: Request, res: Response): void {
+export default function showFile(
+	app: IApplication,
+	user: IUser,
+	req: hapi.Request,
+	res: hapi.IReply
+): void {
 	'use strict';
 
-	show(req.misskeyUser, req.query['file-id']).then((file: Object) => {
-		res.apiRender(file);
+	show(user, req.query['file-id']).then((file: Object) => {
+		res(file);
 	}, (err: any) => {
-		res.apiError(500, err);
+		res(err).code(500);
 	});
 }

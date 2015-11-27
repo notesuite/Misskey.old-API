@@ -1,12 +1,18 @@
-import { Request, Response } from '../../../misskey-express';
+import * as hapi from 'hapi';
+import { IApplication, IUser } from '../../../interfaces';
 import rename from '../../../endpoints/album/files/rename';
 
-export default function renameFile(req: Request, res: Response): void {
+export default function renameFile(
+	app: IApplication,
+	user: IUser,
+	req: hapi.Request,
+	res: hapi.IReply
+): void {
 	'use strict';
 
-	rename(req.misskeyUser, req.body['file-id'], req.body['name']).then((file: Object) => {
-		res.apiRender(file);
+	rename(user, req.payload['file-id'], req.payload['name']).then((file: Object) => {
+		res(file);
 	}, (err: any) => {
-		res.apiError(500, err);
+		res(err).code(500);
 	});
 }
