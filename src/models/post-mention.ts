@@ -10,6 +10,7 @@ export default function postMention(db: mongoose.Connection): mongoose.Model<mon
 	const schema: Schema = new Schema({
 		createdAt: { type: Date, required: true, default: Date.now },
 		cursor: { type: Number },
+		isRead: { type: Boolean, required: false, default: false },
 		post: { type: Schema.Types.ObjectId, required: true, ref: 'Post' },
 		user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
 	});

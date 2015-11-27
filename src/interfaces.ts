@@ -110,6 +110,7 @@ export interface IPostLike extends mongoose.Document {
 export interface IPostMention extends mongoose.Document {
 	createdAt: Date;
 	cursor: number;
+	isRead: boolean;
 	post: string | mongoose.Types.ObjectId | IPost;
 	user: string | mongoose.Types.ObjectId | IUser;
 }
