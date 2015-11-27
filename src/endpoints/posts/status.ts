@@ -1,3 +1,5 @@
+/* tslint:disable:variable-name */
+
 import * as redis from 'redis';
 import config from '../../config';
 const Limiter: any = require('ratelimiter');
