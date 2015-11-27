@@ -1,11 +1,22 @@
-import { Request, Response } from '../../misskey-express';
+import * as hapi from 'hapi';
+import { IApplication, IUser } from '../../interfaces';
 import followings from '../../endpoints/users/followings';
 
-export default function userFollowings(req: Request, res: Response): void {
+export default function userFollowings(
+	app: IApplication,
+	user: IUser,
+	req: hapi.Request,
+	res: hapi.IReply
+): void {
 	'use strict';
-	followings(req.misskeyUser, req.query['limit'], req.query['since-cursor'], req.query['max-cursor']).then((followingList: Object[]) => {
-		res.apiRender(followingList);
+	followings(
+		user,
+		req.query['limit'],
+		req.query['since-cursor'],
+		req.query['max-cursor']
+	).then((followingList: Object[]) => {
+		res(followingList);
 	}, (err: any) => {
-		res.apiError(500, err);
+		res(err).code(500);
 	});
 }

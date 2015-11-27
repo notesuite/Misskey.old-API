@@ -1,11 +1,17 @@
-import { Request, Response } from '../../misskey-express';
+import * as hapi from 'hapi';
+import { IApplication, IUser } from '../../interfaces';
 import search from '../../endpoints/hashtags/search';
 
-export default function searchHashtags(req: Request, res: Response): void {
+export default function searchHashtags(
+	app: IApplication,
+	user: IUser,
+	req: hapi.Request,
+	res: hapi.IReply
+): void {
 	'use strict';
 	search(req.query['name']).then(hashtags => {
-		res.apiRender(hashtags);
+		res(hashtags);
 	}, (err: any) => {
-		res.apiError(500, err);
+		res(err).code(500);
 	});
 }

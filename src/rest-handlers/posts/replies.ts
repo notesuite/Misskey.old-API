@@ -1,17 +1,23 @@
-import { Request, Response } from '../../misskey-express';
+import * as hapi from 'hapi';
+import { IApplication, IUser } from '../../interfaces';
 import replies from '../../endpoints/posts/replies';
 
-export default function replyPosts(req: Request, res: Response): void {
+export default function replyPosts(
+	app: IApplication,
+	user: IUser,
+	req: hapi.Request,
+	res: hapi.IReply
+): void {
 	'use strict';
 	replies(
-		req.misskeyUser,
+		user,
 		req.query['post-id'],
 		req.query['limit'],
 		req.query['since-cursor'],
 		req.query['max-cursor']
 	).then((post: Object) => {
-		res.apiRender(post);
+		res(post);
 	}, (err: any) => {
-		res.apiError(500, err);
+		res(err).code(500);
 	});
 }

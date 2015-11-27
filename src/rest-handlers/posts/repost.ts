@@ -1,11 +1,21 @@
-import { Request, Response } from '../../misskey-express';
+import * as hapi from 'hapi';
+import { IApplication, IUser } from '../../interfaces';
 import create from '../../endpoints/posts/repost';
 
-export default function repost(req: Request, res: Response): void {
+export default function repost(
+	app: IApplication,
+	user: IUser,
+	req: hapi.Request,
+	res: hapi.IReply
+): void {
 	'use strict';
-	create(req.misskeyApp, req.misskeyUser.id, req.body['post-id']).then((repost: Object) => {
-		res.apiRender(repost);
+	create(
+		app,
+		user,
+		req.body['post-id']
+	).then((repost: Object) => {
+		res(repost);
 	}, (err: any) => {
-		res.apiError(500, err);
+		res(err).code(500);
 	});
 }

@@ -1,10 +1,16 @@
-import { Request, Response } from '../../misskey-express';
+import * as hapi from 'hapi';
+import { IApplication, IUser } from '../../interfaces';
 import like from '../../endpoints/posts/like';
 
-export default function likePost(req: Request, res: Response): void {
+export default function likePost(
+	app: IApplication,
+	user: IUser,
+	req: hapi.Request,
+	res: hapi.IReply
+): void {
 	'use strict';
-	like(req.misskeyUser, req.body['post-id']).then(() => {
-		res.apiRender({ kyoppie: "yuppie" });
+	like(user, req.payload['post-id']).then(() => {
+		res({ kyoppie: "yuppie" });
 	}, (err: any) => {
 		const statusCode = (() => {
 			switch (err) {
@@ -16,6 +22,6 @@ export default function likePost(req: Request, res: Response): void {
 					return 500;
 			}
 		})();
-		res.apiError(statusCode, err);
+		res(err).code(statusCode);
 	});
 };

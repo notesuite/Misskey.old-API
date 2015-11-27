@@ -1,15 +1,21 @@
-import { Request, Response } from '../../misskey-express';
+import * as hapi from 'hapi';
+import { IApplication, IUser } from '../../interfaces';
 import unfollow from '../../endpoints/users/unfollow';
 
-export default function unfollowUser(req: Request, res: Response): void {
+export default function unfollowUser(
+	app: IApplication,
+	user: IUser,
+	req: hapi.Request,
+	res: hapi.IReply
+): void {
 	'use strict';
-	if (req.body['user-id'] === undefined || req.body['user-id'] === null) {
-		res.apiError(400, "user-id-is-empty");
+	if (req.payload['user-id'] === undefined || req.payload['user-id'] === null) {
+		res('user-id-is-empty').code(400);
 	} else {
-		unfollow(req.misskeyUser, req.body['user-id']).then(() => {
-			res.apiRender({kyoppie: 'yuppie'});
+		unfollow(user, req.payload['user-id']).then(() => {
+			res({kyoppie: 'yuppie'});
 		}, (err: any) => {
-			res.apiError(500, err);
+			res(err).code(500);
 		});
 	}
 };

@@ -1,11 +1,17 @@
-import { Request, Response } from '../../misskey-express';
+import * as hapi from 'hapi';
+import { IApplication, IUser } from '../../interfaces';
 import search from '../../endpoints/users/search';
 
-export default function searchUsers(req: Request, res: Response): void {
+export default function searchUsers(
+	app: IApplication,
+	user: IUser,
+	req: hapi.Request,
+	res: hapi.IReply
+): void {
 	'use strict';
-	search(req.misskeyUser, req.query['screen-name']).then((users: Object[]) => {
-		res.apiRender(users);
+	search(user, req.query['screen-name']).then((users: Object[]) => {
+		res(users);
 	}, (err: any) => {
-		res.apiError(500, err);
+		res(err).code(500);
 	});
 }
