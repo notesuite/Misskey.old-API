@@ -1,30 +1,23 @@
 import * as cluster from 'cluster';
-import * as express from 'express';
-import * as bodyParser from 'body-parser';
-import misskeyExpress from './misskey-express';
+import * as hapi from 'hapi';
 import config from './config';
-import router from './router';
 
 export default function startServer(): void {
 	'use strict';
 
 	console.log(`Initing server... (${cluster.worker.id})`);
 
-	const app = express();
-	app.disable('x-powered-by');
-	app.use(bodyParser.urlencoded({ extended: true }));
-	app.use(misskeyExpress);
-	router(app);
-	app.use(notFoundHandler);
+	const server = new hapi.Server();
+	server.connection({ port: config.port.http });
 
-	const server = app.listen(config.port.http, () => {
-		console.log(`MisskeyAPI server listening at ${server.address().address}:${server.address().port}`);
+	server.route({ method: '*', path: '/{p*}', handler: notFoundHandler });
+
+	server.start(() => {
+		console.log(`MisskeyAPI server listening at ${server.info.uri}:${server.info.port}`);
 	});
 }
 
-function notFoundHandler(req: express.Request, res: express.Response): void {
+function notFoundHandler(req: hapi.Request, res: hapi.IReply): hapi.IReply {
 	'use strict';
-	res.status(404).json({
-		error: 'API not found.'
-	});
+	return res('API not found').code(404);
 }

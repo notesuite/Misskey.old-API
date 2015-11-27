@@ -45,6 +45,9 @@
     },
     "mongoose-auto-increment/mongoose-auto-increment.d.ts": {
       "ref": "e48f0c7a0a5f9e9d35e9cfd7506461bab435cb49"
+    },
+    "hapi/hapi.d.ts": {
+      "ref": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
     }
   }
 }
