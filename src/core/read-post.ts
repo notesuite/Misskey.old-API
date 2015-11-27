@@ -11,6 +11,8 @@ export default function readPost(me: IUser, post: IPost): Promise<void> {
 		}, (mentionFindErr: any, mention: IPostMention) => {
 			if (mentionFindErr !== null) {
 				return reject(mentionFindErr);
+			} else if (mention === null) {
+				return resolve();
 			}
 			mention.isRead = true;
 			mention.save((err: any, saved: IPostMention) => {
