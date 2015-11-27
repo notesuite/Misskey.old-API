@@ -24,8 +24,7 @@ export default function startServer(): void {
 
 function notFoundHandler(req: express.Request, res: express.Response): void {
 	'use strict';
-	res.status(404);
-	res.json({
+	res.status(404).json({
 		error: 'API not found.'
 	});
 }
