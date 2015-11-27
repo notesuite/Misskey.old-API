@@ -28,6 +28,7 @@ export interface IUser extends mongoose.Document {
 	postsCount: number;
 	screenName: string;
 	screenNameLower: string;
+	timelineReadCursor: number;
 	wallpaper: string | mongoose.Types.ObjectId | IAlbumFile;
 	wallpaperPath: string;
 	websiteUrl: string;
