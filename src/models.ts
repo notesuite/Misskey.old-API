@@ -1,22 +1,34 @@
 import * as mongoose from 'mongoose';
-import { Model, Document } from 'mongoose';
 import config from './config';
 
 const db = mongoose.createConnection(config.mongo.uri, config.mongo.options);
 
+import albumFile from './models/album-file';
+import albumFolder from './models/album-folder';
+import application from './models/application';
+import hashtag from './models/hashtag';
+import notification from './models/notification';
+import { post, status, photo, repost } from './models/post';
+import postLike from './models/post-like';
+import postMention from './models/post-mention';
+import talkMessage from './models/talk-message';
+import talkHistory from './models/talk-history';
+import user from './models/user';
+import userFollowing from './models/user-following';
+
 /* tslint:disable:variable-name */
-export const AlbumFile: Model<Document> = require('./models/albumFile').default(db);
-export const AlbumFolder: Model<Document> = require('./models/albumFolder').default(db);
-export const Application: Model<Document> = require('./models/application').default(db);
-export const Hashtag: Model<Document> = require('./models/hashtag').default(db);
-export const Notification: Model<Document> = require('./models/notification').default(db);
-export const PhotoPost: Model<Document> = require('./models/post').photo(db);
-export const Post: Model<Document> = require('./models/post').post(db);
-export const PostLike: Model<Document> = require('./models/postLike').default(db);
-export const PostMention: Model<Document> = require('./models/postMention').default(db);
-export const Repost: Model<Document> = require('./models/post').repost(db);
-export const StatusPost: Model<Document> = require('./models/post').status(db);
-export const TalkMessage: Model<Document> = require('./models/talkMessage').default(db);
-export const TalkHistory: Model<Document> = require('./models/talkHistory').default(db);
-export const User: Model<Document> = require('./models/user').default(db);
-export const UserFollowing: Model<Document> = require('./models/userFollowing').default(db);
+export const AlbumFile = albumFile(db);
+export const AlbumFolder = albumFolder(db);
+export const Application = application(db);
+export const Hashtag = hashtag(db);
+export const Notification = notification(db);
+export const Post = post(db);
+export const StatusPost = status(db);
+export const PhotoPost = photo(db);
+export const Repost = repost(db);
+export const PostLike = postLike(db);
+export const PostMention = postMention(db);
+export const TalkMessage = talkMessage(db);
+export const TalkHistory = talkHistory(db);
+export const User = user(db);
+export const UserFollowing = userFollowing(db);
