@@ -1,13 +1,19 @@
-import { Request, Response } from '../../misskey-express';
+import * as hapi from 'hapi';
+import { IApplication, IUser } from '../../interfaces';
 import mentionsUnreadsCount from '../../endpoints/posts/mentions-unreads-count';
 
-export default function unreadsCount(req: Request, res: Response): void {
+export default function unreadsCount(
+	app: IApplication,
+	user: IUser,
+	req: hapi.Request,
+	res: hapi.IReply
+): void {
 	'use strict';
 	mentionsUnreadsCount(
-		req.misskeyUser
+		user
 	).then((count: number) => {
-		res.apiRender(count);
+		res(count);
 	}, (err: any) => {
-		res.apiError(500, err);
+		res(err).code(500);
 	});
 }

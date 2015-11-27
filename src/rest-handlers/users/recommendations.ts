@@ -1,13 +1,19 @@
-import { Request, Response } from '../../misskey-express';
+import * as hapi from 'hapi';
+import { IApplication, IUser } from '../../interfaces';
 import recommendations from '../../endpoints/users/recommendations';
 
-export default function userFollowings(req: Request, res: Response): void {
+export default function userFollowings(
+	app: IApplication,
+	user: IUser,
+	req: hapi.Request,
+	res: hapi.IReply
+): void {
 	'use strict';
 	recommendations(
-		req.misskeyUser
+		user
 	).then((recommendationUsers: Object[]) => {
-		res.apiRender(recommendationUsers);
+		res(recommendationUsers);
 	}, (err: any) => {
-		res.apiError(500, err);
+		res(err).code(500);
 	});
 }

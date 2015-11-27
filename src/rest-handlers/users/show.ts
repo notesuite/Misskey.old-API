@@ -1,11 +1,21 @@
-import { Request, Response } from '../../misskey-express';
+import * as hapi from 'hapi';
+import { IApplication, IUser } from '../../interfaces';
 import show from '../../endpoints/users/show';
 
-export default function showUser(req: Request, res: Response): void {
+export default function showUser(
+	app: IApplication,
+	user: IUser,
+	req: hapi.Request,
+	res: hapi.IReply
+): void {
 	'use strict';
-	show(req.misskeyUser, req.query['user-id'], req.query['screen-name']).then((user: Object) => {
-		res.apiRender(user);
+	show(
+		user,
+		req.query['user-id'],
+		req.query['screen-name']
+	).then((showee: Object) => {
+		res(showee);
 	}, (err: any) => {
-		res.apiError(500, err);
+		res(err).code(500);
 	});
 }

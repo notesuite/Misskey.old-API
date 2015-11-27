@@ -22,7 +22,7 @@ export default function search(me: IUser): Promise<Object[]> {
 				: [me.id];
 
 			User.find({
-				_id: { $nin: ignoreIds },
+				_id: { $nin: ignoreIds }
 			})
 			.sort('-createdAt')
 			.limit(4)
@@ -30,7 +30,7 @@ export default function search(me: IUser): Promise<Object[]> {
 				if (searchErr !== null) {
 					reject('something-happened');
 				} else if (users.length === 0) {
-					resolve(null);
+					resolve([]);
 				} else {
 					Promise.all(users.map((user: IUser) => {
 						return serializeUser(me, user);

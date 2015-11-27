@@ -1,15 +1,27 @@
-import { Request, Response } from '../../misskey-express';
+import * as hapi from 'hapi';
+import { IApplication, IUser } from '../../interfaces';
 import create from '../../endpoints/posts/status';
 
-export default function status(req: Request, res: Response): void {
+export default function status(
+	app: IApplication,
+	user: IUser,
+	req: hapi.Request,
+	res: hapi.IReply
+): void {
 	'use strict';
-	const text: string = req.body['text'];
+	const text: string = req.payload['text'];
 	if (text === undefined) {
-		return res.apiError(400, 'text is required');
+		res('text is required').code(400);
+		return;
 	}
-	create(req.misskeyApp, req.misskeyUser, text, req.body['in-reply-to-post-id']).then((status: Object) => {
-		res.apiRender(status);
+	create(
+		app,
+		user,
+		text,
+		req.payload['in-reply-to-post-id']
+	).then((status: Object) => {
+		res(status);
 	}, (err: any) => {
-		res.apiError(500, err);
+		res(err).code(500);
 	});
 }

@@ -1,17 +1,23 @@
-import { Request, Response } from '../../misskey-express';
+import * as hapi from 'hapi';
+import { IApplication, IUser } from '../../interfaces';
 import getTimeline from '../../endpoints/posts/user-timeline';
 
-export default function userTimeline(req: Request, res: Response): void {
+export default function userTimeline(
+	app: IApplication,
+	user: IUser,
+	req: hapi.Request,
+	res: hapi.IReply
+): void {
 	'use strict';
 	getTimeline(
-		req.misskeyUser,
+		user,
 		req.query['user-id'],
 		req.query['limit'],
 		req.query['since-cursor'],
 		req.query['max-cursor'])
 	.then((timeline: Object[]) => {
-		res.apiRender(timeline);
+		res(timeline);
 	}, (err: any) => {
-		res.apiError(500, err);
+		res(err).code(500);
 	});
 }

@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"noEmitOnError": true,
+		"noEmitOnError": false,
 		"noImplicitAny": true,
 		"sourceMap": false,
 		"target": "ES6",

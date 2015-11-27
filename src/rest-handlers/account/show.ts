@@ -1,7 +1,13 @@
-import { Request, Response } from '../../misskey-express';
+import * as hapi from 'hapi';
+import { IApplication, IUser } from '../../interfaces';
 import show from '../../endpoints/account/show';
 
-export default function showAccount(req: Request, res: Response): void {
+export default function showAccount(
+	app: IApplication,
+	user: IUser,
+	req: hapi.Request,
+	res: hapi.IReply
+): void {
 	'use strict';
-	res.apiRender(show(req.misskeyUser));
+	res(show(user));
 };

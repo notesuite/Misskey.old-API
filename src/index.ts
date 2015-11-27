@@ -2,7 +2,6 @@ import * as cluster from 'cluster';
 import { Task, print } from 'powerful';
 import * as os from 'os';
 import startServer from './server';
-import startInternalServer from './internal-server';
 
 const numberOfCpu = os.cpus().length;
 
@@ -12,7 +11,6 @@ const forkForEachCpu = Task.repeat(numberOfCpu, () => fork);
 
 const startServers = Task.sync(() => {
 	startServer();
-	startInternalServer();
 });
 
 (cluster.isMaster ? print('Welcome to Misskey API!').next(forkForEachCpu) : startServers).run();
