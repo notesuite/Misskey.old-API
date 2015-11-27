@@ -35,6 +35,8 @@ export default function router(app: express.Express): void {
 	app.get('/posts/show', require(`${handlerPath}/posts/show`).default);
 	app.get('/posts/talk', require(`${handlerPath}/posts/talk`).default);
 	app.get('/posts/replies', require(`${handlerPath}/posts/replies`).default);
+	app.get('/posts/timeline-unreads-count', require(`${handlerPath}/posts/timeline-unreads-count`).default);
+	app.get('/posts/mentions-unreads-count', require(`${handlerPath}/posts/mentions-unreads-count`).default);
 	app.post('/posts/status', require(`${handlerPath}/posts/status`).default);
 	app.post('/posts/photo', require(`${handlerPath}/posts/photo`).default);
 	app.post('/posts/like', require(`${handlerPath}/posts/like`).default);
