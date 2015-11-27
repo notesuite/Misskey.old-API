@@ -56,7 +56,10 @@ export default function timeline(
 			.exec((err: any, timeline: IPost[]) => {
 				if (err !== null) {
 					return reject(err);
+				} else if (timeline.length === 0) {
+					return resolve([]);
 				}
+
 				// すべてpopulateする
 				Promise.all(timeline.map((post: IPost) => {
 					return populateAll(post);
@@ -70,6 +73,10 @@ export default function timeline(
 				}, (populatedErr: any) => {
 					reject(populatedErr);
 				});
+
+				// ここまで読みましたカーソル(便宜上)を最新の投稿にセットしておく
+				user.timelineReadCursor = timeline[0].cursor;
+				user.save();
 
 				// すべて既読にしておく
 				timeline.forEach(post => {
