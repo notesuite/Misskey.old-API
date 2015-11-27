@@ -1,7 +1,6 @@
-import * as mongoose from 'mongoose';
-import { Schema } from 'mongoose';
+import { Schema, Connection, Document, Model } from 'mongoose';
 
-export default function talkHistory(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
+export default function talkHistory(db: Connection): Model<Document> {
 	'use strict';
 
 	const schema: Schema = new Schema({

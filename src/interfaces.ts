@@ -1,7 +1,7 @@
-import * as mongoose from 'mongoose';
+import { Document, Types } from 'mongoose';
 
-export interface IUser extends mongoose.Document {
-	banner: string | mongoose.Types.ObjectId | IAlbumFile;
+export interface IUser extends Document {
+	banner: string | Types.ObjectId | IAlbumFile;
 	bannerPath: string;
 	birthday: Date;
 	color: string;
@@ -13,7 +13,7 @@ export interface IUser extends mongoose.Document {
 	encryptedPassword: string;
 	followersCount: number;
 	followingsCount: number;
-	avatar: string | mongoose.Types.ObjectId | IAlbumFile;
+	avatar: string | Types.ObjectId | IAlbumFile;
 	avatarPath: string;
 	isDeleted: Boolean;
 	isEmailVerified: Boolean;
@@ -24,57 +24,57 @@ export interface IUser extends mongoose.Document {
 	lang: string;
 	location: string;
 	name: string;
-	pinnedPost: string | mongoose.Types.ObjectId | IPost;
+	pinnedPost: string | Types.ObjectId | IPost;
 	postsCount: number;
 	screenName: string;
 	screenNameLower: string;
 	timelineReadCursor: number;
-	wallpaper: string | mongoose.Types.ObjectId | IAlbumFile;
+	wallpaper: string | Types.ObjectId | IAlbumFile;
 	wallpaperPath: string;
 	websiteUrl: string;
 }
 
-export interface IUserFollowing extends mongoose.Document {
+export interface IUserFollowing extends Document {
 	createdAt: Date;
 	cursor: number;
-	followee: string | mongoose.Types.ObjectId | IUser;
-	follower: string | mongoose.Types.ObjectId | IUser;
+	followee: string | Types.ObjectId | IUser;
+	follower: string | Types.ObjectId | IUser;
 }
 
-export interface IUserKey extends mongoose.Document {
-	app: string | mongoose.Types.ObjectId | IApplication;
+export interface IUserKey extends Document {
+	app: string | Types.ObjectId | IApplication;
 	key: string;
-	user: string | mongoose.Types.ObjectId | IUser;
+	user: string | Types.ObjectId | IUser;
 }
 
-export interface IApplication extends mongoose.Document {
+export interface IApplication extends Document {
 	createdAt: Date;
-	userId: string | mongoose.Types.ObjectId;
+	userId: string | Types.ObjectId;
 	appKey: string;
 	callbackUrl: string;
 	description: string;
-	iconId: string | mongoose.Types.ObjectId;
+	iconId: string | Types.ObjectId;
 	isDeleted: boolean;
 	isSuspended: boolean;
 	permissions: string[];
 }
 
-export interface IHashtag extends mongoose.Document {
+export interface IHashtag extends Document {
 	createdAt: Date;
 	name: string;
 }
 
-export interface IPost extends mongoose.Document {
-	app: string | mongoose.Types.ObjectId | IApplication;
+export interface IPost extends Document {
+	app: string | Types.ObjectId | IApplication;
 	createdAt: Date;
 	cursor: number;
-	inReplyToPost: string | mongoose.Types.ObjectId | IPost;
+	inReplyToPost: string | Types.ObjectId | IPost;
 	isDeleted: boolean;
 	likesCount: number;
 	repliesCount: number;
 	repostsCount: number;
 	type: string;
-	user: string | mongoose.Types.ObjectId | IUser;
+	user: string | Types.ObjectId | IUser;
 }
 
 export interface IStatusPost extends IPost {
@@ -85,42 +85,42 @@ export interface IStatusPost extends IPost {
 
 export interface IPhotoPost extends IPost {
 	isPlain: boolean;
-	photos: string | mongoose.Types.ObjectId[] | IAlbumFile[];
+	photos: string | Types.ObjectId[] | IAlbumFile[];
 	hashtags: string[];
 	text: string;
 }
 
-export interface IRepost extends mongoose.Document {
-	app: string | mongoose.Types.ObjectId | IApplication;
+export interface IRepost extends Document {
+	app: string | Types.ObjectId | IApplication;
 	createdAt: Date;
 	cursor: number;
 	isDeleted: boolean;
-	post: string | mongoose.Types.ObjectId | IPost;
+	post: string | Types.ObjectId | IPost;
 	type: string;
-	user: string | mongoose.Types.ObjectId | IUser;
+	user: string | Types.ObjectId | IUser;
 }
 
-export interface IPostLike extends mongoose.Document {
+export interface IPostLike extends Document {
 	createdAt: Date;
 	cursor: number;
-	post: string | mongoose.Types.ObjectId | IPost;
-	user: string | mongoose.Types.ObjectId | IUser;
+	post: string | Types.ObjectId | IPost;
+	user: string | Types.ObjectId | IUser;
 }
 
-export interface IPostMention extends mongoose.Document {
+export interface IPostMention extends Document {
 	createdAt: Date;
 	cursor: number;
 	isRead: boolean;
-	post: string | mongoose.Types.ObjectId | IPost;
-	user: string | mongoose.Types.ObjectId | IUser;
+	post: string | Types.ObjectId | IPost;
+	user: string | Types.ObjectId | IUser;
 }
 
-export interface IAlbumFile extends mongoose.Document {
-	app: string | mongoose.Types.ObjectId | IApplication;
+export interface IAlbumFile extends Document {
+	app: string | Types.ObjectId | IApplication;
 	createdAt: Date;
 	cursor: number;
 	dataSize: number;
-	folder: string | mongoose.Types.ObjectId | IAlbumFolder;
+	folder: string | Types.ObjectId | IAlbumFolder;
 	mimeType: string;
 	hash: string;
 	isDeleted: boolean;
@@ -129,67 +129,67 @@ export interface IAlbumFile extends mongoose.Document {
 	name: string;
 	properties: Object;
 	serverPath: string;
-	user: string | mongoose.Types.ObjectId | IUser;
+	user: string | Types.ObjectId | IUser;
 }
 
-export interface IAlbumFolder extends mongoose.Document {
+export interface IAlbumFolder extends Document {
 	createdAt: Date;
 	color: string;
 	cursor: number;
 	name: string;
-	parent: string | mongoose.Types.ObjectId | IAlbumFolder;
-	user: string | mongoose.Types.ObjectId | IUser;
+	parent: string | Types.ObjectId | IAlbumFolder;
+	user: string | Types.ObjectId | IUser;
 }
 
-export interface INotification extends mongoose.Document {
-	app: string | mongoose.Types.ObjectId | IApplication;
+export interface INotification extends Document {
+	app: string | Types.ObjectId | IApplication;
 	content: Object;
 	createdAt: Date;
 	cursor: number;
 	isRead: boolean;
 	type: string;
-	user: string | mongoose.Types.ObjectId | IUser;
+	user: string | Types.ObjectId | IUser;
 }
 
-export interface ITalkMessage extends mongoose.Document {
-	app: string | mongoose.Types.ObjectId | IApplication;
-	attachedFiles: string | mongoose.Types.ObjectId[] | IAlbumFile[];
+export interface ITalkMessage extends Document {
+	app: string | Types.ObjectId | IApplication;
+	attachedFiles: string | Types.ObjectId[] | IAlbumFile[];
 	createdAt: Date;
 	cursor: number;
 	isContentModified: boolean;
 	isDeleted: boolean;
 	isPlain: boolean;
 	isRead: boolean;
-	otherparty: string | mongoose.Types.ObjectId | IUser;
+	otherparty: string | Types.ObjectId | IUser;
 	text: string;
-	user: string | mongoose.Types.ObjectId | IUser;
+	user: string | Types.ObjectId | IUser;
 }
 
-export interface ITalkHistory extends mongoose.Document {
+export interface ITalkHistory extends Document {
 	updatedAt: Date;
-	message: string | mongoose.Types.ObjectId | ITalkMessage;
-	otherparty: string | mongoose.Types.ObjectId | IUser;
-	user: string | mongoose.Types.ObjectId | IUser;
+	message: string | Types.ObjectId | ITalkMessage;
+	otherparty: string | Types.ObjectId | IUser;
+	user: string | Types.ObjectId | IUser;
 }
 
-export interface IBBSTopic extends mongoose.Document {
+export interface IBBSTopic extends Document {
 	createdAt: Date;
 	cursor: number;
 	title: string;
-	user: string | mongoose.Types.ObjectId | IUser;
+	user: string | Types.ObjectId | IUser;
 }
 
-export interface IBBSPost extends mongoose.Document {
-	app: string | mongoose.Types.ObjectId | IApplication;
-	attachedFiles: string | mongoose.Types.ObjectId[] | IAlbumFile[];
+export interface IBBSPost extends Document {
+	app: string | Types.ObjectId | IApplication;
+	attachedFiles: string | Types.ObjectId[] | IAlbumFile[];
 	createdAt: Date;
 	cursor: number;
-	inReplyToPost: string | mongoose.Types.ObjectId | IBBSPost;
+	inReplyToPost: string | Types.ObjectId | IBBSPost;
 	isContentModified: boolean;
 	isDeleted: boolean;
 	isPlain: boolean;
 	plusonesCount: number;
 	text: string;
-	topic: string | mongoose.Types.ObjectId | IBBSTopic;
-	user: string | mongoose.Types.ObjectId | IUser;
+	topic: string | Types.ObjectId | IBBSTopic;
+	user: string | Types.ObjectId | IUser;
 }

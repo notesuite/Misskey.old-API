@@ -1,9 +1,8 @@
-import * as mongoose from 'mongoose';
-import { Schema } from 'mongoose';
+import { Schema, Connection, Document, Model } from 'mongoose';
 import * as mongooseAutoIncrement from 'mongoose-auto-increment';
 import config from '../config';
 
-export default function albumFile(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
+export default function albumFile(db: Connection): Model<Document> {
 	'use strict';
 
 	mongooseAutoIncrement.initialize(db);

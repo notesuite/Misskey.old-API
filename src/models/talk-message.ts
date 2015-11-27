@@ -1,8 +1,7 @@
-import * as mongoose from 'mongoose';
-import { Schema } from 'mongoose';
+import { Schema, Connection, Document, Model } from 'mongoose';
 import * as mongooseAutoIncrement from 'mongoose-auto-increment';
 
-export default function talkMessage(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
+export default function talkMessage(db: Connection): Model<Document> {
 	'use strict';
 
 	mongooseAutoIncrement.initialize(db);

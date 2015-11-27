@@ -1,5 +1,4 @@
-import * as mongoose from 'mongoose';
-import { Schema } from 'mongoose';
+import { Schema, Connection, Document, Model } from 'mongoose';
 import * as mongooseAutoIncrement from 'mongoose-auto-increment';
 
 // Common schemas
@@ -36,7 +35,7 @@ const toObject: any = (doc: any, ret: any) => {
 	}
 };
 
-export function post(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
+export function post(db: Connection): Model<Document> {
 	'use strict';
 
 	const schema: Schema = new Schema(postBase);
@@ -49,7 +48,7 @@ export function post(db: mongoose.Connection): mongoose.Model<mongoose.Document>
 	return db.model('Post', schema, 'Posts');
 }
 
-export function status(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
+export function status(db: Connection): Model<Document> {
 	'use strict';
 	mongooseAutoIncrement.initialize(db);
 
@@ -73,7 +72,7 @@ export function status(db: mongoose.Connection): mongoose.Model<mongoose.Documen
 	return db.model('Status', schema, 'Posts');
 }
 
-export function photo(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
+export function photo(db: Connection): Model<Document> {
 	'use strict';
 	mongooseAutoIncrement.initialize(db);
 
@@ -98,7 +97,7 @@ export function photo(db: mongoose.Connection): mongoose.Model<mongoose.Document
 	return db.model('Photo', schema, 'Posts');
 }
 
-export function repost(db: mongoose.Connection): mongoose.Model<mongoose.Document> {
+export function repost(db: Connection): Model<Document> {
 	'use strict';
 
 	const schema: Schema = new Schema({
