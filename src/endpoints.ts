@@ -29,7 +29,7 @@ export default [
 	{ endpoint: 'posts/photo', httpMethod: 'post', login: true, limitDuration: 1000 * 60 * 60, limitMax: 100 },
 	{ endpoint: 'posts/like', httpMethod: 'post', login: true, limitDuration: 1000 * 60 * 60, limitMax: 100 },
 	{ endpoint: 'posts/repost', httpMethod: 'post', login: true, limitDuration: 1000 * 60 * 60, limitMax: 30 },
-	{ endpoint: 'album/files/upload', httpMethod: 'post', login: true, limitDuration: 1000 * 60 * 60, limitMax: 100, file: true },
+	{ endpoint: 'album/files/upload', httpMethod: 'post', login: true, limitDuration: 1000 * 60 * 60, limitMax: 100 },
 	{ endpoint: 'album/files/show', httpMethod: 'get', login: true, limitDuration: null, limitMax: null },
 	{ endpoint: 'album/files/list', httpMethod: 'get', login: true, limitDuration: null, limitMax: null },
 	{ endpoint: 'album/files/move', httpMethod: 'put', login: true, limitDuration: null, limitMax: null },

@@ -14,13 +14,30 @@ export default function startServer(): void {
 	server.connection({ port: config.port.http });
 
 	endpoints.forEach(endpoint => {
-		server.route({
-			method: endpoint.httpMethod,
-			path: `/${endpoint.endpoint}`,
-			handler: (request, reply): void => {
-				apiHandler(endpoint, request, reply);
-			}
-		});
+		if (endpoint.endpoint === 'album/files/upload') {
+			server.route({
+				method: endpoint.httpMethod,
+				path: `/${endpoint.endpoint}`,
+				config: {
+					payload: {
+						output: 'file',
+						parse: true,
+						allow: 'multipart/form-data'
+					},
+					handler: (request: any, reply: any): void => {
+						apiHandler(endpoint, <hapi.Request>request, reply);
+					}
+				}
+			});
+		} else {
+			server.route({
+				method: endpoint.httpMethod,
+				path: `/${endpoint.endpoint}`,
+				handler: (request, reply): void => {
+					apiHandler(endpoint, request, reply);
+				}
+			});
+		}
 	});
 
 	server.route({ method: '*', path: '/{p*}', handler: notFoundHandler });

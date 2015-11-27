@@ -11,16 +11,16 @@ export default function uploadFile(
 ): void {
 	'use strict';
 	const file = req.payload.file;
-	if (file !== undefined && file !== null) {
+	if (file === undefined || file === null) {
 		res('empty-file').code(400);
 		return;
 	}
 	const unconditional: boolean = req.payload.unconditional;
 	const path: string = file.path;
-	const fileName: string = file.originalname;
-	const mimetype: string = file.mimetype;
+	const fileName: string = file.filename;
+	const mimetype: string = file.headers['content-type'];
 	const fileBuffer: Buffer = fs.readFileSync(path);
-	const size: number = file.size;
+	const size: number = file.bytes;
 	fs.unlink(path);
 
 	upload(
