@@ -56,6 +56,12 @@ export default function timeline(user: IUser, limit: number = 10, sinceCursor: n
 			}, (populatedErr: any) => {
 				reject(populatedErr);
 			});
+
+			// 全て既読にする
+			mentions.forEach(mention => {
+				mention.isRead = true;
+				mention.save();
+			});
 		});
 	});
 }
