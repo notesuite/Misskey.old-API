@@ -1,7 +1,7 @@
 import {PostMention} from '../models';
 import {IUser, IPost, IPostMention} from '../interfaces';
 
-export default function readPost(me: IUser, post: any): Promise<void> {
+export default function readPost(me: IUser, post: IPost): Promise<void> {
 	'use strict';
 
 	return new Promise<void>((resolve, reject) => {
