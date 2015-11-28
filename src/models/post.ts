@@ -4,6 +4,7 @@ import * as mongooseAutoIncrement from 'mongoose-auto-increment';
 // Common schemas
 const postBase: Object = {
 	app: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Application' },
+	channel: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Channel' },
 	createdAt: { type: Date, required: true, default: Date.now },
 	cursor: { type: Number },
 	inReplyToPost: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Post' },

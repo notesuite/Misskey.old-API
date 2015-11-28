@@ -59,6 +59,11 @@ export interface IApplication extends Document {
 	permissions: string[];
 }
 
+export interface IChannel extends Document {
+	createdAt: Date;
+	name: string;
+}
+
 export interface IHashtag extends Document {
 	createdAt: Date;
 	name: string;
@@ -66,6 +71,7 @@ export interface IHashtag extends Document {
 
 export interface IPost extends Document {
 	app: string | Types.ObjectId | IApplication;
+	channel: string | Types.ObjectId | IChannel;
 	createdAt: Date;
 	cursor: number;
 	inReplyToPost: string | Types.ObjectId | IPost;
