@@ -12,7 +12,7 @@ export default function search(me: IUser, screenName: string): Promise<Object[]>
 	const screenNameLower: string = screenName.toLowerCase();
 	return new Promise<Object[]>((resolve, reject) => {
 		User.find({
-			screenNameLower: new RegExp(screenNameLower, 'i')
+			screenNameLower: new RegExp(screenNameLower)
 		}, (searchErr: any, users: IUser[]) => {
 			if (searchErr !== null) {
 				return reject('something-happened');
