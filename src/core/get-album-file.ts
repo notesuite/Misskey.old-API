@@ -13,7 +13,7 @@ export default function getAlbumFile(
 				reject(findErr);
 			} else if (file === null) {
 				reject('file-not-found');
-			} else if (file.user !== meId) {
+			} else if (file.user.toString() !== meId.toString()) {
 				reject('file-not-found');
 			} else if (file.isDeleted) {
 				reject('file-not-found');
