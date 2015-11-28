@@ -1,9 +1,14 @@
-import { Request, Response } from '../misskey-express';
+import * as hapi from 'hapi';
 import {User} from '../models';
-import {IUser} from '../interfaces';
+import {IApplication, IUser} from '../interfaces';
 import doLogin from '../endpoints/login';
 
-export default function login(req: Request, res: Response): void {
+export default function login(
+	app: IApplication,
+	user: IUser,
+	req: hapi.Request,
+	res: hapi.IReply
+): void {
 	'use strict';
 	const screenName: string = req.query['screen-name'];
 	const password: string = req.query['password'];
@@ -11,22 +16,22 @@ export default function login(req: Request, res: Response): void {
 		if (same) {
 			User.findOne({
 				screenNameLower: screenName.toLowerCase()
-			}, (findErr: any, user: IUser) => {
+			}, (findErr: any, loginUser: IUser) => {
 				if (findErr) {
-					res.apiError(500, 'something happened');
+					res('something happened').code(500);
 				} else if (user === null) {
-					res.apiError(500, 'something happened');
+					res('something happened').code(500);
 				} else {
-					res.apiRender({
+					res({
 						same: true,
-						user: user.toObject()
+						user: loginUser.toObject()
 					});
 				}
 			});
 		} else {
-			res.apiRender({same: false});
+			res({same: false});
 		}
 	}, (err: any) => {
-		res.apiError(400, err);
+		res(err).code(400);
 	});
 }
