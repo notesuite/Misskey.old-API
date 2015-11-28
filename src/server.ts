@@ -25,7 +25,7 @@ export default function startServer(): void {
 						allow: 'multipart/form-data'
 					},
 					handler: (request: any, reply: any): void => {
-						apiHandler(endpoint, <hapi.Request>request, reply);
+						apiHandler(endpoint, <hapi.Request>request, <hapi.IReply>reply);
 					}
 				}
 			});
