@@ -17,6 +17,7 @@ export default [
 	{ endpoint: 'users/followers', httpMethod: 'get', login: false },
 	{ endpoint: 'users/recommendations', httpMethod: 'get', login: true, limitDuration: null, limitMax: null },
 	{ endpoint: 'users/search', httpMethod: 'get', login: false },
+	{ endpoint: 'users/search-by-screen-name', httpMethod: 'get', login: false },
 	{ endpoint: 'posts/timeline', httpMethod: 'get', login: true, limitDuration: 1000 * 60 * 10, limitMax: 100 },
 	{ endpoint: 'posts/user-timeline', httpMethod: 'get', login: false },
 	{ endpoint: 'posts/mentions', httpMethod: 'get', login: true, limitDuration: 1000 * 60 * 10, limitMax: 100 },
