@@ -71,6 +71,14 @@ export default function stream(
 				serializedMessage.file = (<IAlbumFile>message.file).toObject();
 				return message;
 			}));
+
+			// 既読にする
+			messages.forEach(message => {
+				if (message.user.toString() === otherpartyId) {
+					message.isRead = true;
+					message.save();
+				}
+			});
 		});
 	});
 }
