@@ -31,6 +31,7 @@ export default [
 	{ endpoint: 'posts/repost', httpMethod: 'post', login: true, limitDuration: 1000 * 60 * 60, limitMax: 30 },
 	{ endpoint: 'talks/say', httpMethod: 'post', login: true, limitDuration: 1000 * 60 * 60, limitMax: 120 },
 	{ endpoint: 'talks/stream', httpMethod: 'get', login: true, limitDuration: 1000 * 60 * 60, limitMax: 1000 },
+	{ endpoint: 'talks/history', httpMethod: 'get', login: true, limitDuration: 1000 * 60 * 60, limitMax: 1000 },
 	{ endpoint: 'album/files/upload', httpMethod: 'post', login: true, limitDuration: 1000 * 60 * 60, limitMax: 100 },
 	{ endpoint: 'album/files/show', httpMethod: 'get', login: true, limitDuration: null, limitMax: null },
 	{ endpoint: 'album/files/list', httpMethod: 'get', login: true, limitDuration: null, limitMax: null },
