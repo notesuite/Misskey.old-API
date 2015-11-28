@@ -26,7 +26,9 @@ export default function status(
 		const maxTextLength: number = 300;
 		text = text.trim();
 
-		if (text.length > maxTextLength) {
+		if (text.length === 0) {
+			return reject('empty-text');
+		} else if (text.length > maxTextLength) {
 			return reject('too-long-text');
 		}
 
