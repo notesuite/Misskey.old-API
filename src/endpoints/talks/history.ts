@@ -6,7 +6,7 @@ import {ITalkMessage, IUser, ITalkHistory, IAlbumFile} from '../../interfaces';
  * @param user API利用ユーザー
  * @param limit 取得する投稿の最大数
  */
-export default function stream(
+export default function talksHistory(
 	user: IUser,
 	limit: number = 10
 ): Promise<Object[]> {
