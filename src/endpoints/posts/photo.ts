@@ -1,4 +1,4 @@
-import {AlbumFile, Post, PhotoPost} from '../../models';
+import {Post, PhotoPost} from '../../models';
 import {IApplication, IAlbumFile, IUser, IPost, IPhotoPost} from '../../interfaces';
 import publishUserStream from '../../core/publish-user-stream';
 import populateAll from '../../core/post-populate-all';
@@ -6,6 +6,7 @@ import serializePost from '../../core/serialize-post';
 import savePostMentions from '../../core/save-post-mentions';
 import extractHashtags from '../../core/extract-hashtags';
 import registerHashtags from '../../core/register-hashtags';
+import getAlbumFile from '../../core/get-album-file';
 
 /**
  * PhotoPostを作成します
@@ -53,23 +54,8 @@ export default function photo(app: IApplication, user: IUser, photos: string[], 
 		}
 
 		function checkPhotos(reply: IPost = null): void {
-			Promise.all(photos.map(photo =>
-				new Promise<Object>((checkFileResolve, checkFileReject) => {
-					AlbumFile.findById(photo, (findErr: any, file: IAlbumFile) => {
-						if (findErr !== null) {
-							checkFileReject(findErr);
-						} else if (file === null) {
-							checkFileReject('file-not-found');
-						} else if (file.user.toString() !== user.id.toString()) {
-							checkFileReject('file-not-found');
-						} else if (file.isDeleted) {
-							checkFileReject('file-not-found');
-						} else {
-							checkFileResolve(file);
-						}
-					});
-				})
-			)).then((photoFiles: IAlbumFile[]) => {
+			Promise.all(photos.map(photo => getAlbumFile(user.id, photo)))
+			.then((photoFiles: IAlbumFile[]) => {
 				create(reply);
 			}, (photosCheckErr: any) => {
 				reject(photosCheckErr);
