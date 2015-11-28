@@ -5,8 +5,8 @@ export default function getPostLikers(
 	postId: string,
 	limit: number = 10,
 	sinceCursor: number = null,
-	maxCursor: number = null)
-		: Promise<IUser[]> {
+	maxCursor: number = null
+): Promise<IUser[]> {
 	'use strict';
 
 	return new Promise<IUser[]>((resolve, reject) => {
