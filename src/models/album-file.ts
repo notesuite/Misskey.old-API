@@ -7,7 +7,7 @@ export default function albumFile(db: Connection): Model<Document> {
 
 	mongooseAutoIncrement.initialize(db);
 
-	const schema: Schema = new Schema({
+	const schema = new Schema({
 		app: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Application' },
 		createdAt: { type: Date, required: true, default: Date.now },
 		cursor: { type: Number },

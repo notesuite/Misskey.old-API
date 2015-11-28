@@ -6,7 +6,7 @@ export default function bbsPost(db: Connection): Model<Document> {
 
 	mongooseAutoIncrement.initialize(db);
 
-	const schema: Schema = new Schema({
+	const schema = new Schema({
 		app: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Application' },
 		attachedFiles: [{ type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFile' }],
 		createdAt: { type: Date, required: true, default: Date.now },

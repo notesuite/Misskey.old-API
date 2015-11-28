@@ -38,7 +38,7 @@ const toObject: any = (doc: any, ret: any) => {
 export function post(db: Connection): Model<Document> {
 	'use strict';
 
-	const schema: Schema = new Schema(postBase);
+	const schema = new Schema(postBase);
 
 	if (!(<any>schema).options.toObject) {
 		(<any>schema).options.toObject = {};
@@ -52,7 +52,7 @@ export function status(db: Connection): Model<Document> {
 	'use strict';
 	mongooseAutoIncrement.initialize(db);
 
-	const schema: Schema = new Schema(Object.assign({
+	const schema = new Schema(Object.assign({
 		hashtags: { type: [String], required: false, default: [] },
 		text: { type: String, required: false, default: null },
 		isPlain: { type: Boolean, required: false, default: false }
@@ -76,7 +76,7 @@ export function photo(db: Connection): Model<Document> {
 	'use strict';
 	mongooseAutoIncrement.initialize(db);
 
-	const schema: Schema = new Schema(Object.assign({
+	const schema = new Schema(Object.assign({
 		photos: [{ type: Schema.Types.ObjectId, required: true, ref: 'AlbumFile' }],
 		hashtags: { type: [String], required: false, default: [] },
 		text: { type: String, required: false, default: null },
@@ -100,7 +100,7 @@ export function photo(db: Connection): Model<Document> {
 export function repost(db: Connection): Model<Document> {
 	'use strict';
 
-	const schema: Schema = new Schema({
+	const schema = new Schema({
 		app: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Application' },
 		createdAt: { type: Date, required: true, default: Date.now },
 		cursor: { type: Number },

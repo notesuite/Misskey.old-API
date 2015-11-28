@@ -4,7 +4,7 @@ import config from '../config';
 export default function user(db: Connection): Model<Document> {
 	'use strict';
 
-	const schema: Schema = new Schema({
+	const schema = new Schema({
 		banner: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFiles' },
 		bannerPath: { type: String, required: false, default: null },
 		birthday: { type: Date, required: false, default: null },

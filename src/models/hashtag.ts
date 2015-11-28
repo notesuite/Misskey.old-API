@@ -3,7 +3,7 @@ import { Schema, Connection, Document, Model } from 'mongoose';
 export default function hashtag(db: Connection): Model<Document> {
 	'use strict';
 
-	const schema: Schema = new Schema({
+	const schema = new Schema({
 		createdAt: { type: Date, required: true, default: Date.now },
 		name: { type: String, required: true, unique: true }
 	});

@@ -24,7 +24,7 @@ export default function upload(
 		return <Promise<any>>Promise.reject('too-long-filename');
 	} else {
 		return new Promise<Object>((resolve, reject) => {
-			const appId: string = app !== null ? app.id : null;
+			const appId = app !== null ? app.id : null;
 			add(appId, user.id, fileName, mimetype, file, size, unconditional).then((createdFile: IAlbumFile) => {
 				resolve(createdFile.toObject());
 			}, (err: any) => {

@@ -3,7 +3,7 @@ import { Schema, Connection, Document, Model } from 'mongoose';
 export default function application(db: Connection): Model<Document> {
 	'use strict';
 
-	const schema: Schema = new Schema({
+	const schema = new Schema({
 		createdAt: { type: Date, required: true, default: Date.now },
 		userId: { type: Schema.Types.ObjectId, required: true },
 		appKey: { type: String, required: true },

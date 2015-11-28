@@ -6,7 +6,7 @@ export default function userFollowing(db: Connection): Model<Document> {
 
 	mongooseAutoIncrement.initialize(db);
 
-	const schema: Schema = new Schema({
+	const schema = new Schema({
 		createdAt: { type: Date, required: true, default: Date.now },
 		cursor: { type: Number },
 		followee: { type: Schema.Types.ObjectId, required: true, ref: 'User' },

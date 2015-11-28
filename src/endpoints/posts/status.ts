@@ -23,7 +23,7 @@ export default function status(
 	'use strict';
 
 	return new Promise<Object>((resolve, reject) => {
-		const maxTextLength: number = 300;
+		const maxTextLength = 300;
 		text = text.trim();
 
 		if (text.length === 0) {
@@ -52,7 +52,7 @@ export default function status(
 		}
 
 		function create(reply: IPost = null): void {
-			const hashtags: string[] = extractHashtags(text);
+			const hashtags = extractHashtags(text);
 			StatusPost.create({
 				type: 'status',
 				app: app !== null ? app.id : null,

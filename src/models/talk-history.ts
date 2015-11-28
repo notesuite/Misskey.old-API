@@ -3,7 +3,7 @@ import { Schema, Connection, Document, Model } from 'mongoose';
 export default function talkHistory(db: Connection): Model<Document> {
 	'use strict';
 
-	const schema: Schema = new Schema({
+	const schema = new Schema({
 		updatedAt: { type: Date, required: true, default: Date.now },
 		message: { type: Schema.Types.ObjectId, required: true, ref: 'TalkMessage' },
 		otherparty: { type: Schema.Types.ObjectId, required: true, ref: 'User' },

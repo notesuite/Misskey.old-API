@@ -6,7 +6,7 @@ export default function postMention(db: Connection): Model<Document> {
 
 	mongooseAutoIncrement.initialize(db);
 
-	const schema: Schema = new Schema({
+	const schema = new Schema({
 		createdAt: { type: Date, required: true, default: Date.now },
 		cursor: { type: Number },
 		isRead: { type: Boolean, required: false, default: false },

@@ -15,7 +15,7 @@ export default function search(me: IUser): Promise<Object[]> {
 				return reject(followingsFindErr);
 			}
 
-			const ignoreIds: string[] = (followings.length > 0)
+			const ignoreIds = (followings.length > 0)
 				? followings.map(following => {
 					return following.followee.toString();
 				}).concat([me.id])

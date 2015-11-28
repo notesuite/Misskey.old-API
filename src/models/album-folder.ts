@@ -6,7 +6,7 @@ export default function albumFilder(db: Connection): Model<Document> {
 
 	mongooseAutoIncrement.initialize(db);
 
-	const schema: Schema = new Schema({
+	const schema = new Schema({
 		createdAt: { type: Date, required: true, default: Date.now },
 		color: { type: String, required: true },
 		cursor: { type: Number },
