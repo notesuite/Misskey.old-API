@@ -50,6 +50,12 @@ export default function timeline(
 			})).then(serializedNotifications => {
 				resolve(serializedNotifications);
 			});
+
+			// 全て既読にする
+			notifications.map(notification => {
+				notification.isRead = true;
+				notification.save();
+			});
 		});
 	});
 }
