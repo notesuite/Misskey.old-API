@@ -159,7 +159,7 @@ export interface INotification extends Document {
 
 export interface ITalkMessage extends Document {
 	app: string | Types.ObjectId | IApplication;
-	attachedFiles: string | Types.ObjectId[] | IAlbumFile[];
+	file: string | Types.ObjectId | IAlbumFile;
 	createdAt: Date;
 	cursor: number;
 	isContentModified: boolean;

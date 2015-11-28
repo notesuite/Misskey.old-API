@@ -8,9 +8,9 @@ export default function talkMessage(db: Connection): Model<Document> {
 
 	const schema = new Schema({
 		app: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Application' },
-		attachedFiles: [{ type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFile' }],
 		createdAt: { type: Date, required: true, default: Date.now },
 		cursor: { type: Number },
+		file: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFile' },
 		isContentModified: { type: Boolean, required: false, default: false },
 		isDeleted: { type: Boolean, required: false, default: false },
 		isPlain: { type: Boolean, required: false, default: false },
