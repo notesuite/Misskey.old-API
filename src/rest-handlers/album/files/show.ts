@@ -13,6 +13,6 @@ export default function showFile(
 	show(user, req.query['file-id']).then((file: Object) => {
 		res(file);
 	}, (err: any) => {
-		res(err).code(500);
+		res({error: err}).code(500);
 	});
 }

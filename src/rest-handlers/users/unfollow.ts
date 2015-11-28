@@ -15,7 +15,7 @@ export default function unfollowUser(
 		unfollow(user, req.payload['user-id']).then(() => {
 			res({kyoppie: 'yuppie'});
 		}, (err: any) => {
-			res(err).code(500);
+			res({error: err}).code(500);
 		});
 	}
 };

@@ -13,6 +13,6 @@ export default function list(
 	files(user, req.query['folder-id'], req.query['include-folders']).then((files: Object[]) => {
 		res(files);
 	}, (err: any) => {
-		res(err).code(500);
+		res({error: err}).code(500);
 	});
 }

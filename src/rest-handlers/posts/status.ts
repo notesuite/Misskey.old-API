@@ -22,6 +22,6 @@ export default function status(
 	).then((status: Object) => {
 		res(status);
 	}, (err: any) => {
-		res(err).code(500);
+		res({error: err}).code(500);
 	});
 }

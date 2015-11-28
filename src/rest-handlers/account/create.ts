@@ -29,6 +29,6 @@ export default function create(
 					return 500;
 			}
 		})();
-		res(err).code(statuscode);
+		res({error: err}).code(statuscode);
 	});
 }

@@ -17,6 +17,6 @@ export default function timeline(
 	).then((timeline: Object[]) => {
 		res(timeline);
 	}, (err: any) => {
-		res(err).code(500);
+		res({error: err}).code(500);
 	});
 }

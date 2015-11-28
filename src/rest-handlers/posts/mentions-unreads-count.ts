@@ -14,6 +14,6 @@ export default function unreadsCount(
 	).then((count: number) => {
 		res(count);
 	}, (err: any) => {
-		res(err).code(500);
+		res({error: err}).code(500);
 	});
 }

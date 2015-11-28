@@ -22,6 +22,6 @@ export default function likePost(
 					return 500;
 			}
 		})();
-		res(err).code(statusCode);
+		res({error: err}).code(statusCode);
 	});
 };

@@ -12,6 +12,6 @@ export default function searchHashtags(
 	search(req.query['name']).then(hashtags => {
 		res(hashtags);
 	}, (err: any) => {
-		res(err).code(500);
+		res({error: err}).code(500);
 	});
 }

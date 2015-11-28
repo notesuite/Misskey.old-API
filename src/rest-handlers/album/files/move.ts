@@ -13,6 +13,6 @@ export default function moveFile(
 	move(user, req.payload['file-id'], req.payload['folder-id']).then((file: Object) => {
 		res(file);
 	}, (err: any) => {
-		res(err).code(500);
+		res({error: err}).code(500);
 	});
 }

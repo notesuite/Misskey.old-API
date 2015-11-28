@@ -13,6 +13,6 @@ export default function renameFile(
 	rename(user, req.payload['file-id'], req.payload['name']).then((file: Object) => {
 		res(file);
 	}, (err: any) => {
-		res(err).code(500);
+		res({error: err}).code(500);
 	});
 }

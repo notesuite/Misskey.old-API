@@ -15,6 +15,6 @@ export default function isScreennameAvailable(
 		});
 	}, (err: any) => {
 		// TODO: エラーコードを判別して適切なHTTPステータスコードを返す
-		res(err).code(500);
+		res({error: err}).code(500);
 	});
 }

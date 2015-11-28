@@ -12,6 +12,6 @@ export default function searchUsers(
 	search(user, req.query['screen-name']).then((users: Object[]) => {
 		res(users);
 	}, (err: any) => {
-		res(err).code(500);
+		res({error: err}).code(500);
 	});
 }

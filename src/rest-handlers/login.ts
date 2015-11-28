@@ -32,6 +32,6 @@ export default function login(
 			res({same: false});
 		}
 	}, (err: any) => {
-		res(err).code(400);
+		res({error: err}).code(400);
 	});
 }

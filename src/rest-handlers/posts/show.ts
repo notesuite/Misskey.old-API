@@ -12,6 +12,6 @@ export default function showPost(
 	show(user, req.query['post-id']).then((post: Object) => {
 		res(post);
 	}, (err: any) => {
-		res(err).code(500);
+		res({error: err}).code(500);
 	});
 }

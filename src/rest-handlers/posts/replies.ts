@@ -18,6 +18,6 @@ export default function replyPosts(
 	).then((post: Object) => {
 		res(post);
 	}, (err: any) => {
-		res(err).code(500);
+		res({error: err}).code(500);
 	});
 }

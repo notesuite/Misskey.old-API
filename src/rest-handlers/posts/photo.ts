@@ -26,6 +26,6 @@ export default function photoPost(
 	).then((photoPost: Object) => {
 		res(photoPost);
 	}, (err: any) => {
-		res(err).code(500);
+		res({error: err}).code(500);
 	});
 }

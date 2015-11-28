@@ -12,6 +12,6 @@ export default function updateIcon(
 	update(user, req.payload['file-id']).then((me: Object) => {
 		res(me);
 	}, (err: any) => {
-		res(err).code(500);
+		res({error: err}).code(500);
 	});
 };

@@ -16,6 +16,6 @@ export default function showUser(
 	).then((showee: Object) => {
 		res(showee);
 	}, (err: any) => {
-		res(err).code(500);
+		res({error: err}).code(500);
 	});
 }

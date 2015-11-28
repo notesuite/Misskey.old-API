@@ -17,6 +17,6 @@ export default function userFollowings(
 	).then((followingList: Object[]) => {
 		res(followingList);
 	}, (err: any) => {
-		res(err).code(500);
+		res({error: err}).code(500);
 	});
 }

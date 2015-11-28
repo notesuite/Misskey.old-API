@@ -16,6 +16,6 @@ export default function talkPost(
 	).then((posts: Object[]) => {
 		res(posts);
 	}, (err: any) => {
-		res(err).code(500);
+		res({error: err}).code(500);
 	});
 }

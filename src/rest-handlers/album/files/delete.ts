@@ -15,6 +15,6 @@ export default function deleteFile(
 			status: 'success'
 		});
 	}, (err: any) => {
-		res(err).code(500);
+		res({error: err}).code(500);
 	});
 }

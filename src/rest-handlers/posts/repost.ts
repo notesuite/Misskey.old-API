@@ -16,6 +16,6 @@ export default function repost(
 	).then((repost: Object) => {
 		res(repost);
 	}, (err: any) => {
-		res(err).code(500);
+		res({error: err}).code(500);
 	});
 }

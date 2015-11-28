@@ -34,6 +34,6 @@ export default function uploadFile(
 	).then((albumFile: Object) => {
 		res(albumFile);
 	}, (err: any) => {
-		res(err).code(500);
+		res({error: err}).code(500);
 	});
 };
