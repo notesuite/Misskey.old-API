@@ -1,11 +1,17 @@
-import { Request, Response } from '../../misskey-express';
+import * as hapi from 'hapi';
+import { IApplication, IUser } from '../../interfaces';
 import update from '../../endpoints/account/update-avatar';
 
-export default function updateIcon(req: Request, res: Response): void {
+export default function updateIcon(
+	app: IApplication,
+	user: IUser,
+	req: hapi.Request,
+	res: hapi.IReply
+): void {
 	'use strict';
-	update(req.misskeyUser, req.body['file-id']).then((me: Object) => {
-		res.apiRender(me);
+	update(user, req.payload['file-id']).then((me: Object) => {
+		res(me);
 	}, (err: any) => {
-		res.apiError(500, err);
+		res(err).code(500);
 	});
 };
