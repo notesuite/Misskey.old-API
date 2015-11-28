@@ -69,7 +69,7 @@ export default function stream(
 				serializedMessage.user = (<IUser>message.user).toObject();
 				serializedMessage.otherparty = (<IUser>message.otherparty).toObject();
 				serializedMessage.file = (<IAlbumFile>message.file).toObject();
-				return message;
+				return serializedMessage;
 			}));
 
 			// 既読にする
