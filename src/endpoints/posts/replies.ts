@@ -40,9 +40,8 @@ export default function replies(user: IUser, id: string, limit: number = 10, sin
 				return reject(err);
 			}
 			// すべてpopulateする
-			Promise.all(replies.map((post: IPost) => {
-				return populateAll(post);
-			})).then((populatedTimeline: IPost[]) => {
+			Promise.all(replies.map(post => populateAll(post)))
+			.then((populatedTimeline: IPost[]) => {
 				// 整形
 				serializeTimeline(populatedTimeline, user).then((serializedTimeline: Object[]) => {
 					resolve(serializedTimeline);

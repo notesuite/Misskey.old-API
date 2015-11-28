@@ -107,9 +107,7 @@ function common(
 			new Promise<Object[]>((getLikersResolve, getLikersReject) => {
 				getPostLikers(post.id, 10).then((likers: IUser[]) => {
 					if (likers !== null && likers.length > 0) {
-						getLikersResolve(likers.map((liker: IUser) => {
-							return liker.toObject();
-						}));
+						getLikersResolve(likers.map(liker => liker.toObject()));
 					} else {
 						getLikersResolve(null);
 					}

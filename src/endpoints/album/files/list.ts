@@ -20,16 +20,12 @@ export default function list(user: IUser, folderId: string = null, includeFolder
 					if (foldersFindErr !== null) {
 						return reject(foldersFindErr);
 					}
-					const fileObjs: Object[] = files.map((file: IAlbumFile) => {
-						const obj: any = file.toObject();
-						obj.type = 'file';
-						return obj;
-					});
-					const folderObjs: Object[] = folders.map((folder: IAlbumFolder) => {
-						const obj: any = folder.toObject();
-						obj.type = 'folder';
-						return obj;
-					});
+					const fileObjs: Object[] = files.map(file => Object.assign(file.toObject(), {
+						type: 'file'
+					}));
+					const folderObjs: Object[] = folders.map(folder => Object.assign(folder.toObject(), {
+						type: 'folder'
+					}));
 					resolve(fileObjs.concat(folderObjs));
 				});
 			} else {

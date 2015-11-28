@@ -45,14 +45,11 @@ export default function timeline(
 				return reject(err);
 			}
 
-			Promise.all(notifications.map(notification => {
-				return serializeNotification(notification.toObject(), user);
-			})).then(serializedNotifications => {
-				resolve(serializedNotifications);
-			});
+			Promise.all(notifications.map(notification => serializeNotification(notification.toObject(), user)))
+			.then(resolve);
 
 			// 全て既読にする
-			notifications.map(notification => {
+			notifications.forEach(notification => {
 				notification.isRead = true;
 				notification.save();
 			});

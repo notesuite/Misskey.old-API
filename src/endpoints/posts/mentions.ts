@@ -41,12 +41,11 @@ export default function timeline(user: IUser, limit: number = 10, sinceCursor: n
 				return reject(err);
 			}
 
-			const posts: IPost[] = mentions.map(mention => <IPost>mention.post);
+			const posts = mentions.map(mention => <IPost>mention.post);
 
 			// すべてpopulateする
-			Promise.all(posts.map((post: IPost) => {
-				return populateAll(post);
-			})).then((populatedPosts: IPost[]) => {
+			Promise.all(posts.map(post => populateAll(post)))
+			.then((populatedPosts: IPost[]) => {
 				// 整形
 				serializeTimeline(populatedPosts, user).then((serializedTimeline: Object[]) => {
 					resolve(serializedTimeline);

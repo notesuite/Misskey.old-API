@@ -53,8 +53,8 @@ export default function photo(app: IApplication, user: IUser, photos: string[], 
 		}
 
 		function checkPhotos(reply: IPost = null): void {
-			Promise.all(photos.map((photo: string) => {
-				return new Promise<Object>((checkFileResolve, checkFileReject) => {
+			Promise.all(photos.map(photo =>
+				new Promise<Object>((checkFileResolve, checkFileReject) => {
 					AlbumFile.findById(photo, (findErr: any, file: IAlbumFile) => {
 						if (findErr !== null) {
 							checkFileReject(findErr);
@@ -68,8 +68,8 @@ export default function photo(app: IApplication, user: IUser, photos: string[], 
 							checkFileResolve(file);
 						}
 					});
-				});
-			})).then((photoFiles: IAlbumFile[]) => {
+				})
+			)).then((photoFiles: IAlbumFile[]) => {
 				create(reply);
 			}, (photosCheckErr: any) => {
 				reject(photosCheckErr);

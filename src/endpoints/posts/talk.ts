@@ -22,9 +22,8 @@ export default function talk(user: IUser, id: string, limit: number = 30): Promi
 			} else {
 				get(<string>source.inReplyToPost).then((posts: IPost[]) => {
 					// すべてpopulateする
-					Promise.all(posts.map((post: IPost) => {
-						return populateAll(post);
-					})).then((populatedTimeline: IPost[]) => {
+					Promise.all(posts.map(post => populateAll(post)))
+					.then((populatedTimeline: IPost[]) => {
 						// 整形
 						serializeTimeline(populatedTimeline, user).then((serializedTimeline: Object[]) => {
 							resolve(serializedTimeline);

@@ -19,9 +19,8 @@ export default function search(me: IUser, screenName: string): Promise<Object[]>
 			} else if (users.length === 0) {
 				resolve(null);
 			} else {
-				Promise.all(users.map((user: IUser) => {
-					return serializeUser(me, user);
-				})).then((serializedUsers: Object[]) => {
+				Promise.all(users.map(user => serializeUser(me, user)))
+				.then((serializedUsers: Object[]) => {
 					resolve(serializedUsers);
 				}, (err: any) => {
 					reject('something-happened');

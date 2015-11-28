@@ -9,16 +9,14 @@ export default function extractMentions(text: string): Promise<IUser[]> {
 		return Promise.resolve(null);
 	}
 
-	return Promise.all(mentions.map(mention => {
-		return new Promise<IUser>((resolve, reject) => {
-			const sn = mention.replace('@', '');
-			User.findOne({screenNameLower: sn.toLowerCase()}, (err: any, user: IUser) => {
-				if (err !== null) {
-					reject(err);
-				} else {
-					resolve(user);
-				}
-			});
+	return Promise.all(mentions.map(mention => new Promise<IUser>((resolve, reject) => {
+		const sn = mention.replace('@', '');
+		User.findOne({screenNameLower: sn.toLowerCase()}, (err: any, user: IUser) => {
+			if (err !== null) {
+				reject(err);
+			} else {
+				resolve(user);
+			}
 		});
-	}));
+	})));
 }

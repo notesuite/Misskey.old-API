@@ -21,9 +21,8 @@ export default function deleteFolder(user: IUser, folderId: string = null): Prom
 					if (filesFindErr !== null) {
 						return reject(filesFindErr);
 					}
-					Promise.all(files.map((file: IAlbumFile) => {
-						return fileDel(user, file.id);
-					})).then(() => {
+					Promise.all(files.map(file => fileDel(user, file.id)))
+					.then(() => {
 						folder.remove((removeErr: any) => {
 							if (removeErr !== null) {
 								return reject(removeErr);
