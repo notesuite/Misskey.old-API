@@ -1,12 +1,20 @@
-import { Request, Response } from '../../misskey-express';
+import * as hapi from 'hapi';
 import createAccount from '../../endpoints/account/create';
-import {IUser} from '../../interfaces';
+import { IApplication, IUser } from '../../interfaces';
 
-export default function create(req: Request, res: Response): void {
+export default function create(
+	app: IApplication,
+	user: IUser,
+	req: hapi.Request,
+	res: hapi.IReply
+): void {
 	'use strict';
-	createAccount(req.body['screen-name'], req.body['password']).then((user: IUser) => {
-		res.apiRender({
-			user: user.toObject()
+	createAccount(
+		req.payload['screen-name'],
+		req.payload['password']
+	).then((created: IUser) => {
+		res({
+			user: created.toObject()
 		});
 	}, (err: any) => {
 		const statuscode: number = (() => {
@@ -21,6 +29,6 @@ export default function create(req: Request, res: Response): void {
 					return 500;
 			}
 		})();
-		res.apiError(statuscode, err);
+		res(err).code(statuscode);
 	});
 }
