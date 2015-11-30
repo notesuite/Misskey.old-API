@@ -7,7 +7,7 @@ export interface IUser extends Document {
 	color: string;
 	comment: string;
 	createdAt: Date;
-	credit: Number;
+	credit: number;
 	description: string;
 	email: string;
 	encryptedPassword: string;
