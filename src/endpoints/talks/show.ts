@@ -25,8 +25,8 @@ export default function show(
 			} else if (message === null) {
 				return reject('message-not-found');
 			} else if (
-				message.otherparty.toString() !== user.id.toString() &&
-				message.user.toString() !== user.id.toString()
+				(<IUser>message.otherparty).id.toString() !== user.id.toString() &&
+				(<IUser>message.user).id.toString() !== user.id.toString()
 			) {
 				return reject('access-denied');
 			} else if (message.isDeleted) {
