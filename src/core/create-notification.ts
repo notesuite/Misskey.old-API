@@ -21,7 +21,7 @@ export default function createNotification(
 				reject(createErr);
 			} else {
 				resolve(createdNotification);
-				publishStreamingMessage(`userStream:${userId}`, JSON.stringify({
+				publishStreamingMessage(`user-stream:${userId}`, JSON.stringify({
 					type: 'notification',
 					value: createdNotification.toObject()
 				}));
