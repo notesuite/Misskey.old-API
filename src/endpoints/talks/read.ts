@@ -20,8 +20,10 @@ export default function read(
 				return reject(findErr);
 			} else if (message === null) {
 				return reject('message-not-found');
+			} else if (message.user.toString() === user.id.toString()) {
+				return reject('access-denied');
 			} else if (message.otherparty.toString() !== user.id.toString()) {
-				return reject('message-not-found');
+				return reject('access-denied');
 			} else if (message.isDeleted) {
 				return reject('this-message-has-been-deleted');
 			} else if (message.isRead) {
