@@ -39,11 +39,11 @@ export default function talksDelete(
 				resolve();
 
 				// ストリームメッセージ発行
-				publishStream(`talkStream:${message.otherparty}-${user.id}`, JSON.stringify({
+				publishStream(`talk-stream:${message.otherparty}-${user.id}`, JSON.stringify({
 					type: 'otherparty-message-delete',
 					value: message.id
 				}));
-				publishStream(`talkStream:${user.id}-${message.otherparty}`, JSON.stringify({
+				publishStream(`talk-stream:${user.id}-${message.otherparty}`, JSON.stringify({
 					type: 'me-message-delete',
 					value: message.id
 				}));

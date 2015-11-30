@@ -7,12 +7,12 @@ export default function publishUserStream<T>(publisherId: string, message: T): v
 	const streamMessage = JSON.stringify(message);
 
 	// 自分のストリーム
-	publishStreamingMessage(`userStream:${publisherId}`, streamMessage);
+	publishStreamingMessage(`user-stream:${publisherId}`, streamMessage);
 
 	// 自分のフォロワーのストリーム
 	UserFollowing.find({followee: publisherId}, (followerFindErr: any, followers: IUserFollowing[]) => {
 		followers.forEach(follower => {
-			publishStreamingMessage(`userStream:${follower.follower}`, streamMessage);
+			publishStreamingMessage(`user-stream:${follower.follower}`, streamMessage);
 		});
 	});
 };

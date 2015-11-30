@@ -70,9 +70,9 @@ export default function say(
 
 				// ストリーミングメッセージ
 				[
-					[`userStream:${otherpartyId}`, 'talk-message'],
-					[`talkStream:${otherpartyId}-${user.id}`, 'otherparty-message'],
-					[`talkStream:${user.id}-${otherpartyId}`, 'me-message']
+					[`user-stream:${otherpartyId}`, 'talk-message'],
+					[`talk-stream:${otherpartyId}-${user.id}`, 'otherparty-message'],
+					[`talk-stream:${user.id}-${otherpartyId}`, 'me-message']
 				].forEach(message => {
 					publishStream(message[0], JSON.stringify({
 						type: message[1],
