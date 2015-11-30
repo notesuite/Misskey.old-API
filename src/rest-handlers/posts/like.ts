@@ -1,3 +1,4 @@
+import { Match } from 'powerful';
 import * as hapi from 'hapi';
 import { IApplication, IUser } from '../../interfaces';
 import like from '../../endpoints/posts/like';
@@ -12,16 +13,11 @@ export default function likePost(
 	like(user, req.payload['post-id']).then(() => {
 		res({ kyoppie: "yuppie" });
 	}, (err: any) => {
-		const statusCode = (() => {
-			switch (err) {
-				case 'post-not-found':
-					return 400;
-				case 'already-liked':
-					return 400;
-				default:
-					return 500;
-			}
-		})();
+		const statusCode = new Match<string, number>(err)
+			.is('post-not-found', () => 400)
+			.is('already-liked', () => 400)
+			.toOption().getValue(500);
+
 		res({error: err}).code(statusCode);
 	});
 };

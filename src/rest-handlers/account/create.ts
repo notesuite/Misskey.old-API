@@ -1,3 +1,4 @@
+import { Match } from 'powerful';
 import * as hapi from 'hapi';
 import createAccount from '../../endpoints/account/create';
 import { IApplication, IUser } from '../../interfaces';
@@ -17,18 +18,12 @@ export default function create(
 			user: created.toObject()
 		});
 	}, (err: any) => {
-		const statuscode: number = (() => {
-			switch (err) {
-				case 'empty-screen-name':
-					return 400;
-				case 'invalid-screen-name':
-					return 400;
-				case 'empty-password':
-					return 400;
-				default:
-					return 500;
-			}
-		})();
-		res({error: err}).code(statuscode);
+		const statusCode = new Match<string, number>(err)
+			.is('empty-screen-name', () => 400)
+			.is('invalid-screen-name', () => 400)
+			.is('empty-password', () => 400)
+			.toOption().getValue(500);
+
+		res({error: err}).code(statusCode);
 	});
 }
