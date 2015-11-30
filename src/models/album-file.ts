@@ -29,7 +29,7 @@ export default function albumFile(db: Connection): Model<Document> {
 	}
 	(<any>schema).options.toObject.transform = (doc: any, ret: any) => {
 		ret.id = doc.id;
-		ret.url = `${config.userContentsServer.url}/${doc.serverPath}`;
+		ret.url = `${config.fileServer.url}/${doc.serverPath}`;
 		delete ret._id;
 		delete ret.__v;
 	};

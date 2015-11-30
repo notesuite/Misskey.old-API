@@ -1,4 +1,4 @@
-import {IApplication, IUser, IAlbumFile} from '../../../interfaces';
+import {IApplication, IUser} from '../../../interfaces';
 import add from '../../../core/add-file-to-album';
 
 /**

@@ -16,9 +16,9 @@ export default function deleteFile(user: IUser, fileId: string): Promise<Object>
 				reject('file-not-found');
 			} else {
 				request.del({
-					url: `http://${config.userContentsServer.ip}:${config.userContentsServer.port}/delete`,
+					url: `http://${config.fileServer.ip}:${config.fileServer.port}/delete`,
 					formData: {
-						passkey: config.userContentsServer.passkey,
+						passkey: config.fileServer.passkey,
 						path: file.serverPath
 					}
 				}, (err: any, _: any, res: any) => {

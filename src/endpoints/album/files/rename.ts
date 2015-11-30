@@ -20,9 +20,9 @@ export default function rename(user: IUser, fileId: string, name: string): Promi
 				reject('file-not-found');
 			} else {
 				request.put({
-					url: `http://${config.userContentsServer.ip}:${config.userContentsServer.port}/rename`,
+					url: `http://${config.fileServer.ip}:${config.fileServer.port}/rename`,
 					formData: {
-						passkey: config.userContentsServer.passkey,
+						passkey: config.fileServer.passkey,
 						'old-path': file.serverPath,
 						'new-name': name
 					}
