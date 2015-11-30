@@ -36,7 +36,9 @@ export default function show(
 			serialize(message, user).then(resolve, reject);
 
 			// 既読にする
-			readTalkMessage(user, message);
+			if ((<IUser>message.otherparty).id.toString() === user.id.toString()) {
+				readTalkMessage(user, message);
+			}
 		});
 	});
 }
