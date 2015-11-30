@@ -11,7 +11,7 @@ export default function talksRead(
 	'use strict';
 	showMessage(
 		user,
-		req.payload['message-id']
+		req.query['message-id']
 	).then(() => {
 		res({status: 'success'});
 	}, (err: any) => {
