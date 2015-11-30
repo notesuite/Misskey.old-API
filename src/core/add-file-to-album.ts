@@ -21,8 +21,8 @@ export default function addFileToAlbum(
 	mimetype: string,
 	file: Buffer,
 	size: number,
-	unconditional: boolean = false)
-		: Promise<IAlbumFile> {
+	unconditional: boolean = false
+): Promise<IAlbumFile> {
 	'use strict';
 
 	// ハッシュ生成
@@ -86,10 +86,10 @@ export default function addFileToAlbum(
 					}
 					// ファイルをサーバーにアップロード
 					request.post({
-						url: `http://${config.userContentsServer.ip}:${config.userContentsServer.port}/register`,
+						url: `http://${config.fileServer.ip}:${config.fileServer.port}/register`,
 						formData: {
 							'file-id': albumFile.id,
-							'passkey': config.userContentsServer.passkey,
+							'passkey': config.fileServer.passkey,
 							file: {
 								value: file,
 								options: {

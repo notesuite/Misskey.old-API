@@ -47,20 +47,20 @@ export default function user(db: Connection): Model<Document> {
 		delete ret.avatar;
 		delete ret.avatarPath;
 		ret.avatarUrl = doc.avatar !== null
-			? `${config.userContentsServer.url}/${doc.avatarPath}`
-			: `${config.userContentsServer.url}/defaults/avatar.jpg`;
+			? `${config.fileServer.url}/${doc.avatarPath}`
+			: `${config.fileServer.url}/defaults/avatar.jpg`;
 
 		delete ret.banner;
 		delete ret.bannerPath;
 		ret.bannerUrl = doc.banner !== null
-			? `${config.userContentsServer.url}/${doc.bannerPath}`
-			: `${config.userContentsServer.url}/defaults/banner.jpg`;
+			? `${config.fileServer.url}/${doc.bannerPath}`
+			: `${config.fileServer.url}/defaults/banner.jpg`;
 
 		delete ret.wallpaper;
 		delete ret.wallpaperPath;
 		ret.wallpaperUrl = doc.wallpaper !== null
-			? `${config.userContentsServer.url}/${doc.wallpaperPath}`
-			: `${config.userContentsServer.url}/defaults/wallpaper.jpg`;
+			? `${config.fileServer.url}/${doc.wallpaperPath}`
+			: `${config.fileServer.url}/defaults/wallpaper.jpg`;
 
 		delete ret._id;
 		delete ret.__v;

@@ -27,7 +27,7 @@ export interface IConfig {
 		host: string,
 		port: number
 	};
-	userContentsServer: {
+	fileServer: {
 		passkey: string,
 		url: string,
 		ip: string,
@@ -53,7 +53,7 @@ export const defaultConfig: IConfig = {
 		host: 'localhost',
 		port: 6379
 	},
-	userContentsServer: {
+	fileServer: {
 		passkey: '',
 		url: 'http://usercontents.misskey.xyz',
 		ip: '192.168.0.2',
