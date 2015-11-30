@@ -1,5 +1,5 @@
 import {TalkMessage} from '../../models';
-import {ITalkMessage, IUser, IAlbumFile} from '../../interfaces';
+import {ITalkMessage, IUser} from '../../interfaces';
 import serialize from '../../core/serialize-talk-message';
 import readTalkMessage from '../../core/read-talk-message';
 
