@@ -12,8 +12,8 @@ export default function talksRead(
 	showMessage(
 		user,
 		req.query['message-id']
-	).then(() => {
-		res({status: 'success'});
+	).then(message => {
+		res(message);
 	}, (err: any) => {
 		res({error: err}).code(500);
 	});
