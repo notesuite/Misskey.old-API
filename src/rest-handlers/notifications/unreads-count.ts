@@ -11,7 +11,7 @@ export default function unreadsCount(
 	'use strict';
 	notificationsUnreadsCount(
 		user
-	).then((count: number) => {
+	).then(count => {
 		res(count);
 	}, (err: any) => {
 		res({error: err}).code(500);

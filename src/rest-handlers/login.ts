@@ -12,7 +12,7 @@ export default function login(
 	'use strict';
 	const screenName: string = req.query['screen-name'];
 	const password: string = req.query['password'];
-	doLogin(screenName, password).then((same: boolean) => {
+	doLogin(screenName, password).then(same => {
 		if (same) {
 			User.findOne({
 				screenNameLower: screenName.toLowerCase()

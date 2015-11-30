@@ -9,7 +9,7 @@ export default function isScreennameAvailable(
 	res: hapi.IReply
 ): void {
 	'use strict';
-	screennameAvailable(req.query['screen-name']).then((available: boolean) => {
+	screennameAvailable(req.query['screen-name']).then(available => {
 		res({
 			available
 		});

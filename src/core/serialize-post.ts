@@ -105,7 +105,7 @@ function common(
 			}),
 			// Get likers
 			new Promise<Object[]>((getLikersResolve, getLikersReject) => {
-				getPostLikers(post.id, 10).then((likers: IUser[]) => {
+				getPostLikers(post.id, 10).then(likers => {
 					if (likers !== null && likers.length > 0) {
 						getLikersResolve(likers.map(liker => liker.toObject()));
 					} else {

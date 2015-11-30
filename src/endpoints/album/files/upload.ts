@@ -25,7 +25,7 @@ export default function upload(
 	} else {
 		return new Promise<Object>((resolve, reject) => {
 			const appId = app !== null ? app.id : null;
-			add(appId, user.id, fileName, mimetype, file, size, unconditional).then((createdFile: IAlbumFile) => {
+			add(appId, user.id, fileName, mimetype, file, size, unconditional).then(createdFile => {
 				resolve(createdFile.toObject());
 			}, (err: any) => {
 				reject(err);
