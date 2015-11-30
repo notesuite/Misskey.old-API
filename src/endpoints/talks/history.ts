@@ -14,13 +14,13 @@ export default function talksHistory(
 	'use strict';
 
 	return new Promise<Object[]>((resolve, reject) => {
-		TalkHistory
+		(<any>TalkHistory)
 		.find({
 			user: user.id
 		})
 		.sort('-updatedAt')
 		.limit(limit)
-		.populate('message.user message.otherparty message.file')
+		.deepPopulate('message.user message.otherparty message.file')
 		.exec((err: any, histories: ITalkHistory[]) => {
 			if (err !== null) {
 				return reject(err);
