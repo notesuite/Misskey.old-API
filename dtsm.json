@@ -14,37 +14,37 @@
   },
   "dependencies": {
     "gulp/gulp.d.ts": {
-      "ref": "aed176536a202b9a2475ce1989ea6d2d0226a185"
+      "ref": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
     },
     "gulp-typescript/gulp-typescript.d.ts": {
-      "ref": "aed176536a202b9a2475ce1989ea6d2d0226a185"
+      "ref": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
     },
     "gulp-tslint/gulp-tslint.d.ts": {
-      "ref": "aed176536a202b9a2475ce1989ea6d2d0226a185"
+      "ref": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
     },
     "mongoose/mongoose.d.ts": {
-      "ref": "aed176536a202b9a2475ce1989ea6d2d0226a185"
+      "ref": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
     },
     "express/express.d.ts": {
-      "ref": "aed176536a202b9a2475ce1989ea6d2d0226a185"
+      "ref": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
     },
     "body-parser/body-parser.d.ts": {
-      "ref": "aed176536a202b9a2475ce1989ea6d2d0226a185"
+      "ref": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
     },
     "multer/multer.d.ts": {
-      "ref": "aed176536a202b9a2475ce1989ea6d2d0226a185"
+      "ref": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
     },
     "bcrypt/bcrypt.d.ts": {
-      "ref": "aed176536a202b9a2475ce1989ea6d2d0226a185"
+      "ref": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
     },
     "redis/redis.d.ts": {
-      "ref": "aed176536a202b9a2475ce1989ea6d2d0226a185"
+      "ref": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
     },
     "request/request.d.ts": {
-      "ref": "aed176536a202b9a2475ce1989ea6d2d0226a185"
+      "ref": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
     },
     "mongoose-auto-increment/mongoose-auto-increment.d.ts": {
-      "ref": "e48f0c7a0a5f9e9d35e9cfd7506461bab435cb49"
+      "ref": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
     },
     "hapi/hapi.d.ts": {
       "ref": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
