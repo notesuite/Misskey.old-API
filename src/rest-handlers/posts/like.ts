@@ -17,7 +17,7 @@ export default function likePost(
 			.is('post-not-found', () => 404)
 			.is('post-deleted', () => 410)
 			.is('already-liked', () => 400)
-			.toOption().getValue(500);
+			.getValue(500);
 
 		res({error: err}).code(statusCode);
 	});

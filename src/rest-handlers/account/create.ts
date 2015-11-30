@@ -22,7 +22,7 @@ export default function create(
 			.is('empty-screen-name', () => 400)
 			.is('invalid-screen-name', () => 400)
 			.is('empty-password', () => 400)
-			.toOption().getValue(500);
+			.getValue(500);
 
 		res({error: err}).code(statusCode);
 	});
