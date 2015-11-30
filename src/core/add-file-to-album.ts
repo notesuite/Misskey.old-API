@@ -111,8 +111,9 @@ export default function addFileToAlbum(
 							// 幅と高さを取得してプロパティに保存しておく
 							(<any>gm)(file, fileName)
 							.size((getSizeErr: any, whsize: any) => {
-								if (getSizeErr !== null) {
-									return reject(getSizeErr);
+								if (getSizeErr !== undefined && getSizeErr !== null) {
+									console.error(getSizeErr);
+									return save(albumFile);
 								}
 								albumFile.properties = {
 									width: whsize.width,
