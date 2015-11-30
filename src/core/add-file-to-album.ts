@@ -1,5 +1,6 @@
 import * as crypto from 'crypto';
 import * as request from 'request';
+import * as gm from 'gm';
 import {AlbumFile} from '../models';
 import {IAlbumFile} from '../interfaces';
 import config from '../config';
@@ -101,16 +102,38 @@ export default function addFileToAlbum(
 						if (uploadErr !== null) {
 							return reject(uploadErr);
 						}
+
 						// 最終的にファイルが登録されたサーバーのパスを保存
 						albumFile.serverPath = path;
-						albumFile.save((saveErr: any, saved: IAlbumFile) => {
-							if (saveErr !== null) {
-								return reject(saveErr);
-							}
-							resolve(saved);
-						});
+
+						// 画像だった場合
+						if (/^image\/.*$/.test(mimetype)) {
+							// 幅と高さを取得してプロパティに保存しておく
+							(<any>gm)(file, fileName)
+							.size((getSizeErr: any, whsize: any) => {
+								if (getSizeErr !== null) {
+									return reject(getSizeErr);
+								}
+								albumFile.properties = {
+									width: whsize.width,
+									height: whsize.height
+								};
+								save(albumFile);
+							});
+						} else {
+							save(albumFile);
+						}
 					});
 				});
+			});
+		}
+
+		function save(albumFile: IAlbumFile): void {
+			albumFile.save((saveErr: any, saved: IAlbumFile) => {
+				if (saveErr !== null) {
+					return reject(saveErr);
+				}
+				resolve(saved);
 			});
 		}
 	});

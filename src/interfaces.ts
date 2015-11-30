@@ -135,7 +135,7 @@ export interface IAlbumFile extends Document {
 	isHidden: boolean;
 	isPrivate: boolean;
 	name: string;
-	properties: Object;
+	properties: any;
 	serverPath: string;
 	user: string | Types.ObjectId | IUser;
 }

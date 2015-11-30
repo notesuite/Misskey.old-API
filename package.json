@@ -28,6 +28,7 @@
   "dependencies": {
     "bcrypt": "0.8.5",
     "connect-redis": "3.0.1",
+    "gm": "1.21.1",
     "hapi": "11.1.2",
     "mongoose": "4.2.2",
     "mongoose-auto-increment": "5.0.1",
