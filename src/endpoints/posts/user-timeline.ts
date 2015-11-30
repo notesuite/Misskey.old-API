@@ -4,7 +4,7 @@ import serializeTimeline from '../../core/serialize-timeline';
 import populateAll from '../../core/post-populate-all';
 
 /**
- * 特定のユーザーの投稿のタイムラインを取得します
+ * 指定ユーザーの投稿のタイムラインを取得します
  * @param user API利用ユーザー
  * @param targetUserId 対象のユーザーID
  * @param includeReplies リプライを含めるかどうか
