@@ -20,7 +20,7 @@ export default function photo(app: IApplication, user: IUser, photos: string[], 
 		: Promise<Object> {
 	'use strict';
 
-	const maxTextLength: number = 300;
+	const maxTextLength = 300;
 	if (text !== null) {
 		text = text.trim();
 

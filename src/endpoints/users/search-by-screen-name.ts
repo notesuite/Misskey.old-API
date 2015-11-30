@@ -9,7 +9,7 @@ import serializeUser from '../../core/serialize-user';
  */
 export default function search(me: IUser, screenName: string): Promise<Object[]> {
 	'use strict';
-	const screenNameLower: string = screenName.toLowerCase();
+	const screenNameLower = screenName.toLowerCase();
 	return new Promise<Object[]>((resolve, reject) => {
 		User.find({
 			screenNameLower: new RegExp(screenNameLower)
