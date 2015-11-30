@@ -5,10 +5,10 @@ import serializePhotoPost from './serialize-photo-post';
 import getPostLikers from './get-post-likers';
 
 export default function serializePost(
-		post: any,
-		me: IUser = null,
-		includeDestination: boolean = true)
-			: Promise<Object> {
+	post: any,
+	me: IUser = null,
+	includeDestination: boolean = true
+): Promise<Object> {
 	'use strict';
 
 	const type: string = post.type;

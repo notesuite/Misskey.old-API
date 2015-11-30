@@ -1,5 +1,6 @@
 import {TalkHistory} from '../../models';
-import {ITalkMessage, IUser, ITalkHistory, IAlbumFile} from '../../interfaces';
+import {ITalkMessage, IUser, ITalkHistory} from '../../interfaces';
+import serialize from '../../core/serialize-talk-message';
 
 /**
  * Talkの履歴を取得します
@@ -27,15 +28,11 @@ export default function talksHistory(
 				return resolve([]);
 			}
 
-			// const messages: ITalkMessage[] = histories.map(history => <ITalkMessage>history.message);
+			const messages: ITalkMessage[] = histories.map(history => <ITalkMessage>history.message);
 
-			resolve(histories.map(history => {
-				const serializedMessage: any = (<ITalkMessage>history.message).toObject();
-				serializedMessage.user = (<IUser>(<ITalkMessage>history.message).user).toObject();
-				serializedMessage.otherparty = (<IUser>(<ITalkMessage>history.message).otherparty).toObject();
-				serializedMessage.file = (<IAlbumFile>(<ITalkMessage>history.message).file).toObject();
-				return serializedMessage;
-			}));
+			Promise.all(messages.map(message => {
+				return serialize(message, user);
+			})).then(resolve, reject);
 		});
 	});
 }

@@ -1,5 +1,6 @@
 import {TalkMessage} from '../../models';
-import {ITalkMessage, IUser, IAlbumFile} from '../../interfaces';
+import {ITalkMessage, IUser} from '../../interfaces';
+import serialize from '../../core/serialize-talk-message';
 import readTalkMessage from '../../core/read-talk-message';
 
 /**
@@ -29,12 +30,7 @@ export default function read(
 				return reject('this-message-has-been-deleted');
 			}
 
-			const serializedMessage: any = message.toObject();
-			serializedMessage.user = (<IUser>message.user).toObject();
-			serializedMessage.otherparty = (<IUser>message.otherparty).toObject();
-			serializedMessage.file = (<IAlbumFile>message.file).toObject();
-
-			resolve(serializedMessage);
+			serialize(message, user).then(resolve, reject);
 
 			// 既読にする
 			readTalkMessage(user, message);

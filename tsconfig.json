@@ -43,6 +43,7 @@
 		"./src/core/serialize-photo-post.ts",
 		"./src/core/serialize-post.ts",
 		"./src/core/serialize-status.ts",
+		"./src/core/serialize-talk-message.ts",
 		"./src/core/serialize-timeline.ts",
 		"./src/core/serialize-user.ts",
 		"./src/endpoints.ts",

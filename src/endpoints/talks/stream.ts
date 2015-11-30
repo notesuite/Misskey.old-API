@@ -1,5 +1,6 @@
 import {TalkMessage} from '../../models';
 import {ITalkMessage, IUser, IAlbumFile} from '../../interfaces';
+import serialize from '../../core/serialize-talk-message';
 import readTalkMessage from '../../core/read-talk-message';
 
 /**
@@ -65,13 +66,9 @@ export default function stream(
 				return resolve([]);
 			}
 
-			resolve(messages.map(message => {
-				const serializedMessage: any = message.toObject();
-				serializedMessage.user = (<IUser>message.user).toObject();
-				serializedMessage.otherparty = (<IUser>message.otherparty).toObject();
-				serializedMessage.file = (<IAlbumFile>message.file).toObject();
-				return serializedMessage;
-			}));
+			Promise.all(messages.map(message => {
+				return serialize(message, user);
+			})).then(resolve, reject);
 
 			// 既読にする
 			messages.forEach(message => {
