@@ -1,12 +1,22 @@
-import { Request, Response } from '../../../misskey-express';
+import * as hapi from 'hapi';
+import { IApplication, IUser } from '../../../interfaces';
 import recolor from '../../../endpoints/album/folders/update-color';
 
-export default function updateColor(req: Request, res: Response): void {
+export default function updateColor(
+	app: IApplication,
+	user: IUser,
+	req: hapi.Request,
+	res: hapi.IReply
+): void {
 	'use strict';
 
-	recolor(req.misskeyUser, req.body['folder-id'], req.body['color']).then((folder: Object) => {
-		res.apiRender(folder);
+	recolor(
+		user,
+		req.payload['folder-id'],
+		req.payload['color']
+	).then((folder: Object) => {
+		res(folder);
 	}, (err: any) => {
-		res.apiError(500, err);
+		res({error: err}).code(500);
 	});
 }

@@ -1,12 +1,22 @@
-import { Request, Response } from '../../../misskey-express';
+import * as hapi from 'hapi';
+import { IApplication, IUser } from '../../../interfaces';
 import rename from '../../../endpoints/album/folders/rename';
 
-export default function renameFolder(req: Request, res: Response): void {
+export default function renameFolder(
+	app: IApplication,
+	user: IUser,
+	req: hapi.Request,
+	res: hapi.IReply
+): void {
 	'use strict';
 
-	rename(req.misskeyUser, req.body['folder-id'], req.body['name']).then((folder: Object) => {
-		res.apiRender(folder);
+	rename(
+		user,
+		req.payload['folder-id'],
+		req.payload['name']
+	).then((folder: Object) => {
+		res(folder);
 	}, (err: any) => {
-		res.apiError(500, err);
+		res({error: err}).code(500);
 	});
 }

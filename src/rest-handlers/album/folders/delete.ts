@@ -1,14 +1,23 @@
-import { Request, Response } from '../../../misskey-express';
+import * as hapi from 'hapi';
+import { IApplication, IUser } from '../../../interfaces';
 import del from '../../../endpoints/album/folders/delete';
 
-export default function deleteFolder(req: Request, res: Response): void {
+export default function deleteFolder(
+	app: IApplication,
+	user: IUser,
+	req: hapi.Request,
+	res: hapi.IReply
+): void {
 	'use strict';
 
-	del(req.misskeyUser, req.body['folder-id']).then(() => {
-		res.apiRender({
+	del(
+		user,
+		req.payload['folder-id']
+	).then(() => {
+		res({
 			status: 'success'
 		});
 	}, (err: any) => {
-		res.apiError(500, err);
+		res({error: err}).code(500);
 	});
 }

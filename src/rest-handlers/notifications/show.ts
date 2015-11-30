@@ -1,11 +1,20 @@
-import { Request, Response } from '../../misskey-express';
+import * as hapi from 'hapi';
+import { IApplication, IUser } from '../../interfaces';
 import show from '../../endpoints/notifications/show';
 
-export default function showPost(req: Request, res: Response): void {
+export default function showPost(
+	app: IApplication,
+	user: IUser,
+	req: hapi.Request,
+	res: hapi.IReply
+): void {
 	'use strict';
-	show(req.misskeyUser, req.query['notification-id']).then((notification: Object) => {
-		res.apiRender(notification);
+	show(
+		user,
+		req.query['notification-id']
+	).then((notification: Object) => {
+		res(notification);
 	}, (err: any) => {
-		res.apiError(500, err);
+		res({error: err}).code(500);
 	});
 }

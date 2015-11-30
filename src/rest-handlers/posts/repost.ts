@@ -12,7 +12,7 @@ export default function repost(
 	create(
 		app,
 		user,
-		req.body['post-id']
+		req.payload['post-id']
 	).then((repost: Object) => {
 		res(repost);
 	}, (err: any) => {

@@ -1,10 +1,10 @@
 import {Post, Repost} from '../../models';
-import {IApplication, IPost, IRepost} from '../../interfaces';
+import {IApplication, IUser, IPost, IRepost} from '../../interfaces';
 import publishUserStream from '../../core/publish-user-stream';
 import populateAll from '../../core/post-populate-all';
 import createNotification from '../../core/create-notification';
 
-export default function repost(app: IApplication, userId: string, targetPostId: string)
+export default function repost(app: IApplication, user: IUser, targetPostId: string)
 		: Promise<Object> {
 	'use strict';
 
@@ -16,13 +16,13 @@ export default function repost(app: IApplication, userId: string, targetPostId: 
 				return reject('not-found');
 			} else if (post.isDeleted) {
 				return reject('post-is-deleted');
-			} else if (post.user === userId) {
+			} else if (post.user.toString() === user.id.toString()) {
 				return reject('your-post');
 			} else if (post.type === 'repost') {
 				return reject('no-rerepost');
 			}
 			Repost.findOne({
-				user: userId,
+				user: user.id,
 				type: 'repost',
 				post: targetPostId
 			}, (findOldErr: any, oldRepost: IRepost) => {
@@ -34,7 +34,7 @@ export default function repost(app: IApplication, userId: string, targetPostId: 
 				Repost.create({
 					type: 'repost',
 					app: app !== null ? app.id : null,
-					user: userId,
+					user: user.id,
 					post: targetPostId
 				}, (err: any, createdRepost: IRepost) => {
 					if (err !== null) {
@@ -49,7 +49,7 @@ export default function repost(app: IApplication, userId: string, targetPostId: 
 					post.save();
 
 					// User stream
-					publishUserStream(userId, {
+					publishUserStream(user.id, {
 						type: 'post',
 						value: {
 							id: createdRepost.id
@@ -59,7 +59,7 @@ export default function repost(app: IApplication, userId: string, targetPostId: 
 					// 通知を作成
 					createNotification(null, <string>post.user, 'repost', {
 						postId: post.id,
-						userId: userId
+						userId: user.id
 					});
 				});
 			});

@@ -1,12 +1,22 @@
-import { Request, Response } from '../../../misskey-express';
+import * as hapi from 'hapi';
+import { IApplication, IUser } from '../../../interfaces';
 import create from '../../../endpoints/album/folders/create';
 
-export default function createFolder(req: Request, res: Response): void {
+export default function createFolder(
+	app: IApplication,
+	user: IUser,
+	req: hapi.Request,
+	res: hapi.IReply
+): void {
 	'use strict';
 
-	create(req.misskeyUser, req.body['parent-folder-id'], req.body['name']).then((folder: Object) => {
-		res.apiRender(folder);
+	create(
+		user,
+		req.payload['parent-folder-id'],
+		req.payload['name']
+	).then((folder: Object) => {
+		res(folder);
 	}, (err: any) => {
-		res.apiError(500, err);
+		res({error: err}).code(500);
 	});
 }

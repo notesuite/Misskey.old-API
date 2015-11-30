@@ -1,12 +1,21 @@
-import { Request, Response } from '../../misskey-express';
+import * as hapi from 'hapi';
+import { IApplication, IUser } from '../../interfaces';
 import updateComment from '../../endpoints/account/update-comment';
 
-export default function updateAccountComment(req: Request, res: Response): void {
+export default function updateAccountComment(
+	app: IApplication,
+	user: IUser,
+	req: hapi.Request,
+	res: hapi.IReply
+): void {
 	'use strict';
 
-	updateComment(req.misskeyUser, req.body['comment']).then((user: Object) => {
-		res.apiRender(user);
+	updateComment(
+		user,
+		req.payload['comment']
+	).then((saved: Object) => {
+		res(saved);
 	}, (err: any) => {
-		res.apiError(500, err);
+		res({error: err}).code(500);
 	});
 };

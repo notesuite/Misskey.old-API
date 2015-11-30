@@ -1,12 +1,21 @@
-import { Request, Response } from '../../misskey-express';
+import * as hapi from 'hapi';
+import { IApplication, IUser } from '../../interfaces';
 import updateUrl from '../../endpoints/account/update-url';
 
-export default function updateAccountUrl(req: Request, res: Response): void {
+export default function updateAccountUrl(
+	app: IApplication,
+	user: IUser,
+	req: hapi.Request,
+	res: hapi.IReply
+): void {
 	'use strict';
 
-	updateUrl(req.misskeyUser, req.body['url']).then((user: Object) => {
-		res.apiRender(user);
+	updateUrl(
+		user,
+		req.payload['url']
+	).then((saved: Object) => {
+		res(saved);
 	}, (err: any) => {
-		res.apiError(500, err);
+		res({error: err}).code(500);
 	});
 };
