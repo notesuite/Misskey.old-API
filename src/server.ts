@@ -22,6 +22,7 @@ export default function startServer(): void {
 					payload: {
 						output: 'file',
 						parse: true,
+						maxBytes: (1024 * 1024) * 100,
 						allow: 'multipart/form-data'
 					},
 					handler: (request: any, reply: any): void => {
