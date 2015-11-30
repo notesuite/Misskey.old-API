@@ -72,7 +72,7 @@ export default function stream(
 
 			// 既読にする
 			messages.forEach(message => {
-				if (message.user.toString() === otherpartyId) {
+				if ((<IUser>message.user).id.toString() === otherpartyId) {
 					readTalkMessage(user, message);
 				}
 			});
