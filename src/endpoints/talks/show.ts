@@ -8,7 +8,7 @@ import readTalkMessage from '../../core/read-talk-message';
  * @param user API利用ユーザー
  * @param messageId 対象のメッセージのID
  */
-export default function read(
+export default function show(
 	user: IUser,
 	messageId: string
 ): Promise<Object> {
@@ -24,8 +24,11 @@ export default function read(
 				return reject(findErr);
 			} else if (message === null) {
 				return reject('message-not-found');
-			} else if (message.otherparty.toString() !== user.id.toString()) {
-				return reject('message-not-found');
+			} else if (
+				message.otherparty.toString() !== user.id.toString() &&
+				message.user.toString() !== user.id.toString()
+			) {
+				return reject('access-denied');
 			} else if (message.isDeleted) {
 				return reject('this-message-has-been-deleted');
 			}
