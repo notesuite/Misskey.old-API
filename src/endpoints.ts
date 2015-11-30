@@ -31,6 +31,7 @@ export default [
 	{ endpoint: 'posts/like', httpMethod: 'post', login: true, limitDuration: 1000 * 60 * 60, limitMax: 100 },
 	{ endpoint: 'posts/repost', httpMethod: 'post', login: true, limitDuration: 1000 * 60 * 60, limitMax: 30 },
 	{ endpoint: 'talks/say', httpMethod: 'post', login: true, limitDuration: 1000 * 60 * 60, limitMax: 120 },
+	{ endpoint: 'talks/read', httpMethod: 'post', login: true, limitDuration: null, limitMax: null },
 	{ endpoint: 'talks/stream', httpMethod: 'get', login: true, limitDuration: 1000 * 60 * 60, limitMax: 1000 },
 	{ endpoint: 'talks/history', httpMethod: 'get', login: true, limitDuration: 1000 * 60 * 60, limitMax: 1000 },
 	{ endpoint: 'talks/delete', httpMethod: 'delete', login: true, limitDuration: 1000 * 60 * 60, limitMax: 100 },
