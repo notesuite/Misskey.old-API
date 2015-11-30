@@ -12,6 +12,8 @@ export default function userTimeline(
 	getTimeline(
 		user,
 		req.query['user-id'],
+		req.query['include-replies'],
+		req.query['types'],
 		req.query['limit'],
 		req.query['since-cursor'],
 		req.query['max-cursor'])
