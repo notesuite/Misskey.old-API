@@ -9,6 +9,7 @@
 * npm
 * MongoDB
 * Redis
+* GraphicsMagick
 
 ## External devDependencies
 * node-gyp - https://github.com/nodejs/node-gyp#installation
