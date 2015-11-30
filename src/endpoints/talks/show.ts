@@ -1,21 +1,24 @@
 import {TalkMessage} from '../../models';
-import {ITalkMessage, IUser} from '../../interfaces';
+import {ITalkMessage, IUser, IAlbumFile} from '../../interfaces';
 import readTalkMessage from '../../core/read-talk-message';
 
 /**
- * メッセージを既読にします
+ * メッセージを取得します
  * @param user API利用ユーザー
  * @param messageId 対象のメッセージのID
  */
 export default function read(
 	user: IUser,
 	messageId: string
-): Promise<void> {
+): Promise<Object> {
 	'use strict';
 
-	return new Promise<void>((resolve, reject) => {
+	return new Promise<Object>((resolve, reject) => {
 		// 対象のメッセージを取得
-		TalkMessage.findById(messageId, (findErr: any, message: ITalkMessage) => {
+		TalkMessage
+		.findById(messageId)
+		.populate('user otherparty file')
+		.exec((findErr: any, message: ITalkMessage) => {
 			if (findErr !== null) {
 				return reject(findErr);
 			} else if (message === null) {
@@ -24,11 +27,17 @@ export default function read(
 				return reject('message-not-found');
 			} else if (message.isDeleted) {
 				return reject('this-message-has-been-deleted');
-			} else if (message.isRead) {
-				return reject('this-message-has-already-been-read');
 			}
 
-			readTalkMessage(user, message).then(resolve, reject);
+			const serializedMessage: any = message.toObject();
+			serializedMessage.user = (<IUser>message.user).toObject();
+			serializedMessage.otherparty = (<IUser>message.otherparty).toObject();
+			serializedMessage.file = (<IAlbumFile>message.file).toObject();
+
+			resolve(serializedMessage);
+
+			// 既読にする
+			readTalkMessage(user, message);
 		});
 	});
 }

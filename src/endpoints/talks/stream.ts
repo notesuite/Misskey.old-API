@@ -1,5 +1,6 @@
 import {TalkMessage} from '../../models';
 import {ITalkMessage, IUser, IAlbumFile} from '../../interfaces';
+import readTalkMessage from '../../core/read-talk-message';
 
 /**
  * Talkのストリームを取得します
@@ -75,8 +76,7 @@ export default function stream(
 			// 既読にする
 			messages.forEach(message => {
 				if (message.user.toString() === otherpartyId) {
-					message.isRead = true;
-					message.save();
+					readTalkMessage(user, message);
 				}
 			});
 		});
