@@ -23,9 +23,13 @@ export default function apiHandler(endpoint: any, req: hapi.Request, res: hapi.I
 
 			limiter.get((limitErr: any, limit: any) => {
 				if (limitErr !== null) {
-					return res('something-happened').code(500);
+					return res({
+						error: 'something-happened'
+					}).code(500);
 				} else if (limit.remaining === 0) {
-					return res('rate-limit-exceeded').code(429);
+					return res({
+						error: 'rate-limit-exceeded'
+					}).code(429);
 				} else {
 					require(`${__dirname}/rest-handlers/${endpoint.endpoint}`).default(
 						context.app, context.user, req, res);
@@ -36,6 +40,8 @@ export default function apiHandler(endpoint: any, req: hapi.Request, res: hapi.I
 				context.app, context.user, req, res);
 		}
 	}, (err: any) => {
-		res('authentication-failed').code(403);
+		res({
+			error: 'authentication-failed'
+		}).code(403);
 	});
 }
