@@ -68,7 +68,7 @@ export default function addFileToAlbum(
 
 				// 100MBを超える場合
 				if (used + size > ((1024 * 1024) * 100)) {
-					return reject('no-free-space-of-album');
+					return reject('no-free-space');
 				}
 
 				// AlbumFileドキュメントを作成
