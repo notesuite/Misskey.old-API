@@ -26,6 +26,8 @@ export default function user(db: Connection): Model<Document> {
 		isSuspended: { type: Boolean, required: false, default: false },
 		isVerified: { type: Boolean, required: false, default: false },
 		lang: { type: String, required: true },
+		likedCount: { type: Number, required: false, default: 0 },
+		likesCount: { type: Number, required: false, default: 0 },
 		location: { type: String, required: false, default: null },
 		name: { type: String, required: true },
 		pinnedPost: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Posts' },

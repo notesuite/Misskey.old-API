@@ -1,4 +1,4 @@
-import {Post, PostLike} from '../../models';
+import {User, Post, PostLike} from '../../models';
 import {IUser, IPost, IPostLike} from '../../interfaces';
 import createNotification from '../../core/create-notification';
 
@@ -39,8 +39,19 @@ export default function like(user: IUser, id: string): Promise<void> {
 					}
 					resolve();
 
+					// 投稿のlikesCountをインクリメント
 					post.likesCount++;
 					post.save();
+
+					// ユーザーのlikesCountをインクリメント
+					user.likesCount++;
+					user.save();
+
+					// 投稿の作者のlikesCountをインクリメント
+					User.findById(<string>post.user, (authorFindErr: any, author: IUser) => {
+						author.likedCount++;
+						author.save();
+					});
 
 					// 通知を作成
 					createNotification(null, <string>post.user, 'like', {

@@ -22,6 +22,8 @@ export interface IUser extends Document {
 	isSuspended: Boolean;
 	isVerified: Boolean;
 	lang: string;
+	likedCount: number;
+	likesCount: number;
 	location: string;
 	name: string;
 	pinnedPost: string | Types.ObjectId | IPost;
