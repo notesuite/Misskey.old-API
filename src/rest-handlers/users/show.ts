@@ -13,7 +13,7 @@ export default function showUser(
 		user,
 		req.query['user-id'],
 		req.query['screen-name']
-	).then((showee: Object) => {
+	).then(showee => {
 		res(showee);
 	}, (err: any) => {
 		res({error: err}).code(500);

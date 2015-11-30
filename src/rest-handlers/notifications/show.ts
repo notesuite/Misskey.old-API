@@ -12,7 +12,7 @@ export default function showPost(
 	show(
 		user,
 		req.query['notification-id']
-	).then((notification: Object) => {
+	).then(notification => {
 		res(notification);
 	}, (err: any) => {
 		res({error: err}).code(500);

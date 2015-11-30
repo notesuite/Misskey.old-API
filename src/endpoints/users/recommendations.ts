@@ -33,7 +33,7 @@ export default function search(me: IUser): Promise<Object[]> {
 					resolve([]);
 				} else {
 					Promise.all(users.map(user => serializeUser(me, user)))
-					.then((serializedUsers: Object[]) => {
+					.then(serializedUsers => {
 						resolve(serializedUsers);
 					}, (err: any) => {
 						reject('something-happened');

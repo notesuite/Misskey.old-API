@@ -11,7 +11,7 @@ export default function history(
 	'use strict';
 	getHistory(
 		user
-	).then((messages: Object[]) => {
+	).then(messages => {
 		res(messages);
 	}, (err: any) => {
 		res({error: err}).code(500);

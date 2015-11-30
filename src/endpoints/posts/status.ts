@@ -64,8 +64,8 @@ export default function status(
 				if (createErr !== null) {
 					reject(createErr);
 				} else {
-					populateAll(createdStatus).then((populated: Object) => {
-						serializePost(populated, user).then((serialized: Object) => {
+					populateAll(createdStatus).then(populated => {
+						serializePost(populated, user).then(serialized => {
 							resolve(serialized);
 						}, (serializeErr: any) => {
 							reject(serializeErr);

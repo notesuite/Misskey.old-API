@@ -19,7 +19,7 @@ export default function status(
 		user,
 		text,
 		req.payload['in-reply-to-post-id']
-	).then((status: Object) => {
+	).then(status => {
 		res(status);
 	}, (err: any) => {
 		res({error: err}).code(500);

@@ -14,7 +14,7 @@ export default function userFollowers(
 		req.query['limit'],
 		req.query['since-cursor'],
 		req.query['max-cursor']
-	).then((followerList: Object[]) => {
+	).then(followerList => {
 		res(followerList);
 	}, (err: any) => {
 		res({error: err}).code(500);

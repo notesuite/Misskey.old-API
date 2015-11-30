@@ -14,7 +14,7 @@ export default function updateColor(
 		user,
 		req.payload['folder-id'],
 		req.payload['color']
-	).then((folder: Object) => {
+	).then(folder => {
 		res(folder);
 	}, (err: any) => {
 		res({error: err}).code(500);

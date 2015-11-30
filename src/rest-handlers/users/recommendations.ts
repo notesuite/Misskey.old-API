@@ -11,7 +11,7 @@ export default function userFollowings(
 	'use strict';
 	recommendations(
 		user
-	).then((recommendationUsers: Object[]) => {
+	).then(recommendationUsers => {
 		res(recommendationUsers);
 	}, (err: any) => {
 		res({error: err}).code(500);

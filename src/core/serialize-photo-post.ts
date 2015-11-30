@@ -12,7 +12,7 @@ export default function serializePhotoPost(photoPost: any, me: IUser = null): Pr
 			}
 		});
 	})))
-	.then((photoFiles: Object[]) => {
+	.then(photoFiles => {
 		photoPost.photos = photoFiles;
 		return photoPost;
 	});

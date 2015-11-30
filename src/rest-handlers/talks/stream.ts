@@ -15,7 +15,7 @@ export default function timeline(
 		req.query['limit'],
 		req.query['since-cursor'],
 		req.query['max-cursor']
-	).then((stream: Object[]) => {
+	).then(stream => {
 		res(stream);
 	}, (err: any) => {
 		res({error: err}).code(500);

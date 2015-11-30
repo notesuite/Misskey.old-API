@@ -50,7 +50,7 @@ export default function search(me: IUser, query: string, limit: number = 5): Pro
 
 		function resolver(users: IUser[]): void {
 			Promise.all(users.map(user => serializeUser(me, user)))
-			.then((serializedUsers: Object[]) => {
+			.then(serializedUsers => {
 				resolve(serializedUsers);
 			}, (err: any) => {
 				reject('something-happened');

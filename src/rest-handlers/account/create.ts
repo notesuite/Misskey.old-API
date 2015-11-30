@@ -13,7 +13,7 @@ export default function create(
 	createAccount(
 		req.payload['screen-name'],
 		req.payload['password']
-	).then((created: IUser) => {
+	).then(created => {
 		res({
 			user: created.toObject()
 		});

@@ -13,7 +13,7 @@ export default function updateAccountComment(
 	updateComment(
 		user,
 		req.payload['comment']
-	).then((saved: Object) => {
+	).then(saved => {
 		res(saved);
 	}, (err: any) => {
 		res({error: err}).code(500);

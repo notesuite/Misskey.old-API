@@ -14,7 +14,7 @@ export default function createFolder(
 		user,
 		req.payload['parent-folder-id'],
 		req.payload['name']
-	).then((folder: Object) => {
+	).then(folder => {
 		res(folder);
 	}, (err: any) => {
 		res({error: err}).code(500);

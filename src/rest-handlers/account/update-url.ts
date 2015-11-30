@@ -13,7 +13,7 @@ export default function updateAccountUrl(
 	updateUrl(
 		user,
 		req.payload['url']
-	).then((saved: Object) => {
+	).then(saved => {
 		res(saved);
 	}, (err: any) => {
 		res({error: err}).code(500);

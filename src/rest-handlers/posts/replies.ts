@@ -15,7 +15,7 @@ export default function replyPosts(
 		req.query['limit'],
 		req.query['since-cursor'],
 		req.query['max-cursor']
-	).then((post: Object) => {
+	).then(post => {
 		res(post);
 	}, (err: any) => {
 		res({error: err}).code(500);

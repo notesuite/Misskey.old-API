@@ -14,7 +14,7 @@ export default function renameFolder(
 		user,
 		req.payload['folder-id'],
 		req.payload['name']
-	).then((folder: Object) => {
+	).then(folder => {
 		res(folder);
 	}, (err: any) => {
 		res({error: err}).code(500);

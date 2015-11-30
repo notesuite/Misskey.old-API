@@ -14,7 +14,7 @@ export default function moveFolder(
 		user,
 		req.payload['folder-id'],
 		req.payload['destination-folder-id']
-	).then((folder: Object) => {
+	).then(folder => {
 		res(folder);
 	}, (err: any) => {
 		res({error: err}).code(500);

@@ -41,9 +41,9 @@ export default function replies(user: IUser, id: string, limit: number = 10, sin
 			}
 			// すべてpopulateする
 			Promise.all(replies.map(post => populateAll(post)))
-			.then((populatedTimeline: IPost[]) => {
+			.then(populatedTimeline => {
 				// 整形
-				serializeTimeline(populatedTimeline, user).then((serializedTimeline: Object[]) => {
+				serializeTimeline(populatedTimeline, user).then(serializedTimeline => {
 					resolve(serializedTimeline);
 				}, (serializeErr: any) => {
 					reject(serializeErr);

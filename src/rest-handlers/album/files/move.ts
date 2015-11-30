@@ -10,7 +10,7 @@ export default function moveFile(
 ): void {
 	'use strict';
 
-	move(user, req.payload['file-id'], req.payload['folder-id']).then((file: Object) => {
+	move(user, req.payload['file-id'], req.payload['folder-id']).then(file => {
 		res(file);
 	}, (err: any) => {
 		res({error: err}).code(500);

@@ -55,7 +55,7 @@ export default function photo(app: IApplication, user: IUser, photos: string[], 
 
 		function checkPhotos(reply: IPost = null): void {
 			Promise.all(photos.map(photo => getAlbumFile(user.id, photo)))
-			.then((photoFiles: IAlbumFile[]) => {
+			.then(photoFiles => {
 				create(reply);
 			}, (photosCheckErr: any) => {
 				reject(photosCheckErr);
@@ -76,8 +76,8 @@ export default function photo(app: IApplication, user: IUser, photos: string[], 
 				if (createErr !== null) {
 					reject(createErr);
 				} else {
-					populateAll(createdPhotoPost).then((populated: Object) => {
-						serializePost(populated, user).then((serialized: Object) => {
+					populateAll(createdPhotoPost).then(populated => {
+						serializePost(populated, user).then(serialized => {
 							resolve(serialized);
 						}, (serializeErr: any) => {
 							reject(serializeErr);

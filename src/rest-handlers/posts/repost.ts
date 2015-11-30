@@ -13,7 +13,7 @@ export default function repost(
 		app,
 		user,
 		req.payload['post-id']
-	).then((repost: Object) => {
+	).then(repost => {
 		res(repost);
 	}, (err: any) => {
 		res({error: err}).code(500);

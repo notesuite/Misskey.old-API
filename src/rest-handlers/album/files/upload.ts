@@ -31,7 +31,7 @@ export default function uploadFile(
 		fileBuffer,
 		size,
 		unconditional
-	).then((albumFile: Object) => {
+	).then(albumFile => {
 		res(albumFile);
 	}, (err: any) => {
 		res({error: err}).code(500);

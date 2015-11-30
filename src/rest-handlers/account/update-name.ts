@@ -13,7 +13,7 @@ export default function updateAccountName(
 	updateName(
 		user,
 		req.payload['name']
-	).then((saved: Object) => {
+	).then(saved => {
 		res(saved);
 	}, (err: any) => {
 		res({error: err}).code(500);

@@ -13,7 +13,7 @@ export default function talkPost(
 		user,
 		req.query['post-id'],
 		req.query['limit']
-	).then((posts: Object[]) => {
+	).then(posts => {
 		res(posts);
 	}, (err: any) => {
 		res({error: err}).code(500);

@@ -10,7 +10,7 @@ export default function renameFile(
 ): void {
 	'use strict';
 
-	rename(user, req.payload['file-id'], req.payload['name']).then((file: Object) => {
+	rename(user, req.payload['file-id'], req.payload['name']).then(file => {
 		res(file);
 	}, (err: any) => {
 		res({error: err}).code(500);

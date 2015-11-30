@@ -45,9 +45,9 @@ export default function timeline(user: IUser, limit: number = 10, sinceCursor: n
 
 			// すべてpopulateする
 			Promise.all(posts.map(post => populateAll(post)))
-			.then((populatedPosts: IPost[]) => {
+			.then(populatedPosts => {
 				// 整形
-				serializeTimeline(populatedPosts, user).then((serializedTimeline: Object[]) => {
+				serializeTimeline(populatedPosts, user).then(serializedTimeline => {
 					resolve(serializedTimeline);
 				}, (serializeErr: any) => {
 					reject(serializeErr);

@@ -23,7 +23,7 @@ export default function photoPost(
 		photos,
 		text,
 		inReplyToPostId
-	).then((photoPost: Object) => {
+	).then(photoPost => {
 		res(photoPost);
 	}, (err: any) => {
 		res({error: err}).code(500);

@@ -16,8 +16,8 @@ export default function serializePost(
 	return new Promise<Object>((resolve, reject) => {
 		switch (type) {
 			case 'status':
-				common(<IStatusPost>post, me, includeDestination).then((serialized: Object) => {
-					serializeStatus(serialized, me).then((serializedStatus: Object) => {
+				common(<IStatusPost>post, me, includeDestination).then(serialized => {
+					serializeStatus(serialized, me).then(serializedStatus => {
 						resolve(serializedStatus);
 					}, (serializeErr: any) => {
 						reject(serializeErr);
@@ -27,8 +27,8 @@ export default function serializePost(
 				});
 				break;
 			case 'photo':
-				common(<IPhotoPost>post, me, includeDestination).then((serialized: Object) => {
-					serializePhotoPost(serialized, me).then((serializedPhotoPost: Object) => {
+				common(<IPhotoPost>post, me, includeDestination).then(serialized => {
+					serializePhotoPost(serialized, me).then(serializedPhotoPost => {
 						resolve(serializedPhotoPost);
 					}, (serializeErr: any) => {
 						reject(serializeErr);
@@ -38,7 +38,7 @@ export default function serializePost(
 				});
 				break;
 			case 'repost':
-				serializePost(post.post, me).then((serializedPost: any) => {
+				serializePost(post.post, me).then(serializedPost => {
 					post.post = serializedPost;
 					resolve(post);
 				}, (err: any) => {
@@ -63,7 +63,7 @@ function common(
 			// Get reply source
 			new Promise<Object>((getDestinationResolve, getDestinationReject) => {
 				if (post.inReplyToPost !== null && includeDestination) {
-					serializePost(post.inReplyToPost, me, false).then((serializedReply: Object) => {
+					serializePost(post.inReplyToPost, me, false).then(serializedReply => {
 						getDestinationResolve(serializedReply);
 					}, (serializedReplyErr: any) => {
 						getDestinationReject(serializedReplyErr);

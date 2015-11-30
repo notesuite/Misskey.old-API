@@ -15,7 +15,7 @@ export default function show(me: IUser, id?: string, screenName?: string): Promi
 			if (user === null) {
 				return reject('not-found');
 			}
-			serializeUser(me, user).then((serializedUser: Object) => {
+			serializeUser(me, user).then(serializedUser => {
 				resolve(serializedUser);
 			}, (err: any) => {
 				reject('something-happened');

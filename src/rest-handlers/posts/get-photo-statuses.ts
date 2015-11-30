@@ -15,7 +15,7 @@ export default function getPostPhotoStatuses(
 		req.query['limit'],
 		req.query['since-cursor'],
 		req.query['max-cursor'])
-	.then((timeline: Object[]) => {
+	.then(timeline => {
 		res(timeline);
 	}, (err: any) => {
 		res({error: err}).code(500);

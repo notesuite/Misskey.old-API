@@ -9,7 +9,7 @@ export default function updateIcon(
 	res: hapi.IReply
 ): void {
 	'use strict';
-	update(user, req.payload['file-id']).then((me: Object) => {
+	update(user, req.payload['file-id']).then(me => {
 		res(me);
 	}, (err: any) => {
 		res({error: err}).code(500);

@@ -10,7 +10,7 @@ export default function showFile(
 ): void {
 	'use strict';
 
-	show(user, req.query['file-id']).then((file: Object) => {
+	show(user, req.query['file-id']).then(file => {
 		res(file);
 	}, (err: any) => {
 		res({error: err}).code(500);

@@ -40,7 +40,7 @@ export default function repost(app: IApplication, user: IUser, targetPostId: str
 					if (err !== null) {
 						return reject(err);
 					}
-					populateAll(createdRepost).then((populated: Object) => {
+					populateAll(createdRepost).then(populated => {
 						resolve(populated);
 					}, (populateErr: any) => {
 						reject(populateErr);

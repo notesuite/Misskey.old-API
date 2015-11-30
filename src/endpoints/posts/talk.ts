@@ -20,12 +20,12 @@ export default function talk(user: IUser, id: string, limit: number = 30): Promi
 			} else if (source.inReplyToPost === null) {
 				reject('not-reply');
 			} else {
-				get(<string>source.inReplyToPost).then((posts: IPost[]) => {
+				get(<string>source.inReplyToPost).then(posts => {
 					// すべてpopulateする
 					Promise.all(posts.map(post => populateAll(post)))
-					.then((populatedTimeline: IPost[]) => {
+					.then(populatedTimeline => {
 						// 整形
-						serializeTimeline(populatedTimeline, user).then((serializedTimeline: Object[]) => {
+						serializeTimeline(populatedTimeline, user).then(serializedTimeline => {
 							resolve(serializedTimeline);
 						}, (serializeErr: any) => {
 							reject(serializeErr);
@@ -50,7 +50,7 @@ function get(id: string): Promise<IPost[]> {
 			} else if (post.inReplyToPost === null) {
 				resolve([post]);
 			} else {
-				get(<string>post.inReplyToPost).then((nextPosts: IPost[]) => {
+				get(<string>post.inReplyToPost).then(nextPosts => {
 					resolve([...nextPosts, post]);
 				}, (getErr: any) => {
 					reject(getErr);

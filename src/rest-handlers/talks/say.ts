@@ -18,7 +18,7 @@ export default function photoPost(
 		otherpartyId,
 		text,
 		fileId
-	).then((message: Object) => {
+	).then(message => {
 		res(message);
 	}, (err: any) => {
 		res({error: err}).code(500);

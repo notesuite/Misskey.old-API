@@ -13,8 +13,8 @@ export default function show(shower: IUser, id: string): Promise<Object> {
 			} else if (post === null) {
 				return reject('not-found');
 			}
-			populateAll(post).then((populatedPost: IPost) => {
-				serializePost(populatedPost, shower).then((serializedPost: any) => {
+			populateAll(post).then(populatedPost => {
+				serializePost(populatedPost, shower).then(serializedPost => {
 					resolve(serializedPost);
 				}, (err: any) => {
 					reject(err);

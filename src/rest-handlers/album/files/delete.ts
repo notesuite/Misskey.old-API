@@ -10,7 +10,7 @@ export default function deleteFile(
 ): void {
 	'use strict';
 
-	del(user, req.payload['file-id']).then((file: Object) => {
+	del(user, req.payload['file-id']).then(file => {
 		res({
 			status: 'success'
 		});
