@@ -31,9 +31,9 @@ export interface IUser extends Document {
 	screenName: string;
 	screenNameLower: string;
 	timelineReadCursor: number;
+	url: string;
 	wallpaper: string | Types.ObjectId | IAlbumFile;
 	wallpaperPath: string;
-	websiteUrl: string;
 }
 
 export interface IUserFollowing extends Document {

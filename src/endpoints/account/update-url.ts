@@ -9,7 +9,7 @@ export default function updateUrl(user: IUser, url: string): Promise<Object> {
 	'use strict';
 
 	return new Promise<Object>((resolve, reject) => {
-		user.websiteUrl = url;
+		user.url = url;
 		user.save((saveErr: any, afterUser: IUser) => {
 			if (saveErr !== null) {
 				return reject(saveErr);

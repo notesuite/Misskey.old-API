@@ -35,9 +35,9 @@ export default function user(db: Connection): Model<Document> {
 		screenName: { type: String, required: true, unique: true },
 		screenNameLower: { type: String, required: true, unique: true, lowercase: true },
 		timelineReadCursor: { type: Number, required: false, default: 0 },
+		url: { type: String, required: false, default: null },
 		wallpaper: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFiles' },
-		wallpaperPath: { type: String, required: false, default: null },
-		websiteUrl: { type: String, required: false, default: null }
+		wallpaperPath: { type: String, required: false, default: null }
 	});
 
 	if (!(<any>schema).options.toObject) {
