@@ -1,5 +1,5 @@
 import {Post, PhotoPost} from '../../models';
-import {IApplication, IAlbumFile, IUser, IPost, IPhotoPost} from '../../interfaces';
+import {IApplication, IUser, IPost, IPhotoPost} from '../../interfaces';
 import publishUserStream from '../../core/publish-user-stream';
 import populateAll from '../../core/post-populate-all';
 import serializePost from '../../core/serialize-post';
