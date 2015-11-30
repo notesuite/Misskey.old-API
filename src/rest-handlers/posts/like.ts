@@ -15,6 +15,7 @@ export default function likePost(
 	}, (err: any) => {
 		const statusCode = new Match<string, number>(err)
 			.is('post-not-found', () => 404)
+			.is('post-deleted', () => 410)
 			.is('already-liked', () => 400)
 			.toOption().getValue(500);
 
