@@ -1,3 +1,4 @@
+import { dataSize } from 'powerful';
 import * as crypto from 'crypto';
 import * as request from 'request';
 import * as gm from 'gm';
@@ -68,7 +69,7 @@ export default function addFileToAlbum(
 				const used = albumFiles.map(albumFile => albumFile.dataSize).reduce((x, y) => x + y, 0);
 
 				// 100MBを超える場合
-				if (used + size > ((1024 * 1024) * 100)) {
+				if (used + size > dataSize.fromMiB(100)) {
 					return reject('no-free-space');
 				}
 

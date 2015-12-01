@@ -1,3 +1,4 @@
+import { dataSize } from 'powerful';
 import * as cluster from 'cluster';
 import * as hapi from 'hapi';
 import endpoints from './endpoints';
@@ -22,7 +23,7 @@ export default function startServer(): void {
 					payload: {
 						output: 'file',
 						parse: true,
-						maxBytes: (1024 * 1024) * 100,
+						maxBytes: dataSize.fromMiB(100),
 						allow: 'multipart/form-data'
 					},
 					handler: (request: any, reply: any): void => {
