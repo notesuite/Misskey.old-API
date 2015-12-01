@@ -5,8 +5,10 @@ import {IUser} from '../interfaces';
 export default function login(screenName: string, password: string): Promise<boolean> {
 	'use strict';
 
+	screenName = screenName.trim();
+
 	return new Promise<boolean>((resolve, reject) => {
-		if (screenName) {
+		if (screenName === '') {
 			User.findOne({
 				screenNameLower: screenName.toLowerCase()
 			}, (findErr: any, user: IUser) => {
