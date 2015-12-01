@@ -27,7 +27,7 @@ export default function stream(
 	}
 
 	return new Promise<Object[]>((resolve, reject) => {
-		const baseQuery: any = {
+		const baseQuery = {
 			$or: [
 				{
 					user: user.id,
