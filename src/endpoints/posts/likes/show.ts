@@ -38,15 +38,15 @@ export default function show(
 				return reject(err);
 			}
 
-			Promise.all(likes.map(like => {
-				return new Promise<Object>((resolve2, reject2) => {
+			Promise.all(likes.map(like =>
+				new Promise<Object>((resolve2, reject2) => {
 					const likeObj: any = like.toObject();
 					serializeUser(user, <IUser>like.user).then(userObj => {
 						likeObj.user = userObj;
 						resolve2(likeObj);
 					}, reject2);
-				});
-			})).then(resolve, reject);
+				})
+			)).then(resolve, reject);
 		});
 	});
 }
