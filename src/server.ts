@@ -17,7 +17,7 @@ export default function startServer(): void {
 	endpoints.forEach(endpoint => {
 		if (endpoint.endpoint === 'album/files/upload') {
 			(<any>server).route({
-				method: endpoint.httpMethod,
+				method: 'post',
 				path: `/${endpoint.endpoint}`,
 				config: {
 					payload: {
@@ -33,7 +33,7 @@ export default function startServer(): void {
 			});
 		} else {
 			server.route({
-				method: endpoint.httpMethod,
+				method: 'post',
 				path: `/${endpoint.endpoint}`,
 				handler: (request, reply): void => {
 					apiHandler(endpoint, request, reply);
