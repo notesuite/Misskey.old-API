@@ -1,7 +1,7 @@
-import {Post} from '../../models';
-import {IUser, IPost} from '../../interfaces';
-import serializeTimeline from '../../core/serialize-timeline';
-import populateAll from '../../core/post-populate-all';
+import {Post} from '../../../models';
+import {IUser, IPost} from '../../../interfaces';
+import serializeTimeline from '../../../core/serialize-timeline';
+import populateAll from '../../../core/post-populate-all';
 
 /**
  * 指定された投稿を起点とした場合のそれ以前の会話のストリームを取得します
@@ -9,7 +9,7 @@ import populateAll from '../../core/post-populate-all';
  * @param id 投稿のID
  * @param limit 取得する投稿の最大数
  */
-export default function talk(user: IUser, id: string, limit: number = 30): Promise<Object[]> {
+export default function show(user: IUser, id: string, limit: number = 30): Promise<Object[]> {
 	'use strict';
 	return new Promise<Object[]>((resolve, reject) => {
 		Post.findById(id, (findErr: any, source: IPost) => {

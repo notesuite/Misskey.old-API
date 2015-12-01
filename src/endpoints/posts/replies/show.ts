@@ -1,8 +1,8 @@
 import { Match } from 'powerful';
-import {Post} from '../../models';
-import {IUser, IPost} from '../../interfaces';
-import serializeTimeline from '../../core/serialize-timeline';
-import populateAll from '../../core/post-populate-all';
+import {Post} from '../../../models';
+import {IUser, IPost} from '../../../interfaces';
+import serializeTimeline from '../../../core/serialize-timeline';
+import populateAll from '../../../core/post-populate-all';
 
 /**
  * 投稿の返信を取得します
@@ -12,7 +12,7 @@ import populateAll from '../../core/post-populate-all';
  * @param sinceCursor 取得する投稿を、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
  * @param maxCursor 取得する投稿を、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
  */
-export default function replies(user: IUser, id: string, limit: number = 10, sinceCursor: number = null, maxCursor: number = null)
+export default function show(user: IUser, id: string, limit: number = 10, sinceCursor: number = null, maxCursor: number = null)
 		: Promise<Object[]> {
 	'use strict';
 	return new Promise<Object[]>((resolve, reject) => {
