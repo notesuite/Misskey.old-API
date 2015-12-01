@@ -8,6 +8,12 @@ import {IUser} from '../../interfaces';
 export default function updateUrl(user: IUser, url: string): Promise<Object> {
 	'use strict';
 
+	url = url.trim();
+
+	if (url.length > 100) {
+		return <Promise<any>>Promise.reject('too-long-url');
+	}
+
 	return new Promise<Object>((resolve, reject) => {
 		user.url = url;
 		user.save((saveErr: any, afterUser: IUser) => {
