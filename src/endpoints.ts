@@ -34,6 +34,8 @@ export default [
 	{ endpoint: 'posts/photo', login: true, limitDuration: hour, limitMax: 100 },
 	{ endpoint: 'posts/like', login: true, limitDuration: hour, limitMax: 100 },
 	{ endpoint: 'posts/repost', login: true, limitDuration: hour, limitMax: 30 },
+	{ endpoint: 'posts/likers/show', login: false },
+	{ endpoint: 'posts/reposters/show', login: false },
 	{ endpoint: 'talks/say', login: true, limitDuration: hour, limitMax: 120 },
 	{ endpoint: 'talks/show', login: true, limitDuration: hour, limitMax: 1000 },
 	{ endpoint: 'talks/read', login: true },
