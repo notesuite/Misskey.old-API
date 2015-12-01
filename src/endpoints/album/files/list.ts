@@ -26,7 +26,7 @@ export default function list(user: IUser, folderId: string = null, includeFolder
 					const folderObjs: Object[] = folders.map(folder => Object.assign(folder.toObject(), {
 						type: 'folder'
 					}));
-					resolve(fileObjs.concat(folderObjs));
+					resolve([...fileObjs, folderObjs]);
 				});
 			} else {
 				resolve(files.map<Object>(file => file.toObject()));

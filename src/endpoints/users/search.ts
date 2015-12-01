@@ -41,7 +41,7 @@ export default function search(me: IUser, query: string, limit: number = 5): Pro
 				})
 				.limit(limit - users.length)
 				.exec((err2: any, users2: IUser[]) => {
-					resolver(users.concat(users2));
+					resolver([...users, ...users2]);
 				});
 			} else {
 				resolver(users);
