@@ -3,7 +3,7 @@ const day = hour * 24;
 
 export default [
 	{ endpoint: 'login', login: false },
-	{ endpoint: 'screenname-available', login: false },
+	{ endpoint: 'screenname/available', login: false },
 	{ endpoint: 'account/create', login: false },
 	{ endpoint: 'account/show', login: true },
 	{ endpoint: 'account/name/update', login: true, limitDuration: day, limitMax: 10 },
