@@ -68,9 +68,9 @@ export default function stream(
 				return resolve([]);
 			}
 
-			Promise.all(messages.map(message => {
-				return serialize(message, user);
-			})).then(resolve, reject);
+			Promise.all(messages.map(message =>
+				serialize(message, user)
+			)).then(resolve, reject);
 
 			// 既読にする
 			messages.forEach(message => {
