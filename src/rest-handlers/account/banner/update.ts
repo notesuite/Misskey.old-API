@@ -1,6 +1,6 @@
 import * as hapi from 'hapi';
-import { IApplication, IUser } from '../../interfaces';
-import update from '../../endpoints/account/update-avatar';
+import { IApplication, IUser } from '../../../interfaces';
+import update from '../../../endpoints/account/banner/update';
 
 export default function updateIcon(
 	app: IApplication,

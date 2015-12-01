@@ -1,6 +1,6 @@
 import * as hapi from 'hapi';
-import { IApplication, IUser } from '../../interfaces';
-import updateComment from '../../endpoints/account/update-comment';
+import { IApplication, IUser } from '../../../interfaces';
+import updateComment from '../../../endpoints/account/comment/update';
 
 export default function updateAccountComment(
 	app: IApplication,

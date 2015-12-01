@@ -1,6 +1,6 @@
 import * as hapi from 'hapi';
-import { IApplication, IUser } from '../../interfaces';
-import mentionsUnreadsCount from '../../endpoints/posts/mentions-unreads-count';
+import { IApplication, IUser } from '../../../../interfaces';
+import timelineUnreadsCount from '../../../../endpoints/posts/timeline/unread/count';
 
 export default function unreadsCount(
 	app: IApplication,
@@ -9,7 +9,7 @@ export default function unreadsCount(
 	res: hapi.IReply
 ): void {
 	'use strict';
-	mentionsUnreadsCount(
+	timelineUnreadsCount(
 		user
 	).then(count => {
 		res(count);

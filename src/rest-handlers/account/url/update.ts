@@ -1,8 +1,8 @@
 import * as hapi from 'hapi';
-import { IApplication, IUser } from '../../interfaces';
-import updateLocation from '../../endpoints/account/update-location';
+import { IApplication, IUser } from '../../../interfaces';
+import updateUrl from '../../../endpoints/account/url/update';
 
-export default function updateAccountLocation(
+export default function updateAccountUrl(
 	app: IApplication,
 	user: IUser,
 	req: hapi.Request,
@@ -10,9 +10,9 @@ export default function updateAccountLocation(
 ): void {
 	'use strict';
 
-	updateLocation(
+	updateUrl(
 		user,
-		req.payload['location']
+		req.payload['url']
 	).then(saved => {
 		res(saved);
 	}, (err: any) => {
