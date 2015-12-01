@@ -73,9 +73,9 @@ export default function say(
 					[`user-stream:${otherpartyId}`, 'talk-message'],
 					[`talk-stream:${otherpartyId}-${user.id}`, 'otherparty-message'],
 					[`talk-stream:${user.id}-${otherpartyId}`, 'me-message']
-				].forEach(message => {
-					publishStream(message[0], JSON.stringify({
-						type: message[1],
+				].forEach(([channel, type]) => {
+					publishStream(channel, JSON.stringify({
+						type: type,
 						value: {
 							id: createdMessage.id,
 							userId: user.id,
