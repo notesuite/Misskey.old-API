@@ -1,11 +1,11 @@
-import {IUser} from '../../interfaces';
+import {IUser} from '../../../interfaces';
 
 /**
  * ユーザーのコメントを更新します
  * @param user: API利用ユーザー
  * @param comment: 新しいコメント
  */
-export default function updateComment(user: IUser, comment: string): Promise<Object> {
+export default function update(user: IUser, comment: string): Promise<Object> {
 	'use strict';
 
 	comment = comment.trim();

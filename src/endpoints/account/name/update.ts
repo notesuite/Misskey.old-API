@@ -1,11 +1,11 @@
-import {IUser} from '../../interfaces';
+import {IUser} from '../../../interfaces';
 
 /**
  * ユーザーの名前を更新します
  * @param user: API利用ユーザー
  * @param name: 新しい名前
  */
-export default function updateName(user: IUser, name: string): Promise<Object> {
+export default function update(user: IUser, name: string): Promise<Object> {
 	'use strict';
 
 	name = name.trim();
