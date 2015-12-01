@@ -20,7 +20,7 @@ task('build:ts', () => {
 
 task('lint', () => {
 	return src('./src/**/*.ts')
-		.pipe(tslint(<any>{
+		.pipe(tslint({
 			tslint: require('tslint')
 		}))
 		.pipe(tslint.report('verbose'));
