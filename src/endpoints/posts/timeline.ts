@@ -58,7 +58,7 @@ export default function timeline(
 			.exec((err: any, timeline: IPost[]) => {
 				if (err !== null) {
 					return reject(err);
-				} else if (isEmpty(timeline.length)) {
+				} else if (isEmpty(timeline)) {
 					return resolve([]);
 				}
 
