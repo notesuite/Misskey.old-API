@@ -11,7 +11,7 @@ export default function savePostMentions(post: IPost, text: string): void {
 				user: user.id,
 				post: post.id
 			}, (createErr: any, createdMention: IPostMention) => {
-				publishStreamingMessage(`userStream:${user.id}`, JSON.stringify({
+				publishStreamingMessage(`user-stream:${user.id}`, JSON.stringify({
 					type: 'mention',
 					value: {
 						id: post.id
