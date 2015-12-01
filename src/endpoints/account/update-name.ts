@@ -14,7 +14,7 @@ export default function updateName(user: IUser, name: string): Promise<Object> {
 		return <Promise<any>>Promise.reject('empty-name');
 	}
 
-	if (name.length > 30) {
+	if (name.length > 20) {
 		return <Promise<any>>Promise.reject('too-long-name');
 	}
 
