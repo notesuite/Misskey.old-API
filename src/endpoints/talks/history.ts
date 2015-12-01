@@ -32,9 +32,9 @@ export default function talksHistory(
 
 			const messages: ITalkMessage[] = histories.map(history => <ITalkMessage>history.message);
 
-			Promise.all(messages.map(message => {
-				return serialize(message, user);
-			})).then(resolve, reject);
+			Promise.all(messages.map(message =>
+				serialize(message, user)
+			)).then(resolve, reject);
 		});
 	});
 }
