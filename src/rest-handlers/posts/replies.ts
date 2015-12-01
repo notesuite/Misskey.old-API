@@ -11,10 +11,10 @@ export default function replyPosts(
 	'use strict';
 	replies(
 		user,
-		req.query['post-id'],
-		req.query['limit'],
-		req.query['since-cursor'],
-		req.query['max-cursor']
+		req.payload['post-id'],
+		req.payload['limit'],
+		req.payload['since-cursor'],
+		req.payload['max-cursor']
 	).then(post => {
 		res(post);
 	}, (err: any) => {

@@ -10,7 +10,7 @@ export default function list(
 ): void {
 	'use strict';
 
-	files(user, req.query['folder-id'], req.query['include-folders']).then(files => {
+	files(user, req.payload['folder-id'], req.payload['include-folders']).then(files => {
 		res(files);
 	}, (err: any) => {
 		res({error: err}).code(500);

@@ -10,8 +10,8 @@ export default function login(
 	res: hapi.IReply
 ): void {
 	'use strict';
-	const screenName: string = req.query['screen-name'];
-	const password: string = req.query['password'];
+	const screenName: string = req.payload['screen-name'];
+	const password: string = req.payload['password'];
 	doLogin(screenName, password).then(same => {
 		if (same) {
 			User.findOne({

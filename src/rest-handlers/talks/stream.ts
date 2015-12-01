@@ -11,10 +11,10 @@ export default function timeline(
 	'use strict';
 	getStream(
 		user,
-		req.query['otherparty-id'],
-		req.query['limit'],
-		req.query['since-cursor'],
-		req.query['max-cursor']
+		req.payload['otherparty-id'],
+		req.payload['limit'],
+		req.payload['since-cursor'],
+		req.payload['max-cursor']
 	).then(stream => {
 		res(stream);
 	}, (err: any) => {

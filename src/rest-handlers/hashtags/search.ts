@@ -9,7 +9,7 @@ export default function searchHashtags(
 	res: hapi.IReply
 ): void {
 	'use strict';
-	search(req.query['name']).then(hashtags => {
+	search(req.payload['name']).then(hashtags => {
 		res(hashtags);
 	}, (err: any) => {
 		res({error: err}).code(500);

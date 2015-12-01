@@ -9,7 +9,7 @@ export default function showPost(
 	res: hapi.IReply
 ): void {
 	'use strict';
-	show(user, req.query['post-id']).then(post => {
+	show(user, req.payload['post-id']).then(post => {
 		res(post);
 	}, (err: any) => {
 		res({error: err}).code(500);

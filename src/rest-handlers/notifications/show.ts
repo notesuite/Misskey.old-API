@@ -11,7 +11,7 @@ export default function showPost(
 	'use strict';
 	show(
 		user,
-		req.query['notification-id']
+		req.payload['notification-id']
 	).then(notification => {
 		res(notification);
 	}, (err: any) => {

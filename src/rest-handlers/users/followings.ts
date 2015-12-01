@@ -11,9 +11,9 @@ export default function userFollowings(
 	'use strict';
 	followings(
 		user,
-		req.query['limit'],
-		req.query['since-cursor'],
-		req.query['max-cursor']
+		req.payload['limit'],
+		req.payload['since-cursor'],
+		req.payload['max-cursor']
 	).then(followingList => {
 		res(followingList);
 	}, (err: any) => {

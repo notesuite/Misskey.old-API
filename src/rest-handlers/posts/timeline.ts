@@ -11,9 +11,9 @@ export default function timeline(
 	'use strict';
 	getTimeline(
 		user,
-		req.query['limit'],
-		req.query['since-cursor'],
-		req.query['max-cursor']
+		req.payload['limit'],
+		req.payload['since-cursor'],
+		req.payload['max-cursor']
 	).then(timeline => {
 		res(timeline);
 	}, (err: any) => {

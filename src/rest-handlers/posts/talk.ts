@@ -11,8 +11,8 @@ export default function talkPost(
 	'use strict';
 	talk(
 		user,
-		req.query['post-id'],
-		req.query['limit']
+		req.payload['post-id'],
+		req.payload['limit']
 	).then(posts => {
 		res(posts);
 	}, (err: any) => {

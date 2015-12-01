@@ -11,8 +11,8 @@ export default function showUser(
 	'use strict';
 	show(
 		user,
-		req.query['user-id'],
-		req.query['screen-name']
+		req.payload['user-id'],
+		req.payload['screen-name']
 	).then(showee => {
 		res(showee);
 	}, (err: any) => {
