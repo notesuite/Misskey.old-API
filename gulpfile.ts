@@ -3,7 +3,7 @@
 import { task, src, dest } from 'gulp';
 import * as ts from 'gulp-typescript';
 import * as tslint from 'gulp-tslint';
-import * as babel from 'gulp-babel';
+const babel = require('gulp-babel');
 
 task('build', ['build:ts']);
 
