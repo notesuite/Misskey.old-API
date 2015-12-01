@@ -11,9 +11,15 @@ import serializeUser from '../../../core/serialize-user';
  * @param sinceCursor 取得するLikeを、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
  * @param maxCursor 取得するLikeを、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
  */
-export default function show(user: IUser, id: string, limit: number = 10, sinceCursor: number = null, maxCursor: number = null)
-		: Promise<Object[]> {
+export default function show(
+	user: IUser,
+	id: string,
+	limit: number = 10,
+	sinceCursor: number = null,
+	maxCursor: number = null
+): Promise<Object[]> {
 	'use strict';
+
 	return new Promise<Object[]>((resolve, reject) => {
 		const query = Object.assign({inReplyToPost: id}, {
 			cursor: new Match<void, { $gt: number } | { $lt: number } | {}>(null)
