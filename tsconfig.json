@@ -72,6 +72,7 @@
 		"./src/endpoints/notifications/unreads-count.ts",
 		"./src/endpoints/posts/get-photo-statuses.ts",
 		"./src/endpoints/posts/like.ts",
+		"./src/endpoints/posts/likes/show.ts",
 		"./src/endpoints/posts/mentions-unreads-count.ts",
 		"./src/endpoints/posts/mentions.ts",
 		"./src/endpoints/posts/photo.ts",
