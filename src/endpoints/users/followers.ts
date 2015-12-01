@@ -1,4 +1,4 @@
-import { List } from 'powerful';
+import { List, Match } from 'powerful';
 const isEmpty = List.isEmpty;
 import {UserFollowing} from '../../models';
 import {IUser, IUserFollowing} from '../../interfaces';
@@ -14,15 +14,17 @@ export default function followers(user: IUser, limit: number = 30, sinceCursor: 
 		: Promise<Object[]> {
 	'use strict';
 	return new Promise<Object[]>((resolve, reject) => {
-		const query: any = ((): any => {
-			if (sinceCursor !== null) {
-				return { followee: user.id, cursor: { $gt: sinceCursor } };
-			} else if (maxCursor !== null) {
-				return { followee: user.id, cursor: { $lt: maxCursor } };
-			} else {
-				return { followee: user.id };
-			}
-		})();
+		const query = Object.assign({
+			followee: user.id
+		}, new Match<void, any>(null)
+			.when(() => sinceCursor !== null, () => {
+				return { cursor: { $gt: sinceCursor } };
+			})
+			.when(() => maxCursor !== null, () => {
+				return { cursor: { $lt: maxCursor } };
+			})
+			.getValue({})
+		);
 		UserFollowing
 			.find(query)
 			.sort('-createdAt')

@@ -1,3 +1,4 @@
+import { Match } from 'powerful';
 import {Notification} from '../../models';
 import {IUser, INotification} from '../../interfaces';
 import serializeNotification from '../../core/serialize-notification';
@@ -19,21 +20,20 @@ export default function timeline(
 
 	return new Promise<Object[]>((resolve, reject) => {
 		// タイムライン取得用のクエリを生成
-		const query: any = ((): any => {
-			if (sinceCursor === null && maxCursor === null) {
-				return {user: user.id};
-			} else if (sinceCursor !== null) {
-				return {
-					user: user.id,
-					cursor: {$gt: sinceCursor}
-				};
-			} else if (maxCursor !== null) {
-				return {
-					user: user.id,
-					cursor: {$lt: maxCursor}
-				};
-			}
-		})();
+		const query = new Match<void, any>(null)
+			.when(() => sinceCursor !== null, () => {
+				return {$and: [
+					{user: user.id},
+					{cursor: {$gt: sinceCursor}}
+				]};
+			})
+			.when(() => maxCursor !== null, () => {
+				return {$and: [
+					{user: user.id},
+					{cursor: {$lt: maxCursor}}
+				]};
+			})
+			.getValue({user: user.id});
 
 		// クエリを発行してタイムラインを取得
 		Notification
