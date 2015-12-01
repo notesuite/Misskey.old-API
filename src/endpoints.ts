@@ -1,4 +1,5 @@
-const hour = 1000 * 60 * 60;
+const minute = 1000 * 60;
+const hour = minute * 60;
 const day = hour * 24;
 
 export default [
@@ -22,9 +23,9 @@ export default [
 	{ endpoint: 'users/recommendations', login: true },
 	{ endpoint: 'users/search', login: false },
 	{ endpoint: 'users/search-by-screen-name', login: false },
-	{ endpoint: 'posts/timeline', login: true, limitDuration: hour, limitMax: 100 },
+	{ endpoint: 'posts/timeline', login: true, limitDuration: minute * 10, limitMax: 100 },
 	{ endpoint: 'posts/user-timeline', login: false },
-	{ endpoint: 'posts/mentions', login: true, limitDuration: hour, limitMax: 100 },
+	{ endpoint: 'posts/mentions', login: true, limitDuration: minute * 10, limitMax: 100 },
 	{ endpoint: 'posts/show', login: false },
 	{ endpoint: 'posts/talk/show', login: false },
 	{ endpoint: 'posts/replies/show', login: false },
