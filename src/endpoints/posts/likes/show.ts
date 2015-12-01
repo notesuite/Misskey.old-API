@@ -21,7 +21,7 @@ export default function show(
 	'use strict';
 
 	return new Promise<Object[]>((resolve, reject) => {
-		const query = Object.assign({inReplyToPost: id}, {
+		const query = Object.assign({post: id}, {
 			cursor: new Match<void, { $gt: number } | { $lt: number } | {}>(null)
 				.when(() => sinceCursor !== null, () => { return {$gt: sinceCursor}; })
 				.when(() => maxCursor !== null, () => { return {$lt: maxCursor}; })
