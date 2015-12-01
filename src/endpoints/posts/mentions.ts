@@ -17,16 +17,16 @@ export default function timeline(user: IUser, limit: number = 10, sinceCursor: n
 
 	const query = new Match<void, any>(null)
 		.when(() => sinceCursor !== null, () => {
-			return {$and: [
-				{user: user.id},
-				{cursor: {$gt: sinceCursor}}
-			]};
+			return {
+				user: user.id,
+				cursor: {$gt: sinceCursor}
+			};
 		})
 		.when(() => maxCursor !== null, () => {
-			return {$and: [
-				{user: user.id},
-				{cursor: {$lt: maxCursor}}
-			]};
+			return {
+				user: user.id,
+				cursor: {$lt: maxCursor}
+			};
 		})
 		.getValue({user: user.id});
 
