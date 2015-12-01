@@ -10,7 +10,7 @@ export default function updateName(user: IUser, name: string): Promise<Object> {
 
 	name = name.trim();
 
-	if (name === "") {
+	if (name === '') {
 		return <Promise<any>>Promise.reject('empty-name');
 	}
 
