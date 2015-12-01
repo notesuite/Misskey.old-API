@@ -17,7 +17,7 @@ export default function search(me: IUser): Promise<Object[]> {
 				return reject(followingsFindErr);
 			}
 
-			const ignoreIds = (followings.length > 0)
+			const ignoreIds = !isEmpty(followings)
 				? [...followings.map(following => following.followee.toString()), me.id]
 				: [me.id];
 

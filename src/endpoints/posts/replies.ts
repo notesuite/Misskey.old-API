@@ -1,3 +1,4 @@
+import { Match } from 'powerful';
 import {Post} from '../../models';
 import {IUser, IPost} from '../../interfaces';
 import serializeTimeline from '../../core/serialize-timeline';
@@ -15,13 +16,12 @@ export default function replies(user: IUser, id: string, limit: number = 10, sin
 		: Promise<Object[]> {
 	'use strict';
 	return new Promise<Object[]>((resolve, reject) => {
-		let query: any = {inReplyToPost: id};
-
-		if (sinceCursor !== null) {
-			query.cursor = {$gt: sinceCursor};
-		} else if (maxCursor !== null) {
-			query.cursor = {$lt: maxCursor};
-		}
+		const query = Object.assign({inReplyToPost: id}, {
+			cursor: new Match<void, { $gt: number } | { $lt: number } | {}>(null)
+				.when(() => sinceCursor !== null, () => { return {$gt: sinceCursor}; })
+				.when(() => maxCursor !== null, () => { return {$lt: maxCursor}; })
+				.getValue({})
+		});
 
 		Post
 		.find(query)
