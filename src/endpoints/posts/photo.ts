@@ -1,3 +1,5 @@
+import { List } from 'powerful';
+const isEmpty = List.isEmpty;
 import {Post, PhotoPost} from '../../models';
 import {IApplication, IUser, IPost, IPhotoPost} from '../../interfaces';
 import publishUserStream from '../../core/publish-user-stream';
@@ -29,7 +31,7 @@ export default function photo(app: IApplication, user: IUser, photos: string[], 
 		}
 	}
 
-	if (photos === undefined || photos === null || photos.length === 0) {
+	if (photos === undefined || photos === null || isEmpty(photos)) {
 		return <Promise<any>>Promise.reject('photos-required');
 	}
 

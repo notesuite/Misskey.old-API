@@ -1,3 +1,5 @@
+import { List } from 'powerful';
+const isEmpty = List.isEmpty;
 import {Post, UserFollowing} from '../../models';
 import {IUser, IUserFollowing} from '../../interfaces';
 
@@ -13,7 +15,7 @@ export default function timelineUnreadsCount(user: IUser): Promise<number> {
 		UserFollowing.find({follower: user.id}, (followingsFindErr: any, followings: IUserFollowing[]) => {
 			if (followingsFindErr !== null) {
 				return reject(followingsFindErr);
-			} else if (followings.length === 0) {
+			} else if (isEmpty(followings)) {
 				return resolve(0);
 			}
 

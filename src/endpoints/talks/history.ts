@@ -1,3 +1,5 @@
+import { List } from 'powerful';
+const isEmpty = List.isEmpty;
 import {TalkHistory} from '../../models';
 import {ITalkMessage, IUser, ITalkHistory} from '../../interfaces';
 import serialize from '../../core/serialize-talk-message';
@@ -24,7 +26,7 @@ export default function talksHistory(
 		.exec((err: any, histories: ITalkHistory[]) => {
 			if (err !== null) {
 				return reject(err);
-			} else if (histories.length === 0) {
+			} else if (isEmpty(histories)) {
 				return resolve([]);
 			}
 

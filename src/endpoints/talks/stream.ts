@@ -1,3 +1,5 @@
+import { List } from 'powerful';
+const isEmpty = List.isEmpty;
 import {TalkMessage} from '../../models';
 import {ITalkMessage, IUser} from '../../interfaces';
 import serialize from '../../core/serialize-talk-message';
@@ -62,7 +64,7 @@ export default function stream(
 		.exec((err: any, messages: ITalkMessage[]) => {
 			if (err !== null) {
 				return reject(err);
-			} else if (messages.length === 0) {
+			} else if (isEmpty(messages)) {
 				return resolve([]);
 			}
 

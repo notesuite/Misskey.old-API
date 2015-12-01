@@ -1,3 +1,5 @@
+import { List } from 'powerful';
+const isEmpty = List.isEmpty;
 import {PostLike, Repost} from '../models';
 import {IUser, IStatusPost, IPhotoPost} from '../interfaces';
 import serializeStatus from './serialize-status';
@@ -106,7 +108,7 @@ function common(
 			// Get likers
 			new Promise<Object[]>((getLikersResolve, getLikersReject) => {
 				getPostLikers(post.id, 10).then(likers => {
-					if (likers !== null && likers.length > 0) {
+					if (likers !== null && !isEmpty(likers)) {
 						getLikersResolve(likers.map(liker => liker.toObject()));
 					} else {
 						getLikersResolve(null);

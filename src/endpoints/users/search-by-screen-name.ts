@@ -1,3 +1,5 @@
+import { List } from 'powerful';
+const isEmpty = List.isEmpty;
 import {User} from '../../models';
 import {IUser} from '../../interfaces';
 import serializeUser from '../../core/serialize-user';
@@ -16,7 +18,7 @@ export default function search(me: IUser, screenName: string): Promise<Object[]>
 		}, (searchErr: any, users: IUser[]) => {
 			if (searchErr !== null) {
 				return reject('something-happened');
-			} else if (users.length === 0) {
+			} else if (isEmpty(users)) {
 				return resolve(null);
 			}
 			Promise.all(users.map(user => serializeUser(me, user)))

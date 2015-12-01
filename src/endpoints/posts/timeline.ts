@@ -1,3 +1,5 @@
+import { List } from 'powerful';
+const isEmpty = List.isEmpty;
 import {Post, UserFollowing} from '../../models';
 import {IUser, IUserFollowing, IPost} from '../../interfaces';
 import serializeTimeline from '../../core/serialize-timeline';
@@ -56,7 +58,7 @@ export default function timeline(
 			.exec((err: any, timeline: IPost[]) => {
 				if (err !== null) {
 					return reject(err);
-				} else if (timeline.length === 0) {
+				} else if (isEmpty(timeline.length)) {
 					return resolve([]);
 				}
 

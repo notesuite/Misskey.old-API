@@ -1,3 +1,5 @@
+import { List } from 'powerful';
+const isEmpty = List.isEmpty;
 import {Post, StatusPost} from '../../models';
 import {IApplication, IUser, IPost, IStatusPost} from '../../interfaces';
 import publishUserStream from '../../core/publish-user-stream';
@@ -26,7 +28,7 @@ export default function status(
 		const maxTextLength = 300;
 		text = text.trim();
 
-		if (text.length === 0) {
+		if (isEmpty(text)) {
 			return reject('empty-text');
 		} else if (text.length > maxTextLength) {
 			return reject('too-long-text');

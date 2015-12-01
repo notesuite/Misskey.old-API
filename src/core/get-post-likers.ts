@@ -1,3 +1,5 @@
+import { List } from 'powerful';
+const isEmpty = List.isEmpty;
 import {PostLike} from '../models';
 import {IUser, IPostLike} from '../interfaces';
 
@@ -33,7 +35,7 @@ export default function getPostLikers(
 		.exec((likesFindErr: any, likes: IPostLike[]) => {
 			if (likesFindErr !== null) {
 				reject(likesFindErr);
-			} else if (likes.length === 0) {
+			} else if (isEmpty(likes)) {
 				resolve(null);
 			} else {
 				resolve(likes.map(like => <IUser>like.user));

@@ -1,3 +1,5 @@
+import { List } from 'powerful';
+const isEmpty = List.isEmpty;
 import {Hashtag} from '../../models';
 import {IHashtag} from '../../interfaces';
 
@@ -9,7 +11,7 @@ export default function search(query: string): Promise<string[]> {
 		}, (searchErr: any, hashtags: IHashtag[]) => {
 			if (searchErr !== null) {
 				reject('something-happened');
-			} else if (hashtags.length === 0) {
+			} else if (isEmpty(hashtags)) {
 				resolve([]);
 			} else {
 				resolve(hashtags.map(hashtag => hashtag.name));
