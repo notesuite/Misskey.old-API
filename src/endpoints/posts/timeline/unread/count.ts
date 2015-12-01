@@ -1,13 +1,13 @@
 import { List } from 'powerful';
 const isEmpty = List.isEmpty;
-import {Post, UserFollowing} from '../../models';
-import {IUser, IUserFollowing} from '../../interfaces';
+import {Post, UserFollowing} from '../../../../models';
+import {IUser, IUserFollowing} from '../../../../interfaces';
 
 /**
  * タイムラインにある未読の投稿の件数を取得します
  * @param user API利用ユーザー
  */
-export default function timelineUnreadsCount(user: IUser): Promise<number> {
+export default function count(user: IUser): Promise<number> {
 	'use strict';
 
 	return new Promise<number>((resolve, reject) => {

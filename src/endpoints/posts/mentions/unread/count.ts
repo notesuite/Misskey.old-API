@@ -1,11 +1,11 @@
-import {PostMention} from '../../models';
-import {IUser} from '../../interfaces';
+import {PostMention} from '../../../../models';
+import {IUser} from '../../../../interfaces';
 
 /**
  * 未読のメンションの件数を取得します
  * @param user API利用ユーザー
  */
-export default function mentionsUnreadsCount(user: IUser): Promise<number> {
+export default function count(user: IUser): Promise<number> {
 	'use strict';
 
 	return new Promise<number>((resolve, reject) => {
