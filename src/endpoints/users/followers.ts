@@ -1,3 +1,5 @@
+import { List } from 'powerful';
+const isEmpty = List.isEmpty;
 import {UserFollowing} from '../../models';
 import {IUser, IUserFollowing} from '../../interfaces';
 
@@ -28,7 +30,7 @@ export default function followers(user: IUser, limit: number = 30, sinceCursor: 
 			.populate('follower')
 			.exec((err: any, userFollowings: IUserFollowing[]) => {
 				if (err === null) {
-					const followers: any[] = (userFollowings.length > 0)
+					const followers: any[] = !isEmpty(userFollowings)
 						? userFollowings.map((userFollowing) => (<IUser>userFollowing.follower).toObject())
 						: [];
 					resolve(followers);

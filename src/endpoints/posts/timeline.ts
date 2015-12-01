@@ -29,7 +29,7 @@ export default function timeline(
 			}
 
 			// 自分と自分がフォローしているユーザーのIDのリストを生成
-			const followingIds = (followings.length > 0)
+			const followingIds = !isEmpty(followings)
 				? [...followings.map(following => following.followee.toString()), user.id]
 				: [user.id];
 
