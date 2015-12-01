@@ -69,7 +69,7 @@
 		"./src/endpoints/login.ts",
 		"./src/endpoints/notifications/show.ts",
 		"./src/endpoints/notifications/timeline.ts",
-		"./src/endpoints/notifications/unreads-count.ts",
+		"./src/endpoints/notifications/unread/count.ts",
 		"./src/endpoints/posts/like.ts",
 		"./src/endpoints/posts/likes/show.ts",
 		"./src/endpoints/posts/mentions.ts",
