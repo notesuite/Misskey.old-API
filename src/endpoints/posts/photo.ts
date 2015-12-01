@@ -96,7 +96,7 @@ export default function photo(app: IApplication, user: IUser, photos: string[], 
 						reply.save();
 					}
 
-					savePostMentions(createdPhotoPost, text);
+					savePostMentions(user, createdPhotoPost, text);
 
 					publishUserStream(user.id, {
 						type: 'post',

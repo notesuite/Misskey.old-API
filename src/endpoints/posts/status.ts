@@ -84,7 +84,7 @@ export default function status(
 
 					registerHashtags(hashtags);
 
-					savePostMentions(createdStatus, text);
+					savePostMentions(user, createdStatus, text);
 
 					publishUserStream(user.id, {
 						type: 'post',
