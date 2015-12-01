@@ -1,4 +1,4 @@
-import { List } from 'powerful';
+import { List, Match } from 'powerful';
 const isEmpty = List.isEmpty;
 import {TalkMessage} from '../../models';
 import {ITalkMessage, IUser} from '../../interfaces';
@@ -27,7 +27,7 @@ export default function stream(
 	}
 
 	return new Promise<Object[]>((resolve, reject) => {
-		const baseQuery: any = {
+		const baseQuery = {
 			$or: [
 				{
 					user: user.id,
@@ -40,21 +40,20 @@ export default function stream(
 			]
 		};
 
-		const query: any = ((): any => {
-			if (sinceCursor === null && maxCursor === null) {
-				return baseQuery;
-			} else if (sinceCursor !== null) {
-				return {
+		const query = new Match<void, any>(null)
+			.when(() => sinceCursor !== null, () => {
+				return {$and: [
 					baseQuery,
-					cursor: {$gt: sinceCursor}
-				};
-			} else if (maxCursor !== null) {
-				return {
+					{cursor: {$gt: sinceCursor}}
+				]};
+			})
+			.when(() => maxCursor !== null, () => {
+				return {$and: [
 					baseQuery,
-					cursor: {$lt: maxCursor}
-				};
-			}
-		})();
+					{cursor: {$lt: maxCursor}}
+				]};
+			})
+			.getValue(baseQuery);
 
 		TalkMessage
 		.find(query)

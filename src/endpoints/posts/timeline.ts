@@ -1,4 +1,4 @@
-import { List } from 'powerful';
+import { List, Match } from 'powerful';
 const isEmpty = List.isEmpty;
 import {Post, UserFollowing} from '../../models';
 import {IUser, IUserFollowing, IPost} from '../../interfaces';
@@ -34,21 +34,17 @@ export default function timeline(
 				: [user.id];
 
 			// タイムライン取得用のクエリを生成
-			const query: any = ((): any => {
-				if (sinceCursor === null && maxCursor === null) {
-					return {user: {$in: followingIds}};
-				} else if (sinceCursor !== null) {
-					return {
-						user: {$in: followingIds},
-						cursor: {$gt: sinceCursor}
-					};
-				} else if (maxCursor !== null) {
-					return {
-						user: {$in: followingIds},
-						cursor: {$lt: maxCursor}
-					};
-				}
-			})();
+			const query = Object.assign({
+				user: { $in: followingIds }
+			}, new Match<void, any>(null)
+				.when(() => sinceCursor !== null, () => {
+					return { cursor: { $gt: sinceCursor } };
+				})
+				.when(() => maxCursor !== null, () => {
+					return { cursor: { $lt: maxCursor } };
+				})
+				.getValue({})
+			);
 
 			// クエリを発行してタイムラインを取得
 			Post

@@ -1,4 +1,4 @@
-import { List } from 'powerful';
+import { List, Match } from 'powerful';
 const isEmpty = List.isEmpty;
 import {PostLike} from '../models';
 import {IUser, IPostLike} from '../interfaces';
@@ -12,21 +12,20 @@ export default function getPostLikers(
 	'use strict';
 
 	return new Promise<IUser[]>((resolve, reject) => {
-		const query: any = ((): any => {
-			if (sinceCursor === null && maxCursor === null) {
-				return {post: postId};
-			} else if (sinceCursor) {
+		const query = new Match<void, any>(null)
+			.when(() => sinceCursor !== null, () => {
 				return {$and: [
 					{post: postId},
 					{cursor: {$gt: sinceCursor}}
 				]};
-			} else if (maxCursor) {
+			})
+			.when(() => maxCursor !== null, () => {
 				return {$and: [
 					{post: postId},
 					{cursor: {$lt: maxCursor}}
 				]};
-			}
-		})();
+			})
+			.getValue({post: postId});
 
 		PostLike.find(query)
 		.sort('-createdAt')

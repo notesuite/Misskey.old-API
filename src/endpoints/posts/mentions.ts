@@ -1,3 +1,4 @@
+import { Match } from 'powerful';
 import {PostMention} from '../../models';
 import {IUser, IPost, IPostMention} from '../../interfaces';
 import serializeTimeline from '../../core/serialize-timeline';
@@ -14,21 +15,20 @@ export default function timeline(user: IUser, limit: number = 10, sinceCursor: n
 		: Promise<Object[]> {
 	'use strict';
 
-	const query: any = ((): any => {
-		if (sinceCursor === null && maxCursor === null) {
-			return {user: user.id};
-		} else if (sinceCursor !== null) {
-			return {
-				user: user.id,
-				cursor: {$gt: sinceCursor}
-			};
-		} else if (maxCursor !== null) {
-			return {
-				user: user.id,
-				cursor: {$lt: maxCursor}
-			};
-		}
-	})();
+	const query = new Match<void, any>(null)
+		.when(() => sinceCursor !== null, () => {
+			return {$and: [
+				{user: user.id},
+				{cursor: {$gt: sinceCursor}}
+			]};
+		})
+		.when(() => maxCursor !== null, () => {
+			return {$and: [
+				{user: user.id},
+				{cursor: {$lt: maxCursor}}
+			]};
+		})
+		.getValue({user: user.id});
 
 	return new Promise<Object[]>((resolve, reject) => {
 		// メンションドキュメントを取得
