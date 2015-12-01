@@ -15,27 +15,19 @@ export default function replies(user: IUser, id: string, limit: number = 10, sin
 		: Promise<Object[]> {
 	'use strict';
 	return new Promise<Object[]>((resolve, reject) => {
-		const query: any = ((): any => {
-			if (sinceCursor === null && maxCursor === null) {
-				return {inReplyToPost: id};
-			} else if (sinceCursor !== null) {
-				return {
-					inReplyToPost: id,
-					cursor: {$gt: sinceCursor}
-				};
-			} else if (maxCursor !== null) {
-				return {
-					inReplyToPost: id,
-					cursor: {$lt: maxCursor}
-				};
-			}
-		})();
+		let query: any = {inReplyToPost: id};
+
+		if (sinceCursor !== null) {
+			query.cursor = {$gt: sinceCursor};
+		} else if (maxCursor !== null) {
+			query.cursor = {$lt: maxCursor};
+		}
 
 		Post
-			.find(query)
-			.sort('-createdAt')
-			.limit(limit)
-			.exec((err: any, replies: IPost[]) => {
+		.find(query)
+		.sort('-createdAt')
+		.limit(limit)
+		.exec((err: any, replies: IPost[]) => {
 			if (err !== null) {
 				return reject(err);
 			}
