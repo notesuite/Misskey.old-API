@@ -48,6 +48,7 @@
 		"./src/core/serialize-user.ts",
 		"./src/endpoints.ts",
 		"./src/endpoints/account/avatar/update.ts",
+		"./src/endpoints/account/banner/update.ts",
 		"./src/endpoints/account/comment/update.ts",
 		"./src/endpoints/account/create.ts",
 		"./src/endpoints/account/location/update.ts",
