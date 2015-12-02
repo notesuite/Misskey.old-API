@@ -1,8 +1,8 @@
 import * as hapi from 'hapi';
-import { IApplication, IUser } from '../../interfaces';
-import notificationsUnreadsCount from '../../endpoints/notifications/unreads-count';
+import { IApplication, IUser } from '../../../interfaces';
+import notificationsUnreadsCount from '../../../endpoints/notifications/unread/count';
 
-export default function unreadsCount(
+export default function count(
 	app: IApplication,
 	user: IUser,
 	req: hapi.Request,

@@ -141,7 +141,7 @@
 		"./src/rest-handlers/login.ts",
 		"./src/rest-handlers/notifications/show.ts",
 		"./src/rest-handlers/notifications/timeline.ts",
-		"./src/rest-handlers/notifications/unreads-count.ts",
+		"./src/rest-handlers/notifications/unread/count.ts",
 		"./src/rest-handlers/posts/like.ts",
 		"./src/rest-handlers/posts/mentions.ts",
 		"./src/rest-handlers/posts/mentions/unread/count.ts",
