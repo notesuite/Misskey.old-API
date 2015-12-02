@@ -1,8 +1,8 @@
 import * as hapi from 'hapi';
-import { IApplication, IUser } from '../../interfaces';
-import replies from '../../endpoints/posts/replies';
+import { IApplication, IUser } from '../../../interfaces';
+import replies from '../../../endpoints/posts/replies/show';
 
-export default function replyPosts(
+export default function show(
 	app: IApplication,
 	user: IUser,
 	req: hapi.Request,

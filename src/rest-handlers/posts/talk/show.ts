@@ -1,8 +1,8 @@
 import * as hapi from 'hapi';
-import { IApplication, IUser } from '../../interfaces';
-import talk from '../../endpoints/posts/talk';
+import { IApplication, IUser } from '../../../interfaces';
+import talk from '../../../endpoints/posts/talk/show';
 
-export default function talkPost(
+export default function show(
 	app: IApplication,
 	user: IUser,
 	req: hapi.Request,
