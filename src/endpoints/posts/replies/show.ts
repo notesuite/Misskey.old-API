@@ -30,6 +30,8 @@ export default function show(user: IUser, id: string, limit: number = 10, sinceC
 		.exec((err: any, replies: IPost[]) => {
 			if (err !== null) {
 				return reject(err);
+			} else if (replies.length === 0) {
+				return resolve([]);
 			}
 			// すべてpopulateする
 			Promise.all(replies.map(post => populateAll(post)))
