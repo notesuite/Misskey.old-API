@@ -86,13 +86,11 @@ export interface IPost extends Document {
 }
 
 export interface IStatusPost extends IPost {
-	isPlain: boolean;
 	hashtags: string[];
 	text: string;
 }
 
 export interface IPhotoPost extends IPost {
-	isPlain: boolean;
 	photos: string | Types.ObjectId[] | IAlbumFile[];
 	hashtags: string[];
 	text: string;
@@ -166,7 +164,6 @@ export interface ITalkMessage extends Document {
 	cursor: number;
 	isContentModified: boolean;
 	isDeleted: boolean;
-	isPlain: boolean;
 	isRead: boolean;
 	otherparty: string | Types.ObjectId | IUser;
 	text: string;

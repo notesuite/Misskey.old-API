@@ -55,8 +55,7 @@ export function status(db: Connection): Model<Document> {
 
 	const schema = new Schema(Object.assign({
 		hashtags: { type: [String], required: false, default: [] },
-		text: { type: String, required: false, default: null },
-		isPlain: { type: Boolean, required: false, default: false }
+		text: { type: String, required: false, default: null }
 	}, postBase));
 
 	// Auto increment
@@ -80,8 +79,7 @@ export function photo(db: Connection): Model<Document> {
 	const schema = new Schema(Object.assign({
 		photos: [{ type: Schema.Types.ObjectId, required: true, ref: 'AlbumFile' }],
 		hashtags: { type: [String], required: false, default: [] },
-		text: { type: String, required: false, default: null },
-		isPlain: { type: Boolean, required: false, default: false }
+		text: { type: String, required: false, default: null }
 	}, postBase));
 
 	// Auto increment
