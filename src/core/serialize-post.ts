@@ -1,10 +1,7 @@
-import { List } from 'powerful';
-const isEmpty = List.isEmpty;
 import {PostLike, Repost} from '../models';
 import {IUser, IStatusPost, IPhotoPost} from '../interfaces';
 import serializeStatus from './serialize-status';
 import serializePhotoPost from './serialize-photo-post';
-import getPostLikers from './get-post-likers';
 
 export default function serializePost(
 	post: any,
@@ -104,25 +101,12 @@ function common(
 					}
 					getIsRepostedResolve(count > 0);
 				});
-			}),
-			// Get likers
-			new Promise<Object[]>((getLikersResolve, getLikersReject) => {
-				getPostLikers(post.id, 10).then(likers => {
-					if (likers !== null && !isEmpty(likers)) {
-						getLikersResolve(likers.map(liker => liker.toObject()));
-					} else {
-						getLikersResolve(null);
-					}
-				}, (getLikersErr: any) => {
-					getLikersReject(getLikersErr);
-				});
 			})
-		]).then(([inReplyToPost, isLiked, isReposted, likers]) => {
+		]).then(([inReplyToPost, isLiked, isReposted]) => {
 			const serialized: any = post;
 			serialized.inReplyToPost = (post.inReplyToPost !== null && includeDestination) ? inReplyToPost : post.inReplyToPost;
 			serialized.isLiked = isLiked;
 			serialized.isReposted = isReposted;
-			serialized.likers = likers;
 			resolve(serialized);
 		},
 		(serializedErr: any) => {
