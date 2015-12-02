@@ -18,7 +18,7 @@ export default function show(user: IUser, id: string, limit: number = 30): Promi
 			} else if (source === null) {
 				reject('not-found');
 			} else if (source.inReplyToPost === null) {
-				reject('not-reply');
+				resolve([]);
 			} else {
 				get(<string>source.inReplyToPost).then(posts => {
 					// すべてpopulateする
