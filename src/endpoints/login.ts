@@ -2,32 +2,34 @@ import * as bcrypt from 'bcrypt';
 import {User} from '../models';
 import {IUser} from '../interfaces';
 
-export default function login(screenName: string, password: string): Promise<boolean> {
+export default function login(screenName: string, password: string): Promise<Object> {
 	'use strict';
 
 	screenName = screenName.trim();
 
-	return new Promise<boolean>((resolve, reject) => {
-		if (screenName === '') {
-			User.findOne({
-				screenNameLower: screenName.toLowerCase()
-			}, (findErr: any, user: IUser) => {
-				if (findErr) {
-					reject(findErr);
-				} else if (user) {
-					bcrypt.compare(password, user.encryptedPassword, (compareErr: Error, same: boolean) => {
-						if (compareErr) {
-							reject(compareErr);
-						} else {
-							resolve(same);
-						}
-					});
-				} else {
-					reject('user-not-found');
+	if (screenName === '') {
+		return <Promise<any>>Promise.reject('empty-screen-name');
+	}
+
+	return new Promise<Object>((resolve, reject) => {
+		User.findOne({
+			screenNameLower: screenName.toLowerCase()
+		}, (findErr: any, user: IUser) => {
+			if (findErr !== null) {
+				return reject(findErr);
+			} else if (user === null) {
+				return reject('user-not-found');
+			}
+
+			bcrypt.compare(password, user.encryptedPassword, (compareErr, same) => {
+				if (compareErr !== undefined && compareErr !== null) {
+					return reject(compareErr);
+				} else if (!same) {
+					return reject('failed');
 				}
+
+				resolve(user.toObject());
 			});
-		} else {
-			reject('empty-screen-name');
-		}
+		});
 	});
 }
