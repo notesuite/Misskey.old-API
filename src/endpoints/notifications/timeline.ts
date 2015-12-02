@@ -22,27 +22,29 @@ export default function timeline(
 		// タイムライン取得用のクエリを生成
 		const query = new Match<void, any>(null)
 			.when(() => sinceCursor !== null, () => {
-				return {$and: [
-					{user: user.id},
-					{cursor: {$gt: sinceCursor}}
-				]};
+				return {
+					user: user.id,
+					cursor: {$gt: sinceCursor}
+				};
 			})
 			.when(() => maxCursor !== null, () => {
-				return {$and: [
-					{user: user.id},
-					{cursor: {$lt: maxCursor}}
-				]};
+				return {
+					user: user.id,
+					cursor: {$lt: maxCursor}
+				};
 			})
 			.getValue({user: user.id});
 
 		// クエリを発行してタイムラインを取得
 		Notification
-			.find(query)
-			.sort('-createdAt')
-			.limit(limit)
-			.exec((err: any, notifications: INotification[]) => {
+		.find(query)
+		.sort('-createdAt')
+		.limit(limit)
+		.exec((err: any, notifications: INotification[]) => {
 			if (err !== null) {
 				return reject(err);
+			} else if (notifications.length === 0) {
+				return resolve([]);
 			}
 
 			Promise.all(notifications.map(notification => serializeNotification(notification.toObject(), user)))
