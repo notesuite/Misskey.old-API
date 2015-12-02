@@ -16,12 +16,11 @@ export default function show(user: IUser, id: string, limit: number = 10, sinceC
 		: Promise<Object[]> {
 	'use strict';
 	return new Promise<Object[]>((resolve, reject) => {
-		const query = Object.assign({inReplyToPost: id}, {
-			cursor: new Match<void, { $gt: number } | { $lt: number } | {}>(null)
-				.when(() => sinceCursor !== null, () => { return {$gt: sinceCursor}; })
-				.when(() => maxCursor !== null, () => { return {$lt: maxCursor}; })
+		const query = Object.assign({inReplyToPost: id}, new Match<void, any>(null)
+				.when(() => sinceCursor !== null, () => { return {cursor: {$gt: sinceCursor}}; })
+				.when(() => maxCursor !== null, () => { return {cursor: {$lt: maxCursor}}; })
 				.getValue({})
-		});
+		);
 
 		Post
 		.find(query)
