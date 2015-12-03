@@ -13,6 +13,7 @@
 
 ## External devDependencies
 * node-gyp - https://github.com/nodejs/node-gyp#installation
+* OpenSSL
 
 ## How to build
 
