@@ -30,13 +30,13 @@
     "connect-redis": "3.0.1",
     "gm": "1.21.1",
     "hapi": "11.1.2",
-    "mongoose": "4.2.2",
+    "mongoose": "4.2.9",
     "mongoose-auto-increment": "5.0.1",
     "mongoose-deep-populate": "2.0.3",
     "powerful": "8.0.1",
     "ratelimiter": "2.1.1",
-    "redis": "2.2.5",
-    "request": "2.65.0"
+    "redis": "2.4.2",
+    "request": "2.67.0"
   },
   "private": true
 }
