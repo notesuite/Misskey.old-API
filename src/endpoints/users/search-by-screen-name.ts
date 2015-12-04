@@ -19,7 +19,7 @@ export default function search(me: IUser, screenName: string): Promise<Object[]>
 			if (searchErr !== null) {
 				return reject('something-happened');
 			} else if (isEmpty(users)) {
-				return resolve(null);
+				return resolve([]);
 			}
 			Promise.all(users.map(user => serializeUser(me, user)))
 			.then(serializedUsers => {
