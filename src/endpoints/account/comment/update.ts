@@ -10,7 +10,7 @@ export default function update(user: IUser, comment: string): Promise<Object> {
 
 	comment = comment.trim();
 
-	if (comment.length > 30) {
+	if (comment.length > 50) {
 		return <Promise<any>>Promise.reject('too-long-comment');
 	}
 
