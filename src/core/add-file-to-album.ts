@@ -63,6 +63,7 @@ export default function addFileToAlbum(
 			// アルバム使用量を取得するためにすべてのファイルを取得
 			AlbumFile.find({user: userId}, (albumFilesFindErr: any, albumFiles: IAlbumFile[]) => {
 				if (albumFilesFindErr !== null) {
+					console.error(albumFilesFindErr);
 					return reject(albumFilesFindErr);
 				}
 
@@ -85,6 +86,7 @@ export default function addFileToAlbum(
 					hash: hash
 				}, (albumFileCreateErr: any, albumFile: IAlbumFile) => {
 					if (albumFileCreateErr !== null) {
+						console.error(albumFileCreateErr);
 						return reject(albumFileCreateErr);
 					}
 					// ファイルをサーバーにアップロード
@@ -102,6 +104,7 @@ export default function addFileToAlbum(
 						}
 					}, (uploadErr: any, _: any, path: any) => {
 						if (uploadErr !== null) {
+							console.error(uploadErr);
 							return reject(uploadErr);
 						}
 
@@ -134,6 +137,7 @@ export default function addFileToAlbum(
 		function save(albumFile: IAlbumFile): void {
 			albumFile.save((saveErr: any, saved: IAlbumFile) => {
 				if (saveErr !== null) {
+					console.error(saveErr);
 					return reject(saveErr);
 				}
 				resolve(saved);
