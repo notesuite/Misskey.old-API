@@ -32,6 +32,7 @@ export default function albumFile(db: Connection): Model<Document> {
 		ret.url = `${config.fileServer.url}/${doc.serverPath}`;
 		delete ret._id;
 		delete ret.__v;
+		delete ret.serverPath;
 	};
 
 	// Auto increment
