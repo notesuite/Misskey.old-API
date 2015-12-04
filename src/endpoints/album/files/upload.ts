@@ -17,10 +17,11 @@ export default function upload(
 	mimetype: string,
 	file: Buffer,
 	size: number,
-	unconditional: boolean = false)
-		: Promise<Object> {
+	unconditional: boolean = false
+): Promise<Object> {
 	'use strict';
-	if (fileName.length > 100) {
+
+	if (fileName.length > 200) {
 		return <Promise<any>>Promise.reject('too-long-filename');
 	} else {
 		return new Promise<Object>((resolve, reject) => {
