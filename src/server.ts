@@ -51,5 +51,8 @@ export default function startServer(): void {
 
 function notFoundHandler(req: hapi.Request, res: hapi.IReply): hapi.Response {
 	'use strict';
-	return res('API not found').code(404);
+	console.log(`NOT FOUND: ${req.path}`);
+	return res({
+		error: 'api-not-found'
+	}).code(404);
 }
