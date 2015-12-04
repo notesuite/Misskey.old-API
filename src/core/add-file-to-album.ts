@@ -42,6 +42,7 @@ export default function addFileToAlbum(
 				dataSize: size
 			}, (hashmuchFileFindErr: any, hashmuchFile: IAlbumFile) => {
 				if (hashmuchFileFindErr !== null) {
+					console.error(hashmuchFileFindErr);
 					return reject('something-happend');
 				}
 
