@@ -1,6 +1,6 @@
 import * as hapi from 'hapi';
-import { IApplication, IUser } from '../interfaces';
-import screennameAvailable from '../endpoints/screenname-available';
+import { IApplication, IUser } from '../../interfaces';
+import screennameAvailable from '../../endpoints/screenname/available';
 
 export default function isScreennameAvailable(
 	app: IApplication,
