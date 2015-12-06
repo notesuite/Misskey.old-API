@@ -14,43 +14,43 @@
   },
   "dependencies": {
     "gulp/gulp.d.ts": {
-      "ref": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
+      "ref": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
     },
     "gulp-typescript/gulp-typescript.d.ts": {
-      "ref": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
+      "ref": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
     },
     "gulp-tslint/gulp-tslint.d.ts": {
-      "ref": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
+      "ref": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
     },
     "mongoose/mongoose.d.ts": {
-      "ref": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
+      "ref": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
     },
     "express/express.d.ts": {
-      "ref": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
+      "ref": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
     },
     "body-parser/body-parser.d.ts": {
-      "ref": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
+      "ref": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
     },
     "multer/multer.d.ts": {
-      "ref": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
+      "ref": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
     },
     "bcrypt/bcrypt.d.ts": {
-      "ref": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
+      "ref": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
     },
     "redis/redis.d.ts": {
-      "ref": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
+      "ref": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
     },
     "request/request.d.ts": {
-      "ref": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
+      "ref": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
     },
     "mongoose-auto-increment/mongoose-auto-increment.d.ts": {
-      "ref": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
+      "ref": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
     },
     "hapi/hapi.d.ts": {
-      "ref": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
+      "ref": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
     },
     "gm/gm.d.ts": {
-      "ref": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
+      "ref": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
     }
   }
 }
