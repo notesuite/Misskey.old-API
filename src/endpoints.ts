@@ -48,6 +48,7 @@ export default [
 	{ endpoint: 'album/files/upload', login: true, limitDuration: hour, limitMax: 100 },
 	{ endpoint: 'album/files/show', login: true },
 	{ endpoint: 'album/files/list', login: true },
+	{ endpoint: 'album/files/stream', login: true },
 	{ endpoint: 'album/files/move', login: true },
 	{ endpoint: 'album/files/rename', login: true },
 	{ endpoint: 'album/files/delete', login: true },
