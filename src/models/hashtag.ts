@@ -4,6 +4,7 @@ export default function hashtag(db: Connection): Model<Document> {
 	'use strict';
 
 	const schema = new Schema({
+		count: { type: Number, required: false, default: 1 },
 		createdAt: { type: Date, required: true, default: Date.now },
 		name: { type: String, required: true, unique: true }
 	});

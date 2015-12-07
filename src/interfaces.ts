@@ -67,6 +67,7 @@ export interface IChannel extends Document {
 }
 
 export interface IHashtag extends Document {
+	count: number;
 	createdAt: Date;
 	name: string;
 }
