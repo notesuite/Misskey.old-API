@@ -84,7 +84,7 @@ export default function status(
 						reply.save();
 					}
 
-					registerHashtags(hashtags);
+					registerHashtags(user, hashtags);
 
 					savePostMentions(user, createdStatus, text);
 

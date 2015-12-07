@@ -91,7 +91,7 @@ export default function photo(app: IApplication, user: IUser, photos: string[], 
 					user.postsCount++;
 					user.save();
 
-					registerHashtags(hashtags);
+					registerHashtags(user, hashtags);
 
 					if (reply !== null) {
 						reply.repliesCount++;
