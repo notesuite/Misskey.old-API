@@ -8,7 +8,12 @@ export default function search(query: string): Promise<string[]> {
 	return new Promise<string[]>((resolve, reject) => {
 		Hashtag.find({
 			name: new RegExp(query, 'i')
-		}, (searchErr: any, hashtags: IHashtag[]) => {
+		})
+		.sort({
+			count: -1
+		})
+		.limit(30)
+		.exec((searchErr: any, hashtags: IHashtag[]) => {
 			if (searchErr !== null) {
 				reject('something-happened');
 			} else if (isEmpty(hashtags)) {
