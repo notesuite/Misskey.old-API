@@ -39,30 +39,9 @@ export interface IConfig {
 		http: number,
 		https: number
 	};
+	https: {
+		enable: boolean;
+		keyPath: string;
+		certPath: string;
+	};
 }
-
-export const defaultConfig: IConfig = {
-	mongo: {
-		uri: 'mongodb://localhost/Misskey',
-		options: {
-			user: 'himawari',
-			pass: 'sakurako0907'
-		}
-	},
-	redis: {
-		host: 'localhost',
-		port: 6379
-	},
-	fileServer: {
-		passkey: '',
-		url: 'http://usercontents.misskey.xyz',
-		ip: '192.168.0.2',
-		port: 616
-	},
-	apiPasskey: '',
-	port: {
-		internal: 616,
-		http: 80,
-		https: 443
-	}
-};
