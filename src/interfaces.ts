@@ -70,7 +70,7 @@ export interface IHashtag extends Document {
 	count: number;
 	createdAt: Date;
 	name: string;
-	users: string | Types.ObjectId[] | IUser[];
+	users: string[] | Types.ObjectId[] | IUser[];
 }
 
 export interface IPost extends Document {
@@ -93,7 +93,7 @@ export interface IStatusPost extends IPost {
 }
 
 export interface IPhotoPost extends IPost {
-	photos: string | Types.ObjectId[] | IAlbumFile[];
+	photos: string[] | Types.ObjectId[] | IAlbumFile[];
 	hashtags: string[];
 	text: string;
 }
