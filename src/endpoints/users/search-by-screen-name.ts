@@ -15,7 +15,12 @@ export default function search(me: IUser, screenName: string): Promise<Object[]>
 	return new Promise<Object[]>((resolve, reject) => {
 		User.find({
 			screenNameLower: new RegExp(screenNameLower)
-		}, (searchErr: any, users: IUser[]) => {
+		})
+		.sort({
+			followersCount: -1
+		})
+		.limit(30)
+		.exec((searchErr: any, users: IUser[]) => {
 			if (searchErr !== null) {
 				return reject('something-happened');
 			} else if (isEmpty(users)) {
