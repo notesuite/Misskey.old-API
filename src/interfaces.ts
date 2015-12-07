@@ -70,6 +70,7 @@ export interface IHashtag extends Document {
 	count: number;
 	createdAt: Date;
 	name: string;
+	users: string | Types.ObjectId[] | IUser[];
 }
 
 export interface IPost extends Document {
