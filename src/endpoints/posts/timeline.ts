@@ -71,10 +71,6 @@ export default function timeline(
 					reject(populatedErr);
 				});
 
-				// ここまで読みましたカーソル(便宜上)を最新の投稿にセットしておく
-				user.timelineReadCursor = timeline[0].cursor;
-				user.save();
-
 				// すべて既読にしておく
 				timeline.forEach(post => {
 					readPost(user, post);
