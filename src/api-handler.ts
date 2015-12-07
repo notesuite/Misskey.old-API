@@ -14,27 +14,33 @@ export default function apiHandler(endpoint: any, req: hapi.Request, res: hapi.I
 
 	authorize(req).then((context: any) => {
 		if (endpoint.login) {
-			const limiter = new Limiter({
-				id: `${context.user.id}:${endpoint.endpoint}`,
-				duration: endpoint.limitDuration,
-				max: endpoint.limitMax,
-				db: limiterDb
-			});
+			if (endpoint.hasOwnProperty('limitDuration') && endpoint.hasOwnProperty('limitMax')) {
+				const limitKey = endpoint.hasOwnProperty('limitKey') ? endpoint.limitKey : endpoint.endpoint;
+				const limiter = new Limiter({
+					id: `${context.user.id}:${limitKey}`,
+					duration: endpoint.limitDuration,
+					max: endpoint.limitMax,
+					db: limiterDb
+				});
 
-			limiter.get((limitErr: any, limit: any) => {
-				if (limitErr !== null) {
-					return res({
-						error: 'something-happened'
-					}).code(500);
-				} else if (limit.remaining === 0) {
-					return res({
-						error: 'rate-limit-exceeded'
-					}).code(429);
-				} else {
-					require(`${__dirname}/rest-handlers/${endpoint.endpoint}`).default(
-						context.app, context.user, req, res);
-				}
-			});
+				limiter.get((limitErr: any, limit: any) => {
+					if (limitErr !== null) {
+						return res({
+							error: 'something-happened'
+						}).code(500);
+					} else if (limit.remaining === 0) {
+						return res({
+							error: 'rate-limit-exceeded'
+						}).code(429);
+					} else {
+						require(`${__dirname}/rest-handlers/${endpoint.endpoint}`).default(
+							context.app, context.user, req, res);
+					}
+				});
+			} else {
+				require(`${__dirname}/rest-handlers/${endpoint.endpoint}`).default(
+					context.app, context.user, req, res);
+			}
 		} else {
 			require(`${__dirname}/rest-handlers/${endpoint.endpoint}`).default(
 				context.app, context.user, req, res);
