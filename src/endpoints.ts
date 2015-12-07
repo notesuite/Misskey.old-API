@@ -45,6 +45,7 @@ export default [
 	{ endpoint: 'talks/stream', login: true, limitDuration: hour, limitMax: 1000 },
 	{ endpoint: 'talks/history', login: true, limitDuration: hour, limitMax: 1000 },
 	{ endpoint: 'talks/delete', login: true, limitDuration: hour, limitMax: 100 },
+	{ endpoint: 'talks/unread/count', login: true },
 	{ endpoint: 'album/files/upload', login: true, limitDuration: hour, limitMax: 100 },
 	{ endpoint: 'album/files/show', login: true },
 	{ endpoint: 'album/files/list', login: true },
