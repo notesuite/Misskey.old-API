@@ -5,14 +5,17 @@ import {IUser, IUserFollowing} from '../../interfaces';
 import serializeUser from '../../core/serialize-user';
 
 /**
- * おすすめのユーザーを取得します(現在は未実装で、ただ最新のユーザーを取得します)
+ * おすすめのユーザーを取得します
  * @param me API利用ユーザー
  */
 export default function search(me: IUser): Promise<Object[]> {
 	'use strict';
+
 	return new Promise<Object[]>((resolve, reject) => {
 		// 自分がフォローしているユーザーの関係を取得
-		UserFollowing.find({follower: me.id}, (followingsFindErr: any, followings: IUserFollowing[]) => {
+		UserFollowing.find({
+			follower: me.id
+		}, (followingsFindErr: any, followings: IUserFollowing[]) => {
 			if (followingsFindErr !== null) {
 				return reject(followingsFindErr);
 			}
@@ -24,7 +27,9 @@ export default function search(me: IUser): Promise<Object[]> {
 			User.find({
 				_id: { $nin: ignoreIds }
 			})
-			.sort('-createdAt')
+			.sort({
+				followersCount: -1
+			})
 			.limit(4)
 			.exec((searchErr: any, users: IUser[]) => {
 				if (searchErr !== null) {
