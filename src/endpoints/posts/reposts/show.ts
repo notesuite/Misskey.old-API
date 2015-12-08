@@ -23,20 +23,17 @@ export default function show(
 
 	return new Promise<Object[]>((resolve, reject) => {
 
-		const query = new Match<void, any>(null)
+		const query = Object.assign({
+			post: postId
+		}, new Match<void, any>(null)
 			.when(() => sinceCursor !== null, () => {
-				return {
-					post: postId,
-					cursor: {$gt: sinceCursor}
-				};
+				return { cursor: { $gt: sinceCursor } };
 			})
 			.when(() => maxCursor !== null, () => {
-				return {
-					post: postId,
-					cursor: {$lt: maxCursor}
-				};
+				return { cursor: { $lt: maxCursor } };
 			})
-			.getValue({post: postId});
+			.getValue({})
+		);
 
 		Repost
 		.find(query)
