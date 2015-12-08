@@ -10,7 +10,7 @@ export default function search(): Promise<string[]> {
 		.sort({
 			count: -1
 		})
-		.limit(10)
+		.limit(16)
 		.exec((searchErr: any, hashtags: IHashtag[]) => {
 			if (searchErr !== null) {
 				reject('something-happened');
