@@ -56,5 +56,6 @@ export default [
 	{ endpoint: 'album/folders/create', login: true, limitDuration: hour, limitMax: 50 },
 	{ endpoint: 'album/folders/move', login: true },
 	{ endpoint: 'album/folders/rename', login: true },
-	{ endpoint: 'hashtags/search', login: false }
+	{ endpoint: 'hashtags/search', login: false },
+	{ endpoint: 'hashtags/trend/show', login: false }
 ]
