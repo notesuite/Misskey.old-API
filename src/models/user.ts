@@ -49,19 +49,19 @@ export default function user(db: Connection): Model<Document> {
 		delete ret.avatar;
 		delete ret.avatarPath;
 		ret.avatarUrl = doc.avatar !== null
-			? `${config.fileServer.url}/${doc.avatarPath}`
+			? `${config.fileServer.url}/${encodePath(doc.avatarPath)}`
 			: `${config.fileServer.url}/defaults/avatar.jpg`;
 
 		delete ret.banner;
 		delete ret.bannerPath;
 		ret.bannerUrl = doc.banner !== null
-			? `${config.fileServer.url}/${doc.bannerPath}`
+			? `${config.fileServer.url}/${encodePath(doc.bannerPath)}`
 			: `${config.fileServer.url}/defaults/banner.jpg`;
 
 		delete ret.wallpaper;
 		delete ret.wallpaperPath;
 		ret.wallpaperUrl = doc.wallpaper !== null
-			? `${config.fileServer.url}/${doc.wallpaperPath}`
+			? `${config.fileServer.url}/${encodePath(doc.wallpaperPath)}`
 			: `${config.fileServer.url}/defaults/wallpaper.jpg`;
 
 		delete ret._id;
@@ -72,4 +72,8 @@ export default function user(db: Connection): Model<Document> {
 	};
 
 	return db.model('User', schema, 'Users');
+}
+
+function encodePath(path: string): string {
+	return (<string>path).split('/').map(x => encodeURI(x)).join('/');
 }
