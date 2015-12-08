@@ -35,6 +35,10 @@ export default function photo(app: IApplication, user: IUser, photos: string[], 
 		return <Promise<any>>Promise.reject('photos-required');
 	}
 
+	if (photos.length > 4) {
+		return <Promise<any>>Promise.reject('too-many-photos');
+	}
+
 	return new Promise<Object>((resolve, reject) => {
 		if (inReplyToPostId !== null) {
 			// リプライ先に指定されている投稿が実在するかチェック
