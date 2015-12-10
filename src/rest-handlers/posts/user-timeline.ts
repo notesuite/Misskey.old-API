@@ -12,7 +12,7 @@ export default function userTimeline(
 	getTimeline(
 		user,
 		req.payload['user-id'],
-		req.payload['include-replies'],
+		req.payload['include-replies'] === 'true',
 		req.payload['types'],
 		req.payload['limit'],
 		req.payload['since-cursor'],
