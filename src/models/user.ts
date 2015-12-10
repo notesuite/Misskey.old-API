@@ -75,5 +75,6 @@ export default function user(db: Connection): Model<Document> {
 }
 
 function encodePath(path: string): string {
+	'use strict';
 	return (<string>path).split('/').map(x => encodeURI(x)).join('/');
 }
