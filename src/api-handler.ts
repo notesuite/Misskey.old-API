@@ -8,9 +8,13 @@ import config from './config';
 
 const limiterDb = redis.createClient(config.redis.port, config.redis.host);
 
-export default function apiHandler(endpoint: any, req: hapi.Request, res: hapi.IReply): void {
+export default function apiHandler(endpoint: any, req: hapi.Request, reply: hapi.IReply): void {
 	'use strict';
 	console.log(`${req.method} ${req.path}`);
+
+	const response = (<any>reply)()
+		.header('Access-Control-Allow-Origin', '*')
+		.hold().send;
 
 	authorize(req).then((context: any) => {
 		if (endpoint.login) {
@@ -25,28 +29,28 @@ export default function apiHandler(endpoint: any, req: hapi.Request, res: hapi.I
 
 				limiter.get((limitErr: any, limit: any) => {
 					if (limitErr !== null) {
-						return res({
+						return response({
 							error: 'something-happened'
 						}).code(500);
 					} else if (limit.remaining === 0) {
-						return res({
+						return response({
 							error: 'rate-limit-exceeded'
 						}).code(429);
 					} else {
 						require(`${__dirname}/rest-handlers/${endpoint.endpoint}`).default(
-							context.app, context.user, req, res);
+							context.app, context.user, req, response);
 					}
 				});
 			} else {
 				require(`${__dirname}/rest-handlers/${endpoint.endpoint}`).default(
-					context.app, context.user, req, res);
+					context.app, context.user, req, response);
 			}
 		} else {
 			require(`${__dirname}/rest-handlers/${endpoint.endpoint}`).default(
-				context.app, context.user, req, res);
+				context.app, context.user, req, response);
 		}
 	}, (err: any) => {
-		res({
+		response({
 			error: 'authentication-failed'
 		}).code(403);
 	});
