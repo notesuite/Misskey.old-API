@@ -51,6 +51,9 @@
     },
     "gm/gm.d.ts": {
       "ref": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
+    },
+    "gulp-babel/gulp-babel.d.ts": {
+      "ref": "27986c2fb0ee3d386a881c19eddec1c6de1108bf"
     }
   }
 }
