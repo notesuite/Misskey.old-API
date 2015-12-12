@@ -24,6 +24,8 @@ export default function talkMessage(db: Connection): Model<Document> {
 	}
 	(<any>schema).options.toObject.transform = (doc: any, ret: any) => {
 		ret.id = doc.id;
+		ret.isModified = doc.isContentModified;
+		delete ret.isContentModified;
 		delete ret._id;
 		delete ret.__v;
 	};
