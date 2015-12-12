@@ -12,12 +12,16 @@ export default function read(
 ): Promise<void> {
 	'use strict';
 
+	const otherpartyId: string = typeof message.user === 'string'
+		? message.user
+		: (<any>message.user).id;
+
 	return new Promise<void>((resolve, reject) => {
 		message.isRead = true;
 		message.save();
 
 		// ストリームメッセージ発行
-		publishStream(`talk-stream:${message.otherparty}-${user.id}`, JSON.stringify({
+		publishStream(`talk-stream:${otherpartyId}-${user.id}`, JSON.stringify({
 			type: 'read',
 			value: message.id
 		}));
