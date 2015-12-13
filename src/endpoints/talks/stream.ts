@@ -27,33 +27,23 @@ export default function stream(
 	}
 
 	return new Promise<Object[]>((resolve, reject) => {
-		const baseQuery = {
-			$or: [
-				{
-					user: user.id,
-					otherparty: otherpartyId
-				},
-				{
-					user: otherpartyId,
-					otherparty: user.id
-				},
-			]
-		};
-
-		const query = new Match<void, any>(null)
+		const query = Object.assign({
+			$or: [{
+				user: user.id,
+				otherparty: otherpartyId
+			}, {
+				user: otherpartyId,
+				otherparty: user.id
+			}]
+		}, new Match<void, any>(null)
 			.when(() => sinceCursor !== null, () => {
-				return {$and: [
-					baseQuery,
-					{cursor: {$gt: sinceCursor}}
-				]};
+				return { cursor: { $gt: sinceCursor } };
 			})
 			.when(() => maxCursor !== null, () => {
-				return {$and: [
-					baseQuery,
-					{cursor: {$lt: maxCursor}}
-				]};
+				return { cursor: { $lt: maxCursor } };
 			})
-			.getValue(baseQuery);
+			.getValue({})
+		);
 
 		TalkMessage
 		.find(query)
