@@ -15,7 +15,7 @@ export default function talkMessage(db: Connection): Model<Document> {
 		isDeleted: { type: Boolean, required: false, default: false },
 		isRead: { type: Boolean, required: false, default: false },
 		otherparty: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
-		text: { type: String, required: true },
+		text: { type: String, required: false, default: '' },
 		user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
 	});
 

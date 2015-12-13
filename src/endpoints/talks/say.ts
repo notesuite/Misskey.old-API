@@ -28,7 +28,7 @@ export default function say(
 	}
 
 	// ファイルが添付されていないかつテキストも空だったらエラー
-	if (fileId === null && text === '') {
+	if (fileId === null && (text === '' || text === null || text === '')) {
 		return <Promise<any>>Promise.reject('empty-text');
 	}
 
