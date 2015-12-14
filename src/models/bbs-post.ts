@@ -8,14 +8,16 @@ export default function bbsPost(db: Connection): Model<Document> {
 
 	const schema = new Schema({
 		app: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Application' },
-		attachedFiles: [{ type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFile' }],
+		files: [{ type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFile' }],
 		createdAt: { type: Date, required: true, default: Date.now },
 		cursor: { type: Number },
 		inReplyToPost: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'BBSPost' },
 		isContentModified: { type: Boolean, required: false, default: false },
 		isDeleted: { type: Boolean, required: false, default: false },
 		isPlain: { type: Boolean, required: false, default: false },
-		plusonesCount: { type: Number, required: false, default: 0 },
+		likesCount: { type: Number, required: false, default: 0 },
+		number: { type: Number, required: true },
+		repliesCount: { type: Number, required: false, default: 0 },
 		text: { type: String, required: true },
 		topic: { type: Schema.Types.ObjectId, required: true, ref: 'BBSTopic' },
 		user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }

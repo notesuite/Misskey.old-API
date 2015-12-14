@@ -180,23 +180,32 @@ export interface ITalkHistory extends Document {
 }
 
 export interface IBBSTopic extends Document {
+	bookmarksCount: number;
 	createdAt: Date;
 	cursor: number;
+	pinnedPost: string | Types.ObjectId | IBBSPost;
 	title: string;
 	user: string | Types.ObjectId | IUser;
 }
 
 export interface IBBSPost extends Document {
 	app: string | Types.ObjectId | IApplication;
-	attachedFiles: string | Types.ObjectId[] | IAlbumFile[];
+	files: string | Types.ObjectId[] | IAlbumFile[];
 	createdAt: Date;
 	cursor: number;
 	inReplyToPost: string | Types.ObjectId | IBBSPost;
 	isContentModified: boolean;
 	isDeleted: boolean;
 	isPlain: boolean;
-	plusonesCount: number;
+	likesCount: number;
+	repliesCount: number;
 	text: string;
+	topic: string | Types.ObjectId | IBBSTopic;
+	user: string | Types.ObjectId | IUser;
+}
+
+export interface IBBSWatching extends Document {
+	createdAt: Date;
 	topic: string | Types.ObjectId | IBBSTopic;
 	user: string | Types.ObjectId | IUser;
 }
