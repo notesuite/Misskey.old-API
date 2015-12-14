@@ -27,6 +27,10 @@ export default function say(
 		return <Promise<any>>Promise.reject('empty-otherparty-id');
 	}
 
+	if (otherpartyId === user.id.toString())  {
+		return <Promise<any>>Promise.reject('no-yourself');
+	}
+
 	// ファイルが添付されていないかつテキストも空だったらエラー
 	if (fileId === null && (text === '' || text === null || text === '')) {
 		return <Promise<any>>Promise.reject('empty-text');
