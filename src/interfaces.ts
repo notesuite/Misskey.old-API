@@ -159,17 +159,76 @@ export interface INotification extends Document {
 	user: string | Types.ObjectId | IUser;
 }
 
+export interface ITalkGroup extends Document {
+	allowInvite: boolean;
+	createdAt: Date;
+	icon: string | Types.ObjectId | IAlbumFile;
+	iconPath: string;
+	members: string[] | Types.ObjectId[] | IUser[];
+	name: string;
+	owner: string | Types.ObjectId | IUser;
+}
+
+export interface ITalkGroupInvitation extends Document {
+	createdAt: Date;
+	group: string | Types.ObjectId | ITalkGroup;
+	isRefused: boolean;
+	user: string | Types.ObjectId | IUser;
+}
+
 export interface ITalkMessage extends Document {
-	app: string | Types.ObjectId | IApplication;
-	file: string | Types.ObjectId | IAlbumFile;
 	createdAt: Date;
 	cursor: number;
+	type: string;
+}
+
+export interface ITalkUserMessage extends ITalkMessage {
+	file: string | Types.ObjectId | IAlbumFile;
 	isContentModified: boolean;
 	isDeleted: boolean;
 	isRead: boolean;
 	otherparty: string | Types.ObjectId | IUser;
 	text: string;
 	user: string | Types.ObjectId | IUser;
+}
+
+export interface ITalkGroupMessage extends ITalkMessage {
+	file: string | Types.ObjectId | IAlbumFile;
+	group: string | Types.ObjectId | ITalkGroup;
+	isContentModified: boolean;
+	isDeleted: boolean;
+	reads: string[] | Types.ObjectId[] | IUser[];
+	text: string;
+	user: string | Types.ObjectId | IUser;
+}
+
+export interface ITalkGroupSentInvitationActivity extends ITalkMessage {
+	group: string | Types.ObjectId | ITalkGroup;
+	invitee: string | Types.ObjectId | IUser;
+	inviter: string | Types.ObjectId | IUser;
+}
+
+export interface ITalkGroupMemberLeftActivity extends ITalkMessage {
+	group: string | Types.ObjectId | ITalkGroup;
+	lefter: string | Types.ObjectId | IUser;
+}
+
+export interface ITalkGroupMemberJoinActivity extends ITalkMessage {
+	group: string | Types.ObjectId | ITalkGroup;
+	joiner: string | Types.ObjectId | IUser;
+}
+
+export interface ITalkRenameGroupActivity extends ITalkMessage {
+	group: string | Types.ObjectId | ITalkGroup;
+	renamer: string | Types.ObjectId | IUser;
+	oldName: string;
+	newName: string;
+}
+
+export interface ITalkTransferGroupOwnershipActivity extends ITalkMessage {
+	group: string | Types.ObjectId | ITalkGroup;
+	oldOwner: string | Types.ObjectId | IUser;
+	newOwner: string | Types.ObjectId | IUser;
 }
 
 export interface ITalkHistory extends Document {
