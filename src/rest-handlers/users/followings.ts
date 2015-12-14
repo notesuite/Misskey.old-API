@@ -13,8 +13,8 @@ export default function(
 		req.payload['limit'],
 		req.payload['since-cursor'],
 		req.payload['max-cursor']
-	).then(followingList => {
-		res(followingList);
+	).then(followings => {
+		res(followings);
 	}, (err: any) => {
 		res({error: err}).code(500);
 	});
