@@ -5,6 +5,7 @@ export default function(db: Connection): Model<Document> {
 
 	const schema = new Schema({
 		allowInvite: { type: Boolean, required: false, default: true },
+		createdAt: { type: Date, required: true, default: Date.now },
 		icon: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFiles' },
 		iconPath: { type: String, required: false, default: null },
 		members: [{ type: Schema.Types.ObjectId, required: true, ref: 'User' }],
