@@ -1,5 +1,5 @@
-import {BBSTopic} from '../../../models';
-import {IBBSTopic, IApplication, IUser} from '../../../interfaces';
+import {BBSTopic, BBSWatching} from '../../../models';
+import {IBBSTopic, IBBSWatching, IApplication, IUser} from '../../../interfaces';
 
 /**
  * bbs topicを作成します
@@ -34,6 +34,12 @@ export default function create(
 			}
 
 			resolve(topic.toObject());
+
+			// Watchしとく
+			BBSWatching.create({
+				user: user.id,
+				topic: topic.id
+			});
 		});
 	});
 }
