@@ -1,7 +1,7 @@
 import { IApplication, IUser } from '../../../interfaces';
 import filesStream from '../../../endpoints/album/files/stream';
 
-export default function stream(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

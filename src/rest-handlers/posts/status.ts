@@ -1,7 +1,7 @@
 import { IApplication, IUser } from '../../interfaces';
 import create from '../../endpoints/posts/status';
 
-export default function status(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

@@ -3,7 +3,7 @@ import { IUser, IPost, IPostMention } from '../interfaces';
 import extractMentions from './extract-mentions';
 import publishStreamingMessage from './publish-streaming-message';
 
-export default function savePostMentions(author: IUser, post: IPost, text: string): void {
+export default function(author: IUser, post: IPost, text: string): void {
 	'use strict';
 	const postObject: any = post.toObject();
 	postObject.user = author.toObject();

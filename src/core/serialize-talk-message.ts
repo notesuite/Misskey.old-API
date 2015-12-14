@@ -1,6 +1,6 @@
 import {IUser, ITalkMessage, IAlbumFile} from '../interfaces';
 
-export default function serialize(
+export default function(
 	message: ITalkMessage,
 	me: IUser
 ): Promise<Object> {

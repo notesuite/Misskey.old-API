@@ -10,7 +10,7 @@ import {IUser, IUserFollowing} from '../../interfaces';
  * @param sinceCursor 取得するユーザーを、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
  * @param maxCursor 取得するユーザーを、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
  */
-export default function followings(
+export default function(
 	user: IUser,
 	limit: number = 30,
 	sinceCursor: number = null,

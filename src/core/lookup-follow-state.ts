@@ -1,7 +1,7 @@
 import { UserFollowing } from '../models';
 import { IUserFollowing } from '../interfaces';
 
-export default function lookupFollowState(meId: string, otherpartyId: string): Promise<boolean> {
+export default function(meId: string, otherpartyId: string): Promise<boolean> {
 	'use strict';
 	return new Promise<boolean>((resolve, reject) => {
 		UserFollowing.findOne({

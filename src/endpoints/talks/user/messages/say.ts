@@ -11,7 +11,7 @@ import publishStream from '../../../../core/publish-streaming-message';
  * @param text 本文
  * @param fileId 添付ファイルのID
  */
-export default function say(
+export default function(
 	app: IApplication,
 	user: IUser,
 	otherpartyId: string,

@@ -2,7 +2,7 @@ import { Match } from 'powerful';
 import { IApplication, IUser } from '../../interfaces';
 import like from '../../endpoints/posts/like';
 
-export default function likePost(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

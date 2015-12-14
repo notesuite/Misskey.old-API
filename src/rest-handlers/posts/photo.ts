@@ -1,7 +1,7 @@
 import { IApplication, IUser } from '../../interfaces';
 import photo from '../../endpoints/posts/photo';
 
-export default function photoPost(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

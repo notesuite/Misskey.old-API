@@ -4,7 +4,7 @@ import publishUserStream from '../../core/publish-user-stream';
 import populateAll from '../../core/post-populate-all';
 import createNotification from '../../core/create-notification';
 
-export default function repost(app: IApplication, user: IUser, targetPostId: string)
+export default function(app: IApplication, user: IUser, targetPostId: string)
 		: Promise<Object> {
 	'use strict';
 

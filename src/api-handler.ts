@@ -7,7 +7,7 @@ import config from './config';
 
 const limiterDb = redis.createClient(config.redis.port, config.redis.host);
 
-export default function apiHandler(endpoint: any, req: any, res: any): void {
+export default function(endpoint: any, req: any, res: any): void {
 	'use strict';
 	console.log(`${req.method} ${req.path}`);
 

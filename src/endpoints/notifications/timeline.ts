@@ -10,7 +10,7 @@ import serializeNotification from '../../core/serialize-notification';
  * @param sinceCursor 取得する通知を、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
  * @param maxCursor 取得する通知を、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
  */
-export default function timeline(
+export default function(
 	user: IUser,
 	limit: number = 10,
 	sinceCursor: number = null,

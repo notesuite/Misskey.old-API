@@ -8,7 +8,7 @@ import serializeUser from '../../core/serialize-user';
  * @param query クエリ
  * @param limit 取得数
  */
-export default function search(me: IUser, query: string, limit: number = 5): Promise<Object[]> {
+export default function(me: IUser, query: string, limit: number = 5): Promise<Object[]> {
 	'use strict';
 	query = query.toLowerCase();
 	let searchType: string = null;

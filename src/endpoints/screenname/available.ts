@@ -2,7 +2,7 @@ import { List } from 'powerful';
 const isEmpty = List.isEmpty;
 import {User} from '../../models';
 
-export default function screenNameAvailable(screenName: string): Promise<boolean> {
+export default function(screenName: string): Promise<boolean> {
 	'use strict';
 
 	if (screenName) {

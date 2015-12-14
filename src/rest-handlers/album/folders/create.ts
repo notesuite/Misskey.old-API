@@ -1,7 +1,7 @@
 import { IApplication, IUser } from '../../../interfaces';
 import create from '../../../endpoints/album/folders/create';
 
-export default function createFolder(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

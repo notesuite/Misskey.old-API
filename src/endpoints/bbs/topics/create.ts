@@ -7,7 +7,7 @@ import {IBBSTopic, IApplication, IUser} from '../../../interfaces';
  * @param user API利用ユーザー
  * @param title タイトル
  */
-export default function create(
+export default function(
 	app: IApplication,
 	user: IUser,
 	title: string

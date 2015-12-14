@@ -11,7 +11,7 @@ import createNotification from '../../../core/create-notification';
  * @param text 本文
  * @param inReplyToPostId 返信先投稿のID
  */
-export default function create_(
+export default function(
 	app: IApplication,
 	user: IUser,
 	topicId: string,

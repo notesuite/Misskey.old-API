@@ -1,7 +1,7 @@
 import { IApplication, IUser } from '../../interfaces';
 import show from '../../endpoints/posts/show';
 
-export default function showPost(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

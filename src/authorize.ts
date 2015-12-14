@@ -2,7 +2,7 @@ import {User} from './models';
 import {IUser} from './interfaces';
 import config from './config';
 
-export default function authorize(req: any): Promise<any> {
+export default function(req: any): Promise<any> {
 	'use strict';
 	return new Promise<Object>((resolve, reject) => {
 		if (req.headers['passkey'] !== undefined && req.headers['passkey'] !== null) {

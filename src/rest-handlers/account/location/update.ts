@@ -1,7 +1,7 @@
 import { IApplication, IUser } from '../../../interfaces';
 import updateLocation from '../../../endpoints/account/location/update';
 
-export default function updateAccountLocation(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

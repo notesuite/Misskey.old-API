@@ -2,7 +2,7 @@ import { Match } from 'powerful';
 import createAccount from '../../endpoints/account/create';
 import { IApplication, IUser } from '../../interfaces';
 
-export default function create(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

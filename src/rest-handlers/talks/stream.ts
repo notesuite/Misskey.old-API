@@ -1,7 +1,7 @@
 import { IApplication, IUser } from '../../interfaces';
 import getStream from '../../endpoints/talks/stream';
 
-export default function timeline(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

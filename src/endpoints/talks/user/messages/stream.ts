@@ -13,7 +13,7 @@ import readTalkMessage from '../../../../core/read-talk-message';
  * @param sinceCursor 取得するメッセージを、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
  * @param maxCursor 取得するメッセージを、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
  */
-export default function stream(
+export default function(
 	user: IUser,
 	otherpartyId: string,
 	limit: number = 10,

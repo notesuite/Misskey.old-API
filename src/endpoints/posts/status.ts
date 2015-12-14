@@ -16,7 +16,7 @@ import registerHashtags from '../../core/register-hashtags';
  * @param text 本文
  * @param inReplyToPostId 返信先投稿のID
  */
-export default function status(
+export default function(
 	app: IApplication,
 	user: IUser,
 	text: string,

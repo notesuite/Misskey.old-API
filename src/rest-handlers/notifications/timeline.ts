@@ -1,7 +1,7 @@
 import { IApplication, IUser } from '../../interfaces';
 import getTimeline from '../../endpoints/notifications/timeline';
 
-export default function timeline(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

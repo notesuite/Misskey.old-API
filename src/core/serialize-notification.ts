@@ -1,7 +1,7 @@
 import {User, Post} from '../models';
 import {IUser, IPost} from '../interfaces';
 
-export default function serializeNotification(
+export default function(
 	notification: any,
 	me: IUser
 ): Promise<Object> {

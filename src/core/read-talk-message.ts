@@ -6,7 +6,7 @@ import publishStream from './publish-streaming-message';
  * @param user ユーザー
  * @param message 対象のメッセージ
  */
-export default function read(
+export default function(
 	user: IUser,
 	message: ITalkMessage
 ): Promise<void> {

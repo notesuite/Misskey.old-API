@@ -1,7 +1,7 @@
 import { IApplication, IUser } from '../../interfaces';
 import unfollow from '../../endpoints/users/unfollow';
 
-export default function unfollowUser(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

@@ -6,7 +6,7 @@ import config from './config';
 
 import apiHandler from './api-handler';
 
-export default function startServer(): void {
+export default function(): void {
 	'use strict';
 
 	console.log(`Initing server... (${cluster.worker.id})`);

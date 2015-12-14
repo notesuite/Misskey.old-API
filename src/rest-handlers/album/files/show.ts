@@ -1,7 +1,7 @@
 import { IApplication, IUser } from '../../../interfaces';
 import show from '../../../endpoints/album/files/show';
 
-export default function showFile(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

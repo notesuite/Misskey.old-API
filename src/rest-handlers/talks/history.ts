@@ -1,7 +1,7 @@
 import { IApplication, IUser } from '../../interfaces';
 import getHistory from '../../endpoints/talks/history';
 
-export default function history(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

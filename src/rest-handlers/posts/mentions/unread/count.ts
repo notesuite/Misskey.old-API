@@ -1,7 +1,7 @@
 import { IApplication, IUser } from '../../../../interfaces';
 import mentionsUnreadsCount from '../../../../endpoints/posts/mentions/unread/count';
 
-export default function unreadsCount(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

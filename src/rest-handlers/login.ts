@@ -1,7 +1,7 @@
 import {IApplication, IUser} from '../interfaces';
 import doLogin from '../endpoints/login';
 
-export default function login(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

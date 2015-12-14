@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import { IApplication, IUser } from '../../../interfaces';
 import upload from '../../../endpoints/album/files/upload';
 
-export default function uploadFile(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

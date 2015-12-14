@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
 import { Schema, Connection, Document, Model } from 'mongoose';
 
-export default function talkHistory(db: Connection): Model<Document> {
+export default function(db: Connection): Model<Document> {
 	'use strict';
 
 	const deepPopulate: any = require('mongoose-deep-populate')(mongoose);

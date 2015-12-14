@@ -1,7 +1,7 @@
 import {PostMention} from '../models';
 import {IUser, IPost, IPostMention} from '../interfaces';
 
-export default function readPost(me: IUser, post: IPost): void {
+export default function(me: IUser, post: IPost): void {
 	'use strict';
 
 	if (me.timelineReadCursor < post.cursor) {

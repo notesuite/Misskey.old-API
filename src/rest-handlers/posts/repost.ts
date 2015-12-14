@@ -1,7 +1,7 @@
 import { IApplication, IUser } from '../../interfaces';
 import create from '../../endpoints/posts/repost';
 
-export default function repost(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

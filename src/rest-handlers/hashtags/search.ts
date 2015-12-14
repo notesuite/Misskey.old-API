@@ -1,7 +1,7 @@
 import { IApplication, IUser } from '../../interfaces';
 import search from '../../endpoints/hashtags/search';
 
-export default function searchHashtags(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

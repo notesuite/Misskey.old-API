@@ -3,7 +3,7 @@ const isEmpty = List.isEmpty;
 import {PostLike} from '../models';
 import {IUser, IPostLike} from '../interfaces';
 
-export default function getPostLikers(
+export default function(
 	postId: string,
 	limit: number = 10,
 	sinceCursor: number = null,

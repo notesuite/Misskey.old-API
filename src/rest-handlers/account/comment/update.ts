@@ -1,7 +1,7 @@
 import { IApplication, IUser } from '../../../interfaces';
 import updateComment from '../../../endpoints/account/comment/update';
 
-export default function updateAccountComment(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

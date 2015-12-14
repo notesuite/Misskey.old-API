@@ -1,7 +1,7 @@
 import { IApplication, IUser } from '../../interfaces';
 import search from '../../endpoints/users/search';
 
-export default function searchUsers(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

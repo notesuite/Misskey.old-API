@@ -1,7 +1,7 @@
 import { IApplication, IUser } from '../../../interfaces';
 import create from '../../../endpoints/bbs/topics/create';
 
-export default function create_(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

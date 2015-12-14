@@ -1,7 +1,7 @@
 import { IApplication, IUser } from '../../../interfaces';
 import updateUrl from '../../../endpoints/account/url/update';
 
-export default function updateAccountUrl(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

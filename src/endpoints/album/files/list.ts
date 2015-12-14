@@ -6,7 +6,7 @@ import {IUser, IAlbumFile} from '../../../interfaces';
  * @param user API利用ユーザー
  * @param folderId 対象フォルダID(nullでルート)
  */
-export default function list(user: IUser, folderId: string = null): Promise<Object[]> {
+export default function(user: IUser, folderId: string = null): Promise<Object[]> {
 	'use strict';
 
 	return new Promise<Object[]>((resolve, reject) => {

@@ -13,7 +13,7 @@ import readPost from '../../core/read-post';
  * @param sinceCursor 取得する投稿を、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
  * @param maxCursor 取得する投稿を、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
  */
-export default function timeline(
+export default function(
 	user: IUser,
 	limit: number = 10,
 	sinceCursor: number = null,

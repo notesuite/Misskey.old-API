@@ -1,6 +1,6 @@
 import { Schema, Connection, Document, Model } from 'mongoose';
 
-export default function talkGroup(db: Connection): Model<Document> {
+export default function(db: Connection): Model<Document> {
 	'use strict';
 
 	const schema = new Schema({

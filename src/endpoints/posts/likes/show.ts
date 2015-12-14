@@ -11,7 +11,7 @@ import serializeUser from '../../../core/serialize-user';
  * @param sinceCursor 取得するLikeを、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
  * @param maxCursor 取得するLikeを、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
  */
-export default function show(
+export default function(
 	user: IUser,
 	postId: string,
 	limit: number = 10,

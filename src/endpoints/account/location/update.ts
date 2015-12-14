@@ -5,7 +5,7 @@ import {IUser} from '../../../interfaces';
  * @param user API利用ユーザー
  * @param location 新しいLocation
  */
-export default function update(user: IUser, location: string): Promise<Object> {
+export default function(user: IUser, location: string): Promise<Object> {
 	'use strict';
 
 	location = location.trim();

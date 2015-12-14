@@ -1,7 +1,7 @@
 import { IApplication, IUser } from '../../interfaces';
 import follow from '../../endpoints/users/follow';
 
-export default function followUser(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

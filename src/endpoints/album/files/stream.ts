@@ -11,7 +11,7 @@ import {IUser, IAlbumFile} from '../../../interfaces';
  * @param sinceCursor 取得するファイルを、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
  * @param maxCursor 取得するファイルを、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
  */
-export default function stream(
+export default function(
 	user: IUser,
 	folderId: string = null,
 	limit: number = 50,

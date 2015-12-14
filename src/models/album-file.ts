@@ -2,7 +2,7 @@ import { Schema, Connection, Document, Model } from 'mongoose';
 import * as mongooseAutoIncrement from 'mongoose-auto-increment';
 import config from '../config';
 
-export default function albumFile(db: Connection): Model<Document> {
+export default function(db: Connection): Model<Document> {
 	'use strict';
 
 	mongooseAutoIncrement.initialize(db);

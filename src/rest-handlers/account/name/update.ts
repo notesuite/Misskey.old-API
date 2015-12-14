@@ -1,7 +1,7 @@
 import { IApplication, IUser } from '../../../interfaces';
 import updateName from '../../../endpoints/account/name/update';
 
-export default function updateAccountName(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

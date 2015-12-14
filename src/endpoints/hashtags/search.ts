@@ -3,7 +3,7 @@ const isEmpty = List.isEmpty;
 import {Hashtag} from '../../models';
 import {IHashtag} from '../../interfaces';
 
-export default function search(query: string): Promise<string[]> {
+export default function(query: string): Promise<string[]> {
 	'use strict';
 	return new Promise<string[]>((resolve, reject) => {
 		Hashtag.find({

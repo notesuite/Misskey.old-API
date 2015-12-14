@@ -1,7 +1,7 @@
 import { IApplication, IUser } from '../../../interfaces';
 import rename from '../../../endpoints/album/files/rename';
 
-export default function renameFile(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

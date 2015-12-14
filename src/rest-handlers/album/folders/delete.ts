@@ -1,7 +1,7 @@
 import { IApplication, IUser } from '../../../interfaces';
 import del from '../../../endpoints/album/folders/delete';
 
-export default function deleteFolder(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

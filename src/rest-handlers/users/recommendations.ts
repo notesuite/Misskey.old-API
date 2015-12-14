@@ -1,7 +1,7 @@
 import { IApplication, IUser } from '../../interfaces';
 import recommendations from '../../endpoints/users/recommendations';
 
-export default function userFollowings(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

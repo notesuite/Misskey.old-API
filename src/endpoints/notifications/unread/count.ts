@@ -5,7 +5,7 @@ import {IUser} from '../../../interfaces';
  * 未読の通知の件数を取得します
  * @param user API利用ユーザー
  */
-export default function count(user: IUser): Promise<number> {
+export default function(user: IUser): Promise<number> {
 	'use strict';
 
 	return new Promise<number>((resolve, reject) => {

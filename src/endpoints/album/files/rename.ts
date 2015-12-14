@@ -3,7 +3,7 @@ import {AlbumFile} from '../../../models';
 import {IUser, IAlbumFile} from '../../../interfaces';
 import config from '../../../config';
 
-export default function rename(user: IUser, fileId: string, name: string): Promise<Object> {
+export default function(user: IUser, fileId: string, name: string): Promise<Object> {
 	'use strict';
 
 	if (name.length > 100) {

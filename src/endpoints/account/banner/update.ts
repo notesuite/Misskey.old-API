@@ -6,7 +6,7 @@ import {IUser, IAlbumFile} from '../../../interfaces';
  * @param user: API利用ユーザー
  * @param fileId: Bannerに使用するファイルのID
  */
-export default function update(user: IUser, fileId: string): Promise<Object> {
+export default function(user: IUser, fileId: string): Promise<Object> {
 	'use strict';
 
 	return new Promise<Object>((resolve, reject) => {

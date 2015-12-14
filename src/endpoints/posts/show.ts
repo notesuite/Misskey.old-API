@@ -4,7 +4,7 @@ import serializePost from '../../core/serialize-post';
 import populateAll from '../../core/post-populate-all';
 import readPost from '../../core/read-post';
 
-export default function show(shower: IUser, id: string): Promise<Object> {
+export default function(shower: IUser, id: string): Promise<Object> {
 	'use strict';
 	return new Promise<Object>((resolve, reject) => {
 		Post.findById(id, (findErr: any, post: IPost) => {

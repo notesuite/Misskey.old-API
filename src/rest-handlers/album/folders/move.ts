@@ -1,7 +1,7 @@
 import { IApplication, IUser } from '../../../interfaces';
 import move from '../../../endpoints/album/folders/move';
 
-export default function moveFolder(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

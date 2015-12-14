@@ -8,7 +8,7 @@ import serializeUser from '../../core/serialize-user';
  * おすすめのユーザーを取得します
  * @param me API利用ユーザー
  */
-export default function search(me: IUser): Promise<Object[]> {
+export default function(me: IUser): Promise<Object[]> {
 	'use strict';
 
 	return new Promise<Object[]>((resolve, reject) => {

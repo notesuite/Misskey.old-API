@@ -16,7 +16,7 @@ import config from '../config';
  * @param size ファイルサイズ(byte)
  * @param unconditional trueに設定すると、ハッシュが同じファイルが見つかった場合でも無視してアルバムに登録します
  */
-export default function addFileToAlbum(
+export default function(
 	appId: string,
 	userId: string,
 	fileName: string,

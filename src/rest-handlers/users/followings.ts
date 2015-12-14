@@ -1,7 +1,7 @@
 import { IApplication, IUser } from '../../interfaces';
 import followings from '../../endpoints/users/followings';
 
-export default function userFollowings(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

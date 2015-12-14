@@ -1,7 +1,7 @@
 import { Schema, Connection, Document, Model } from 'mongoose';
 import config from '../config';
 
-export default function user(db: Connection): Model<Document> {
+export default function(db: Connection): Model<Document> {
 	'use strict';
 
 	const schema = new Schema({

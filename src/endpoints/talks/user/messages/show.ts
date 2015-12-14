@@ -8,7 +8,7 @@ import readTalkMessage from '../../../../core/read-talk-message';
  * @param user API利用ユーザー
  * @param messageId 対象のメッセージのID
  */
-export default function show(
+export default function(
 	user: IUser,
 	messageId: string
 ): Promise<Object> {

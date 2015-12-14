@@ -1,7 +1,7 @@
 import { IApplication, IUser } from '../../../../interfaces';
 import timelineUnreadsCount from '../../../../endpoints/posts/timeline/unread/count';
 
-export default function unreadsCount(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

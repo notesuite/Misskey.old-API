@@ -1,7 +1,7 @@
 import { IApplication, IUser } from '../../interfaces';
 import screennameAvailable from '../../endpoints/screenname/available';
 
-export default function isScreennameAvailable(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

@@ -7,7 +7,7 @@ import publishStream from '../../../../core/publish-streaming-message';
  * @param user API利用ユーザー
  * @param messageId メッセージのID
  */
-export default function del(
+export default function(
 	user: IUser,
 	messageId: string
 ): Promise<void> {

@@ -1,7 +1,7 @@
 import { IApplication, IUser } from '../../interfaces';
 import deleteMessage from '../../endpoints/talks/delete';
 
-export default function talksDelete(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

@@ -10,7 +10,7 @@ import add from '../../../core/add-file-to-album';
  * @param file 内容
  * @param unconditional trueに設定すると、ハッシュが同じファイルが見つかった場合でも無視してアルバムに登録します
  */
-export default function upload(
+export default function(
 	app: IApplication,
 	user: IUser,
 	fileName: string,

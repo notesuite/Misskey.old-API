@@ -1,7 +1,7 @@
 import { IApplication, IUser } from '../../../interfaces';
 import update from '../../../endpoints/account/avatar/update';
 
-export default function updateIcon(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

@@ -1,7 +1,7 @@
 import { IApplication, IUser } from '../../interfaces';
 import showMessage from '../../endpoints/talks/show';
 
-export default function talksRead(
+export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,

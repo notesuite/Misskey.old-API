@@ -1,7 +1,7 @@
 import {AlbumFile} from '../models';
 import {IAlbumFile} from '../interfaces';
 
-export default function getAlbumFile(
+export default function(
 	meId: string,
 	fileId: string
 ): Promise<IAlbumFile> {
