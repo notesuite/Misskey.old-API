@@ -9,9 +9,7 @@ const fork = Task.sync<void>(() => cluster.fork());
 
 const forkForEachCpu = Task.repeat(numberOfCpu, () => fork);
 
-const startServers = Task.sync(() => {
-	startServer();
-});
+const startServers = Task.sync(() => startServer());
 
 (cluster.isMaster ? print('Welcome to Misskey API!').next(forkForEachCpu) : startServers).run();
 
