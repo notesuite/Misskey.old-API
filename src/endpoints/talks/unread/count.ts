@@ -11,7 +11,7 @@ export default function count(user: IUser): Promise<number> {
 	return new Promise<number>((resolve, reject) => {
 		TalkMessage
 		.find({
-			user: user.id,
+			otherparty: user.id,
 			isRead: false
 		})
 		.limit(100)
