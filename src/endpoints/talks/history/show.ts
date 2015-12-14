@@ -1,15 +1,15 @@
 import { List } from 'powerful';
 const isEmpty = List.isEmpty;
-import {TalkHistory} from '../../models';
-import {ITalkMessage, IUser, ITalkHistory} from '../../interfaces';
-import serialize from '../../core/serialize-talk-message';
+import {TalkHistory} from '../../../models';
+import {ITalkMessage, IUser, ITalkHistory} from '../../../interfaces';
+import serialize from '../../../core/serialize-talk-message';
 
 /**
  * Talkの履歴を取得します
  * @param user API利用ユーザー
  * @param limit 取得する投稿の最大数
  */
-export default function talksHistory(
+export default function show(
 	user: IUser,
 	limit: number = 10
 ): Promise<Object[]> {

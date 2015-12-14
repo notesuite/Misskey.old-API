@@ -14,7 +14,15 @@ import notification from './models/notification';
 import { post, status, photo, repost } from './models/post';
 import postLike from './models/post-like';
 import postMention from './models/post-mention';
-import talkMessage from './models/talk-message';
+import {
+	talkUserMessage,
+	talkGroupMessage,
+	talkGroupSentInvitationActivity,
+	talkGroupMemberLeftActivity,
+	talkGroupMemberJoinActivity,
+	talkRenameGroupActivity,
+	talkTransferGroupOwnershipActivity
+} from './models/talk-message';
 import talkHistory from './models/talk-history';
 import user from './models/user';
 import userFollowing from './models/user-following';
@@ -34,7 +42,13 @@ export const PhotoPost = photo(db);
 export const Repost = repost(db);
 export const PostLike = postLike(db);
 export const PostMention = postMention(db);
-export const TalkMessage = talkMessage(db);
+export const TalkUserMessage = talkUserMessage(db);
+export const TalkGroupMessage = talkGroupMessage(db);
+export const TalkGroupSendInvitationActivity = talkGroupSendInvitationActivity(db);
+export const TalkGroupMemberLeftActivity = talkGroupMemberLeftActivity(db);
+export const TalkGroupMemberJoinActivity = talkGroupMemberJoinActivity(db);
+export const TalkRenameGroupActivity = talkRenameGroupActivity(db);
+export const TalkTransferGroupOwnershipActivity = talkTransferGroupOwnershipActivity(db);
 export const TalkHistory = talkHistory(db);
 export const User = user(db);
 export const UserFollowing = userFollowing(db);

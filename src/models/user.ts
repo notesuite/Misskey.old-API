@@ -5,7 +5,7 @@ export default function user(db: Connection): Model<Document> {
 	'use strict';
 
 	const schema = new Schema({
-		banner: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFiles' },
+		banner: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFile' },
 		bannerPath: { type: String, required: false, default: null },
 		birthday: { type: Date, required: false, default: null },
 		color: { type: String, required: false, default: null },
@@ -17,7 +17,7 @@ export default function user(db: Connection): Model<Document> {
 		encryptedPassword: { type: String, required: true },
 		followersCount: { type: Number, required: false, default: 0 },
 		followingsCount: { type: Number, required: false, default: 0 },
-		avatar: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFiles' },
+		avatar: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFile' },
 		avatarPath: { type: String, required: false, default: null },
 		isDeleted: { type: Boolean, required: false, default: false },
 		isEmailVerified: { type: Boolean, required: false, default: false },
@@ -30,13 +30,13 @@ export default function user(db: Connection): Model<Document> {
 		likesCount: { type: Number, required: false, default: 0 },
 		location: { type: String, required: false, default: null },
 		name: { type: String, required: true },
-		pinnedPost: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Posts' },
+		pinnedPost: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Post' },
 		postsCount: { type: Number, required: false, default: 0 },
 		screenName: { type: String, required: true, unique: true },
 		screenNameLower: { type: String, required: true, unique: true, lowercase: true },
 		timelineReadCursor: { type: Number, required: false, default: 0 },
 		url: { type: String, required: false, default: null },
-		wallpaper: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFiles' },
+		wallpaper: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFile' },
 		wallpaperPath: { type: String, required: false, default: null }
 	});
 

@@ -1,13 +1,13 @@
-import {TalkMessage} from '../../models';
-import {ITalkMessage, IUser} from '../../interfaces';
-import publishStream from '../../core/publish-streaming-message';
+import {TalkMessage} from '../../../../models';
+import {ITalkMessage, IUser} from '../../../../interfaces';
+import publishStream from '../../../../core/publish-streaming-message';
 
 /**
  * Talkのメッセージを削除します
  * @param user API利用ユーザー
  * @param messageId メッセージのID
  */
-export default function talksDelete(
+export default function del(
 	user: IUser,
 	messageId: string
 ): Promise<void> {
