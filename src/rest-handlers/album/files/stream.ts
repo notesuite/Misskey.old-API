@@ -1,12 +1,11 @@
-import * as hapi from 'hapi';
 import { IApplication, IUser } from '../../../interfaces';
 import filesStream from '../../../endpoints/album/files/stream';
 
 export default function stream(
 	app: IApplication,
 	user: IUser,
-	req: hapi.Request,
-	res: hapi.IReply
+	req: any,
+	res: any
 ): void {
 	'use strict';
 

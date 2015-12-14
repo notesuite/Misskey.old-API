@@ -1,13 +1,12 @@
 import * as fs from 'fs';
-import * as hapi from 'hapi';
 import { IApplication, IUser } from '../../../interfaces';
 import upload from '../../../endpoints/album/files/upload';
 
 export default function uploadFile(
 	app: IApplication,
 	user: IUser,
-	req: hapi.Request,
-	res: hapi.IReply
+	req: any,
+	res: any
 ): void {
 	'use strict';
 	const file = req.payload.file;

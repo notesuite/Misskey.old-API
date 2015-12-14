@@ -1,12 +1,11 @@
-import * as hapi from 'hapi';
 import { IApplication, IUser } from '../../../interfaces';
 import move from '../../../endpoints/album/folders/move';
 
 export default function moveFolder(
 	app: IApplication,
 	user: IUser,
-	req: hapi.Request,
-	res: hapi.IReply
+	req: any,
+	res: any
 ): void {
 	'use strict';
 

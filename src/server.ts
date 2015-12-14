@@ -1,6 +1,6 @@
 import { dataSize } from 'powerful';
 import * as cluster from 'cluster';
-import * as hapi from 'hapi';
+const hapi = require('hapi');
 import endpoints from './endpoints';
 import config from './config';
 
@@ -27,7 +27,7 @@ export default function startServer(): void {
 						allow: 'multipart/form-data'
 					},
 					handler: (request: any, reply: any): void => {
-						apiHandler(endpoint, <hapi.Request>request, <hapi.IReply>reply);
+						apiHandler(endpoint, request, reply);
 					}
 				}
 			});
@@ -35,7 +35,7 @@ export default function startServer(): void {
 			server.route({
 				method: 'post',
 				path: `/${endpoint.endpoint}`,
-				handler: (request, reply): void => {
+				handler: (request: any, reply: any): void => {
 					apiHandler(endpoint, request, reply);
 				}
 			});
@@ -49,7 +49,7 @@ export default function startServer(): void {
 	});
 }
 
-function notFoundHandler(req: hapi.Request, res: hapi.IReply): hapi.Response {
+function notFoundHandler(req: any, res: any): any {
 	'use strict';
 	console.log(`NOT FOUND: ${req.path}`);
 	return res({

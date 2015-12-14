@@ -2,13 +2,12 @@
 
 import * as redis from 'redis';
 const Limiter: any = require('ratelimiter');
-import * as hapi from 'hapi';
 import authorize from './authorize';
 import config from './config';
 
 const limiterDb = redis.createClient(config.redis.port, config.redis.host);
 
-export default function apiHandler(endpoint: any, req: hapi.Request, res: hapi.IReply): void {
+export default function apiHandler(endpoint: any, req: any, res: any): void {
 	'use strict';
 	console.log(`${req.method} ${req.path}`);
 

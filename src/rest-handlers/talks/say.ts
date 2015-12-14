@@ -1,12 +1,11 @@
-import * as hapi from 'hapi';
 import { IApplication, IUser } from '../../interfaces';
 import say from '../../endpoints/talks/say';
 
 export default function photoPost(
 	app: IApplication,
 	user: IUser,
-	req: hapi.Request,
-	res: hapi.IReply
+	req: any,
+	res: any
 ): void {
 	'use strict';
 	const otherpartyId = req.payload['otherparty-id'];

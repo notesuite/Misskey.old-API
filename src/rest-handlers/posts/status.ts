@@ -1,12 +1,11 @@
-import * as hapi from 'hapi';
 import { IApplication, IUser } from '../../interfaces';
 import create from '../../endpoints/posts/status';
 
 export default function status(
 	app: IApplication,
 	user: IUser,
-	req: hapi.Request,
-	res: hapi.IReply
+	req: any,
+	res: any
 ): void {
 	'use strict';
 	const text: string = req.payload['text'];

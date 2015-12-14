@@ -1,13 +1,12 @@
 import { Match } from 'powerful';
-import * as hapi from 'hapi';
 import { IApplication, IUser } from '../../interfaces';
 import like from '../../endpoints/posts/like';
 
 export default function likePost(
 	app: IApplication,
 	user: IUser,
-	req: hapi.Request,
-	res: hapi.IReply
+	req: any,
+	res: any
 ): void {
 	'use strict';
 	like(user, req.payload['post-id']).then(() => {

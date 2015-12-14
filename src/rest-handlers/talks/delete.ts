@@ -1,12 +1,11 @@
-import * as hapi from 'hapi';
 import { IApplication, IUser } from '../../interfaces';
 import deleteMessage from '../../endpoints/talks/delete';
 
 export default function talksDelete(
 	app: IApplication,
 	user: IUser,
-	req: hapi.Request,
-	res: hapi.IReply
+	req: any,
+	res: any
 ): void {
 	'use strict';
 	deleteMessage(

@@ -1,12 +1,11 @@
-import * as hapi from 'hapi';
 import { IApplication, IUser } from '../../interfaces';
 import screennameAvailable from '../../endpoints/screenname/available';
 
 export default function isScreennameAvailable(
 	app: IApplication,
 	user: IUser,
-	req: hapi.Request,
-	res: hapi.IReply
+	req: any,
+	res: any
 ): void {
 	'use strict';
 	screennameAvailable(req.payload['screen-name']).then(available => {

@@ -1,13 +1,12 @@
 import { Match } from 'powerful';
-import * as hapi from 'hapi';
 import createAccount from '../../endpoints/account/create';
 import { IApplication, IUser } from '../../interfaces';
 
 export default function create(
 	app: IApplication,
 	user: IUser,
-	req: hapi.Request,
-	res: hapi.IReply
+	req: any,
+	res: any
 ): void {
 	'use strict';
 	createAccount(

@@ -1,12 +1,11 @@
-import * as hapi from 'hapi';
 import { IApplication, IUser } from '../../interfaces';
 import unfollow from '../../endpoints/users/unfollow';
 
 export default function unfollowUser(
 	app: IApplication,
 	user: IUser,
-	req: hapi.Request,
-	res: hapi.IReply
+	req: any,
+	res: any
 ): void {
 	'use strict';
 	if (req.payload['user-id'] === undefined || req.payload['user-id'] === null) {
