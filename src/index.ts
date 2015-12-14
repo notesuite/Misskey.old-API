@@ -3,11 +3,11 @@ import { Task, print } from 'powerful';
 import * as os from 'os';
 import startServer from './server';
 
-const numberOfCpu = os.cpus().length;
+const numCpu = os.cpus().length;
 
 const fork = Task.sync<void>(() => cluster.fork());
 
-const forkForEachCpu = Task.repeat(numberOfCpu, () => fork);
+const forkForEachCpu = Task.repeat(numCpu, () => fork);
 
 const startServers = Task.sync(() => startServer());
 
