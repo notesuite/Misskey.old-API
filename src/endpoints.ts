@@ -57,5 +57,6 @@ export default [
 	{ endpoint: 'album/folders/move', login: true },
 	{ endpoint: 'album/folders/rename', login: true },
 	{ endpoint: 'hashtags/search', login: false },
-	{ endpoint: 'hashtags/trend/show', login: false }
+	{ endpoint: 'hashtags/trend/show', login: false },
+	{ endpoint: 'bbs/topics/create', login: true, limitDuration: day, limitMax: 30 }
 ]
