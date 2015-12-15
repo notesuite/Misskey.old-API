@@ -2,6 +2,8 @@ import {User} from '../../models';
 import {IUser} from '../../interfaces';
 import serializeUser from '../../core/serialize-user';
 
+/* tslint:disable:whitespace */
+
 /**
  * ユーザーを検索します
  * @param me API利用ユーザー
@@ -11,19 +13,15 @@ import serializeUser from '../../core/serialize-user';
 export default function(me: IUser, query: string, limit: number = 5): Promise<Object[]> {
 	'use strict';
 	query = query.toLowerCase();
-	let searchType: string = null;
-	let dbQuery: any = null;
-	if (/^@?[a-zA-Z0-9\-]+$/.exec(query)) {
-		dbQuery = {
+
+	const [searchType, dbQuery] = /^@?[a-zA-Z0-9\-]+$/.exec(query)
+		? [<'screen-name'>'screen-name', {
 			screenNameLower: new RegExp(query.replace('@', ''))
-		};
-		searchType = 'screen-name';
-	} else {
-		dbQuery = {
+		}]
+		: [<'name'>'name', {
 			name: new RegExp(query, 'i')
-		};
-		searchType = 'name';
-	}
+		}];
+
 	return new Promise<Object[]>((resolve, reject) => {
 		User
 		.find(dbQuery)
