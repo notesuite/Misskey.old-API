@@ -6,8 +6,14 @@ export default function(
 ): Promise<Object> {
 	'use strict';
 
+	const serializedMessage: any = message.toObject();
+
 	return new Promise<Object>((resolve, reject) => {
-		const serializedMessage: any = message.toObject();
+		switch (message.type) {
+			case 'user-message':
+				
+		}
+
 		serializedMessage.user = (<IUser>message.user).toObject();
 		serializedMessage.otherparty = (<IUser>message.otherparty).toObject();
 		if (serializedMessage.file !== null) {

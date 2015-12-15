@@ -208,14 +208,14 @@ export interface ITalkGroupSentInvitationActivity extends ITalkMessage {
 	inviter: string | Types.ObjectId | IUser;
 }
 
-export interface ITalkGroupMemberLeftActivity extends ITalkMessage {
-	group: string | Types.ObjectId | ITalkGroup;
-	lefter: string | Types.ObjectId | IUser;
-}
-
 export interface ITalkGroupMemberJoinActivity extends ITalkMessage {
 	group: string | Types.ObjectId | ITalkGroup;
 	joiner: string | Types.ObjectId | IUser;
+}
+
+export interface ITalkGroupMemberLeftActivity extends ITalkMessage {
+	group: string | Types.ObjectId | ITalkGroup;
+	lefter: string | Types.ObjectId | IUser;
 }
 
 export interface ITalkRenameGroupActivity extends ITalkMessage {
@@ -234,8 +234,16 @@ export interface ITalkTransferGroupOwnershipActivity extends ITalkMessage {
 export interface ITalkHistory extends Document {
 	updatedAt: Date;
 	message: string | Types.ObjectId | ITalkMessage;
-	otherparty: string | Types.ObjectId | IUser;
+	type: string;
 	user: string | Types.ObjectId | IUser;
+}
+
+export interface ITalkUserHistory extends ITalkHistory {
+	otherparty: string | Types.ObjectId | IUser;
+}
+
+export interface ITalkGroupHistory extends ITalkHistory {
+	group: string | Types.ObjectId | ITalkGroup;
 }
 
 export interface IBBSTopic extends Document {

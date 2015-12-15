@@ -1,9 +1,9 @@
 import { List, Match } from 'powerful';
 const isEmpty = List.isEmpty;
-import {TalkMessage} from '../../../../models';
-import {ITalkMessage, IUser} from '../../../../interfaces';
+import {TalkUserMessage} from '../../../../models';
+import {ITalkUserMessage, IUser} from '../../../../interfaces';
 import serialize from '../../../../core/serialize-talk-message';
-import readTalkMessage from '../../../../core/read-talk-message';
+import readTalkUserMessage from '../../../../core/read-talk-user-message';
 
 /**
  * Talkのストリームを取得します
@@ -28,6 +28,7 @@ export default function(
 
 	return new Promise<Object[]>((resolve, reject) => {
 		const query = Object.assign({
+			type: 'user-message',
 			$or: [{
 				user: user.id,
 				otherparty: otherpartyId
@@ -45,12 +46,12 @@ export default function(
 			.getValue({})
 		);
 
-		TalkMessage
+		TalkUserMessage
 		.find(query)
 		.sort('-createdAt')
 		.limit(limit)
 		.populate('user otherparty file')
-		.exec((err: any, messages: ITalkMessage[]) => {
+		.exec((err: any, messages: ITalkUserMessage[]) => {
 			if (err !== null) {
 				return reject(err);
 			} else if (isEmpty(messages)) {
@@ -64,7 +65,7 @@ export default function(
 			// 既読にする
 			messages.forEach(message => {
 				if ((<IUser>message.user).id.toString() === otherpartyId) {
-					readTalkMessage(user, message);
+					readTalkUserMessage(user, message);
 				}
 			});
 		});

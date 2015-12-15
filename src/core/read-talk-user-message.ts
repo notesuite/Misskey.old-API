@@ -1,4 +1,4 @@
-import {IUser, ITalkMessage} from '../interfaces';
+import {IUser, ITalkUserMessage} from '../interfaces';
 import publishStream from './publish-streaming-message';
 
 /**
@@ -8,7 +8,7 @@ import publishStream from './publish-streaming-message';
  */
 export default function(
 	user: IUser,
-	message: ITalkMessage
+	message: ITalkUserMessage
 ): Promise<void> {
 	'use strict';
 
@@ -21,7 +21,7 @@ export default function(
 		message.save();
 
 		// ストリームメッセージ発行
-		publishStream(`talk-stream:${otherpartyId}-${user.id}`, JSON.stringify({
+		publishStream(`talk-user-stream:${otherpartyId}-${user.id}`, JSON.stringify({
 			type: 'read',
 			value: message.id
 		}));

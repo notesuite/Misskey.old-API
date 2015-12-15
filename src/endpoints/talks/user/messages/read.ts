@@ -1,5 +1,5 @@
-import {TalkMessage} from '../../../../models';
-import {ITalkMessage, IUser} from '../../../../interfaces';
+import {TalkUserMessage} from '../../../../models';
+import {ITalkUserMessage, IUser} from '../../../../interfaces';
 import readTalkMessage from '../../../../core/read-talk-message';
 
 /**
@@ -15,10 +15,12 @@ export default function(
 
 	return new Promise<void>((resolve, reject) => {
 		// 対象のメッセージを取得
-		TalkMessage.findById(messageId, (findErr: any, message: ITalkMessage) => {
+		TalkUserMessage.findById(messageId, (findErr: any, message: ITalkUserMessage) => {
 			if (findErr !== null) {
 				return reject(findErr);
 			} else if (message === null) {
+				return reject('message-not-found');
+			} else if (message.type !== 'user') {
 				return reject('message-not-found');
 			} else if (message.user.toString() === user.id.toString()) {
 				return reject('access-denied');

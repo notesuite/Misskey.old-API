@@ -1,7 +1,7 @@
-import {TalkMessage} from '../../../../models';
-import {ITalkMessage, IUser} from '../../../../interfaces';
+import {TalkUserMessage} from '../../../../models';
+import {ITalkUserMessage, IUser} from '../../../../interfaces';
 import serialize from '../../../../core/serialize-talk-message';
-import readTalkMessage from '../../../../core/read-talk-message';
+import readTalkUserMessage from '../../../../core/read-talk-user-message';
 
 /**
  * メッセージを取得します
@@ -16,10 +16,13 @@ export default function(
 
 	return new Promise<Object>((resolve, reject) => {
 		// 対象のメッセージを取得
-		TalkMessage
-		.findById(messageId)
+		TalkUserMessage
+		.findOne({
+			_id: messageId,
+			type: 'user-message'
+		})
 		.populate('user otherparty file')
-		.exec((findErr: any, message: ITalkMessage) => {
+		.exec((findErr: any, message: ITalkUserMessage) => {
 			if (findErr !== null) {
 				return reject(findErr);
 			} else if (message === null) {
@@ -37,7 +40,7 @@ export default function(
 
 			// 既読にする
 			if ((<IUser>message.otherparty).id.toString() === user.id.toString()) {
-				readTalkMessage(user, message);
+				readTalkUserMessage(user, message);
 			}
 		});
 	});

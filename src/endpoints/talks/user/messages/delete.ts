@@ -1,5 +1,5 @@
-import {TalkMessage} from '../../../../models';
-import {ITalkMessage, IUser} from '../../../../interfaces';
+import {TalkUserMessage} from '../../../../models';
+import {ITalkUserMessage, IUser} from '../../../../interfaces';
 import publishStream from '../../../../core/publish-streaming-message';
 
 /**
@@ -19,7 +19,10 @@ export default function(
 
 	return new Promise<void>((resolve, reject) => {
 		// 対象のメッセージを取得
-		TalkMessage.findById(messageId, (findErr: any, message: ITalkMessage) => {
+		TalkUserMessage.findOne({
+			_id: messageId,
+			type: 'user-message'
+		}, (findErr: any, message: ITalkUserMessage) => {
 			if (findErr !== null) {
 				return reject(findErr);
 			} else if (message === null) {
@@ -39,11 +42,11 @@ export default function(
 				resolve();
 
 				// ストリームメッセージ発行
-				publishStream(`talk-stream:${message.otherparty}-${user.id}`, JSON.stringify({
+				publishStream(`talk-user-stream:${message.otherparty}-${user.id}`, JSON.stringify({
 					type: 'otherparty-message-delete',
 					value: message.id
 				}));
-				publishStream(`talk-stream:${user.id}-${message.otherparty}`, JSON.stringify({
+				publishStream(`talk-user-stream:${user.id}-${message.otherparty}`, JSON.stringify({
 					type: 'me-message-delete',
 					value: message.id
 				}));

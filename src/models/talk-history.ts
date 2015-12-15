@@ -1,17 +1,21 @@
 import * as mongoose from 'mongoose';
 import { Schema, Connection, Document, Model } from 'mongoose';
 
-export default function(db: Connection): Model<Document> {
+const base: Object = {
+	updatedAt: { type: Date, required: true, default: Date.now },
+	message: { type: Schema.Types.ObjectId, required: true, ref: 'TalkMessage' },
+	type: { type: String, required: true },
+	user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
+};
+
+export function talkUserHistory(db: Connection): Model<Document> {
 	'use strict';
 
 	const deepPopulate: any = require('mongoose-deep-populate')(mongoose);
 
-	const schema = new Schema({
-		updatedAt: { type: Date, required: true, default: Date.now },
-		message: { type: Schema.Types.ObjectId, required: true, ref: 'TalkMessage' },
-		otherparty: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
-		user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
-	});
+	const schema = new Schema(Object.assign({
+		otherparty: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
+	}, base));
 
 	schema.plugin(deepPopulate);
 
@@ -24,5 +28,28 @@ export default function(db: Connection): Model<Document> {
 		delete ret.__v;
 	};
 
-	return db.model('TalkHistory', schema, 'TalkHistories');
+	return db.model('TalkUserHistory', schema, 'TalkHistories');
+}
+
+export function talkGroupHistory(db: Connection): Model<Document> {
+	'use strict';
+
+	const deepPopulate: any = require('mongoose-deep-populate')(mongoose);
+
+	const schema = new Schema(Object.assign({
+		group: { type: Schema.Types.ObjectId, required: true, ref: 'TalkGroup' }
+	}, base));
+
+	schema.plugin(deepPopulate);
+
+	if (!(<any>schema).options.toObject) {
+		(<any>schema).options.toObject = {};
+	}
+	(<any>schema).options.toObject.transform = (doc: any, ret: any) => {
+		ret.id = doc.id;
+		delete ret._id;
+		delete ret.__v;
+	};
+
+	return db.model('TalkGroupHistory', schema, 'TalkHistories');
 }

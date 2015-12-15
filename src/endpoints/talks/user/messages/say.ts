@@ -1,5 +1,5 @@
-import {TalkMessage, TalkHistory, User} from '../../../../models';
-import {ITalkMessage, ITalkHistory, IApplication, IUser} from '../../../../interfaces';
+import {TalkUserMessage, TalkUserHistory, User} from '../../../../models';
+import {ITalkUserMessage, ITalkUserHistory, IApplication, IUser} from '../../../../interfaces';
 import getAlbumFile from '../../../../core/get-album-file';
 import publishStream from '../../../../core/publish-streaming-message';
 
@@ -59,13 +59,13 @@ export default function(
 		});
 
 		function create(): void {
-			TalkMessage.create({
-				app: app !== null ? app.id : null,
+			TalkUserMessage.create({
+				type: 'user-message',
 				user: user.id,
 				otherparty: otherpartyId,
 				text,
 				file: fileId
-			}, (createErr: any, createdMessage: ITalkMessage) => {
+			}, (createErr: any, createdMessage: ITalkUserMessage) => {
 				if (createErr !== null) {
 					return reject(createErr);
 				}
@@ -74,9 +74,9 @@ export default function(
 
 				// ストリーミングメッセージ
 				[
-					[`user-stream:${otherpartyId}`, 'talk-message'],
-					[`talk-stream:${otherpartyId}-${user.id}`, 'otherparty-message'],
-					[`talk-stream:${user.id}-${otherpartyId}`, 'me-message']
+					[`user-stream:${otherpartyId}`, 'talk-user-message'],
+					[`talk-user-stream:${otherpartyId}-${user.id}`, 'otherparty-message'],
+					[`talk-user-stream:${user.id}-${otherpartyId}`, 'me-message']
 				].forEach(([channel, type]) => {
 					publishStream(channel, JSON.stringify({
 						type: type,
@@ -89,15 +89,17 @@ export default function(
 				});
 
 				// 履歴を作成しておく(自分)
-				TalkHistory.findOne({
+				TalkUserHistory.findOne({
+					type: 'user',
 					user: user.id,
 					otherparty: otherpartyId
-				}, (findHistoryErr: any, history: ITalkHistory) => {
+				}, (findHistoryErr: any, history: ITalkUserHistory) => {
 					if (findHistoryErr !== null) {
 						return;
 					}
 					if (history === null) {
-						TalkHistory.create({
+						TalkUserHistory.create({
+							type: 'user',
 							user: user.id,
 							otherparty: otherpartyId,
 							message: createdMessage.id
@@ -110,15 +112,17 @@ export default function(
 				});
 
 				// 履歴を作成しておく(相手)
-				TalkHistory.findOne({
+				TalkUserHistory.findOne({
+					type: 'user',
 					user: otherpartyId,
 					otherparty: user.id
-				}, (findHistoryErr: any, history: ITalkHistory) => {
+				}, (findHistoryErr: any, history: ITalkUserHistory) => {
 					if (findHistoryErr !== null) {
 						return;
 					}
 					if (history === null) {
-						TalkHistory.create({
+						TalkUserHistory.create({
+							type: 'user',
 							user: otherpartyId,
 							otherparty: user.id,
 							message: createdMessage.id
