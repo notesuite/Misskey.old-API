@@ -47,11 +47,11 @@ export default [
 
 	{ endpoint: 'talks/history/show', login: true, limitDuration: hour, limitMax: 1000 },
 	{ endpoint: 'talks/messages/unread/count', login: true },
-	{ endpoint: 'talks/user/messages/say', login: true, limitDuration: hour, limitMax: 120 },
-	{ endpoint: 'talks/user/messages/show', login: true, limitDuration: hour, limitMax: 1000 },
-	{ endpoint: 'talks/user/messages/read', login: true },
-	{ endpoint: 'talks/user/messages/stream', login: true, limitDuration: hour, limitMax: 1000 },
-	{ endpoint: 'talks/user/messages/delete', login: true, limitDuration: hour, limitMax: 100 },
+	{ endpoint: 'talks/messages/say', login: true, limitDuration: hour, limitMax: 120 },
+	{ endpoint: 'talks/messages/show', login: true, limitDuration: hour, limitMax: 1000 },
+	{ endpoint: 'talks/messages/read', login: true },
+	{ endpoint: 'talks/messages/stream', login: true, limitDuration: hour, limitMax: 1000 },
+	{ endpoint: 'talks/messages/delete', login: true, limitDuration: hour, limitMax: 100 },
 
 	{ endpoint: 'album/files/upload', login: true, limitDuration: hour, limitMax: 100 },
 	{ endpoint: 'album/files/show', login: true },
