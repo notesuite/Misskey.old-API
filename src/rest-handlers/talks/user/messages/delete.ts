@@ -1,5 +1,5 @@
-import { IApplication, IUser } from '../../interfaces';
-import showMessage from '../../endpoints/talks/show';
+import { IApplication, IUser } from '../../../../interfaces';
+import deleteMessage from '../../../../endpoints/talks/user/messages/delete';
 
 export default function(
 	app: IApplication,
@@ -8,11 +8,11 @@ export default function(
 	res: any
 ): void {
 	'use strict';
-	showMessage(
+	deleteMessage(
 		user,
 		req.payload['message-id']
-	).then(message => {
-		res(message);
+	).then(() => {
+		res({status: 'success'});
 	}, (err: any) => {
 		res({error: err}).code(500);
 	});

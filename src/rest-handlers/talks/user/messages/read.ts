@@ -1,5 +1,5 @@
-import { IApplication, IUser } from '../../interfaces';
-import deleteMessage from '../../endpoints/talks/delete';
+import { IApplication, IUser } from '../../../../interfaces';
+import readMessage from '../../../../endpoints/talks/user/messages/read';
 
 export default function(
 	app: IApplication,
@@ -8,7 +8,7 @@ export default function(
 	res: any
 ): void {
 	'use strict';
-	deleteMessage(
+	readMessage(
 		user,
 		req.payload['message-id']
 	).then(() => {

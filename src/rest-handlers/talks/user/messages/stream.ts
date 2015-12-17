@@ -1,5 +1,5 @@
-import { IApplication, IUser } from '../../interfaces';
-import getStream from '../../endpoints/talks/stream';
+import { IApplication, IUser } from '../../../../interfaces';
+import getStream from '../../../../endpoints/talks/user/messages/stream';
 
 export default function(
 	app: IApplication,
