@@ -1,6 +1,6 @@
-import {TalkUserMessage} from '../../../../models';
-import {ITalkUserMessage, IUser} from '../../../../interfaces';
-import readTalkMessage from '../../../../core/read-talk-message';
+import {TalkUserMessage} from '../../../models';
+import {ITalkUserMessage, IUser} from '../../../interfaces';
+import readTalkMessage from '../../../core/read-talk-message';
 
 /**
  * メッセージを既読にします

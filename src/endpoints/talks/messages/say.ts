@@ -1,7 +1,7 @@
-import {TalkUserMessage, TalkUserHistory, User} from '../../../../models';
-import {ITalkUserMessage, ITalkUserHistory, IApplication, IUser} from '../../../../interfaces';
-import getAlbumFile from '../../../../core/get-album-file';
-import publishStream from '../../../../core/publish-streaming-message';
+import {TalkUserMessage, TalkUserHistory, User} from '../../../models';
+import {ITalkUserMessage, ITalkUserHistory, IApplication, IUser} from '../../../interfaces';
+import getAlbumFile from '../../../core/get-album-file';
+import publishStream from '../../../core/publish-streaming-message';
 
 /**
  * Talkを作成します

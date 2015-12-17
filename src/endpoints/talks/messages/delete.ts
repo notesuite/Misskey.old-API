@@ -1,6 +1,6 @@
-import {TalkUserMessage} from '../../../../models';
-import {ITalkUserMessage, IUser} from '../../../../interfaces';
-import publishStream from '../../../../core/publish-streaming-message';
+import {TalkUserMessage} from '../../../models';
+import {ITalkUserMessage, IUser} from '../../../interfaces';
+import publishStream from '../../../core/publish-streaming-message';
 
 /**
  * Talkのメッセージを削除します

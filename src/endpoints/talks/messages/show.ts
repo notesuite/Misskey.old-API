@@ -1,7 +1,7 @@
-import {TalkUserMessage} from '../../../../models';
-import {ITalkUserMessage, IUser} from '../../../../interfaces';
-import serialize from '../../../../core/serialize-talk-message';
-import readTalkUserMessage from '../../../../core/read-talk-user-message';
+import {TalkUserMessage} from '../../../models';
+import {ITalkUserMessage, IUser} from '../../../interfaces';
+import serialize from '../../../core/serialize-talk-message';
+import readTalkUserMessage from '../../../core/read-talk-user-message';
 
 /**
  * メッセージを取得します
