@@ -1,5 +1,5 @@
-import { IApplication, IUser } from '../../interfaces';
-import getHistory from '../../endpoints/talks/history';
+import { IApplication, IUser } from '../../../interfaces';
+import show from '../../../endpoints/talks/history/show';
 
 export default function(
 	app: IApplication,
@@ -8,7 +8,7 @@ export default function(
 	res: any
 ): void {
 	'use strict';
-	getHistory(
+	show(
 		user
 	).then(messages => {
 		res(messages);
