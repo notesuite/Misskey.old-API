@@ -5,7 +5,9 @@ const day = 24 * hour;
 
 export default [
 	{ endpoint: 'login', login: false },
+
 	{ endpoint: 'screenname/available', login: false },
+
 	{ endpoint: 'account/create', login: false },
 	{ endpoint: 'account/show', login: true },
 	{ endpoint: 'account/name/update', login: true, limitDuration: day, limitMax: 10 },
@@ -14,9 +16,11 @@ export default [
 	{ endpoint: 'account/banner/update', login: true, limitDuration: day, limitMax: 30 },
 	{ endpoint: 'account/comment/update', login: true, limitDuration: day, limitMax: 30 },
 	{ endpoint: 'account/location/update', login: true, limitDuration: day, limitMax: 30 },
+
 	{ endpoint: 'notifications/show', login: true },
 	{ endpoint: 'notifications/timeline', login: true },
 	{ endpoint: 'notifications/unread/count', login: true },
+
 	{ endpoint: 'users/show', login: false },
 	{ endpoint: 'users/follow', login: true, limitDuration: hour, limitMax: 100 },
 	{ endpoint: 'users/unfollow', login: true, limitDuration: hour, limitMax: 100 },
@@ -25,6 +29,7 @@ export default [
 	{ endpoint: 'users/recommendations', login: true },
 	{ endpoint: 'users/search', login: false },
 	{ endpoint: 'users/search-by-screen-name', login: false },
+
 	{ endpoint: 'posts/timeline', login: true, limitDuration: 10 * minute, limitMax: 100 },
 	{ endpoint: 'posts/user-timeline', login: false },
 	{ endpoint: 'posts/mentions', login: true, limitDuration: 10 * minute, limitMax: 100 },
@@ -39,6 +44,7 @@ export default [
 	{ endpoint: 'posts/repost', login: true, limitDuration: hour, limitMax: 120, limitKey: 'post' },
 	{ endpoint: 'posts/likes/show', login: false },
 	{ endpoint: 'posts/reposts/show', login: false },
+
 	{ endpoint: 'talks/history/show', login: true, limitDuration: hour, limitMax: 1000 },
 	{ endpoint: 'talks/messages/unread/count', login: true },
 	{ endpoint: 'talks/user/messages/say', login: true, limitDuration: hour, limitMax: 120 },
@@ -46,6 +52,7 @@ export default [
 	{ endpoint: 'talks/user/messages/read', login: true },
 	{ endpoint: 'talks/user/messages/stream', login: true, limitDuration: hour, limitMax: 1000 },
 	{ endpoint: 'talks/user/messages/delete', login: true, limitDuration: hour, limitMax: 100 },
+
 	{ endpoint: 'album/files/upload', login: true, limitDuration: hour, limitMax: 100 },
 	{ endpoint: 'album/files/show', login: true },
 	{ endpoint: 'album/files/list', login: true },
@@ -56,8 +63,10 @@ export default [
 	{ endpoint: 'album/folders/create', login: true, limitDuration: hour, limitMax: 50 },
 	{ endpoint: 'album/folders/move', login: true },
 	{ endpoint: 'album/folders/rename', login: true },
+
 	{ endpoint: 'hashtags/search', login: false },
 	{ endpoint: 'hashtags/trend/show', login: false },
+
 	{ endpoint: 'bbs/topics/create', login: true, limitDuration: day, limitMax: 30 },
 	{ endpoint: 'bbs/posts/create', login: true, limitDuration: hour, limitMax: 120 }
 ]
