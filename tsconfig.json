@@ -91,7 +91,6 @@
 		"./src/endpoints/posts/user-timeline.ts",
 		"./src/endpoints/screenname/available.ts",
 		"./src/endpoints/talks/group/create.ts",
-		"./src/endpoints/talks/group/history/show.ts",
 		"./src/endpoints/talks/group/members/invite.ts",
 		"./src/endpoints/talks/history/show.ts",
 		"./src/endpoints/talks/messages/delete.ts",
