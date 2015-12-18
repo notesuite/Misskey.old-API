@@ -187,7 +187,7 @@ export interface ITalkUserMessage extends ITalkMessage {
 	isContentModified: boolean;
 	isDeleted: boolean;
 	isRead: boolean;
-	otherparty: string | Types.ObjectId | IUser;
+	recipient: string | Types.ObjectId | IUser;
 	text: string;
 	user: string | Types.ObjectId | IUser;
 }

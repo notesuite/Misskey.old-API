@@ -23,7 +23,7 @@ export function userMessage(db: Connection): Model<Document> {
 		isContentModified: { type: Boolean, required: false, default: false },
 		isDeleted: { type: Boolean, required: false, default: false },
 		isRead: { type: Boolean, required: false, default: false },
-		otherparty: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
+		recipient: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
 		text: { type: String, required: false, default: '' },
 		user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
 	}, base));
