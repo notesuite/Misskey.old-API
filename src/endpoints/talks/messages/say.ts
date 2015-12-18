@@ -4,7 +4,7 @@ import getAlbumFile from '../../../core/get-album-file';
 import publishStream from '../../../core/publish-streaming-message';
 
 /**
- * Talkを作成します
+ * Talkメッセージを作成します
  * @param app API利用App
  * @param user API利用ユーザー
  * @param userId 宛先のユーザーのID
