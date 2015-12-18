@@ -32,7 +32,7 @@ export default function(
 				value: message.id
 			}));
 		} else {
-			message.reads.push(me.id);
+			// message.reads.push(me.id);
 			message.save();
 
 			// Publish stream message

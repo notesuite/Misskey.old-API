@@ -1,6 +1,11 @@
-import {TalkUserMessage} from '../../../models';
-import {ITalkUserMessage, IUser} from '../../../interfaces';
+import {TalkMessage} from '../../../models';
+import {ITalkMessage, ITalkUserMessage, ITalkGroupMessage, IUser} from '../../../interfaces';
 import readTalkMessage from '../../../core/read-talk-message';
+
+function isUserMessage(message: ITalkMessage): message is ITalkUserMessage {
+	'use strict';
+	return message.hasOwnProperty('recipient');
+}
 
 /**
  * メッセージを既読にします
@@ -15,21 +20,24 @@ export default function(
 
 	return new Promise<void>((resolve, reject) => {
 		// 対象のメッセージを取得
-		TalkUserMessage.findById(messageId, (findErr: any, message: ITalkUserMessage) => {
+		TalkMessage.findById(messageId, (findErr: any, message: ITalkUserMessage | ITalkGroupMessage) => {
 			if (findErr !== null) {
 				return reject(findErr);
 			} else if (message === null) {
 				return reject('message-not-found');
-			} else if (message.type !== 'user') {
-				return reject('message-not-found');
-			} else if (message.user.toString() === user.id.toString()) {
-				return reject('access-denied');
-			} else if (message.otherparty.toString() !== user.id.toString()) {
-				return reject('access-denied');
-			} else if (message.isDeleted) {
-				return reject('this-message-has-been-deleted');
-			} else if (message.isRead) {
-				return reject('this-message-has-already-been-read');
+			}
+			if (isUserMessage(message)) {
+				if (message.user.toString() === user.id.toString()) {
+					return reject('access-denied');
+				} else if (message.recipient.toString() !== user.id.toString()) {
+					return reject('access-denied');
+				} else if (message.isDeleted) {
+					return reject('this-message-has-been-deleted');
+				} else if (message.isRead) {
+					return reject('this-message-has-already-been-read');
+				}
+			} else {
+				return reject('not-implemented');
 			}
 
 			readTalkMessage(user, message).then(resolve, reject);
