@@ -15,7 +15,7 @@ import { post, status, photo, repost } from './models/post';
 import postLike from './models/post-like';
 import postMention from './models/post-mention';
 import * as talk from './models/talk-message';
-import { talkUserHistory, talkGroupHistory } from './models/talk-history';
+import { talkHistory, talkUserHistory, talkGroupHistory } from './models/talk-history';
 import user from './models/user';
 import userFollowing from './models/user-following';
 
@@ -41,6 +41,7 @@ export const TalkGroupMemberJoinActivity = talk.groupMemberJoinActivity(db);
 export const TalkGroupMemberLeftActivity = talk.groupMemberLeftActivity(db);
 export const TalkRenameGroupActivity = talk.renameGroupActivity(db);
 export const TalkTransferGroupOwnershipActivity = talk.transferGroupOwnershipActivity(db);
+export const TalkHistory = talkHistory(db);
 export const TalkUserHistory = talkUserHistory(db);
 export const TalkGroupHistory = talkGroupHistory(db);
 export const User = user(db);

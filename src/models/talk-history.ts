@@ -7,6 +7,23 @@ const base: Object = {
 	user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
 };
 
+export function talkHistory(db: Connection): Model<Document> {
+	'use strict';
+
+	const schema = new Schema(base);
+
+	if (!(<any>schema).options.toObject) {
+		(<any>schema).options.toObject = {};
+	}
+	(<any>schema).options.toObject.transform = (doc: any, ret: any) => {
+		ret.id = doc.id;
+		delete ret._id;
+		delete ret.__v;
+	};
+
+	return db.model('TalkHistory', schema, 'TalkHistories');
+}
+
 export function talkUserHistory(db: Connection): Model<Document> {
 	'use strict';
 
