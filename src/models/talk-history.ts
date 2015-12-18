@@ -4,7 +4,6 @@ import { Schema, Connection, Document, Model } from 'mongoose';
 const base: Object = {
 	updatedAt: { type: Date, required: true, default: Date.now },
 	message: { type: Schema.Types.ObjectId, required: true, ref: 'TalkMessage' },
-	type: { type: String, required: true },
 	user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
 };
 
@@ -14,7 +13,7 @@ export function talkUserHistory(db: Connection): Model<Document> {
 	const deepPopulate: any = require('mongoose-deep-populate')(mongoose);
 
 	const schema = new Schema(Object.assign({
-		otherparty: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
+		recipient: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
 	}, base));
 
 	schema.plugin(deepPopulate);

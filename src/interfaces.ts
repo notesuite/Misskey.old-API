@@ -234,12 +234,11 @@ export interface ITalkTransferGroupOwnershipActivity extends ITalkMessage {
 export interface ITalkHistory extends Document {
 	updatedAt: Date;
 	message: string | Types.ObjectId | ITalkMessage;
-	type: string;
 	user: string | Types.ObjectId | IUser;
 }
 
 export interface ITalkUserHistory extends ITalkHistory {
-	otherparty: string | Types.ObjectId | IUser;
+	recipient: string | Types.ObjectId | IUser;
 }
 
 export interface ITalkGroupHistory extends ITalkHistory {
