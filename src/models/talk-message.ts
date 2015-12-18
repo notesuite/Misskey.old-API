@@ -14,6 +14,20 @@ const toObject: any = (doc: any, ret: any) => {
 	delete ret.__v;
 };
 
+export function message(db: Connection): Model<Document> {
+	'use strict';
+	mongooseAutoIncrement.initialize(db);
+
+	const schema = new Schema(base);
+
+	if (!(<any>schema).options.toObject) {
+		(<any>schema).options.toObject = {};
+	}
+	(<any>schema).options.toObject.transform = toObject;
+
+	return db.model('Message', schema, 'TalkMessages');
+}
+
 export function userMessage(db: Connection): Model<Document> {
 	'use strict';
 	mongooseAutoIncrement.initialize(db);

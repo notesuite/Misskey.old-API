@@ -1,6 +1,11 @@
-import {TalkUserMessage} from '../../../models';
-import {ITalkUserMessage, IUser} from '../../../interfaces';
+import {TalkMessage} from '../../../models';
+import {ITalkMessage, ITalkUserMessage, ITalkGroupMessage, IUser} from '../../../interfaces';
 import publishStream from '../../../core/publish-streaming-message';
+
+function isUserMessage(message: ITalkMessage): message is ITalkUserMessage {
+	'use strict';
+	return message.hasOwnProperty('recipient');
+}
 
 /**
  * Talkのメッセージを削除します
@@ -19,10 +24,10 @@ export default function(
 
 	return new Promise<void>((resolve, reject) => {
 		// 対象のメッセージを取得
-		TalkUserMessage.findOne({
+		TalkMessage.findOne({
 			_id: messageId,
-			type: 'user-message'
-		}, (findErr: any, message: ITalkUserMessage) => {
+			user: user.id
+		}, (findErr: any, message: ITalkUserMessage | ITalkGroupMessage) => {
 			if (findErr !== null) {
 				return reject(findErr);
 			} else if (message === null) {
@@ -41,15 +46,22 @@ export default function(
 
 				resolve();
 
-				// ストリームメッセージ発行
-				publishStream(`talk-user-stream:${message.otherparty}-${user.id}`, JSON.stringify({
-					type: 'otherparty-message-delete',
-					value: message.id
-				}));
-				publishStream(`talk-user-stream:${user.id}-${message.otherparty}`, JSON.stringify({
-					type: 'me-message-delete',
-					value: message.id
-				}));
+				// Publish stream messages
+				if (isUserMessage(message)) {
+					publishStream(`talk-user-stream:${message.recipient}-${user.id}`, JSON.stringify({
+						type: 'otherparty-message-delete',
+						value: message.id
+					}));
+					publishStream(`talk-user-stream:${user.id}-${message.recipient}`, JSON.stringify({
+						type: 'me-message-delete',
+						value: message.id
+					}));
+				} else {
+					publishStream(`talk-group-stream:${message.group}`, JSON.stringify({
+						type: 'otherparty-message-delete',
+						value: message.id
+					}));
+				}
 			});
 		});
 	});

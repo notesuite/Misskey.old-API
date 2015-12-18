@@ -34,6 +34,7 @@ export const PhotoPost = photo(db);
 export const Repost = repost(db);
 export const PostLike = postLike(db);
 export const PostMention = postMention(db);
+export const TalkMessage = talk.message(db);
 export const TalkUserMessage = talk.userMessage(db);
 export const TalkGroupMessage = talk.groupMessage(db);
 export const TalkGroupSendInvitationActivity = talk.groupSentInvitationActivity(db);
