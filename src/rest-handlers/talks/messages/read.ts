@@ -1,5 +1,5 @@
-import { IApplication, IUser } from '../../../../interfaces';
-import readMessage from '../../../../endpoints/talks/user/messages/read';
+import { IApplication, IUser } from '../../../interfaces';
+import readMessage from '../../../endpoints/talks/messages/read';
 
 export default function(
 	app: IApplication,
