@@ -58,7 +58,7 @@ function common(
 			: Promise<Object> {
 	'use strict';
 	return new Promise<Object>((resolve, reject) => {
-		Promise.all([
+		Promise.all<Object, boolean, boolean>([
 			// Get reply source
 			new Promise<Object>((getDestinationResolve, getDestinationReject) => {
 				if (post.inReplyToPost !== null && includeDestination) {
