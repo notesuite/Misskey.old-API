@@ -7,23 +7,27 @@ import * as babel from 'gulp-babel';
 
 task('build', ['build:ts']);
 
-task('build:ts', () => {
+function buildTypeScript(): ts.CompilationStream {
+	'use strict';
 	const project = ts.createProject('tsconfig.json', {
 		typescript: require('typescript')
 	});
 
-	return project.src()
-		.pipe(ts(project))
-		.pipe(babel())
-		.pipe(dest('./built'));
-});
+	return project.src().pipe(ts(project));
+}
 
-task('lint', () => {
-	return src('./src/**/*.ts')
+task('build:ts', () =>
+	buildTypeScript()
+		.pipe(babel())
+		.pipe(dest('./built'))
+);
+
+task('lint', () =>
+	src('./src/**/*.ts')
 		.pipe(tslint({
 			tslint: require('tslint')
 		}))
-		.pipe(tslint.report('verbose'));
-});
+		.pipe(tslint.report('verbose'))
+);
 
 task('test', ['build', 'lint']);
