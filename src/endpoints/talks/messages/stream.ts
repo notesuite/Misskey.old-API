@@ -3,7 +3,7 @@ const isEmpty = List.isEmpty;
 import {TalkUserMessage} from '../../../models';
 import {ITalkUserMessage, IUser} from '../../../interfaces';
 import serialize from '../../../core/serialize-talk-message';
-import readTalkUserMessage from '../../../core/read-talk-user-message';
+import readTalkMessage from '../../../core/read-talk-message';
 
 /**
  * Talkのストリームを取得します
@@ -65,7 +65,7 @@ export default function(
 			// 既読にする
 			messages.forEach(message => {
 				if ((<IUser>message.user).id.toString() === otherpartyId) {
-					readTalkUserMessage(user, message);
+					readTalkMessage(user, message);
 				}
 			});
 		});

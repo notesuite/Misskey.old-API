@@ -1,7 +1,7 @@
 import {TalkUserMessage} from '../../../models';
 import {ITalkUserMessage, IUser} from '../../../interfaces';
 import serialize from '../../../core/serialize-talk-message';
-import readTalkUserMessage from '../../../core/read-talk-user-message';
+import readTalkMessage from '../../../core/read-talk-message';
 
 /**
  * メッセージを取得します
@@ -28,7 +28,7 @@ export default function(
 			} else if (message === null) {
 				return reject('message-not-found');
 			} else if (
-				(<IUser>message.otherparty).id.toString() !== user.id.toString() &&
+				(<IUser>message.recipient).id.toString() !== user.id.toString() &&
 				(<IUser>message.user).id.toString() !== user.id.toString()
 			) {
 				return reject('access-denied');
@@ -39,8 +39,8 @@ export default function(
 			serialize(message, user).then(resolve, reject);
 
 			// 既読にする
-			if ((<IUser>message.otherparty).id.toString() === user.id.toString()) {
-				readTalkUserMessage(user, message);
+			if ((<IUser>message.recipient).id.toString() === user.id.toString()) {
+				readTalkMessage(user, message);
 			}
 		});
 	});
