@@ -36,7 +36,7 @@
 		"./src/core/publish-streaming-message.ts",
 		"./src/core/publish-user-stream.ts",
 		"./src/core/read-post.ts",
-		"./src/core/read-talk-user-message.ts",
+		"./src/core/read-talk-message.ts",
 		"./src/core/register-hashtags.ts",
 		"./src/core/save-post-mentions.ts",
 		"./src/core/serialize-notification.ts",
