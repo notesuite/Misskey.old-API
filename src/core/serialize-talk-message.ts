@@ -10,12 +10,12 @@ export default function(
 		switch (message.type) {
 			case 'user-message':
 				message.populate({
-					path: 'user otherparty file',
+					path: 'user recipient file',
 					model: 'User'
 				}, (err: any, message2: ITalkUserMessage) => {
 					const serializedMessage: any = message2.toObject();
 					serializedMessage.user = (<IUser>message2.user).toObject();
-					serializedMessage.otherparty = (<IUser>message2.otherparty).toObject();
+					serializedMessage.recipient = (<IUser>message2.recipient).toObject();
 					if (serializedMessage.file !== null) {
 						serializedMessage.file = (<IAlbumFile>message2.file).toObject();
 					}
