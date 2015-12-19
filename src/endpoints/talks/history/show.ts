@@ -11,7 +11,7 @@ import serialize from '../../../core/serialize-talk-message';
  */
 export default function(
 	user: IUser,
-	limit: number = 10
+	limit: number = 30
 ): Promise<Object[]> {
 	'use strict';
 
