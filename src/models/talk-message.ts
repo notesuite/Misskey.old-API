@@ -39,6 +39,7 @@ export function userMessage(db: Connection): Model<Document> {
 		isRead: { type: Boolean, required: false, default: false },
 		recipient: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
 		text: { type: String, required: false, default: '' },
+		type: { type: String, required: false, default: 'user-message' },
 		user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
 	}, base));
 
@@ -67,6 +68,7 @@ export function groupMessage(db: Connection): Model<Document> {
 		isDeleted: { type: Boolean, required: false, default: false },
 		reads: [{ type: Schema.Types.ObjectId, required: false, default: null, ref: 'User' }],
 		text: { type: String, required: false, default: '' },
+		type: { type: String, required: false, default: 'group-message' },
 		user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
 	}, base));
 
