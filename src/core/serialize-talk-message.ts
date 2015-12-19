@@ -5,10 +5,13 @@ export default function(
 	me: IUser
 ): Promise<Object> {
 	'use strict';
-
+	console.log(message);
 	return new Promise<Object>((resolve, reject) => {
+		console.log('kyoppie');
+		console.log(message.type);
 		switch (message.type) {
 			case 'user-message':
+				console.log('yuppie');
 				message.populate({
 					path: 'user recipient file',
 					model: 'User'
@@ -16,6 +19,7 @@ export default function(
 					if (err !== null) {
 						reject(err);
 					}
+					console.log(message2);
 
 					const serializedMessage: any = message2.toObject();
 					serializedMessage.user = (<IUser>message2.user).toObject();
