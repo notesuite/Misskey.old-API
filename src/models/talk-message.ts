@@ -25,7 +25,7 @@ export function message(db: Connection): Model<Document> {
 	}
 	(<any>schema).options.toObject.transform = toObject;
 
-	return db.model('Message', schema, 'TalkMessages');
+	return db.model('TalkMessage', schema, 'TalkMessages');
 }
 
 export function userMessage(db: Connection): Model<Document> {
@@ -53,7 +53,7 @@ export function userMessage(db: Connection): Model<Document> {
 	}
 	(<any>schema).options.toObject.transform = toObject;
 
-	return db.model('UserMessage', schema, 'TalkMessages');
+	return db.model('TalkUserMessage', schema, 'TalkMessages');
 }
 
 export function groupMessage(db: Connection): Model<Document> {
@@ -81,7 +81,7 @@ export function groupMessage(db: Connection): Model<Document> {
 	}
 	(<any>schema).options.toObject.transform = toObject;
 
-	return db.model('GroupMessage', schema, 'TalkMessages');
+	return db.model('TalkGroupMessage', schema, 'TalkMessages');
 }
 
 export function groupSentInvitationActivity(db: Connection): Model<Document> {
@@ -106,7 +106,7 @@ export function groupSentInvitationActivity(db: Connection): Model<Document> {
 	}
 	(<any>schema).options.toObject.transform = toObject;
 
-	return db.model('GroupSentInvitationActivity', schema, 'TalkMessages');
+	return db.model('TalkGroupSentInvitationActivity', schema, 'TalkMessages');
 }
 
 export function groupMemberJoinActivity(db: Connection): Model<Document> {
@@ -130,7 +130,7 @@ export function groupMemberJoinActivity(db: Connection): Model<Document> {
 	}
 	(<any>schema).options.toObject.transform = toObject;
 
-	return db.model('GroupMemberJoinActivity', schema, 'TalkMessages');
+	return db.model('TalkGroupMemberJoinActivity', schema, 'TalkMessages');
 }
 
 export function groupMemberLeftActivity(db: Connection): Model<Document> {
@@ -154,7 +154,7 @@ export function groupMemberLeftActivity(db: Connection): Model<Document> {
 	}
 	(<any>schema).options.toObject.transform = toObject;
 
-	return db.model('GroupMemberLeftActivity', schema, 'TalkMessages');
+	return db.model('TalkGroupMemberLeftActivity', schema, 'TalkMessages');
 }
 
 export function renameGroupActivity(db: Connection): Model<Document> {
@@ -180,7 +180,7 @@ export function renameGroupActivity(db: Connection): Model<Document> {
 	}
 	(<any>schema).options.toObject.transform = toObject;
 
-	return db.model('RenameGroupActivity', schema, 'TalkMessages');
+	return db.model('TalkRenameGroupActivity', schema, 'TalkMessages');
 }
 
 export function transferGroupOwnershipActivity(db: Connection): Model<Document> {
@@ -205,5 +205,5 @@ export function transferGroupOwnershipActivity(db: Connection): Model<Document> 
 	}
 	(<any>schema).options.toObject.transform = toObject;
 
-	return db.model('TransferGroupOwnershipActivity', schema, 'TalkMessages');
+	return db.model('TalkTransferGroupOwnershipActivity', schema, 'TalkMessages');
 }
