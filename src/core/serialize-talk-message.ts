@@ -13,6 +13,10 @@ export default function(
 					path: 'user recipient file',
 					model: 'User'
 				}, (err: any, message2: ITalkUserMessage) => {
+					if (err !== null) {
+						reject(err);
+					}
+
 					const serializedMessage: any = message2.toObject();
 					serializedMessage.user = (<IUser>message2.user).toObject();
 					serializedMessage.recipient = (<IUser>message2.recipient).toObject();
