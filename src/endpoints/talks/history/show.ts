@@ -22,7 +22,7 @@ export default function(
 		})
 		.sort('-updatedAt')
 		.limit(limit)
-		.deepPopulate('message.user message.recipient message.file')
+		.populate('message')
 		.exec((err: any, histories: ITalkHistory[]) => {
 			if (err !== null) {
 				return reject(err);
