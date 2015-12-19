@@ -8,15 +8,17 @@ export default function(
 	res: any
 ): void {
 	'use strict';
-	const otherpartyId = req.payload['otherparty-id'];
+	const userId = req.payload['user-id'];
+	const groupId = req.payload['group-id'];
 	const text: string = req.payload['text'];
 	const fileId = req.payload['file'];
 	say(
 		app,
 		user,
-		otherpartyId,
 		text,
-		fileId
+		fileId,
+		userId,
+		groupId
 	).then(message => {
 		res(message);
 	}, (err: any) => {
