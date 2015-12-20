@@ -112,7 +112,6 @@ function createUserMessage(
 			}
 			if (history === null) {
 				TalkUserHistory.create({
-					type: 'user',
 					user: me.id,
 					recipient: recipient.id,
 					message: createdMessage.id
@@ -135,7 +134,6 @@ function createUserMessage(
 			}
 			if (history === null) {
 				TalkUserHistory.create({
-					type: 'user',
 					user: recipient.id,
 					recipient: me.id,
 					message: createdMessage.id

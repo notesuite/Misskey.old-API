@@ -10,7 +10,9 @@ const base: Object = {
 export function talkHistory(db: Connection): Model<Document> {
 	'use strict';
 
-	const schema = new Schema(base);
+	const schema = new Schema(Object.assign({
+		type: { type: String, required: true }
+	}, base));
 
 	if (!(<any>schema).options.toObject) {
 		(<any>schema).options.toObject = {};
@@ -30,7 +32,8 @@ export function talkUserHistory(db: Connection): Model<Document> {
 	const deepPopulate: any = require('mongoose-deep-populate')(mongoose);
 
 	const schema = new Schema(Object.assign({
-		recipient: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
+		recipient: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
+		type: { type: String, required: false, default: 'user' }
 	}, base));
 
 	schema.plugin(deepPopulate);
@@ -53,7 +56,8 @@ export function talkGroupHistory(db: Connection): Model<Document> {
 	const deepPopulate: any = require('mongoose-deep-populate')(mongoose);
 
 	const schema = new Schema(Object.assign({
-		group: { type: Schema.Types.ObjectId, required: true, ref: 'TalkGroup' }
+		group: { type: Schema.Types.ObjectId, required: true, ref: 'TalkGroup' },
+		type: { type: String, required: false, default: 'group' }
 	}, base));
 
 	schema.plugin(deepPopulate);
