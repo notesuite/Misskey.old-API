@@ -1,10 +1,5 @@
-import {IUser, ITalkMessage, ITalkUserMessage, ITalkGroupMessage} from '../interfaces';
+import {IUser, ITalkMessage} from '../interfaces';
 import publishStream from './publish-streaming-message';
-
-function isUserMessage(message: ITalkMessage): message is ITalkUserMessage {
-	'use strict';
-	return message.hasOwnProperty('recipient');
-}
 
 /**
  * メッセージを既読にします
@@ -13,33 +8,46 @@ function isUserMessage(message: ITalkMessage): message is ITalkUserMessage {
  */
 export default function(
 	me: IUser,
-	message: ITalkUserMessage | ITalkGroupMessage
+	message: ITalkMessage
 ): Promise<void> {
 	'use strict';
 
+	if (!message.hasOwnProperty('user')) {
+		return Promise.resolve();
+	}
+
+	if (message.user.toString() === me.id.toString()) {
+		return Promise.reject('isme');
+	}
+
 	return new Promise<void>((resolve, reject) => {
-		if (isUserMessage(message)) {
-			const otherpartyId: string = typeof message.user === 'string'
-				? message.user
-				: (<any>message.user).id;
+		switch (message.type) {
+			case 'user-message':
+				const otherpartyId: string = typeof message.user === 'string'
+					? message.user
+					: (<any>message.user).id;
 
-			message.isRead = true;
-			message.save();
+				message.isRead = true;
+				message.save();
 
-			// Publish stream message
-			publishStream(`talk-user-stream:${otherpartyId}-${me.id}`, JSON.stringify({
-				type: 'read',
-				value: message.id
-			}));
-		} else {
-			// message.reads.push(me.id);
-			message.save();
+				// Publish stream message
+				publishStream(`talk-user-stream:${otherpartyId}-${me.id}`, JSON.stringify({
+					type: 'read',
+					value: message.id
+				}));
+				break;
+			case 'group-message':
+				// message.reads.push(me.id);
+				message.save();
 
-			// Publish stream message
-			publishStream(`talk-group-stream:${message.group}`, JSON.stringify({
-				type: 'read',
-				value: message.id
-			}));
+				// Publish stream message
+				publishStream(`talk-group-stream:${message.group}`, JSON.stringify({
+					type: 'read',
+					value: message.id
+				}));
+				break;
+			default:
+				break;
 		}
 	});
 }

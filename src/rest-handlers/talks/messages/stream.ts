@@ -10,10 +10,11 @@ export default function(
 	'use strict';
 	getStream(
 		user,
-		req.payload['otherparty-id'],
 		req.payload['limit'],
 		req.payload['since-cursor'],
-		req.payload['max-cursor']
+		req.payload['max-cursor'],
+		req.payload['user-id'],
+		req.payload['group-id']
 	).then(stream => {
 		res(stream);
 	}, (err: any) => {
