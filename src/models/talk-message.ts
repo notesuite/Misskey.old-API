@@ -18,7 +18,9 @@ export function message(db: Connection): Model<Document> {
 	'use strict';
 	mongooseAutoIncrement.initialize(db);
 
-	const schema = new Schema(base);
+	const schema = new Schema(Object.assign({
+		type: { type: String, required: true }
+	}, base));
 
 	if (!(<any>schema).options.toObject) {
 		(<any>schema).options.toObject = {};
