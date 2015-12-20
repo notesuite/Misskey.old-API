@@ -45,7 +45,7 @@ export default function(
 				return reject('is-me');
 			}
 
-			// message.reads.push(me.id);
+			(<string[]>message.reads).push(me.id);
 			message.save();
 
 			// Publish stream message
