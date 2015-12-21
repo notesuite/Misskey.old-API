@@ -59,6 +59,18 @@ export function userMessage(db: Connection): Model<Document> {
 	return db.model('TalkUserMessage', schema, 'TalkMessages');
 }
 
+export function groupBase(db: Connection): Model<Document> {
+	'use strict';
+	mongooseAutoIncrement.initialize(db);
+
+	const schema = new Schema(Object.assign({
+		group: { type: Schema.Types.ObjectId },
+		type: { type: String }
+	}, base));
+
+	return db.model('TalkGroupBase', schema, 'TalkMessages');
+}
+
 export function groupMessage(db: Connection): Model<Document> {
 	'use strict';
 	mongooseAutoIncrement.initialize(db);

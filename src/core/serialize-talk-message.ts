@@ -23,6 +23,22 @@ export default function(
 					resolve(message2.toObject());
 				});
 				break;
+			case 'group-message':
+				message
+				.populate({
+					path: 'user',
+					model: 'User'
+				})
+				.populate({
+					path: 'file',
+					model: 'AlbumFile'
+				}, (err: any, message2: ITalkUserMessage) => {
+					if (err !== null) {
+						reject(err);
+					}
+					resolve(message2.toObject());
+				});
+				break;
 			default:
 				break;
 		}
