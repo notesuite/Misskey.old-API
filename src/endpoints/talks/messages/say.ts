@@ -88,8 +88,8 @@ function createUserMessage(
 
 		[ // Streaming messages
 			[`user-stream:${recipient.id}`, 'talk-user-message'],
-			[`talk-user-stream:${recipient.id}-${me.id}`, 'otherparty-message'],
-			[`talk-user-stream:${me.id}-${recipient.id}`, 'me-message']
+			[`talk-user-stream:${recipient.id}-${me.id}`, 'message'],
+			[`talk-user-stream:${me.id}-${recipient.id}`, 'message']
 		].forEach(([channel, type]) => {
 			publishStream(channel, JSON.stringify({
 				type: type,
