@@ -28,9 +28,7 @@ export default function(
 				return reject('is-me');
 			}
 
-			const otherpartyId: string = typeof message.user === 'string'
-				? message.user
-				: (<any>message.user).id;
+			const otherpartyId: string = <string>message.user;
 
 			message.isRead = true;
 			message.save();
