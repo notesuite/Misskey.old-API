@@ -1,11 +1,6 @@
-import {TalkMessage} from '../../../models';
-import {ITalkMessage, ITalkUserMessage, ITalkGroupMessage, IUser} from '../../../interfaces';
+import {TalkMessage, TalkGroup} from '../../../models';
+import {IUser, ITalkGroup} from '../../../interfaces';
 import readTalkMessage from '../../../core/read-talk-message';
-
-function isUserMessage(message: ITalkMessage): message is ITalkUserMessage {
-	'use strict';
-	return message.hasOwnProperty('recipient');
-}
 
 /**
  * メッセージを既読にします
@@ -20,27 +15,42 @@ export default function(
 
 	return new Promise<void>((resolve, reject) => {
 		// 対象のメッセージを取得
-		TalkMessage.findById(messageId, (findErr: any, message: ITalkUserMessage | ITalkGroupMessage) => {
+		TalkMessage.findById(messageId, (findErr: any, message: any) => {
 			if (findErr !== null) {
 				return reject(findErr);
 			} else if (message === null) {
 				return reject('message-not-found');
 			}
-			if (isUserMessage(message)) {
-				if (message.user.toString() === user.id.toString()) {
-					return reject('access-denied');
-				} else if (message.recipient.toString() !== user.id.toString()) {
-					return reject('access-denied');
-				} else if (message.isDeleted) {
-					return reject('this-message-has-been-deleted');
-				} else if (message.isRead) {
-					return reject('this-message-has-already-been-read');
-				}
-			} else {
-				return reject('not-implemented');
+			switch (message.type) {
+				case 'user-message':
+					if (message._doc.user.toString() === user.id.toString()) {
+						return reject('access-denied');
+					} else if (message._doc.recipient.toString() !== user.id.toString()) {
+						return reject('access-denied');
+					} else if (message._doc.isDeleted) {
+						return reject('this-message-has-been-deleted');
+					} else if (message._doc.isRead) {
+						return reject('this-message-has-already-been-read');
+					}
+					readTalkMessage(user, message).then(resolve, reject);
+					break;
+				case 'group-message':
+					TalkGroup
+					.findById(message.group)
+					.exec((groupFindErr: any, group: ITalkGroup) => {
+						if (
+							(<string[]>group.members)
+							.map(member => member.toString())
+							.indexOf(user.id.toString()) === -1
+						) {
+							return reject('access-denied');
+						}
+						readTalkMessage(user, message).then(resolve, reject);
+					});
+					break;
+				default:
+					break;
 			}
-
-			readTalkMessage(user, message).then(resolve, reject);
 		});
 	});
 }

@@ -41,6 +41,8 @@ export default function(
 		} else if (isGroupMessage(message)) {
 			if (message.user.toString() === me.id.toString()) {
 				return reject('is-me');
+			} else if ((<string[]>message.reads).indexOf(me.id) > 0) {
+				return reject('arleady-read');
 			}
 
 			(<string[]>message.reads).push(me.id);
