@@ -8,10 +8,20 @@ const base: Object = {
 
 const toObject: any = (doc: any, ret: any) => {
 	ret.id = doc.id;
-	ret.isModified = doc.isContentModified;
-	delete ret.isContentModified;
 	delete ret._id;
 	delete ret.__v;
+	switch (doc.type) {
+		case 'user-message':
+			ret.isModified = doc._doc.isContentModified;
+			delete ret.isContentModified;
+			break;
+		case 'group-message':
+			ret.isModified = doc._doc.isContentModified;
+			delete ret.isContentModified;
+			break;
+		default:
+			break;
+	}
 };
 
 export function message(db: Connection): Model<Document> {
@@ -67,6 +77,11 @@ export function groupBase(db: Connection): Model<Document> {
 		group: { type: Schema.Types.ObjectId },
 		type: { type: String }
 	}, base));
+
+	if (!(<any>schema).options.toObject) {
+		(<any>schema).options.toObject = {};
+	}
+	(<any>schema).options.toObject.transform = toObject;
 
 	return db.model('TalkGroupBase', schema, 'TalkMessages');
 }
