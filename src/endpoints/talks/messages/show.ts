@@ -27,8 +27,8 @@ export default function(
 			switch (message.type) {
 				case 'user-message':
 					if (
-						(<IUser>(<ITalkUserMessage>message).recipient).id.toString() !== user.id.toString() &&
-						(<IUser>(<ITalkUserMessage>message).user).id.toString() !== user.id.toString()
+						(<any>message)._doc.recipient.toString() !== user.id.toString() &&
+						(<any>message)._doc.user.toString() !== user.id.toString()
 					) {
 						return reject('access-denied');
 					} else if ((<ITalkUserMessage>message).isDeleted) {
@@ -38,7 +38,7 @@ export default function(
 					break;
 				case 'group-message':
 					TalkGroup
-					.findById(<string>(<ITalkGroupMessage>message).group)
+					.findById(<string>(<any>message)._doc.group)
 					.exec((groupFindErr: any, group: ITalkGroup) => {
 						if (
 							(<string[]>group.members)
