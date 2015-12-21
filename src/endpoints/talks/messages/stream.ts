@@ -28,7 +28,7 @@ export default function(
 		if (userId !== null) {
 			getUserStream();
 		} else if (groupId !== null) {
-			reject('not-implemented');
+			getGroupStream();
 		} else {
 			reject('empty-destination-query');
 		}
@@ -54,6 +54,42 @@ export default function(
 			);
 
 			TalkUserMessage
+			.find(query)
+			.sort('-createdAt')
+			.limit(limit)
+			.exec((err: any, messages: ITalkMessage[]) => {
+				if (err !== null) {
+					return reject(err);
+				} else if (isEmpty(messages)) {
+					return resolve([]);
+				}
+
+				Promise.all(messages.map(message =>
+					serialize(message, me)
+				)).then(resolve, reject);
+
+				// 既読にする
+				messages.forEach(message => {
+					readTalkMessage(me, message);
+				});
+			});
+		}
+
+		function getGroupStream(): void {
+			'use strict';
+			const query = Object.assign({
+				group: groupId,
+			}, new Match<void, any>(null)
+				.when(() => sinceCursor !== null, () => {
+					return { cursor: { $gt: sinceCursor } };
+				})
+				.when(() => maxCursor !== null, () => {
+					return { cursor: { $lt: maxCursor } };
+				})
+				.getValue({})
+			);
+
+			TalkMessage
 			.find(query)
 			.sort('-createdAt')
 			.limit(limit)
