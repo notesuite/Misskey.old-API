@@ -26,7 +26,8 @@ export default function(
 
 	return new Promise<Object>((resolve, reject) => {
 		TalkGroup.create({
-			user: me.id,
+			owner: me.id,
+			members: [me.id],
 			name
 		}, (createErr: any, group: ITalkGroup) => {
 			if (createErr !== null) {
