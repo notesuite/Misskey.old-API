@@ -170,6 +170,7 @@
 		"./src/rest-handlers/posts/timeline/unread/count.ts",
 		"./src/rest-handlers/posts/user-timeline.ts",
 		"./src/rest-handlers/screenname/available.ts",
+		"./src/rest-handlers/talks/group/create.ts",
 		"./src/rest-handlers/talks/history/show.ts",
 		"./src/rest-handlers/talks/messages/delete.ts",
 		"./src/rest-handlers/talks/messages/read.ts",
