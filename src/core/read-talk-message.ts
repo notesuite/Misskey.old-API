@@ -24,11 +24,11 @@ export default function(
 
 	return new Promise<void>((resolve, reject) => {
 		if (isUserMessage(message)) {
-			if (message.user.toString() === me.id.toString()) {
+			if ((<any>message)._doc.user.toString() === me.id.toString()) {
 				return reject('is-me');
 			}
 
-			const otherpartyId: string = <string>message.user;
+			const otherpartyId: string = <string>(<any>message)._doc.user;
 
 			message.isRead = true;
 			message.save();
