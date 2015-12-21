@@ -1,5 +1,5 @@
-import {TalkUserMessage, TalkUserHistory, User} from '../../../models';
-import {ITalkUserMessage, ITalkUserHistory, IApplication, IUser, IAlbumFile} from '../../../interfaces';
+import {TalkGroup, TalkGroupMessage, TalkUserMessage, TalkUserHistory, TalkGroupHistory, User} from '../../../models';
+import * as interfaces from '../../../interfaces';
 import getAlbumFile from '../../../core/get-album-file';
 import publishStream from '../../../core/publish-streaming-message';
 
@@ -12,8 +12,8 @@ import publishStream from '../../../core/publish-streaming-message';
  * @param fileId 添付ファイルのID
  */
 export default function(
-	app: IApplication,
-	user: IUser,
+	app: interfaces.IApplication,
+	user: interfaces.IUser,
 	text: string,
 	fileId: string = null,
 	userId: string = null,
@@ -41,14 +41,15 @@ export default function(
 
 		return new Promise<Object>((resolve, reject) => {
 			// 作成する対象のユーザーが実在するかチェック
-			User.findById(otherpartyId, (checkErr: any, recipient: IUser) => {
+			User.findById(otherpartyId, (checkErr: any, recipient: interfaces.IUser) => {
 				if (checkErr !== null) {
 					return reject(checkErr);
 				} else if (recipient === null) {
-					return reject('recipient-notfound');
+					return reject('recipient-not-found');
 				}
 
 				if (fileId !== null) {
+					// ファイルチェック & 取得
 					getAlbumFile(user.id, fileId).then(file => {
 						createUserMessage(resolve, reject, user, recipient, text, file);
 					}, reject);
@@ -58,7 +59,31 @@ export default function(
 			});
 		});
 	} else if (groupId !== null) {
-		return <Promise<any>>Promise.reject('not-implemented');
+		return new Promise<Object>((resolve, reject) => {
+			// グループ取得
+			TalkGroup.findById(groupId, (checkErr: any, group: interfaces.ITalkGroup) => {
+				if (checkErr !== null) {
+					return reject(checkErr);
+				} else if (group === null) {
+					return reject('group-not-found');
+				} else if (
+					(<any[]>group.members)
+					.map(member => member.toString())
+					.indexOf(user.id.toString()) === -1
+				) {
+					return reject('access-denied');
+				}
+
+				if (fileId !== null) {
+					// ファイルチェック & 取得
+					getAlbumFile(user.id, fileId).then(file => {
+						createGroupMessage(resolve, reject, user, group, text, file);
+					}, reject);
+				} else {
+					createGroupMessage(resolve, reject, user, group, text);
+				}
+			});
+		});
 	} else {
 		return <Promise<any>>Promise.reject('empty-destination-query');
 	}
@@ -67,10 +92,10 @@ export default function(
 function createUserMessage(
 	resolve: any,
 	reject: any,
-	me: IUser,
-	recipient: IUser,
+	me: interfaces.IUser,
+	recipient: interfaces.IUser,
 	text: string,
-	file: IAlbumFile = null
+	file: interfaces.IAlbumFile = null
 ): void {
 	'use strict';
 
@@ -79,7 +104,7 @@ function createUserMessage(
 		recipient: recipient.id,
 		text,
 		file: file !== null ? file.id : null
-	}, (createErr: any, createdMessage: ITalkUserMessage) => {
+	}, (createErr: any, createdMessage: interfaces.ITalkUserMessage) => {
 		if (createErr !== null) {
 			return reject(createErr);
 		}
@@ -106,7 +131,7 @@ function createUserMessage(
 			type: 'user',
 			user: me.id,
 			recipient: recipient.id
-		}, (findHistoryErr: any, history: ITalkUserHistory) => {
+		}, (findHistoryErr: any, history: interfaces.ITalkUserHistory) => {
 			if (findHistoryErr !== null) {
 				return;
 			}
@@ -128,7 +153,7 @@ function createUserMessage(
 			type: 'user',
 			user: recipient.id,
 			recipient: me.id
-		}, (findHistoryErr: any, history: ITalkUserHistory) => {
+		}, (findHistoryErr: any, history: interfaces.ITalkUserHistory) => {
 			if (findHistoryErr !== null) {
 				return;
 			}
@@ -143,6 +168,68 @@ function createUserMessage(
 				history.message = createdMessage.id;
 				history.save();
 			}
+		});
+	});
+}
+
+function createGroupMessage(
+	resolve: any,
+	reject: any,
+	me: interfaces.IUser,
+	group: interfaces.ITalkGroup,
+	text: string,
+	file: interfaces.IAlbumFile = null
+): void {
+	'use strict';
+
+	TalkGroupMessage.create({
+		user: me.id,
+		group: group.id,
+		text,
+		file: file !== null ? file.id : null
+	}, (createErr: any, createdMessage: interfaces.ITalkGroupMessage) => {
+		if (createErr !== null) {
+			return reject(createErr);
+		}
+
+		resolve(createdMessage.toObject());
+
+		// Streaming messages
+		(<string[]>group.members).map(member => [`user-stream:${member}`, 'talk-user-message']).concat([
+			[`talk-group-stream:${group.id}`, 'message']
+		]).forEach(([channel, type]) => {
+			publishStream(channel, JSON.stringify({
+				type: type,
+				value: {
+					id: createdMessage.id,
+					userId: me.id,
+					text: createdMessage.text
+				}
+			}));
+		});
+
+		// 履歴を作成しておく
+		(<string[]>group.members).forEach(member => {
+			TalkGroupHistory.findOne({
+				type: 'group',
+				user: member,
+				group: group.id
+			}, (findHistoryErr: any, history: interfaces.ITalkGroupHistory) => {
+				if (findHistoryErr !== null) {
+					return;
+				}
+				if (history === null) {
+					TalkGroupHistory.create({
+						user: member,
+						group: group.id,
+						message: createdMessage.id
+					});
+				} else {
+					history.updatedAt = <any>Date.now();
+					history.message = createdMessage.id;
+					history.save();
+				}
+			});
 		});
 	});
 }
