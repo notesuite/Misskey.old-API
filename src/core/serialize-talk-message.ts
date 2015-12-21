@@ -2,7 +2,8 @@ import {IUser, ITalkMessage, ITalkUserMessage} from '../interfaces';
 
 export default function(
 	message: ITalkMessage,
-	me: IUser
+	me: IUser,
+	includeGroup: boolean = false
 ): Promise<Object> {
 	'use strict';
 	return new Promise<Object>((resolve, reject) => {
@@ -24,12 +25,18 @@ export default function(
 				});
 				break;
 			case 'group-message':
-				message
+				const q = message
 				.populate({
 					path: 'user',
 					model: 'User'
-				})
-				.populate({
+				});
+				if (includeGroup) {
+					q.populate({
+						path: 'group',
+						model: 'TalkGroup'
+					});
+				}
+				q.populate({
 					path: 'file',
 					model: 'AlbumFile'
 				}, (err: any, message2: ITalkUserMessage) => {

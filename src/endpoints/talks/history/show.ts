@@ -33,7 +33,7 @@ export default function(
 			const messages = histories.map(history => <ITalkMessage>history.message);
 
 			Promise.all(messages.map(message =>
-				serialize(message, user)
+				serialize(message, user, true)
 			)).then(resolve, reject);
 		});
 	});
