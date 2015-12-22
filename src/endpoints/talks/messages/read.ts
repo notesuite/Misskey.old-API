@@ -36,7 +36,7 @@ export default function(
 					break;
 				case 'group-message':
 					TalkGroup
-					.findById(message.group)
+					.findById(message._doc.group)
 					.exec((groupFindErr: any, group: ITalkGroup) => {
 						if (
 							(<string[]>group.members)
