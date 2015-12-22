@@ -33,6 +33,7 @@
 		"./src/core/get-post-likers.ts",
 		"./src/core/lookup-follow-state.ts",
 		"./src/core/post-populate-all.ts",
+		"./src/core/publish-group-talk-message.ts",
 		"./src/core/publish-streaming-message.ts",
 		"./src/core/publish-user-stream.ts",
 		"./src/core/read-post.ts",

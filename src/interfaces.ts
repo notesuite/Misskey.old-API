@@ -202,7 +202,7 @@ export interface ITalkGroupMessage extends ITalkMessage {
 	user: string | Types.ObjectId | IUser;
 }
 
-export interface ITalkGroupSentInvitationActivity extends ITalkMessage {
+export interface ITalkGroupSendInvitationActivity extends ITalkMessage {
 	group: string | Types.ObjectId | ITalkGroup;
 	invitee: string | Types.ObjectId | IUser;
 	inviter: string | Types.ObjectId | IUser;

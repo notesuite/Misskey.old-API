@@ -1,7 +1,8 @@
-import {TalkGroup, TalkGroupMessage, TalkUserMessage, TalkUserHistory, TalkGroupHistory, User} from '../../../models';
+import {TalkGroup, TalkGroupMessage, TalkUserMessage, TalkUserHistory, User} from '../../../models';
 import * as interfaces from '../../../interfaces';
 import getAlbumFile from '../../../core/get-album-file';
 import publishStream from '../../../core/publish-streaming-message';
+import publishMessage from '../../../core/publish-group-talk-message';
 
 /**
  * Talkメッセージを作成します
@@ -194,42 +195,6 @@ function createGroupMessage(
 
 		resolve(createdMessage.toObject());
 
-		// Streaming messages
-		(<string[]>group.members).map(member => [`user-stream:${member}`, 'talk-user-message']).concat([
-			[`talk-group-stream:${group.id}`, 'message']
-		]).forEach(([channel, type]) => {
-			publishStream(channel, JSON.stringify({
-				type: type,
-				value: {
-					id: createdMessage.id,
-					userId: me.id,
-					text: createdMessage.text
-				}
-			}));
-		});
-
-		// 履歴を作成しておく
-		(<string[]>group.members).forEach(member => {
-			TalkGroupHistory.findOne({
-				type: 'group',
-				user: member,
-				group: group.id
-			}, (findHistoryErr: any, history: interfaces.ITalkGroupHistory) => {
-				if (findHistoryErr !== null) {
-					return;
-				}
-				if (history === null) {
-					TalkGroupHistory.create({
-						user: member,
-						group: group.id,
-						message: createdMessage.id
-					});
-				} else {
-					history.updatedAt = <any>Date.now();
-					history.message = createdMessage.id;
-					history.save();
-				}
-			});
-		});
+		publishMessage(<interfaces.ITalkMessage>createdMessage, group);
 	});
 }
