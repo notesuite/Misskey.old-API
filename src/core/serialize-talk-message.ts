@@ -1,4 +1,4 @@
-import {IUser, ITalkMessage, ITalkUserMessage} from '../interfaces';
+import {IUser, ITalkMessage, ITalkUserMessage, ITalkGroupMessage} from '../interfaces';
 
 export default function(
 	message: ITalkMessage,
@@ -39,6 +39,24 @@ export default function(
 				q.populate({
 					path: 'file',
 					model: 'AlbumFile'
+				}, (err: any, message2: ITalkGroupMessage) => {
+					if (err !== null) {
+						reject(err);
+					}
+					resolve(message2.toObject());
+				});
+				break;
+			case 'group-send-invitation-activity':
+				let q2: any = message;
+				if (includeGroup) {
+					q2 = message.populate({
+						path: 'group',
+						model: 'TalkGroup'
+					});
+				}
+				q2.populate({
+					path: 'invitee inviter',
+					model: 'User'
 				}, (err: any, message2: ITalkUserMessage) => {
 					if (err !== null) {
 						reject(err);

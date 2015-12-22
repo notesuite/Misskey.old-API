@@ -12,8 +12,8 @@ import publishMessage from '../../../../core/publish-group-talk-message';
 export default function(
 	app: interfaces.IApplication,
 	user: interfaces.IUser,
-	groupId: string = null,
-	userId: string = null
+	groupId: string,
+	userId: string
 ): Promise<Object> {
 	'use strict';
 

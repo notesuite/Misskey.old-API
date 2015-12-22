@@ -54,6 +54,7 @@ export default [
 	{ endpoint: 'talks/messages/delete', login: true, limitDuration: hour, limitMax: 100 },
 	{ endpoint: 'talks/group/create', login: true, limitDuration: day, limitMax: 30 },
 	{ endpoint: 'talks/group/show', login: true },
+	{ endpoint: 'talks/group/members/invite', login: true, limitDuration: day, limitMax: 30 },
 
 	{ endpoint: 'album/files/upload', login: true, limitDuration: hour, limitMax: 100 },
 	{ endpoint: 'album/files/show', login: true },
