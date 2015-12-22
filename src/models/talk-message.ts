@@ -115,7 +115,7 @@ export function groupMessage(db: Connection): Model<Document> {
 	return db.model('TalkGroupMessage', schema, 'TalkMessages');
 }
 
-export function groupSentInvitationActivity(db: Connection): Model<Document> {
+export function groupSendInvitationActivity(db: Connection): Model<Document> {
 	'use strict';
 	mongooseAutoIncrement.initialize(db);
 
@@ -123,7 +123,7 @@ export function groupSentInvitationActivity(db: Connection): Model<Document> {
 		group: { type: Schema.Types.ObjectId, required: true, ref: 'TalkGroup' },
 		invitee: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
 		inviter: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
-		type: { type: String, required: false, default: 'group-sent-invitation-activity' }
+		type: { type: String, required: false, default: 'group-send-invitation-activity' }
 	}, base));
 
 	// Auto increment
@@ -137,7 +137,7 @@ export function groupSentInvitationActivity(db: Connection): Model<Document> {
 	}
 	(<any>schema).options.toObject.transform = toObject;
 
-	return db.model('TalkGroupSentInvitationActivity', schema, 'TalkMessages');
+	return db.model('TalkGroupSendInvitationActivity', schema, 'TalkMessages');
 }
 
 export function groupMemberJoinActivity(db: Connection): Model<Document> {
