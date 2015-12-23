@@ -52,13 +52,13 @@ export default function(
 						show();
 					});
 					break;
-				case 'group-sent-invitation-activity':
+				case 'group-send-invitation-activity':
 				case 'group-member-join-activity':
 				case 'group-member-left-activity':
 				case 'rename-group-activity':
 				case 'transfer-group-ownership-activity':
 					TalkGroup
-					.findById(<string>(<any>message).group)
+					.findById(<string>(<any>message)._doc.group)
 					.exec((groupFindErr: any, group: ITalkGroup) => {
 						if (
 							(<string[]>group.members)
