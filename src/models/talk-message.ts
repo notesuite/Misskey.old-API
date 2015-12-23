@@ -3,8 +3,14 @@ import * as mongooseAutoIncrement from 'mongoose-auto-increment';
 
 const base: Object = {
 	createdAt: { type: Date, required: true, default: Date.now },
-	cursor: { type: Number }
+	cursor: { type: Number },
+	type: { type: String, required: true }
 };
+
+const groupBaseScema: Object = Object.assign({
+	group: { type: Schema.Types.ObjectId, required: true, ref: 'TalkGroup' },
+	reads: [{ type: Schema.Types.ObjectId, required: false, default: null, ref: 'User' }]
+}, base);
 
 const toObject: any = (doc: any, ret: any) => {
 	ret.id = doc.id;
@@ -73,10 +79,7 @@ export function groupBase(db: Connection): Model<Document> {
 	'use strict';
 	mongooseAutoIncrement.initialize(db);
 
-	const schema = new Schema(Object.assign({
-		group: { type: Schema.Types.ObjectId },
-		type: { type: String }
-	}, base));
+	const schema = new Schema(groupBaseScema);
 
 	if (!(<any>schema).options.toObject) {
 		(<any>schema).options.toObject = {};
@@ -90,16 +93,14 @@ export function groupMessage(db: Connection): Model<Document> {
 	'use strict';
 	mongooseAutoIncrement.initialize(db);
 
-	const schema = new Schema(Object.assign({
+	const schema = new Schema(Object.assign(groupBaseScema, {
 		file: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFile' },
-		group: { type: Schema.Types.ObjectId, required: true, ref: 'TalkGroup' },
 		isContentModified: { type: Boolean, required: false, default: false },
 		isDeleted: { type: Boolean, required: false, default: false },
-		reads: [{ type: Schema.Types.ObjectId, required: false, default: null, ref: 'User' }],
 		text: { type: String, required: false, default: '' },
 		type: { type: String, required: false, default: 'group-message' },
 		user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
-	}, base));
+	}));
 
 	// Auto increment
 	schema.plugin(mongooseAutoIncrement.plugin, {
@@ -119,12 +120,11 @@ export function groupSendInvitationActivity(db: Connection): Model<Document> {
 	'use strict';
 	mongooseAutoIncrement.initialize(db);
 
-	const schema = new Schema(Object.assign({
-		group: { type: Schema.Types.ObjectId, required: true, ref: 'TalkGroup' },
+	const schema = new Schema(Object.assign(groupBaseScema, {
 		invitee: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
 		inviter: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
 		type: { type: String, required: false, default: 'group-send-invitation-activity' }
-	}, base));
+	}));
 
 	// Auto increment
 	schema.plugin(mongooseAutoIncrement.plugin, {
@@ -144,11 +144,10 @@ export function groupMemberJoinActivity(db: Connection): Model<Document> {
 	'use strict';
 	mongooseAutoIncrement.initialize(db);
 
-	const schema = new Schema(Object.assign({
-		group: { type: Schema.Types.ObjectId, required: true, ref: 'TalkGroup' },
+	const schema = new Schema(Object.assign(groupBaseScema, {
 		joiner: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
 		type: { type: String, required: false, default: 'group-member-join-activity' }
-	}, base));
+	}));
 
 	// Auto increment
 	schema.plugin(mongooseAutoIncrement.plugin, {
@@ -168,11 +167,10 @@ export function groupMemberLeftActivity(db: Connection): Model<Document> {
 	'use strict';
 	mongooseAutoIncrement.initialize(db);
 
-	const schema = new Schema(Object.assign({
-		group: { type: Schema.Types.ObjectId, required: true, ref: 'TalkGroup' },
+	const schema = new Schema(Object.assign(groupBaseScema, {
 		lefter: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
 		type: { type: String, required: false, default: 'group-member-left-activity' }
-	}, base));
+	}));
 
 	// Auto increment
 	schema.plugin(mongooseAutoIncrement.plugin, {
@@ -192,13 +190,12 @@ export function renameGroupActivity(db: Connection): Model<Document> {
 	'use strict';
 	mongooseAutoIncrement.initialize(db);
 
-	const schema = new Schema(Object.assign({
-		group: { type: Schema.Types.ObjectId, required: true, ref: 'TalkGroup' },
+	const schema = new Schema(Object.assign(groupBaseScema, {
 		renamer: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
 		oldName: { type: String, required: true },
 		newName: { type: String, required: true },
 		type: { type: String, required: false, default: 'rename-group-activity' }
-	}, base));
+	}));
 
 	// Auto increment
 	schema.plugin(mongooseAutoIncrement.plugin, {
@@ -218,12 +215,11 @@ export function transferGroupOwnershipActivity(db: Connection): Model<Document> 
 	'use strict';
 	mongooseAutoIncrement.initialize(db);
 
-	const schema = new Schema(Object.assign({
-		group: { type: Schema.Types.ObjectId, required: true, ref: 'TalkGroup' },
+	const schema = new Schema(Object.assign(groupBaseScema, {
 		oldOwner: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
 		newOwner: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
 		type: { type: String, required: false, default: 'transfer-group-ownership-activity' }
-	}, base));
+	}));
 
 	// Auto increment
 	schema.plugin(mongooseAutoIncrement.plugin, {
