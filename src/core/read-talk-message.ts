@@ -49,6 +49,21 @@ export default function(
 					value: message.id
 				}));
 				break;
+			case 'group-send-invitation-activity':
+				if ((<string[]>(<any>message)._doc.reads).indexOf(me.id) > 0) {
+					return reject('arleady-read');
+				}
+
+				TalkGroupMessage.findByIdAndUpdate(message.id, { $set: { reads: (<string[]>(<any>message)._doc.reads).concat(me.id) }}, (_1, _2) => {
+					// dummy
+				});
+
+				// Publish stream message
+				publishStream(`talk-group-stream:${(<any>message)._doc.group}`, JSON.stringify({
+					type: 'read',
+					value: message.id
+				}));
+				break;
 			default:
 				resolve();
 				break;

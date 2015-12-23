@@ -78,7 +78,9 @@ export function groupBase(db: Connection): Model<Document> {
 	'use strict';
 	mongooseAutoIncrement.initialize(db);
 
-	const schema = new Schema(groupBaseScema);
+	const schema = new Schema(Object.assign({
+		type: { type: String, required: true }
+	}, groupBaseScema));
 
 	if (!(<any>schema).options.toObject) {
 		(<any>schema).options.toObject = {};
