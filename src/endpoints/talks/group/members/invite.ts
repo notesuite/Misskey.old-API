@@ -11,7 +11,7 @@ import publishMessage from '../../../../core/publish-group-talk-message';
  */
 export default function(
 	app: interfaces.IApplication,
-	user: interfaces.IUser,
+	me: interfaces.IUser,
 	groupId: string,
 	userId: string
 ): Promise<Object> {
@@ -19,7 +19,7 @@ export default function(
 
 	return new Promise<Object>((resolve, reject) => {
 		// 自分自身
-		if (user.id.toString() === userId) {
+		if (me.id.toString() === userId) {
 			return reject('invitee-is-youself');
 		}
 		// グループ取得
@@ -31,7 +31,7 @@ export default function(
 			} else if (
 				(<string[]>group.members)
 				.map(member => member.toString())
-				.indexOf(user.id.toString()) === -1
+				.indexOf(me.id.toString()) === -1
 			) {
 				return reject('access-denied');
 			}
@@ -51,7 +51,7 @@ export default function(
 				// 招待が既にあるかチェック
 				TalkGroupInvitation.findOne({
 					group: group.id,
-					user: user.id
+					user: invitee.id
 				}, (invitationFindErr: any, existInvitation: interfaces.ITalkGroupInvitation) => {
 					if (invitationFindErr !== null) {
 						return reject(invitationFindErr);
@@ -63,7 +63,7 @@ export default function(
 					// 招待作成
 					TalkGroupInvitation.create({
 						group: group.id,
-						user: user.id
+						user: invitee.id
 					}, (createErr: any, invitation: interfaces.ITalkGroupInvitation) => {
 						if (createErr !== null) {
 							return reject(createErr);
@@ -75,7 +75,7 @@ export default function(
 						TalkGroupSendInvitationActivity.create({
 							group: group.id,
 							invitee: invitee.id,
-							inviter: user.id
+							inviter: me.id
 						}, (activityErr: any, createdActivity: interfaces.ITalkGroupSendInvitationActivity) => {
 							if (activityErr !== null) {
 								return;
