@@ -1,7 +1,7 @@
 import { List, Match } from 'powerful';
 const isEmpty = List.isEmpty;
-import {TalkGroupBase, TalkUserMessage} from '../../../models';
-import {ITalkMessage, IUser} from '../../../interfaces';
+import {TalkGroup, TalkGroupBase, TalkUserMessage} from '../../../models';
+import {ITalkGroup, ITalkMessage, IUser} from '../../../interfaces';
 import serialize from '../../../core/serialize-talk-message';
 import readTalkMessage from '../../../core/read-talk-message';
 
@@ -77,36 +77,52 @@ export default function(
 
 		function getGroupStream(): void {
 			'use strict';
-			const query = Object.assign({
-				group: groupId,
-			}, new Match<void, any>(null)
-				.when(() => sinceCursor !== null, () => {
-					return { cursor: { $gt: sinceCursor } };
-				})
-				.when(() => maxCursor !== null, () => {
-					return { cursor: { $lt: maxCursor } };
-				})
-				.getValue({})
-			);
-
-			TalkGroupBase
-			.find(query)
-			.sort('-createdAt')
-			.limit(limit)
-			.exec((err: any, messages: ITalkMessage[]) => {
-				if (err !== null) {
-					return reject(err);
-				} else if (isEmpty(messages)) {
-					return resolve([]);
+			TalkGroup
+			.findById(groupId)
+			.exec((groupFindErr: any, group: ITalkGroup) => {
+				if (groupFindErr !== null) {
+					return reject(groupFindErr);
+				} else if (group === null) {
+					return reject('group-not-found');
+				} else if (
+					(<string[]>group.members)
+					.map(member => member.toString())
+					.indexOf(me.id.toString()) === -1
+				) {
+					return reject('access-denied');
 				}
 
-				Promise.all(messages.map(message =>
-					serialize(message, me)
-				)).then(resolve, reject);
+				const query = Object.assign({
+					group: group.id,
+				}, new Match<void, any>(null)
+					.when(() => sinceCursor !== null, () => {
+						return { cursor: { $gt: sinceCursor } };
+					})
+					.when(() => maxCursor !== null, () => {
+						return { cursor: { $lt: maxCursor } };
+					})
+					.getValue({})
+				);
 
-				// 既読にする
-				messages.forEach(message => {
-					readTalkMessage(me, message);
+				TalkGroupBase
+				.find(query)
+				.sort('-createdAt')
+				.limit(limit)
+				.exec((err: any, messages: ITalkMessage[]) => {
+					if (err !== null) {
+						return reject(err);
+					} else if (isEmpty(messages)) {
+						return resolve([]);
+					}
+
+					Promise.all(messages.map(message =>
+						serialize(message, me)
+					)).then(resolve, reject);
+
+					// 既読にする
+					messages.forEach(message => {
+						readTalkMessage(me, message);
+					});
 				});
 			});
 		}
