@@ -35,7 +35,7 @@ export default function(
 			case 'group-message':
 				if ((<any>message)._doc.user.toString() === me.id.toString()) {
 					return reject('is-me');
-				} else if ((<string[]>(<any>message)._doc.reads).indexOf(me.id) > 0) {
+				} else if ((<string[]>(<any>message)._doc.reads).indexOf(me.id.toString()) !== -1) {
 					return reject('arleady-read');
 				}
 
@@ -50,7 +50,7 @@ export default function(
 				}));
 				break;
 			case 'group-send-invitation-activity':
-				if ((<string[]>(<any>message)._doc.reads).indexOf(me.id) > 0) {
+				if ((<string[]>(<any>message)._doc.reads).indexOf(me.id.toString()) !== -1) {
 					return reject('arleady-read');
 				}
 
