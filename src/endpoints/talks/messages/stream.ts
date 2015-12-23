@@ -1,6 +1,6 @@
 import { List, Match } from 'powerful';
 const isEmpty = List.isEmpty;
-import {TalkGroup, TalkGroupBase, TalkUserMessage} from '../../../models';
+import {TalkGroup, TalkGroupMessageBase, TalkUserMessage} from '../../../models';
 import {ITalkGroup, ITalkMessage, IUser} from '../../../interfaces';
 import serialize from '../../../core/serialize-talk-message';
 import readTalkMessage from '../../../core/read-talk-message';
@@ -104,7 +104,7 @@ export default function(
 					.getValue({})
 				);
 
-				TalkGroupBase
+				TalkGroupMessageBase
 				.find(query)
 				.sort('-createdAt')
 				.limit(limit)
