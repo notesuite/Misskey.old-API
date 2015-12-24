@@ -8,8 +8,12 @@ export default function(
 	res: any
 ): void {
 	'use strict';
+	const type = req.payload['type'];
+	const limit = req.payload['limit'];
 	show(
-		user
+		user,
+		type,
+		limit
 	).then(messages => {
 		res(messages);
 	}, (err: any) => {

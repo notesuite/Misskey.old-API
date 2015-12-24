@@ -11,15 +11,26 @@ import serialize from '../../../core/serialize-talk-message';
  */
 export default function(
 	user: IUser,
+	type: string = null,
 	limit: number = 30
 ): Promise<Object[]> {
 	'use strict';
 
 	return new Promise<Object[]>((resolve, reject) => {
-		(<any>TalkHistory)
-		.find({
+		let query: any = {
 			user: user.id
-		})
+		};
+		switch (type) {
+			case 'user':
+				query.type = 'user';
+				break;
+			case 'group':
+				query.type = 'group';
+				break;
+		}
+
+		(<any>TalkHistory)
+		.find(query)
 		.sort('-updatedAt')
 		.limit(limit)
 		.populate('message')
