@@ -11,7 +11,7 @@ export default function(user: IUser): Promise<number> {
 	return new Promise<number>((resolve, reject) => {
 		TalkMessage
 		.find({
-			otherparty: user.id,
+			recipient: user.id,
 			isRead: false
 		})
 		.limit(999)
