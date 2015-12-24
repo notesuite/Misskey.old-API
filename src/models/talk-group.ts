@@ -1,4 +1,5 @@
 import { Schema, Connection, Document, Model } from 'mongoose';
+import config from '../config';
 
 export default function(db: Connection): Model<Document> {
 	'use strict';
@@ -20,7 +21,18 @@ export default function(db: Connection): Model<Document> {
 		ret.id = doc.id;
 		delete ret._id;
 		delete ret.__v;
+
+		delete ret.icon;
+		delete ret.iconPath;
+		ret.iconUrl = doc.icon !== null
+			? `${config.fileServer.url}/${encodePath(doc.iconPath)}`
+			: `${config.fileServer.url}/defaults/talk-group-icon.jpg`;
 	};
 
 	return db.model('TalkGroup', schema, 'TalkGroups');
+}
+
+function encodePath(path: string): string {
+	'use strict';
+	return (<string>path).split('/').map(x => encodeURI(x)).join('/');
 }

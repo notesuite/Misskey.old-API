@@ -16,7 +16,9 @@ export default function(
 		// 招待取得
 		TalkGroupInvitation.find({
 			user: me.id
-		}, (invitationsFindErr: any, invitations: ITalkGroupInvitation[]) => {
+		})
+		.populate('group')
+		.exec((invitationsFindErr: any, invitations: ITalkGroupInvitation[]) => {
 			if (invitationsFindErr !== null) {
 				return reject(invitationsFindErr);
 			} else if (invitations.length === 0) {
