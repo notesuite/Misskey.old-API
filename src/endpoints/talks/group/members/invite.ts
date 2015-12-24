@@ -25,6 +25,10 @@ export default function(
 		if (text.length > 200) {
 			return <Promise<any>>Promise.reject('too-long-message');
 		}
+
+		if (text === '') {
+			text = null;
+		}
 	}
 
 	return new Promise<Object>((resolve, reject) => {
