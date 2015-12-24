@@ -173,6 +173,7 @@ export interface ITalkGroupInvitation extends Document {
 	createdAt: Date;
 	group: string | Types.ObjectId | ITalkGroup;
 	isRefused: boolean;
+	text: string;
 	user: string | Types.ObjectId | IUser;
 }
 

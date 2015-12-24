@@ -10,11 +10,13 @@ export default function(
 	'use strict';
 	const groupId: string = req.payload['group-id'];
 	const userId: string = req.payload['user-id'];
+	const text: string = req.payload['text'];
 	invite(
 		app,
 		user,
 		groupId,
-		userId
+		userId,
+		text
 	).then(group => {
 		res(group);
 	}, (err: any) => {

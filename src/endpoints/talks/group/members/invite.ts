@@ -8,14 +8,24 @@ import publishMessage from '../../../../core/publish-group-talk-message';
  * @param user API利用ユーザー
  * @param groupId グループID
  * @param userId 招待するユーザーのID
+ * @param text 招待についてのメッセージ
  */
 export default function(
 	app: interfaces.IApplication,
 	me: interfaces.IUser,
 	groupId: string,
-	userId: string
+	userId: string,
+	text: string = null
 ): Promise<Object> {
 	'use strict';
+
+	if (text !== null) {
+		text = text.trim();
+
+		if (text.length > 200) {
+			return <Promise<any>>Promise.reject('too-long-message');
+		}
+	}
 
 	return new Promise<Object>((resolve, reject) => {
 		// 自分自身
@@ -63,7 +73,8 @@ export default function(
 					// 招待作成
 					TalkGroupInvitation.create({
 						group: group.id,
-						user: invitee.id
+						user: invitee.id,
+						text: text
 					}, (createErr: any, invitation: interfaces.ITalkGroupInvitation) => {
 						if (createErr !== null) {
 							return reject(createErr);
