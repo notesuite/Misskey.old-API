@@ -22,6 +22,8 @@ export default function(
 				return reject(invitationFindErr);
 			} else if (invitation === null) {
 				return reject('invitation-not-found');
+			} else if (invitation.user.toString() !== me.id.toString()) {
+				return reject('invitation-not-found');
 			}
 			// グループ取得
 			TalkGroup.findById(<string>invitation.group, (groupFindErr: any, group: interfaces.ITalkGroup) => {

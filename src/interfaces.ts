@@ -172,7 +172,7 @@ export interface ITalkGroup extends Document {
 export interface ITalkGroupInvitation extends Document {
 	createdAt: Date;
 	group: string | Types.ObjectId | ITalkGroup;
-	isRefused: boolean;
+	isDeclined: boolean;
 	text: string;
 	user: string | Types.ObjectId | IUser;
 }
@@ -207,6 +207,7 @@ export interface ITalkGroupSendInvitationActivity extends ITalkMessage {
 	group: string | Types.ObjectId | ITalkGroup;
 	invitee: string | Types.ObjectId | IUser;
 	inviter: string | Types.ObjectId | IUser;
+	invitation: string | Types.ObjectId | ITalkGroupInvitation;
 }
 
 export interface ITalkGroupMemberJoinActivity extends ITalkMessage {

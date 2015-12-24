@@ -64,6 +64,24 @@ export default function(
 					resolve(message2.toObject());
 				});
 				break;
+			case 'group-member-join-activity':
+				let q3: any = message;
+				if (includeGroup) {
+					q3 = message.populate({
+						path: 'group',
+						model: 'TalkGroup'
+					});
+				}
+				q3.populate({
+					path: 'joiner',
+					model: 'User'
+				}, (err: any, message2: ITalkUserMessage) => {
+					if (err !== null) {
+						reject(err);
+					}
+					resolve(message2.toObject());
+				});
+				break;
 			default:
 				break;
 		}

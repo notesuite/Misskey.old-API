@@ -69,9 +69,9 @@ export default function(
 				}, (invitationFindErr: any, existInvitation: interfaces.ITalkGroupInvitation) => {
 					if (invitationFindErr !== null) {
 						return reject(invitationFindErr);
-					} else if (existInvitation !== null && existInvitation.isRefused) {
-						return reject('invitation-is-already-refused');
-					} else if (existInvitation !== null && !existInvitation.isRefused) {
+					} else if (existInvitation !== null && existInvitation.isDeclined) {
+						return reject('invitation-is-already-declined');
+					} else if (existInvitation !== null && !existInvitation.isDeclined) {
 						return reject('already-invite');
 					}
 					// 招待作成
@@ -90,7 +90,8 @@ export default function(
 						TalkGroupSendInvitationActivity.create({
 							group: group.id,
 							invitee: invitee.id,
-							inviter: me.id
+							inviter: me.id,
+							invitation: invitation.id
 						}, (activityErr: any, createdActivity: interfaces.ITalkGroupSendInvitationActivity) => {
 							if (activityErr !== null) {
 								return;

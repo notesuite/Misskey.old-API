@@ -15,7 +15,8 @@ export default function(
 	return new Promise<Object[]>((resolve, reject) => {
 		// 招待取得
 		TalkGroupInvitation.find({
-			user: me.id
+			user: me.id,
+			isDeclined: false
 		})
 		.populate('group')
 		.exec((invitationsFindErr: any, invitations: ITalkGroupInvitation[]) => {

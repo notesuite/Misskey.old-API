@@ -124,6 +124,7 @@ export function groupSendInvitationActivity(db: Connection): Model<Document> {
 	const schema = new Schema(Object.assign({
 		invitee: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
 		inviter: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
+		invitation: { type: Schema.Types.ObjectId, required: true, ref: 'TalkGroupInvitation' },
 		type: { type: String, required: false, default: 'group-send-invitation-activity' }
 	}, groupBaseScema));
 
