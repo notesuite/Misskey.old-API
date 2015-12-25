@@ -50,6 +50,7 @@ export default function(
 				}));
 				break;
 			case 'group-send-invitation-activity':
+			case 'group-member-join-activity':
 				if ((<string[]>(<any>message)._doc.reads).indexOf(me.id.toString()) !== -1) {
 					return reject('arleady-read');
 				}
