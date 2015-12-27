@@ -17,9 +17,10 @@ export default function(me: IUser, hashtags: string[]): void {
 				const meExist: any[] = (<any>existHashtag.users).filter((id: any) => {
 					return id.toString() === me.id.toString();
 				});
-				if (meExist === []) {
+				if (meExist.length === 0) {
 					existHashtag.count++;
 					(<any>existHashtag.users).push(me.id);
+					existHashtag.markModified('users');
 					existHashtag.save();
 				}
 			}
