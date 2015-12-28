@@ -15,20 +15,17 @@ export default function(user: IUser, limit: number = 10, sinceCursor: number = n
 		: Promise<Object[]> {
 	'use strict';
 
-	const query = new Match<void, any>(null)
+	const query = Object.assign({
+		user: user.id
+	}, new Match<void, any>(null)
 		.when(() => sinceCursor !== null, () => {
-			return {
-				user: user.id,
-				cursor: {$gt: sinceCursor}
-			};
+			return { cursor: { $gt: sinceCursor } };
 		})
 		.when(() => maxCursor !== null, () => {
-			return {
-				user: user.id,
-				cursor: {$lt: maxCursor}
-			};
+			return { cursor: { $lt: maxCursor } };
 		})
-		.getValue({user: user.id});
+		.getValue({})
+	);
 
 	return new Promise<Object[]>((resolve, reject) => {
 		// メンションドキュメントを取得
