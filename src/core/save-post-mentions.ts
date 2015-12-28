@@ -12,7 +12,8 @@ export default function(author: IUser, post: IPost, text: string): void {
 		users.forEach(user => {
 			PostMention.create({
 				user: user.id,
-				post: post.id
+				post: post.id,
+				cursor: post.cursor
 			}, (createErr: any, createdMention: IPostMention) => {
 				publishStreamingMessage(`user-stream:${user.id}`, JSON.stringify({
 					type: 'mention',
