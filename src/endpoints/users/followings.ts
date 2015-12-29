@@ -14,8 +14,8 @@ export default function(
 	user: IUser,
 	limit: number = 30,
 	sinceCursor: number = null,
-	maxCursor: number = null)
-		: Promise<Object[]> {
+	maxCursor: number = null
+): Promise<Object[]> {
 	'use strict';
 	return new Promise<Object[]>((resolve, reject) => {
 		const query = Object.assign({
@@ -30,19 +30,19 @@ export default function(
 			.getValue({})
 		);
 		UserFollowing
-			.find(query)
-			.sort('-createdAt')
-			.limit(limit)
-			.populate('followee')
-			.exec((err: any, userFollowings: IUserFollowing[]) => {
-				if (err === null) {
-					const followees: any[] = !isEmpty(userFollowings)
-						? userFollowings.map((userFollowing) => (<IUser>userFollowing.followee).toObject())
-						: [];
-					resolve(followees);
-				} else {
-					reject(err);
-				}
-			});
+		.find(query)
+		.sort('-createdAt')
+		.limit(limit)
+		.populate('followee')
+		.exec((err: any, userFollowings: IUserFollowing[]) => {
+			if (err === null) {
+				const followees: any[] = !isEmpty(userFollowings)
+					? userFollowings.map((userFollowing) => (<IUser>userFollowing.followee).toObject())
+					: [];
+				resolve(followees);
+			} else {
+				reject(err);
+			}
+		});
 	});
 };
