@@ -27,6 +27,7 @@ export default function(db: Connection): Model<Document> {
 		ret.iconUrl = doc.icon !== null
 			? `${config.fileServer.url}/${encodePath(doc.iconPath)}`
 			: `${config.fileServer.url}/defaults/talk-group-icon.jpg`;
+		ret.iconThumbnailUrl = `${ret.iconUrl}?thumbnail`;
 	};
 
 	return db.model('TalkGroup', schema, 'TalkGroups');

@@ -51,18 +51,21 @@ export default function(db: Connection): Model<Document> {
 		ret.avatarUrl = doc.avatar !== null
 			? `${config.fileServer.url}/${encodePath(doc.avatarPath)}`
 			: `${config.fileServer.url}/defaults/avatar.jpg`;
+		ret.avatarThumbnailUrl = `${ret.avatarUrl}?thumbnail`;
 
 		delete ret.banner;
 		delete ret.bannerPath;
 		ret.bannerUrl = doc.banner !== null
 			? `${config.fileServer.url}/${encodePath(doc.bannerPath)}`
 			: `${config.fileServer.url}/defaults/banner.jpg`;
+		ret.bannerThumbnailUrl = `${ret.bannerUrl}?thumbnail`;
 
 		delete ret.wallpaper;
 		delete ret.wallpaperPath;
 		ret.wallpaperUrl = doc.wallpaper !== null
 			? `${config.fileServer.url}/${encodePath(doc.wallpaperPath)}`
 			: `${config.fileServer.url}/defaults/wallpaper.jpg`;
+		ret.wallpaperThumbnailUrl = `${ret.wallpaperUrl}?thumbnail`;
 
 		delete ret._id;
 		delete ret.__v;
