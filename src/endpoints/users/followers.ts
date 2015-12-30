@@ -1,7 +1,7 @@
-import { List, Match } from 'powerful';
-const isEmpty = List.isEmpty;
+import { Match } from 'powerful';
 import {UserFollowing} from '../../models';
 import {IUser, IUserFollowing} from '../../interfaces';
+import serializeUser from '../../core/serialize-user';
 
 /**
  * 対象ユーザーのフォロワーの一覧を取得します。
@@ -17,7 +17,9 @@ export default function(
 	maxCursor: number = null
 ): Promise<Object[]> {
 	'use strict';
+
 	return new Promise<Object[]>((resolve, reject) => {
+
 		const query = Object.assign({
 			followee: user.id
 		}, new Match<void, any>(null)
@@ -29,20 +31,25 @@ export default function(
 			})
 			.getValue({})
 		);
+
 		UserFollowing
 		.find(query)
 		.sort('-createdAt')
 		.limit(limit)
 		.populate('follower')
 		.exec((err: any, userFollowings: IUserFollowing[]) => {
-			if (err === null) {
-				const followers: any[] = !isEmpty(userFollowings)
-					? userFollowings.map((userFollowing) => (<IUser>userFollowing.follower).toObject())
-					: [];
-				resolve(followers);
-			} else {
-				reject(err);
+			if (err !== null) {
+				return reject(err);
 			}
+
+			Promise.all(userFollowings.map(following => {
+				return serializeUser(user, <IUser>following.follower);
+			})).then((followers: any[]) => {
+				for (let i = 0; i < followers.length; i++) {
+					followers[i].cursor = userFollowings[i].cursor;
+				}
+				resolve(followers);
+			});
 		});
 	});
 };
