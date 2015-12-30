@@ -13,12 +13,12 @@ export default function(user: IUser, id: string): Promise<void> {
 		Post.findById(id, (err: any, post: IPost) => {
 			if (err !== null) {
 				return reject(err);
-			}
-			if (post === null) {
+			} else if (post === null) {
 				return reject('post-not-found');
-			}
-			if (post.isDeleted) {
+			} else if (post.isDeleted) {
 				return reject('post-is-deleted');
+			} else if (post.type === 'repost') {
+				return reject('no-like-to-repost');
 			}
 			PostLike.findOne({
 				post: post.id,
