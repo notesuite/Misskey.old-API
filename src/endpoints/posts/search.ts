@@ -22,7 +22,7 @@ export default function(
 	'use strict';
 
 	const query = Object.assign({
-		text: new RegExp(q)
+		text: new RegExp(q, 'i')
 	}, new Match<void, any>(null)
 		.when(() => sinceCursor !== null, () => {
 			return { cursor: { $gt: sinceCursor } };
