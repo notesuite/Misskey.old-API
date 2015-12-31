@@ -1,6 +1,6 @@
 import {Post} from '../../../models';
 import {IUser, IPost} from '../../../interfaces';
-import serializeTimeline from '../../../core/serialize-timeline';
+import serializePosts from '../../../core/serialize-posts';
 import populateAll from '../../../core/post-populate-all';
 
 /**
@@ -25,7 +25,7 @@ export default function(user: IUser, id: string, limit: number = 30): Promise<Ob
 					Promise.all(posts.map(post => populateAll(post)))
 					.then(populatedTimeline => {
 						// 整形
-						serializeTimeline(populatedTimeline, user).then(serializedTimeline => {
+						serializePosts(populatedTimeline, user).then(serializedTimeline => {
 							resolve(serializedTimeline);
 						}, (serializeErr: any) => {
 							reject(serializeErr);

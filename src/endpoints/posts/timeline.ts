@@ -2,7 +2,7 @@ import { List, Match } from 'powerful';
 const isEmpty = List.isEmpty;
 import {Post, UserFollowing} from '../../models';
 import {IUser, IUserFollowing, IPost} from '../../interfaces';
-import serializeTimeline from '../../core/serialize-timeline';
+import serializePosts from '../../core/serialize-posts';
 import populateAll from '../../core/post-populate-all';
 import readPost from '../../core/read-post';
 
@@ -62,7 +62,7 @@ export default function(
 				Promise.all(timeline.map(post => populateAll(post)))
 				.then(populatedTimeline => {
 					// 整形
-					serializeTimeline(populatedTimeline, user).then(serializedTimeline => {
+					serializePosts(populatedTimeline, user).then(serializedTimeline => {
 						resolve(serializedTimeline);
 					}, (serializeErr: any) => {
 						reject(serializeErr);

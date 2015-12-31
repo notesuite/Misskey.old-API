@@ -1,7 +1,7 @@
 import { Match } from 'powerful';
 import { Repost } from '../../../models';
 import { IUser, IRepost } from '../../../interfaces';
-import serializeTimeline from '../../../core/serialize-timeline';
+import serializePosts from '../../../core/serialize-posts';
 import populateAll from '../../../core/post-populate-all';
 
 /**
@@ -50,7 +50,7 @@ export default function(
 			Promise.all(reposts.map(repost => populateAll(repost)))
 			.then(populatedReposts => {
 				// 整形
-				serializeTimeline(populatedReposts, user).then(serializedReposts => {
+				serializePosts(populatedReposts, user).then(serializedReposts => {
 					resolve(serializedReposts);
 				}, (serializeErr: any) => {
 					reject(serializeErr);

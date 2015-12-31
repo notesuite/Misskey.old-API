@@ -1,7 +1,7 @@
 import { Match } from 'powerful';
 import {PostMention} from '../../models';
 import {IUser, IPost, IPostMention} from '../../interfaces';
-import serializeTimeline from '../../core/serialize-timeline';
+import serializePosts from '../../core/serialize-posts';
 import populateAll from '../../core/post-populate-all';
 
 /**
@@ -11,8 +11,12 @@ import populateAll from '../../core/post-populate-all';
  * @param sinceCursor 取得する投稿を、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
  * @param maxCursor 取得する投稿を、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
  */
-export default function(user: IUser, limit: number = 10, sinceCursor: number = null, maxCursor: number = null)
-		: Promise<Object[]> {
+export default function(
+	user: IUser,
+	limit: number = 10,
+	sinceCursor: number = null,
+	maxCursor: number = null
+): Promise<Object[]> {
 	'use strict';
 
 	const query = Object.assign({
@@ -44,7 +48,7 @@ export default function(user: IUser, limit: number = 10, sinceCursor: number = n
 			Promise.all(posts.map(post => populateAll(post)))
 			.then(populatedPosts => {
 				// 整形
-				serializeTimeline(populatedPosts, user).then(serializedTimeline => {
+				serializePosts(populatedPosts, user).then(serializedTimeline => {
 					resolve(serializedTimeline);
 				}, (serializeErr: any) => {
 					reject(serializeErr);
