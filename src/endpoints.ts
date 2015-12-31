@@ -41,6 +41,7 @@ export default [
 	{ endpoint: 'posts/create', login: true, limitDuration: hour, limitMax: 120, limitKey: 'post' },
 	{ endpoint: 'posts/like', login: true, limitDuration: hour, limitMax: 120 },
 	{ endpoint: 'posts/repost', login: true, limitDuration: hour, limitMax: 120, limitKey: 'post' },
+	{ endpoint: 'posts/search', login: false },
 	{ endpoint: 'posts/likes/show', login: false },
 	{ endpoint: 'posts/reposts/show', login: false },
 
