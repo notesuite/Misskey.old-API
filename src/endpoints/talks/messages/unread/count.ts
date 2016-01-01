@@ -1,4 +1,4 @@
-import {TalkMessage} from '../../../../models';
+import {TalkUserMessage} from '../../../../models';
 import {IUser} from '../../../../interfaces';
 
 /**
@@ -9,7 +9,7 @@ export default function(user: IUser): Promise<number> {
 	'use strict';
 
 	return new Promise<number>((resolve, reject) => {
-		TalkMessage
+		TalkUserMessage
 		.find({
 			recipient: user.id,
 			isRead: false
