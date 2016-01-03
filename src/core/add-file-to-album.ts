@@ -70,8 +70,8 @@ export default function(
 				// 現時点でのアルバム使用量を算出(byte)
 				const used = albumFiles.map(albumFile => albumFile.dataSize).reduce((x, y) => x + y, 0);
 
-				// 100MBを超える場合
-				if (used + size > dataSize.fromMiB(100)) {
+				// 1000MBを超える場合
+				if (used + size > dataSize.fromMiB(1000)) {
 					return reject('no-free-space');
 				}
 
