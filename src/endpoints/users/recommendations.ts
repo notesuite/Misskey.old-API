@@ -8,7 +8,10 @@ import serializeUser from '../../core/serialize-user';
  * おすすめのユーザーを取得します
  * @param me API利用ユーザー
  */
-export default function(me: IUser): Promise<Object[]> {
+export default function(
+	me: IUser,
+	limit: number = 4
+): Promise<Object[]> {
 	'use strict';
 
 	return new Promise<Object[]>((resolve, reject) => {
@@ -30,7 +33,7 @@ export default function(me: IUser): Promise<Object[]> {
 			.sort({
 				followersCount: -1
 			})
-			.limit(4)
+			.limit(limit)
 			.exec((searchErr: any, users: IUser[]) => {
 				if (searchErr !== null) {
 					reject('something-happened');

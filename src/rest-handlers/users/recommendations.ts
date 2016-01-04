@@ -9,7 +9,8 @@ export default function(
 ): void {
 	'use strict';
 	recommendations(
-		user
+		user,
+		req.payload['limit']
 	).then(recommendationUsers => {
 		res(recommendationUsers);
 	}, (err: any) => {
