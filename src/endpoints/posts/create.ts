@@ -17,6 +17,7 @@ import getAlbumFile from '../../core/get-album-file';
  * @param inReplyToPostId 返信先投稿のID
  * @param type 投稿のタイプ
  * @param text 本文
+ * @return 作成された投稿オブジェクト
  */
 export default function(
 	app: IApplication,

@@ -6,6 +6,7 @@ import {IBBSTopic, IApplication, IUser} from '../../../interfaces';
  * @param app API利用App
  * @param user API利用ユーザー
  * @param title タイトル
+ * @return 作成されたbbs topicオブジェクト
  */
 export default function(
 	app: IApplication,

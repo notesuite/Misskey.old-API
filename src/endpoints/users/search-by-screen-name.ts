@@ -8,6 +8,7 @@ import serializeUser from '../../core/serialize-user';
  * ユーザーをScreen nameで検索します
  * @param me API利用ユーザー
  * @param screenName クエリ
+ * @return ユーザーオブジェクトの配列
  */
 export default function(me: IUser, screenName: string): Promise<Object[]> {
 	'use strict';

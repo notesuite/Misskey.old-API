@@ -5,6 +5,7 @@ import {IUser, IAlbumFile} from '../../../interfaces';
  * アルバムのファイルを取得します
  * @param user API利用ユーザー
  * @param folderId 対象フォルダID(nullでルート)
+ * @return ファイルオブジェクト
  */
 export default function(user: IUser, folderId: string = null): Promise<Object[]> {
 	'use strict';

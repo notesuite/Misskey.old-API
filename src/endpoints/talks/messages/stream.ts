@@ -13,6 +13,7 @@ import readTalkMessage from '../../../core/read-talk-message';
  * @param maxCursor 取得するメッセージを、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
  * @param userId 相手のユーザーのID
  * @param groupId
+ * @return トークメッセージの配列
  */
 export default function(
 	me: IUser,

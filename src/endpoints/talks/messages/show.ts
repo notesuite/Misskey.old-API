@@ -7,6 +7,7 @@ import readTalkMessage from '../../../core/read-talk-message';
  * メッセージを取得します
  * @param user API利用ユーザー
  * @param messageId 対象のメッセージのID
+ * @return 取得したメッセージ
  */
 export default function(
 	user: IUser,

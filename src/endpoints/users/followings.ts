@@ -9,6 +9,7 @@ import serializeUser from '../../core/serialize-user';
  * @param limit 取得するユーザーの最大数
  * @param sinceCursor 取得するユーザーを、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
  * @param maxCursor 取得するユーザーを、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
+ * @return ユーザーオブジェクトの配列
  */
 export default function(
 	user: IUser,

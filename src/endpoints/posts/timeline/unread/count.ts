@@ -6,6 +6,7 @@ import {IUser, IUserFollowing} from '../../../../interfaces';
 /**
  * タイムラインにある未読の投稿の件数を取得します
  * @param user API利用ユーザー
+ * @return タイムラインにある未読の投稿の件数
  */
 export default function(user: IUser): Promise<number> {
 	'use strict';

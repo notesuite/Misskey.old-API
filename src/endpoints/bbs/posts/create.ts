@@ -10,6 +10,7 @@ import createNotification from '../../../core/create-notification';
  * @param topicId topicのID
  * @param text 本文
  * @param inReplyToPostId 返信先投稿のID
+ * @return 作成したbbs postオブジェクト
  */
 export default function(
 	app: IApplication,

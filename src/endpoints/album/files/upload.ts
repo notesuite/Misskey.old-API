@@ -9,6 +9,7 @@ import add from '../../../core/add-file-to-album';
  * @param mimetype ファイルの種類
  * @param file 内容
  * @param unconditional trueに設定すると、ハッシュが同じファイルが見つかった場合でも無視してアルバムに登録します
+ * @return アップロードされたファイルオブジェクト
  */
 export default function(
 	app: IApplication,

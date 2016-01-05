@@ -11,6 +11,7 @@ import populateAll from '../../../core/post-populate-all';
  * @param limit 取得するRepostの最大数
  * @param sinceCursor 取得するRepostを、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
  * @param maxCursor 取得するRepostを、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
+ * @return 投稿オブジェクトの配列
  */
 export default function(
 	user: IUser,

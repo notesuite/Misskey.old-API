@@ -11,6 +11,7 @@ import publishMessage from '../../../core/publish-group-talk-message';
  * @param userId 宛先のユーザーのID
  * @param text 本文
  * @param fileId 添付ファイルのID
+ * @return 作成されたTalkメッセージ
  */
 export default function(
 	app: interfaces.IApplication,

@@ -6,6 +6,7 @@ import {IApplication, IUser, ITalkGroup} from '../../../interfaces';
  * @param app API利用App
  * @param me API利用ユーザー
  * @param name グループ名
+ * @return 作成されたTalkGroupオブジェクト
  */
 export default function(
 	app: IApplication,

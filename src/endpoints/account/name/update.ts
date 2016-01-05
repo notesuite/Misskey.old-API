@@ -4,6 +4,7 @@ import {IUser} from '../../../interfaces';
  * ユーザーの名前を更新します
  * @param user: API利用ユーザー
  * @param name: 新しい名前
+ * @return ユーザーオブジェクト
  */
 export default function(user: IUser, name: string): Promise<Object> {
 	'use strict';
