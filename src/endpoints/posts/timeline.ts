@@ -21,6 +21,12 @@ export default function(
 ): Promise<Object[]> {
 	'use strict';
 
+	if (limit < 1) {
+		return <Promise<any>>Promise.reject('1 kara');
+	} else if (limit > 100) {
+		return <Promise<any>>Promise.reject('100 made');
+	}
+
 	return new Promise<Object[]>((resolve, reject) => {
 		// 自分がフォローしているユーザーの関係を取得
 		UserFollowing.find({follower: user.id}, (followingsFindErr: any, followings: IUserFollowing[]) => {

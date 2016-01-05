@@ -24,6 +24,12 @@ export default function(
 ): Promise<Object[]> {
 	'use strict';
 
+	if (limit < 1) {
+		return <Promise<any>>Promise.reject('1 kara');
+	} else if (limit > 100) {
+		return <Promise<any>>Promise.reject('100 made');
+	}
+
 	return new Promise<Object[]>((resolve, reject) => {
 		if (userId !== null) {
 			getUserStream();
