@@ -9,6 +9,7 @@ import publishMessage from '../../../../core/publish-group-talk-message';
  * @param groupId グループID
  * @param userId 招待するユーザーのID
  * @param text 招待についてのメッセージ
+ * @return 作成された招待オブジェクト
  */
 export default function(
 	app: interfaces.IApplication,

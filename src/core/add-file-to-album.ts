@@ -15,6 +15,7 @@ import config from '../config';
  * @param file 内容
  * @param size ファイルサイズ(byte)
  * @param unconditional trueに設定すると、ハッシュが同じファイルが見つかった場合でも無視してアルバムに登録します
+ * @return 追加したファイルオブジェクト
  */
 export default function(
 	appId: string,

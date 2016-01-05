@@ -7,6 +7,7 @@ import serializeUser from '../../core/serialize-user';
  * @param me API利用ユーザー
  * @param id 対象ユーザーのID
  * @param screenName 対象ユーザーのScreen name
+ * @return ユーザーオブジェクト
  */
 export default function(me: IUser, id?: string, screenName?: string): Promise<Object> {
 	'use strict';

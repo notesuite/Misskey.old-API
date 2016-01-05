@@ -4,6 +4,7 @@ import {IUser} from '../../../interfaces';
  * ユーザーのコメントを更新します
  * @param user: API利用ユーザー
  * @param comment: 新しいコメント
+ * @return ユーザーオブジェクト
  */
 export default function(user: IUser, comment: string): Promise<Object> {
 	'use strict';

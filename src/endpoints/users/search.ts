@@ -9,6 +9,7 @@ import serializeUser from '../../core/serialize-user';
  * @param me API利用ユーザー
  * @param query クエリ
  * @param limit 取得数
+ * @return ユーザーオブジェクトの配列
  */
 export default function(me: IUser, query: string, limit: number = 5): Promise<Object[]> {
 	'use strict';

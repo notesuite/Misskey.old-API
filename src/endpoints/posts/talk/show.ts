@@ -8,6 +8,7 @@ import populateAll from '../../../core/post-populate-all';
  * @param user API利用ユーザー
  * @param id 投稿のID
  * @param limit 取得する投稿の最大数
+ * @return 投稿オブジェクトの配列
  */
 export default function(user: IUser, id: string, limit: number = 30): Promise<Object[]> {
 	'use strict';

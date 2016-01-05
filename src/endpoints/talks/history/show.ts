@@ -8,6 +8,7 @@ import serialize from '../../../core/serialize-talk-message';
  * Talkの履歴を取得します
  * @param user API利用ユーザー
  * @param limit 取得する投稿の最大数
+ * @return Talkの履歴オブジェクトの配列
  */
 export default function(
 	user: IUser,

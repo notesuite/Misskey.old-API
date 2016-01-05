@@ -5,6 +5,7 @@ import {IUser, IAlbumFile} from '../../../interfaces';
  * ユーザーのBannerを更新します
  * @param user: API利用ユーザー
  * @param fileId: Bannerに使用するファイルのID
+ * @return ユーザーオブジェクト
  */
 export default function(user: IUser, fileId: string): Promise<Object> {
 	'use strict';

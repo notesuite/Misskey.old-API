@@ -5,6 +5,7 @@ import {ITalkGroup, IUser} from '../../../interfaces';
  * Groupを取得します
  * @param user API利用ユーザー
  * @param groupId 対象のGroupのID
+ * @return Groupオブジェクト
  */
 export default function(
 	user: IUser,

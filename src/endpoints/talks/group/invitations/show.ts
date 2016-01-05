@@ -5,6 +5,7 @@ import {IApplication, IUser, ITalkGroupInvitation} from '../../../../interfaces'
  * TalkGroupへの招待一覧を取得します
  * @param app API利用App
  * @param me API利用ユーザー
+ * @return 招待オブジェクトの配列
  */
 export default function(
 	app: IApplication,

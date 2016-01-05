@@ -7,6 +7,7 @@ import serializeUser from '../../core/serialize-user';
 /**
  * おすすめのユーザーを取得します
  * @param me API利用ユーザー
+ * @return ユーザーオブジェクトの配列
  */
 export default function(
 	me: IUser,

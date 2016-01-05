@@ -9,6 +9,7 @@ import serializeNotification from '../../core/serialize-notification';
  * @param limit 取得する通知の最大数
  * @param sinceCursor 取得する通知を、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
  * @param maxCursor 取得する通知を、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
+ * @return 通知オブジェクトの配列
  */
 export default function(
 	user: IUser,
