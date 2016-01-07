@@ -3,6 +3,7 @@ import {Post} from '../../models';
 import {IUser, IPost} from '../../interfaces';
 import serializePosts from '../../core/serialize-posts';
 import populateAll from '../../core/post-populate-all';
+import escapeRegexp from '../../core/escape-regexp';
 
 /**
  * 投稿を検索します
@@ -31,7 +32,7 @@ export default function(
 	}
 
 	const query = Object.assign({
-		text: new RegExp(q, 'i')
+		text: new RegExp(escapeRegexp(q), 'i')
 	}, new Match<void, any>(null)
 		.when(() => sinceCursor !== null, () => {
 			return { cursor: { $gt: sinceCursor } };

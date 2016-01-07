@@ -27,6 +27,7 @@
 		"./src/config.ts",
 		"./src/core/add-file-to-album.ts",
 		"./src/core/create-notification.ts",
+		"./src/core/escape-regexp.ts",
 		"./src/core/extract-hashtags.ts",
 		"./src/core/extract-mentions.ts",
 		"./src/core/get-album-file.ts",

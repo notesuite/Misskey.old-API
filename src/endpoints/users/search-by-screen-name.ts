@@ -3,6 +3,7 @@ const isEmpty = List.isEmpty;
 import {User} from '../../models';
 import {IUser} from '../../interfaces';
 import serializeUser from '../../core/serialize-user';
+import escapeRegexp from '../../core/escape-regexp';
 
 /**
  * ユーザーをScreen nameで検索します
@@ -12,7 +13,9 @@ import serializeUser from '../../core/serialize-user';
  */
 export default function(me: IUser, screenName: string): Promise<Object[]> {
 	'use strict';
-	const screenNameLower = screenName.toLowerCase();
+
+	const screenNameLower = escapeRegexp(screenName.toLowerCase());
+
 	return new Promise<Object[]>((resolve, reject) => {
 		User.find({
 			screenNameLower: new RegExp(screenNameLower)

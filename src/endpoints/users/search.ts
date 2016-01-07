@@ -1,6 +1,7 @@
 import {User} from '../../models';
 import {IUser} from '../../interfaces';
 import serializeUser from '../../core/serialize-user';
+import escapeRegexp from '../../core/escape-regexp';
 
 /* tslint:disable:whitespace */
 
@@ -14,7 +15,7 @@ import serializeUser from '../../core/serialize-user';
 export default function(me: IUser, query: string, limit: number = 5): Promise<Object[]> {
 	'use strict';
 
-	query = query.toLowerCase();
+	query = escapeRegexp(query.toLowerCase());
 
 	limit = parseInt(<any>limit, 10);
 
