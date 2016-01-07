@@ -19,6 +19,7 @@ export default [
 
 	{ endpoint: 'notifications/show', login: true },
 	{ endpoint: 'notifications/timeline', login: true },
+	{ endpoint: 'notifications/delete-all', login: true },
 	{ endpoint: 'notifications/unread/count', login: true },
 
 	{ endpoint: 'users/show', login: false },
