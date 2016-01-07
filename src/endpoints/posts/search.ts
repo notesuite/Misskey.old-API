@@ -22,6 +22,12 @@ export default function(
 ): Promise<Object> {
 	'use strict';
 
+	if (limit < 1) {
+		return <Promise<any>>Promise.reject('1 kara');
+	} else if (limit > 100) {
+		return <Promise<any>>Promise.reject('100 made');
+	}
+
 	const query = Object.assign({
 		text: new RegExp(q, 'i')
 	}, new Match<void, any>(null)
