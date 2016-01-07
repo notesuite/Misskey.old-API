@@ -2,12 +2,13 @@ import { List } from 'powerful';
 const isEmpty = List.isEmpty;
 import {Hashtag} from '../../models';
 import {IHashtag} from '../../interfaces';
+import escapeRegexp from '../../core/escape-regexp';
 
 export default function(query: string): Promise<string[]> {
 	'use strict';
 	return new Promise<string[]>((resolve, reject) => {
 		Hashtag.find({
-			name: new RegExp(query, 'i')
+			name: new RegExp(escapeRegexp(query), 'i')
 		})
 		.sort({
 			count: -1
