@@ -27,8 +27,8 @@ export default function(
 
 	if (limit < 1) {
 		return <Promise<any>>Promise.reject('1 kara');
-	} else if (limit > 100) {
-		return <Promise<any>>Promise.reject('100 made');
+	} else if (limit > 30) {
+		return <Promise<any>>Promise.reject('30 made');
 	}
 
 	return new Promise<Object[]>((resolve, reject) => {
