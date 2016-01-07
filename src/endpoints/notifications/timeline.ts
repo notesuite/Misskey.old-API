@@ -15,9 +15,17 @@ export default function(
 	user: IUser,
 	limit: number = 10,
 	sinceCursor: number = null,
-	maxCursor: number = null)
-		: Promise<Object[]> {
+	maxCursor: number = null
+): Promise<Object[]> {
 	'use strict';
+
+	limit = parseInt(<any>limit, 10);
+
+	if (limit < 1) {
+		return <Promise<any>>Promise.reject('1 kara');
+	} else if (limit > 30) {
+		return <Promise<any>>Promise.reject('30 made');
+	}
 
 	return new Promise<Object[]>((resolve, reject) => {
 		// タイムライン取得用のクエリを生成

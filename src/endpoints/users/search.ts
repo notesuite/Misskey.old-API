@@ -13,7 +13,16 @@ import serializeUser from '../../core/serialize-user';
  */
 export default function(me: IUser, query: string, limit: number = 5): Promise<Object[]> {
 	'use strict';
+
 	query = query.toLowerCase();
+
+	limit = parseInt(<any>limit, 10);
+
+	if (limit < 1) {
+		return <Promise<any>>Promise.reject('1 kara');
+	} else if (limit > 30) {
+		return <Promise<any>>Promise.reject('30 made');
+	}
 
 	const [searchType, dbQuery] = /^@?[a-zA-Z0-9\-]+$/.exec(query)
 		? [<'screen-name'>'screen-name', {

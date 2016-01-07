@@ -19,8 +19,15 @@ export default function(
 ): Promise<Object[]> {
 	'use strict';
 
-	return new Promise<Object[]>((resolve, reject) => {
+	limit = parseInt(<any>limit, 10);
 
+	if (limit < 1) {
+		return <Promise<any>>Promise.reject('1 kara');
+	} else if (limit > 30) {
+		return <Promise<any>>Promise.reject('30 made');
+	}
+
+	return new Promise<Object[]>((resolve, reject) => {
 		const query = Object.assign({
 			follower: user.id
 		}, new Match<void, any>(null)

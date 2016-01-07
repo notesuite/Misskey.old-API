@@ -25,6 +25,8 @@ export default function(
 ): Promise<Object[]> {
 	'use strict';
 
+	limit = parseInt(<any>limit, 10);
+
 	if (limit < 1) {
 		return <Promise<any>>Promise.reject('1 kara');
 	} else if (limit > 30) {
