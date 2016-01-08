@@ -168,7 +168,7 @@
 		"./src/rest-handlers/posts/like.ts",
 		"./src/rest-handlers/posts/likes/show.ts",
 		"./src/rest-handlers/posts/mentions.ts",
-		"./src/rest-handlers/posts/mentions/show.ts",
+		"./src/rest-handlers/posts/mentions/delete-all.ts",
 		"./src/rest-handlers/posts/mentions/unread/count.ts",
 		"./src/rest-handlers/posts/replies/show.ts",
 		"./src/rest-handlers/posts/repost.ts",
