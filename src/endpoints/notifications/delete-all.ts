@@ -12,7 +12,7 @@ export default function(user: IUser): Promise<void> {
 		Notification.find({
 			user: user.id
 		}, (findErr: any, notifications: INotification[]) => {
-			Promise.all(notifications.map((notification) => {
+			Promise.all(notifications.map(notification => {
 				return new Promise((resolve2, reject2) => {
 					notification.remove(() => {
 						resolve2();
