@@ -34,6 +34,7 @@ export default function(db: Connection): Model<Document> {
 		postsCount: { type: Number, required: false, default: 0 },
 		screenName: { type: String, required: true, unique: true },
 		screenNameLower: { type: String, required: true, unique: true, lowercase: true },
+		tags: { type: [String], required: false, default: [] },
 		timelineReadCursor: { type: Number, required: false, default: 0 },
 		url: { type: String, required: false, default: null },
 		wallpaper: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFile' },
