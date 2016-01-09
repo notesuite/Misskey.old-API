@@ -1,6 +1,8 @@
 import { Document, Types } from 'mongoose';
 
 export interface IUser extends Document {
+	avatar: string | Types.ObjectId | IAlbumFile;
+	avatarPath: string;
 	banner: string | Types.ObjectId | IAlbumFile;
 	bannerPath: string;
 	birthday: Date;
@@ -13,8 +15,6 @@ export interface IUser extends Document {
 	encryptedPassword: string;
 	followersCount: number;
 	followingCount: number;
-	avatar: string | Types.ObjectId | IAlbumFile;
-	avatarPath: string;
 	isDeleted: Boolean;
 	isEmailVerified: Boolean;
 	isPrivate: Boolean;
@@ -30,6 +30,7 @@ export interface IUser extends Document {
 	postsCount: number;
 	screenName: string;
 	screenNameLower: string;
+	tags: string[];
 	timelineReadCursor: number;
 	url: string;
 	wallpaper: string | Types.ObjectId | IAlbumFile;

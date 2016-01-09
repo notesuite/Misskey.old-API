@@ -16,6 +16,7 @@ export default [
 	{ endpoint: 'account/banner/update', login: true, limitDuration: day, limitMax: 30 },
 	{ endpoint: 'account/comment/update', login: true, limitDuration: day, limitMax: 30 },
 	{ endpoint: 'account/location/update', login: true, limitDuration: day, limitMax: 30 },
+	{ endpoint: 'account/tags/update', login: true, limitDuration: day, limitMax: 100 },
 
 	{ endpoint: 'notifications/show', login: true },
 	{ endpoint: 'notifications/timeline', login: true },
