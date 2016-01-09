@@ -10,6 +10,7 @@ export default function(
 	'use strict';
 	following(
 		user,
+		req.payload['user-id'],
 		req.payload['limit'],
 		req.payload['since-cursor'],
 		req.payload['max-cursor']

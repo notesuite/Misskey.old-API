@@ -5,14 +5,16 @@ import serializeUser from '../../core/serialize-user';
 
 /**
  * 対象ユーザーがフォローしているユーザーの一覧を取得します。
- * @param user 対象ユーザー
+ * @param me API利用ユーザー
+ * @param userId 対象ユーザーのID
  * @param limit 取得するユーザーの最大数
  * @param sinceCursor 取得するユーザーを、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
  * @param maxCursor 取得するユーザーを、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
  * @return ユーザーオブジェクトの配列
  */
 export default function(
-	user: IUser,
+	me: IUser,
+	userId: string,
 	limit: number = 30,
 	sinceCursor: number = null,
 	maxCursor: number = null
@@ -29,7 +31,7 @@ export default function(
 
 	return new Promise<Object[]>((resolve, reject) => {
 		const query = Object.assign({
-			follower: user.id
+			follower: userId
 		}, new Match<void, any>(null)
 			.when(() => sinceCursor !== null, () => {
 				return { cursor: { $gt: sinceCursor } };
@@ -51,7 +53,7 @@ export default function(
 			}
 
 			Promise.all(userFollowing.map(follow => {
-				return serializeUser(user, <IUser>follow.followee);
+				return serializeUser(me, <IUser>follow.followee);
 			})).then((following: any[]) => {
 				for (let i = 0; i < following.length; i++) {
 					following[i].cursor = userFollowing[i].cursor;
