@@ -45,18 +45,18 @@ export default function(
 		.sort('-createdAt')
 		.limit(limit)
 		.populate('followee')
-		.exec((err: any, userFollowings: IUserFollowing[]) => {
+		.exec((err: any, userFollowing: IUserFollowing[]) => {
 			if (err !== null) {
 				return reject(err);
 			}
 
-			Promise.all(userFollowings.map(following => {
-				return serializeUser(user, <IUser>following.followee);
-			})).then((followings: any[]) => {
-				for (let i = 0; i < followings.length; i++) {
-					followings[i].cursor = userFollowings[i].cursor;
+			Promise.all(userFollowing.map(follow => {
+				return serializeUser(user, <IUser>follow.followee);
+			})).then((following: any[]) => {
+				for (let i = 0; i < following.length; i++) {
+					following[i].cursor = userFollowing[i].cursor;
 				}
-				resolve(followings);
+				resolve(following);
 			});
 		});
 	});

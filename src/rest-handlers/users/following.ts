@@ -1,5 +1,5 @@
 import { IApplication, IUser } from '../../interfaces';
-import followings from '../../endpoints/users/followings';
+import following from '../../endpoints/users/following';
 
 export default function(
 	app: IApplication,
@@ -8,13 +8,13 @@ export default function(
 	res: any
 ): void {
 	'use strict';
-	followings(
+	following(
 		user,
 		req.payload['limit'],
 		req.payload['since-cursor'],
 		req.payload['max-cursor']
-	).then(followings => {
-		res(followings);
+	).then(following => {
+		res(following);
 	}, (err: any) => {
 		res({error: err}).code(500);
 	});

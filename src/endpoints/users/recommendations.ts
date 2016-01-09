@@ -19,13 +19,13 @@ export default function(
 		// 自分がフォローしているユーザーの関係を取得
 		UserFollowing.find({
 			follower: me.id
-		}, (followingsFindErr: any, followings: IUserFollowing[]) => {
-			if (followingsFindErr !== null) {
-				return reject(followingsFindErr);
+		}, (followingFindErr: any, following: IUserFollowing[]) => {
+			if (followingFindErr !== null) {
+				return reject(followingFindErr);
 			}
 
-			const ignoreIds = !isEmpty(followings)
-				? [...followings.map(following => following.followee.toString()), me.id]
+			const ignoreIds = !isEmpty(following)
+				? [...following.map(follow => follow.followee.toString()), me.id]
 				: [me.id];
 
 			User.find({

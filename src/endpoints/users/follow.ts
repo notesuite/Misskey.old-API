@@ -35,7 +35,7 @@ export default function(follower: IUser, followeeId: string): Promise<void> {
 					if (createErr !== null) {
 						return reject(createErr);
 					}
-					follower.followingsCount++;
+					follower.followingCount++;
 					follower.save();
 					followee.followersCount++;
 					followee.save();

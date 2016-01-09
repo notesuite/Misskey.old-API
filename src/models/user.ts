@@ -16,7 +16,7 @@ export default function(db: Connection): Model<Document> {
 		email: { type: String, required: false, sparse: true, default: null },
 		encryptedPassword: { type: String, required: true },
 		followersCount: { type: Number, required: false, default: 0 },
-		followingsCount: { type: Number, required: false, default: 0 },
+		followingCount: { type: Number, required: false, default: 0 },
 		avatar: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFile' },
 		avatarPath: { type: String, required: false, default: null },
 		isDeleted: { type: Boolean, required: false, default: false },

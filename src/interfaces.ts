@@ -12,7 +12,7 @@ export interface IUser extends Document {
 	email: string;
 	encryptedPassword: string;
 	followersCount: number;
-	followingsCount: number;
+	followingCount: number;
 	avatar: string | Types.ObjectId | IAlbumFile;
 	avatarPath: string;
 	isDeleted: Boolean;

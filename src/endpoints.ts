@@ -25,7 +25,7 @@ export default [
 	{ endpoint: 'users/show', login: false },
 	{ endpoint: 'users/follow', login: true, limitDuration: hour, limitMax: 100 },
 	{ endpoint: 'users/unfollow', login: true, limitDuration: hour, limitMax: 100 },
-	{ endpoint: 'users/followings', login: false },
+	{ endpoint: 'users/following', login: false },
 	{ endpoint: 'users/followers', login: false },
 	{ endpoint: 'users/recommendations', login: true },
 	{ endpoint: 'users/search', login: false },

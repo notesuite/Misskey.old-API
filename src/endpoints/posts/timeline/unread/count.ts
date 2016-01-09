@@ -13,15 +13,15 @@ export default function(user: IUser): Promise<number> {
 
 	return new Promise<number>((resolve, reject) => {
 		// 自分がフォローしているユーザーの関係を取得
-		UserFollowing.find({follower: user.id}, (followingsFindErr: any, followings: IUserFollowing[]) => {
-			if (followingsFindErr !== null) {
-				return reject(followingsFindErr);
-			} else if (isEmpty(followings)) {
+		UserFollowing.find({follower: user.id}, (followingFindErr: any, following: IUserFollowing[]) => {
+			if (followingFindErr !== null) {
+				return reject(followingFindErr);
+			} else if (isEmpty(following)) {
 				return resolve(0);
 			}
 
 			// 自分がフォローしているユーザーのIDのリストを生成
-			const followingIds = followings.map(following => following.followee.toString());
+			const followingIds = following.map(follow => follow.followee.toString());
 
 			// タイムライン取得用のクエリ
 			const query: any = {

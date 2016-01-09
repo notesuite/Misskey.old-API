@@ -32,14 +32,14 @@ export default function(
 
 	return new Promise<Object[]>((resolve, reject) => {
 		// 自分がフォローしているユーザーの関係を取得
-		UserFollowing.find({follower: user.id}, (followingsFindErr: any, followings: IUserFollowing[]) => {
-			if (followingsFindErr !== null) {
-				return reject(followingsFindErr);
+		UserFollowing.find({follower: user.id}, (followingFindErr: any, following: IUserFollowing[]) => {
+			if (followingFindErr !== null) {
+				return reject(followingFindErr);
 			}
 
 			// 自分と自分がフォローしているユーザーのIDのリストを生成
-			const followingIds = !isEmpty(followings)
-				? [...followings.map(following => following.followee.toString()), user.id]
+			const followingIds = !isEmpty(following)
+				? [...following.map(follow => follow.followee.toString()), user.id]
 				: [user.id];
 
 			// タイムライン取得用のクエリを生成
