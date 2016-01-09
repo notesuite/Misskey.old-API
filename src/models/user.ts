@@ -5,6 +5,8 @@ export default function(db: Connection): Model<Document> {
 	'use strict';
 
 	const schema = new Schema({
+		avatar: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFile' },
+		avatarPath: { type: String, required: false, default: null },
 		banner: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFile' },
 		bannerPath: { type: String, required: false, default: null },
 		birthday: { type: Date, required: false, default: null },
@@ -17,8 +19,6 @@ export default function(db: Connection): Model<Document> {
 		encryptedPassword: { type: String, required: true },
 		followersCount: { type: Number, required: false, default: 0 },
 		followingCount: { type: Number, required: false, default: 0 },
-		avatar: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFile' },
-		avatarPath: { type: String, required: false, default: null },
 		isDeleted: { type: Boolean, required: false, default: false },
 		isEmailVerified: { type: Boolean, required: false, default: false },
 		isPrivate: { type: Boolean, required: false, default: false },
