@@ -1,33 +1,34 @@
 import { Schema, Connection, Document, Model } from 'mongoose';
 import * as mongooseAutoIncrement from 'mongoose-auto-increment';
 
-// Common schemas
-const postBase: Object = {
+// Base schema of post
+const base: Object = {
 	app: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Application' },
 	channel: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Channel' },
 	createdAt: { type: Date, required: true, default: Date.now },
 	cursor: { type: Number },
-	inReplyToPost: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Post' },
 	isDeleted: { type: Boolean, required: false, default: false },
 	likesCount: { type: Number, required: false, default: 0 },
 	repliesCount: { type: Number, required: false, default: 0 },
 	repostsCount: { type: Number, required: false, default: 0 },
-	type: { type: String, required: true },
+	// 各スキーマが実装します
+	// type: { type: String, required: true },
 	user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
 };
 
 const toObject: any = (doc: any, ret: any) => {
 	// General
 	ret.id = doc.id;
+	ret.userId = ret.user;
+
+	// Remove needless properties
 	delete ret._id;
 	delete ret.__v;
 
 	switch (doc.type) {
 		case 'status':
-			ret.userId = ret.user;
-			ret.inReplyToPostId = ret.inReplyToPost;
 			break;
-		case 'photo':
+		case 'reply':
 			ret.userId = ret.user;
 			ret.inReplyToPostId = ret.inReplyToPost;
 			break;
@@ -36,10 +37,29 @@ const toObject: any = (doc: any, ret: any) => {
 	}
 };
 
+function initSchema(db: Connection, schema: Schema): void {
+	'use strict';
+
+	mongooseAutoIncrement.initialize(db);
+
+	// Auto increment
+	schema.plugin(mongooseAutoIncrement.plugin, {
+		model: 'Post',
+		field: 'cursor'
+	});
+
+	if (!(<any>schema).options.toObject) {
+		(<any>schema).options.toObject = {};
+	}
+	(<any>schema).options.toObject.transform = toObject;
+}
+
 export function post(db: Connection): Model<Document> {
 	'use strict';
 
-	const schema = new Schema(postBase);
+	const schema = new Schema(Object.assign({
+		type: { type: String, required: true }
+	}, base));
 
 	if (!(<any>schema).options.toObject) {
 		(<any>schema).options.toObject = {};
@@ -51,49 +71,33 @@ export function post(db: Connection): Model<Document> {
 
 export function status(db: Connection): Model<Document> {
 	'use strict';
-	mongooseAutoIncrement.initialize(db);
 
 	const schema = new Schema(Object.assign({
+		files: { type: [Schema.Types.ObjectId], required: false, default: null, ref: 'AlbumFile' },
 		hashtags: { type: [String], required: false, default: [] },
-		text: { type: String, required: false, default: null }
-	}, postBase));
+		text: { type: String, required: false, default: null },
+		type: { type: String, required: true, default: 'status' }
+	}, base));
 
-	// Auto increment
-	schema.plugin(mongooseAutoIncrement.plugin, {
-		model: 'Post',
-		field: 'cursor'
-	});
-
-	if (!(<any>schema).options.toObject) {
-		(<any>schema).options.toObject = {};
-	}
-	(<any>schema).options.toObject.transform = toObject;
+	initSchema(db, schema);
 
 	return db.model('Status', schema, 'Posts');
 }
 
-export function photo(db: Connection): Model<Document> {
+export function reply(db: Connection): Model<Document> {
 	'use strict';
-	mongooseAutoIncrement.initialize(db);
 
 	const schema = new Schema(Object.assign({
-		photos: [{ type: Schema.Types.ObjectId, required: true, ref: 'AlbumFile' }],
+		files: { type: [Schema.Types.ObjectId], required: false, default: null, ref: 'AlbumFile' },
 		hashtags: { type: [String], required: false, default: [] },
-		text: { type: String, required: false, default: null }
-	}, postBase));
+		inReplyToPost: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Post' },
+		text: { type: String, required: false, default: null },
+		type: { type: String, required: true, default: 'reply' }
+	}, base));
 
-	// Auto increment
-	schema.plugin(mongooseAutoIncrement.plugin, {
-		model: 'Post',
-		field: 'cursor'
-	});
+	initSchema(db, schema);
 
-	if (!(<any>schema).options.toObject) {
-		(<any>schema).options.toObject = {};
-	}
-	(<any>schema).options.toObject.transform = toObject;
-
-	return db.model('Photo', schema, 'Posts');
+	return db.model('Reply', schema, 'Posts');
 }
 
 export function repost(db: Connection): Model<Document> {
@@ -105,20 +109,11 @@ export function repost(db: Connection): Model<Document> {
 		cursor: { type: Number },
 		isDeleted: { type: Boolean, required: false, default: false },
 		post: { type: Schema.Types.ObjectId, required: true, ref: 'Post' },
-		type: { type: String, required: true },
+		type: { type: String, required: true, default: 'repost' },
 		user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
 	});
 
-	// Auto increment
-	schema.plugin(mongooseAutoIncrement.plugin, {
-		model: 'Post',
-		field: 'cursor'
-	});
-
-	if (!(<any>schema).options.toObject) {
-		(<any>schema).options.toObject = {};
-	}
-	(<any>schema).options.toObject.transform = toObject;
+	initSchema(db, schema);
 
 	return db.model('Repost', schema, 'Posts');
 }

@@ -79,7 +79,6 @@ export interface IPost extends Document {
 	channel: string | Types.ObjectId | IChannel;
 	createdAt: Date;
 	cursor: number;
-	inReplyToPost: string | Types.ObjectId | IPost;
 	isDeleted: boolean;
 	likesCount: number;
 	repliesCount: number;
@@ -88,18 +87,20 @@ export interface IPost extends Document {
 	user: string | Types.ObjectId | IUser;
 }
 
-export interface IStatusPost extends IPost {
+export interface IPost_Status extends IPost {
+	files: string[] | Types.ObjectId[] | IAlbumFile[];
 	hashtags: string[];
 	text: string;
 }
 
-export interface IPhotoPost extends IPost {
-	photos: string[] | Types.ObjectId[] | IAlbumFile[];
+export interface IPost_Reply extends IPost {
+	files: string[] | Types.ObjectId[] | IAlbumFile[];
 	hashtags: string[];
+	inReplyToPost: string | Types.ObjectId | IPost;
 	text: string;
 }
 
-export interface IRepost extends Document {
+export interface IPost_Repost extends Document {
 	app: string | Types.ObjectId | IApplication;
 	createdAt: Date;
 	cursor: number;
