@@ -22,14 +22,14 @@
     "gulp-tslint": "4.2.2",
     "gulp-typescript": "2.10.0",
     "tslint": "3.2.1",
-    "typescript": "1.8.0-dev.20151214",
+    "typescript": "1.8.0-dev.20160110",
     "typescript-require": "0.2.9-1"
   },
   "dependencies": {
     "bcrypt": "0.8.5",
-    "connect-redis": "3.0.1",
+    "connect-redis": "3.0.2",
     "gm": "1.21.1",
-    "hapi": "11.1.4",
+    "hapi": "12.1.0",
     "mongoose": "4.3.4",
     "mongoose-auto-increment": "5.0.1",
     "mongoose-deep-populate": "2.0.3",
