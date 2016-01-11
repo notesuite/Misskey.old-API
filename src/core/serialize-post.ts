@@ -7,9 +7,8 @@ export default function serializePost(
 	includeReply: boolean = true
 ): Promise<Object> {
 	'use strict';
-
 	return new Promise<Object>((resolve, reject) => {
-		switch ((<any>post)._doc.type) {
+		switch (post.type) {
 			case 'status':
 				serializeStatus(resolve, reject, post, me);
 				break;
@@ -26,7 +25,12 @@ export default function serializePost(
 	});
 }
 
-function serializeStatus(resolve: any, reject: any, post: IPost, me: IUser = null): void {
+function serializeStatus(
+	resolve: any,
+	reject: any,
+	post: IPost,
+	me: IUser = null
+): void {
 	'use strict';
 	common(post.toObject(), me).then(postObj => {
 		if (postObj.files === null) {
@@ -53,7 +57,13 @@ function serializeStatus(resolve: any, reject: any, post: IPost, me: IUser = nul
 	});
 }
 
-function serializeReply(resolve: any, reject: any, post: IPost, me: IUser = null, includeReply: boolean = true): void {
+function serializeReply(
+	resolve: any,
+	reject: any,
+	post: IPost,
+	me: IUser = null,
+	includeReply: boolean = true
+): void {
 	'use strict';
 	common(post.toObject(), me).then(postObj => {
 		// Get reply source
@@ -98,7 +108,12 @@ function serializeReply(resolve: any, reject: any, post: IPost, me: IUser = null
 	});
 }
 
-function serializeRepost(resolve: any, reject: any, post: IPost, me: IUser = null): void {
+function serializeRepost(
+	resolve: any,
+	reject: any,
+	post: IPost,
+	me: IUser = null
+): void {
 	'use strict';
 	Post.findById((<any>post)._doc.post, (findTargetErr: any, target: IPost) => {
 		if (findTargetErr !== null) {

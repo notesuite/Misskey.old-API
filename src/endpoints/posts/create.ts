@@ -73,7 +73,10 @@ export default function(
 		}
 
 		function create(files: IAlbumFile[] = null): void {
+			// ハッシュタグ抽出
 			const hashtags: string[] = extractHashtags(text);
+
+			// 作成
 			Status.create({
 				app: app !== null ? app.id : null,
 				user: user.id,

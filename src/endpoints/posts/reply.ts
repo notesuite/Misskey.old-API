@@ -8,7 +8,7 @@ import registerHashtags from '../../core/register-hashtags';
 import getAlbumFile from '../../core/get-album-file';
 
 /**
- * 投稿を作成します
+ * 投稿に返信します
  * @param app API利用App
  * @param user API利用ユーザー
  * @param inReplyToPostId 返信先投稿のID
@@ -75,7 +75,7 @@ export default function(
 				return reject('reply-target-not-found');
 			} else if (inReplyToPost.isDeleted) {
 				return reject('reply-target-not-found');
-			} else if ((<any>inReplyToPost)._doc.type === 'repost') {
+			} else if (inReplyToPost.type === 'repost') {
 				return reject('reply-to-repost-is-not-allowed');
 			}
 
@@ -92,7 +92,10 @@ export default function(
 			}
 
 			function create(files: IAlbumFile[] = null): void {
+				// ハッシュタグ抽出
 				const hashtags: string[] = extractHashtags(text);
+
+				// 作成
 				Reply.create({
 					app: app !== null ? app.id : null,
 					user: user.id,

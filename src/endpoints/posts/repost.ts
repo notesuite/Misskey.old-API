@@ -34,7 +34,7 @@ export default function(
 				return reject('post-is-deleted');
 			} else if (post.user.toString() === user.id.toString()) {
 				return reject('your-post');
-			} else if ((<any>post)._doc.type === 'repost') {
+			} else if (post.type === 'repost') {
 				return reject('no-rerepost');
 			}
 
