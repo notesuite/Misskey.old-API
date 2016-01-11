@@ -1,5 +1,5 @@
 import { Match } from 'powerful';
-import {Post} from '../../../models';
+import {Reply} from '../../../models';
 import {IUser, IPost} from '../../../interfaces';
 import serializePosts from '../../../core/serialize-posts';
 
@@ -28,7 +28,7 @@ export default function(
 			.getValue({})
 		);
 
-		Post
+		Reply
 		.find(query)
 		.sort('-createdAt')
 		.limit(limit)
