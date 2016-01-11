@@ -2,7 +2,6 @@ import { Match } from 'powerful';
 import { Repost } from '../../../models';
 import { IUser, IRepost } from '../../../interfaces';
 import serializePosts from '../../../core/serialize-posts';
-import populateAll from '../../../core/post-populate-all';
 
 /**
  * 投稿のRepostを取得します
@@ -47,17 +46,11 @@ export default function(
 				return resolve([]);
 			}
 
-			// すべてpopulateする
-			Promise.all(reposts.map(repost => populateAll(repost)))
-			.then(populatedReposts => {
-				// 整形
-				serializePosts(populatedReposts, user).then(serializedReposts => {
-					resolve(serializedReposts);
-				}, (serializeErr: any) => {
-					reject(serializeErr);
-				});
-			}, (populatedErr: any) => {
-				reject(populatedErr);
+			// Resolve promise
+			serializePosts(reposts, user).then(serializedReposts => {
+				resolve(serializedReposts);
+			}, (serializeErr: any) => {
+				reject(serializeErr);
 			});
 		});
 	});

@@ -87,20 +87,20 @@ export interface IPost extends Document {
 	user: string | Types.ObjectId | IUser;
 }
 
-export interface IPost_Status extends IPost {
+export interface IStatus extends IPost {
 	files: string[] | Types.ObjectId[] | IAlbumFile[];
 	hashtags: string[];
 	text: string;
 }
 
-export interface IPost_Reply extends IPost {
+export interface IReply extends IPost {
 	files: string[] | Types.ObjectId[] | IAlbumFile[];
 	hashtags: string[];
 	inReplyToPost: string | Types.ObjectId | IPost;
 	text: string;
 }
 
-export interface IPost_Repost extends Document {
+export interface IRepost extends Document {
 	app: string | Types.ObjectId | IApplication;
 	createdAt: Date;
 	cursor: number;

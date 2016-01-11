@@ -1,30 +1,40 @@
 import {Post} from '../../models';
 import {IUser, IPost} from '../../interfaces';
 import serializePost from '../../core/serialize-post';
-import populateAll from '../../core/post-populate-all';
 import readPost from '../../core/read-post';
 
-export default function(shower: IUser, id: string): Promise<Object> {
+/**
+ * 対象の投稿を取得します
+ * @param shower API利用ユーザー
+ * @param postId 対象の投稿のID
+ * @return 投稿オブジェクト
+ */
+export default function(shower: IUser, postId: string): Promise<Object> {
 	'use strict';
 	return new Promise<Object>((resolve, reject) => {
-		Post.findById(id, (findErr: any, post: IPost) => {
+		// Init 'postId' parameter
+		if (postId === undefined || postId === null || postId === '') {
+			return reject('post-id-required');
+		}
+
+		Post.findById(postId, (findErr: any, post: IPost) => {
 			if (findErr !== null) {
 				return reject(findErr);
 			} else if (post === null) {
 				return reject('not-found');
 			}
-			populateAll(post).then(populatedPost => {
-				serializePost(populatedPost, shower).then(serializedPost => {
-					resolve(serializedPost);
-				}, (err: any) => {
-					reject(err);
-				});
-			}, (populatedErr: any) => {
-				reject(populatedErr);
+
+			// Resolve promise
+			serializePost(post, shower).then(serializedPost => {
+				resolve(serializedPost);
+			}, (err: any) => {
+				reject(err);
 			});
 
 			// 既読にする
-			readPost(shower, post);
+			if (shower !== null) {
+				readPost(shower, post);
+			}
 		});
 	});
 }

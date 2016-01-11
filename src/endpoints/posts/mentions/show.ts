@@ -1,8 +1,7 @@
 import { Match } from 'powerful';
-import {PostMention} from '../../models';
-import {IUser, IPost, IPostMention} from '../../interfaces';
-import serializePosts from '../../core/serialize-posts';
-import populateAll from '../../core/post-populate-all';
+import {PostMention} from '../../../models';
+import {IUser, IPost, IPostMention} from '../../../interfaces';
+import serializePosts from '../../../core/serialize-posts';
 
 /**
  * メンションを取得します
@@ -53,17 +52,11 @@ export default function(
 
 			const posts = mentions.map(mention => <IPost>mention.post);
 
-			// すべてpopulateする
-			Promise.all(posts.map(post => populateAll(post)))
-			.then(populatedPosts => {
-				// 整形
-				serializePosts(populatedPosts, user).then(serializedTimeline => {
-					resolve(serializedTimeline);
-				}, (serializeErr: any) => {
-					reject(serializeErr);
-				});
-			}, (populatedErr: any) => {
-				reject(populatedErr);
+			// Resolve promise
+			serializePosts(posts, user).then(serializedTimeline => {
+				resolve(serializedTimeline);
+			}, (serializeErr: any) => {
+				reject(serializeErr);
 			});
 
 			// 全て既読にする

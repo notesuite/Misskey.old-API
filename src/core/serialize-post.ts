@@ -1,76 +1,126 @@
-import {PostLike, Repost} from '../models';
-import {IUser, IStatusPost, IPhotoPost} from '../interfaces';
-import serializeStatus from './serialize-status';
-import serializePhotoPost from './serialize-photo-post';
+import {Post, PostLike, Repost, AlbumFile} from '../models';
+import {IUser, IPost, IAlbumFile} from '../interfaces';
 
 export default function serializePost(
 	post: any,
 	me: IUser = null,
-	includeDestination: boolean = true
+	includeReply: boolean = true
 ): Promise<Object> {
 	'use strict';
 
-	const type: string = post.type;
-
 	return new Promise<Object>((resolve, reject) => {
-		switch (type) {
+		switch ((<any>post)._doc.type) {
 			case 'status':
-				common(<IStatusPost>post, me, includeDestination).then(serialized => {
-					serializeStatus(serialized, me).then(serializedStatus => {
-						resolve(serializedStatus);
-					}, (serializeErr: any) => {
-						reject(serializeErr);
-					});
-				}, (serializeErr: any) => {
-					reject(serializeErr);
-				});
+				serializeStatus(resolve, reject, post, me);
 				break;
-			case 'photo':
-				common(<IPhotoPost>post, me, includeDestination).then(serialized => {
-					serializePhotoPost(serialized, me).then(serializedPhotoPost => {
-						resolve(serializedPhotoPost);
-					}, (serializeErr: any) => {
-						reject(serializeErr);
-					});
-				}, (serializeErr: any) => {
-					reject(serializeErr);
-				});
+			case 'reply':
+				serializeReply(resolve, reject, post, me);
 				break;
 			case 'repost':
-				serializePost(post.post, me).then(serializedPost => {
-					post.post = serializedPost;
-					resolve(post);
-				}, (err: any) => {
-					reject(err);
-				});
+				serializeRepost(resolve, reject, post, me);
 				break;
 			default:
-				reject('unknown-timeline-item-type');
+				reject('unknown-post-type');
 				break;
 		}
 	});
 }
 
+function serializeStatus(resolve: any, reject: any, post: IPost, me: IUser = null): void {
+	'use strict';
+	common(post.toObject(), me).then(postObj => {
+		if (postObj.files === null) {
+			return resolve(postObj);
+		}
+		// Get attached files
+		Promise.all(postObj.files.map((fileId: string) => new Promise<Object>((resolve2, reject2) => {
+			AlbumFile.findById(fileId, (findErr: any, file: IAlbumFile) => {
+				if (findErr !== null) {
+					reject2(findErr);
+				} else {
+					resolve2(file.toObject());
+				}
+			});
+		})))
+		.then(files => {
+			postObj.files = files;
+			resolve(postObj);
+		}, (getFilesErr: any) => {
+			reject(getFilesErr);
+		});
+	}, (serializeErr: any) => {
+		reject(serializeErr);
+	});
+}
+
+function serializeReply(resolve: any, reject: any, post: IPost, me: IUser = null, includeReply: boolean = true): void {
+	'use strict';
+	common(post.toObject(), me).then(postObj => {
+		// Get reply source
+		if (includeReply) {
+			Post.findById((<any>post)._doc.inReplyToPost, (findReplyErr: any, inReplyToPost: IPost) => {
+				if (findReplyErr !== null) {
+					return reject(findReplyErr);
+				}
+				serializePost(inReplyToPost, me, false).then(serializedReply => {
+					kyoppie(serializedReply);
+				}, (serializedReplyErr: any) => {
+					reject(serializedReplyErr);
+				});
+			});
+		} else {
+			kyoppie((<any>post)._doc.inReplyToPost);
+		}
+		function kyoppie(inReplyToPost: any): void {
+			postObj.inReplyToPost = inReplyToPost;
+			if (postObj.files === null) {
+				return resolve(postObj);
+			}
+			// Get attached files
+			Promise.all(postObj.files.map((fileId: string) => new Promise<Object>((resolve2, reject2) => {
+				AlbumFile.findById(fileId, (findErr: any, file: IAlbumFile) => {
+					if (findErr !== null) {
+						reject2(findErr);
+					} else {
+						resolve2(file.toObject());
+					}
+				});
+			})))
+			.then(files => {
+				postObj.files = files;
+				resolve(postObj);
+			}, (getFilesErr: any) => {
+				reject(getFilesErr);
+			});
+		}
+	}, (serializeErr: any) => {
+		reject(serializeErr);
+	});
+}
+
+function serializeRepost(resolve: any, reject: any, post: IPost, me: IUser = null): void {
+	'use strict';
+	Post.findById((<any>post)._doc.post, (findTargetErr: any, target: IPost) => {
+		if (findTargetErr !== null) {
+			return reject(findTargetErr);
+		}
+		serializePost(target, me).then(serializedTarget => {
+			const postObj: any = post.toObject();
+			postObj.post = serializedTarget;
+			resolve(postObj);
+		}, (err: any) => {
+			reject(err);
+		});
+	});
+}
+
 function common(
 		post: any,
-		me: IUser = null,
-		includeDestination: boolean = true)
-			: Promise<Object> {
+		me: IUser = null
+): Promise<any> {
 	'use strict';
 	return new Promise<Object>((resolve, reject) => {
-		Promise.all<Object, boolean, boolean>([
-			// Get reply source
-			new Promise<Object>((getDestinationResolve, getDestinationReject) => {
-				if (post.inReplyToPost !== null && includeDestination) {
-					serializePost(post.inReplyToPost, me, false).then(serializedReply => {
-						getDestinationResolve(serializedReply);
-					}, (serializedReplyErr: any) => {
-						getDestinationReject(serializedReplyErr);
-					});
-				} else {
-					getDestinationResolve(null);
-				}
-			}),
+		Promise.all<boolean, boolean>([
 			// Get is liked
 			new Promise<boolean>((getIsLikedResolve, getIsLikedReject) => {
 				if (me === null) {
@@ -102,9 +152,8 @@ function common(
 					getIsRepostedResolve(count > 0);
 				});
 			})
-		]).then(([inReplyToPost, isLiked, isReposted]) => {
+		]).then(([isLiked, isReposted]) => {
 			const serialized: any = post;
-			serialized.inReplyToPost = (post.inReplyToPost !== null && includeDestination) ? inReplyToPost : post.inReplyToPost;
 			serialized.isLiked = isLiked;
 			serialized.isReposted = isReposted;
 			resolve(serialized);

@@ -28,6 +28,8 @@ export default function(
 			case 'group':
 				query.type = 'group';
 				break;
+			default:
+				break;
 		}
 
 		(<any>TalkHistory)

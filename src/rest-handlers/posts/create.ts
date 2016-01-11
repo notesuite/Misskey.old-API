@@ -11,10 +11,8 @@ export default function(
 	create(
 		app,
 		user,
-		req.payload['in-reply-to-post-id'],
-		req.payload['type'],
 		req.payload['text'],
-		req.payload['photos']
+		req.payload['files']
 	).then(post => {
 		res(post);
 	}, (err: any) => {

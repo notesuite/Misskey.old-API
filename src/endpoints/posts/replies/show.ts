@@ -2,7 +2,6 @@ import { Match } from 'powerful';
 import {Post} from '../../../models';
 import {IUser, IPost} from '../../../interfaces';
 import serializePosts from '../../../core/serialize-posts';
-import populateAll from '../../../core/post-populate-all';
 
 /**
  * 投稿の返信を取得します
@@ -13,14 +12,20 @@ import populateAll from '../../../core/post-populate-all';
  * @param maxCursor 取得する投稿を、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
  * @return 投稿オブジェクトの配列
  */
-export default function(user: IUser, id: string, limit: number = 10, sinceCursor: number = null, maxCursor: number = null)
-		: Promise<Object[]> {
+export default function(
+	user: IUser,
+	id: string,
+	limit: number = 10,
+	sinceCursor: number = null,
+	maxCursor: number = null
+): Promise<Object[]> {
 	'use strict';
+
 	return new Promise<Object[]>((resolve, reject) => {
 		const query = Object.assign({inReplyToPost: id}, new Match<void, any>(null)
-				.when(() => sinceCursor !== null, () => { return {cursor: {$gt: sinceCursor}}; })
-				.when(() => maxCursor !== null, () => { return {cursor: {$lt: maxCursor}}; })
-				.getValue({})
+			.when(() => sinceCursor !== null, () => { return {cursor: {$gt: sinceCursor}}; })
+			.when(() => maxCursor !== null, () => { return {cursor: {$lt: maxCursor}}; })
+			.getValue({})
 		);
 
 		Post
@@ -33,17 +38,12 @@ export default function(user: IUser, id: string, limit: number = 10, sinceCursor
 			} else if (replies.length === 0) {
 				return resolve([]);
 			}
-			// すべてpopulateする
-			Promise.all(replies.map(post => populateAll(post)))
-			.then(populatedTimeline => {
-				// 整形
-				serializePosts(populatedTimeline, user).then(serializedTimeline => {
-					resolve(serializedTimeline);
-				}, (serializeErr: any) => {
-					reject(serializeErr);
-				});
-			}, (populatedErr: any) => {
-				reject(populatedErr);
+
+			// Resolve promise
+			serializePosts(replies, user).then(serializedTimeline => {
+				resolve(serializedTimeline);
+			}, (serializeErr: any) => {
+				reject(serializeErr);
 			});
 		});
 	});

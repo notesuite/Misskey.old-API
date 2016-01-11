@@ -2,7 +2,6 @@ import { Match } from 'powerful';
 import {Post} from '../../models';
 import {IUser, IPost} from '../../interfaces';
 import serializePosts from '../../core/serialize-posts';
-import populateAll from '../../core/post-populate-all';
 import escapeRegexp from '../../core/escape-regexp';
 
 /**
@@ -54,16 +53,11 @@ export default function(
 				return resolve([]);
 			}
 
-			Promise.all(posts.map(post => populateAll(post)))
-			.then(populatedPosts => {
-				// 整形
-				serializePosts(populatedPosts, user).then(serializedPosts => {
-					resolve(serializedPosts);
-				}, (serializeErr: any) => {
-					reject(serializeErr);
-				});
-			}, (populatedErr: any) => {
-				reject(populatedErr);
+			// Resolve promise
+			serializePosts(posts, user).then(serializedPosts => {
+				resolve(serializedPosts);
+			}, (serializeErr: any) => {
+				reject(serializeErr);
 			});
 		});
 	});

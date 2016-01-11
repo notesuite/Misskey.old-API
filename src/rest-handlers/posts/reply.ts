@@ -1,5 +1,5 @@
 import { IApplication, IUser } from '../../interfaces';
-import mentions from '../../endpoints/posts/mentions';
+import reply from '../../endpoints/posts/reply';
 
 export default function(
 	app: IApplication,
@@ -8,13 +8,14 @@ export default function(
 	res: any
 ): void {
 	'use strict';
-	mentions(
+	reply(
+		app,
 		user,
-		req.payload['limit'],
-		req.payload['since-cursor'],
-		req.payload['max-cursor']
-	).then(timeline => {
-		res(timeline);
+		req.payload['in-reply-to-post-id'],
+		req.payload['text'],
+		req.payload['files']
+	).then(post => {
+		res(post);
 	}, (err: any) => {
 		res({error: err}).code(500);
 	});

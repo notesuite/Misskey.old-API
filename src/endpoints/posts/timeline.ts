@@ -3,7 +3,6 @@ const isEmpty = List.isEmpty;
 import {Post, UserFollowing} from '../../models';
 import {IUser, IUserFollowing, IPost} from '../../interfaces';
 import serializePosts from '../../core/serialize-posts';
-import populateAll from '../../core/post-populate-all';
 import readPost from '../../core/read-post';
 
 /**
@@ -67,17 +66,11 @@ export default function(
 					return resolve([]);
 				}
 
-				// すべてpopulateする
-				Promise.all(timeline.map(post => populateAll(post)))
-				.then(populatedTimeline => {
-					// 整形
-					serializePosts(populatedTimeline, user).then(serializedTimeline => {
-						resolve(serializedTimeline);
-					}, (serializeErr: any) => {
-						reject(serializeErr);
-					});
-				}, (populatedErr: any) => {
-					reject(populatedErr);
+				// Resolve promise
+				serializePosts(timeline, user).then(serializedTimeline => {
+					resolve(serializedTimeline);
+				}, (serializeErr: any) => {
+					reject(serializeErr);
 				});
 
 				// すべて既読にしておく

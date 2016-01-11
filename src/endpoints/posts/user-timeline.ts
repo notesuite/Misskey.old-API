@@ -1,7 +1,6 @@
 import {Post} from '../../models';
 import {IUser, IPost} from '../../interfaces';
 import serializePosts from '../../core/serialize-posts';
-import populateAll from '../../core/post-populate-all';
 
 /**
  * 指定ユーザーの投稿のタイムラインを取得します
@@ -68,17 +67,12 @@ export default function(
 			if (err !== null) {
 				return reject(err);
 			}
-			// すべてpopulateする
-			Promise.all(timeline.map(post => populateAll(post)))
-			.then(populatedTimeline => {
-				// 整形
-				serializePosts(populatedTimeline, user).then(serializedTimeline => {
-					resolve(serializedTimeline);
-				}, (serializeErr: any) => {
-					reject(serializeErr);
-				});
-			}, (populatedErr: any) => {
-				reject(populatedErr);
+
+			// Resolve promise
+			serializePosts(timeline, user).then(serializedTimeline => {
+				resolve(serializedTimeline);
+			}, (serializeErr: any) => {
+				reject(serializeErr);
 			});
 		});
 	});
