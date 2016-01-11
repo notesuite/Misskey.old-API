@@ -37,7 +37,7 @@ export default function(
 
 		Repost
 		.find(query)
-		.sort('-createdAt')
+		.sort({createdAt: -1})
 		.limit(limit)
 		.exec((err: any, reposts: IRepost[]) => {
 			if (err !== null) {

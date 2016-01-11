@@ -40,7 +40,7 @@ export default function(
 
 		AlbumFile
 		.find(query)
-		.sort('-createdAt')
+		.sort({createdAt: -1})
 		.limit(limit)
 		.exec((err: any, files: IAlbumFile[]) => {
 			if (err !== null) {

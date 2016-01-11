@@ -57,7 +57,7 @@ export default function(
 			// クエリを発行してタイムラインを取得
 			Post
 			.find(query)
-			.sort('-createdAt')
+			.sort({createdAt: -1})
 			.limit(limit)
 			.exec((err: any, timeline: IPost[]) => {
 				if (err !== null) {

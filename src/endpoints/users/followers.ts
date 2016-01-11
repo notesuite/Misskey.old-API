@@ -44,7 +44,7 @@ export default function(
 
 		UserFollowing
 		.find(query)
-		.sort('-createdAt')
+		.sort({createdAt: -1})
 		.limit(limit)
 		.populate('follower')
 		.exec((err: any, userFollowing: IUserFollowing[]) => {

@@ -64,7 +64,7 @@ export default function(
 
 			TalkUserMessage
 			.find(query)
-			.sort('-createdAt')
+			.sort({createdAt: -1})
 			.limit(limit)
 			.exec((err: any, messages: ITalkMessage[]) => {
 				if (err !== null) {
@@ -115,7 +115,7 @@ export default function(
 
 				TalkGroupMessageBase
 				.find(query)
-				.sort('-createdAt')
+				.sort({createdAt: -1})
 				.limit(limit)
 				.exec((err: any, messages: ITalkMessage[]) => {
 					if (err !== null) {

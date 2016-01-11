@@ -47,7 +47,7 @@ export default function(
 		// クエリを発行してタイムラインを取得
 		Notification
 		.find(query)
-		.sort('-createdAt')
+		.sort({createdAt: -1})
 		.limit(limit)
 		.exec((err: any, notifications: INotification[]) => {
 			if (err !== null) {

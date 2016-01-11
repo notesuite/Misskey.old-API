@@ -30,7 +30,7 @@ export default function(
 
 		Reply
 		.find(query)
-		.sort('-createdAt')
+		.sort({createdAt: -1})
 		.limit(limit)
 		.exec((err: any, replies: IPost[]) => {
 			if (err !== null) {

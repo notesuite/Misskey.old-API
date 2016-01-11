@@ -37,7 +37,7 @@ export default function(
 
 		PostLike
 		.find(query)
-		.sort('-createdAt')
+		.sort({createdAt: -1})
 		.limit(limit)
 		.populate('user')
 		.exec((err: any, likes: IPostLike[]) => {

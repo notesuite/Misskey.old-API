@@ -42,7 +42,7 @@ export default function(
 	return new Promise<Object[]>((resolve, reject) => {
 		// メンションドキュメントを取得
 		PostMention.find(query)
-		.sort('-createdAt')
+		.sort({createdAt: -1})
 		.limit(limit)
 		.populate('post')
 		.exec((err: any, mentions: IPostMention[]) => {

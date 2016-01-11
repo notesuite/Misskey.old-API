@@ -44,7 +44,7 @@ export default function(
 
 	return new Promise<Object>((resolve, reject) => {
 		Post.find(query)
-		.sort('-createdAt')
+		.sort({createdAt: -1})
 		.limit(limit)
 		.exec((searchErr: any, posts: IPost[]) => {
 			if (searchErr !== null) {
