@@ -3,6 +3,11 @@ import { IUser } from '../interfaces';
 
 export default function(text: string): Promise<IUser[]> {
 	'use strict';
+
+	if (text === null) {
+		return Promise.resolve(null);
+	}
+
 	const mentions = text.match(/@[a-zA-Z0-9\-]+/g);
 
 	if (mentions === null) {
