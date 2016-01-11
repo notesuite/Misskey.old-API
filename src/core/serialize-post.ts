@@ -1,4 +1,4 @@
-import {Post, PostLike, Repost, AlbumFile} from '../models';
+import {User, Post, PostLike, Repost, AlbumFile} from '../models';
 import {IUser, IPost, IAlbumFile} from '../interfaces';
 
 export default function serializePost(
@@ -7,32 +7,43 @@ export default function serializePost(
 	includeReply: boolean = true
 ): Promise<Object> {
 	'use strict';
+
+	const postObj = post.toObject();
+
 	return new Promise<Object>((resolve, reject) => {
-		switch (post.type) {
-			case 'status':
-				serializeStatus(resolve, reject, post, me);
-				break;
-			case 'reply':
-				serializeReply(resolve, reject, post, me);
-				break;
-			case 'repost':
-				serializeRepost(resolve, reject, post, me);
-				break;
-			default:
-				reject('unknown-post-type');
-				break;
-		}
+		// 作者
+		User.findById(post.user, (findUserErr: any, user: IUser) => {
+			if (findUserErr !== null) {
+				return reject(findUserErr);
+			}
+			postObj.user = user.toObject();
+
+			switch (post.type) {
+				case 'status':
+					serializeStatus(resolve, reject, postObj, me);
+					break;
+				case 'reply':
+					serializeReply(resolve, reject, postObj, me);
+					break;
+				case 'repost':
+					serializeRepost(resolve, reject, postObj, me);
+					break;
+				default:
+					reject('unknown-post-type');
+					break;
+			}
+		});
 	});
 }
 
 function serializeStatus(
 	resolve: any,
 	reject: any,
-	post: IPost,
+	post: any,
 	me: IUser = null
 ): void {
 	'use strict';
-	common(post.toObject(), me).then(postObj => {
+	common(post, me).then(postObj => {
 		if (postObj.files === null) {
 			return resolve(postObj);
 		}
@@ -60,15 +71,15 @@ function serializeStatus(
 function serializeReply(
 	resolve: any,
 	reject: any,
-	post: IPost,
+	post: any,
 	me: IUser = null,
 	includeReply: boolean = true
 ): void {
 	'use strict';
-	common(post.toObject(), me).then(postObj => {
+	common(post, me).then(postObj => {
 		// Get reply source
 		if (includeReply) {
-			Post.findById((<any>post)._doc.inReplyToPost, (findReplyErr: any, inReplyToPost: IPost) => {
+			Post.findById(postObj.inReplyToPost, (findReplyErr: any, inReplyToPost: IPost) => {
 				if (findReplyErr !== null) {
 					return reject(findReplyErr);
 				}
@@ -79,7 +90,7 @@ function serializeReply(
 				});
 			});
 		} else {
-			kyoppie((<any>post)._doc.inReplyToPost);
+			kyoppie(postObj.inReplyToPost);
 		}
 		function kyoppie(inReplyToPost: any): void {
 			postObj.inReplyToPost = inReplyToPost;
@@ -111,18 +122,17 @@ function serializeReply(
 function serializeRepost(
 	resolve: any,
 	reject: any,
-	post: IPost,
+	post: any,
 	me: IUser = null
 ): void {
 	'use strict';
-	Post.findById((<any>post)._doc.post, (findTargetErr: any, target: IPost) => {
+	Post.findById(post.post, (findTargetErr: any, target: IPost) => {
 		if (findTargetErr !== null) {
 			return reject(findTargetErr);
 		}
 		serializePost(target, me).then(serializedTarget => {
-			const postObj: any = post.toObject();
-			postObj.post = serializedTarget;
-			resolve(postObj);
+			post.post = serializedTarget;
+			resolve(post);
 		}, (err: any) => {
 			reject(err);
 		});
