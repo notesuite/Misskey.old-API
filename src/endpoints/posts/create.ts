@@ -72,7 +72,7 @@ export default function(
 			create(null);
 		}
 
-		function create(files: IAlbumFile[] = null): void {
+		function create(files: IAlbumFile[]): void {
 			// ハッシュタグ抽出
 			const hashtags: string[] = extractHashtags(text);
 
