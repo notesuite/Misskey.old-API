@@ -93,18 +93,21 @@ export default function(
 					return reject(createErr);
 				}
 
-				// Resolve promise
-				serializePost(createdStatus, user).then(serialized => {
-					resolve(serialized);
-				}, (serializeErr: any) => {
-					reject(serializeErr);
-				});
-
 				// 投稿数インクリメント
 				user.postsCount++;
 				// 最終StatusTextを更新
 				user.latestStatusText = createdStatus.text;
-				user.save();
+				user.save((saveErr: any, user2: IUser) => {
+					if (saveErr !== null) {
+						return reject(saveErr);
+					}
+					// Resolve promise
+					serializePost(createdStatus, user2).then(serialized => {
+						resolve(serialized);
+					}, (serializeErr: any) => {
+						reject(serializeErr);
+					});
+				});
 
 				// ハッシュタグをデータベースに登録
 				registerHashtags(user, hashtags);
