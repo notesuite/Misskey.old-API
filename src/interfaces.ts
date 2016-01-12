@@ -22,6 +22,7 @@ export interface IUser extends Document {
 	isSuspended: Boolean;
 	isVerified: Boolean;
 	lang: string;
+	latestStatusText: string;
 	likedCount: number;
 	likesCount: number;
 	location: string;

@@ -60,6 +60,11 @@ export default function(
 			return reject('text-or-files-is-required');
 		}
 
+		// 最後のStatusとテキストが同じならエラー(連投検知)
+		if (text !== null && text === user.latestStatusText) {
+			return reject('content-duplicate');
+		}
+
 		// 添付ファイルがあれば添付ファイルのバリデーションを行う
 		if (fileIds !== null) {
 			Promise.all(fileIds.map(fileId => getAlbumFile(user.id, fileId)))
@@ -97,6 +102,8 @@ export default function(
 
 				// 投稿数インクリメント
 				user.postsCount++;
+				// 最終StatusTextを更新
+				user.latestStatusText = createdStatus.text;
 				user.save();
 
 				// ハッシュタグをデータベースに登録

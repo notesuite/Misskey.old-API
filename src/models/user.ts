@@ -26,6 +26,7 @@ export default function(db: Connection): Model<Document> {
 		isSuspended: { type: Boolean, required: false, default: false },
 		isVerified: { type: Boolean, required: false, default: false },
 		lang: { type: String, required: true },
+		latestStatusText: { type: String, required: false, default: null },
 		likedCount: { type: Number, required: false, default: 0 },
 		likesCount: { type: Number, required: false, default: 0 },
 		location: { type: String, required: false, default: null },
@@ -47,6 +48,7 @@ export default function(db: Connection): Model<Document> {
 	(<any>schema).options.toObject.transform = (doc: any, ret: any) => {
 		ret.id = doc.id;
 
+		// Normalization avatar URL
 		delete ret.avatar;
 		delete ret.avatarPath;
 		ret.avatarUrl = doc.avatar !== null
@@ -54,6 +56,7 @@ export default function(db: Connection): Model<Document> {
 			: `${config.fileServer.url}/defaults/avatar.jpg`;
 		ret.avatarThumbnailUrl = `${ret.avatarUrl}?thumbnail`;
 
+		// Normalization banner URL
 		delete ret.banner;
 		delete ret.bannerPath;
 		ret.bannerUrl = doc.banner !== null
@@ -61,6 +64,7 @@ export default function(db: Connection): Model<Document> {
 			: `${config.fileServer.url}/defaults/banner.jpg`;
 		ret.bannerThumbnailUrl = `${ret.bannerUrl}?thumbnail`;
 
+		// Normalization wallpaper URL
 		delete ret.wallpaper;
 		delete ret.wallpaperPath;
 		ret.wallpaperUrl = doc.wallpaper !== null
@@ -68,11 +72,13 @@ export default function(db: Connection): Model<Document> {
 			: `${config.fileServer.url}/defaults/wallpaper.jpg`;
 		ret.wallpaperThumbnailUrl = `${ret.wallpaperUrl}?thumbnail`;
 
+		// Remove needless properties
 		delete ret._id;
 		delete ret.__v;
 		delete ret.screenNameLower;
 		delete ret.email;
 		delete ret.encryptedPassword;
+		delete ret.latestStatusText;
 	};
 
 	return db.model('User', schema, 'Users');
