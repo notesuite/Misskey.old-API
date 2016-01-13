@@ -3,6 +3,7 @@ import * as interfaces from '../../../interfaces';
 import getAlbumFile from '../../../core/get-album-file';
 import publishStream from '../../../core/publish-streaming-message';
 import publishMessage from '../../../core/publish-group-talk-message';
+import createNotification from '../../../core/create-notification';
 
 /**
  * Talkメッセージを作成します
@@ -171,6 +172,21 @@ function createUserMessage(
 				history.save();
 			}
 		});
+
+		// 今から3秒後に未読であった場合通知する
+		setTimeout(() => {
+			TalkUserMessage.findById(createdMessage.id, (reloadErr: any, reloadedMessage: interfaces.ITalkUserMessage) => {
+				if (reloadErr !== null) {
+					return;
+				} else if (reloadedMessage.isRead) {
+					return;
+				}
+				// 通知を作成
+				createNotification(null, recipient.id, 'talk-user-message', {
+					messageId: createdMessage.id
+				});
+			});
+		}, 3000);
 	});
 }
 

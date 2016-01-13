@@ -1,5 +1,6 @@
-import {User, Post} from '../models';
-import {IUser, IPost} from '../interfaces';
+import {User, Post, TalkUserMessage} from '../models';
+import {IUser, IPost, ITalkUserMessage} from '../interfaces';
+import serializeTalkMessage from '../core/serialize-talk-message';
 
 export default function(
 	notification: any,
@@ -26,6 +27,14 @@ export default function(
 				User.findById(content.userId, (userErr: any, user: IUser) => {
 					notification.content.user = user.toObject();
 					resolve(notification);
+				});
+				break;
+			case 'talk-user-message':
+				TalkUserMessage.findById(content.messageId, (messageErr: any, message: ITalkUserMessage) => {
+					serializeTalkMessage(message, me).then((message2: ITalkUserMessage) => {
+						notification.content.message = message2;
+						resolve(notification);
+					}, reject);
 				});
 				break;
 			default:
