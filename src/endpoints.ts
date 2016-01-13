@@ -44,7 +44,7 @@ export default [
 	{ endpoint: 'posts/create', login: true, limitDuration: hour, limitMax: 120, minInterval: 3000, imitKey: 'post' },
 	{ endpoint: 'posts/reply', login: true, limitDuration: hour, limitMax: 120, minInterval: 3000, limitKey: 'post' },
 	{ endpoint: 'posts/repost', login: true, limitDuration: hour, limitMax: 120, minInterval: 3000, limitKey: 'post' },
-	{ endpoint: 'posts/like', login: true, limitDuration: hour, limitMax: 120 },
+	{ endpoint: 'posts/like', login: true, limitDuration: hour, limitMax: 60 },
 	{ endpoint: 'posts/search', login: false },
 	{ endpoint: 'posts/likes/show', login: false },
 	{ endpoint: 'posts/reposts/show', login: false },
