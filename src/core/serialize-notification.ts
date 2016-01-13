@@ -1,5 +1,6 @@
 import {User, Post, TalkUserMessage} from '../models';
 import {IUser, IPost, ITalkUserMessage} from '../interfaces';
+import serializePost from '../core/serialize-post';
 import serializeTalkMessage from '../core/serialize-talk-message';
 
 export default function(
@@ -23,6 +24,14 @@ export default function(
 					});
 				});
 				break;
+			case 'mention':
+				Post.findById(content.postId, (postErr: any, post: IPost) => {
+					serializePost(post, me).then((post2: any) => {
+						notification.content.post = post2;
+						resolve(notification);
+					}, reject);
+				});
+				break;
 			case 'follow':
 				User.findById(content.userId, (userErr: any, user: IUser) => {
 					notification.content.user = user.toObject();
@@ -31,7 +40,7 @@ export default function(
 				break;
 			case 'talk-user-message':
 				TalkUserMessage.findById(content.messageId, (messageErr: any, message: ITalkUserMessage) => {
-					serializeTalkMessage(message, me).then((message2: ITalkUserMessage) => {
+					serializeTalkMessage(message, me).then((message2: any) => {
 						notification.content.message = message2;
 						resolve(notification);
 					}, reject);
