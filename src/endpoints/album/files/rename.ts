@@ -3,6 +3,13 @@ import {AlbumFile} from '../../../models';
 import {IUser, IAlbumFile} from '../../../interfaces';
 import config from '../../../config';
 
+/**
+ * アルバムのファイルをリネームします
+ * @param user API利用ユーザー
+ * @param fileId 対象のファイルID
+ * @param name 新しい名前
+ * @return ファイルオブジェクト
+ */
 export default function(user: IUser, fileId: string, name: string): Promise<Object> {
 	'use strict';
 

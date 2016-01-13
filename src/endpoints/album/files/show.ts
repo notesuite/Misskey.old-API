@@ -1,6 +1,12 @@
 import {AlbumFile} from '../../../models';
 import {IUser, IAlbumFile} from '../../../interfaces';
 
+/**
+ * アルバムのファイルを取得します
+ * @param user API利用ユーザー
+ * @param fileId 対象のファイルID
+ * @return ファイルオブジェクト
+ */
 export default function(user: IUser, fileId: string): Promise<Object> {
 	'use strict';
 
