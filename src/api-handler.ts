@@ -17,8 +17,46 @@ export default function(endpoint: any, req: any, res: any): void {
 
 	authorize(req).then((context: any) => {
 		if (endpoint.login) {
-			if (endpoint.hasOwnProperty('limitDuration') && endpoint.hasOwnProperty('limitMax')) {
-				const limitKey = endpoint.hasOwnProperty('limitKey') ? endpoint.limitKey : endpoint.endpoint;
+			const limitKey = endpoint.hasOwnProperty('limitKey') ? endpoint.limitKey : endpoint.endpoint;
+
+			if (endpoint.hasOwnProperty('minInterval')) {
+				detectBriefInterval();
+			} else if (endpoint.hasOwnProperty('limitDuration') && endpoint.hasOwnProperty('limitMax')) {
+				rateLimit();
+			} else {
+				call();
+			}
+
+			// 短い期間の方のリミット
+			function detectBriefInterval(): void {
+				const minIntervalLimiter = new Limiter({
+					id: `${context.user.id}:${limitKey}:for-detect-brief-interval`,
+					duration: endpoint.minInterval,
+					max: 1,
+					db: limiterDb
+				});
+
+				minIntervalLimiter.get((limitErr: any, limit: any) => {
+					if (limitErr !== null) {
+						return reply({
+							error: 'something-happened'
+						}).code(500);
+					} else if (limit.remaining === 0) {
+						return reply({
+							error: 'brief-interval-detected'
+						}).code(429);
+					} else {
+						if (endpoint.hasOwnProperty('limitDuration') && endpoint.hasOwnProperty('limitMax')) {
+							rateLimit();
+						} else {
+							call();
+						}
+					}
+				});
+			}
+
+			// 長い期間の方のリミット
+			function rateLimit(): void {
 				const limiter = new Limiter({
 					id: `${context.user.id}:${limitKey}`,
 					duration: endpoint.limitDuration,
@@ -36,15 +74,15 @@ export default function(endpoint: any, req: any, res: any): void {
 							error: 'rate-limit-exceeded'
 						}).code(429);
 					} else {
-						require(`${__dirname}/rest-handlers/${endpoint.endpoint}`).default(
-							context.app, context.user, req, reply);
+						call();
 					}
 				});
-			} else {
-				require(`${__dirname}/rest-handlers/${endpoint.endpoint}`).default(
-					context.app, context.user, req, reply);
 			}
 		} else {
+			call();
+		}
+
+		function call(): void {
 			require(`${__dirname}/rest-handlers/${endpoint.endpoint}`).default(
 				context.app, context.user, req, reply);
 		}
