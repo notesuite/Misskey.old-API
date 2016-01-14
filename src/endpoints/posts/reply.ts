@@ -58,6 +58,23 @@ export default function(
 			} else if (fileIds.length > maxFileLength) {
 				return reject('too-many-files');
 			}
+
+			// 重複チェック
+			let isRejected = false;
+			fileIds.forEach(fileId => {
+				let count = 0;
+				fileIds.forEach(fileId2 => {
+					if (fileId === fileId2) {
+						count++;
+						if (count === 2) {
+							isRejected = true;
+						}
+					}
+				});
+			});
+			if (isRejected) {
+				return reject('duplicate-files');
+			}
 		} else {
 			fileIds = null;
 		}
