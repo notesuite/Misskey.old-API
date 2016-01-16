@@ -21,7 +21,8 @@
     "gulp-babel": "6.1.1",
     "gulp-tslint": "4.3.0",
     "gulp-typescript": "2.10.0",
-    "tslint": "3.2.1",
+    "powerful": "8.0.1",
+    "tslint": "3.2.1-dev.1",
     "typescript": "1.8.0-dev.20160110",
     "typescript-require": "0.2.9-1"
   },
