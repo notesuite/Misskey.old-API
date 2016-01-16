@@ -14,43 +14,43 @@
   },
   "dependencies": {
     "gulp/gulp.d.ts": {
-      "ref": "8ea42cd8bb11863ed6f242d67c502288ebc45a7b"
+      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
     },
     "gulp-typescript/gulp-typescript.d.ts": {
-      "ref": "8ea42cd8bb11863ed6f242d67c502288ebc45a7b"
+      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
     },
     "gulp-tslint/gulp-tslint.d.ts": {
-      "ref": "8ea42cd8bb11863ed6f242d67c502288ebc45a7b"
+      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
     },
     "mongoose/mongoose.d.ts": {
-      "ref": "8ea42cd8bb11863ed6f242d67c502288ebc45a7b"
+      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
     },
     "express/express.d.ts": {
-      "ref": "8ea42cd8bb11863ed6f242d67c502288ebc45a7b"
+      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
     },
     "body-parser/body-parser.d.ts": {
-      "ref": "8ea42cd8bb11863ed6f242d67c502288ebc45a7b"
+      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
     },
     "multer/multer.d.ts": {
-      "ref": "8ea42cd8bb11863ed6f242d67c502288ebc45a7b"
+      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
     },
     "bcrypt/bcrypt.d.ts": {
-      "ref": "8ea42cd8bb11863ed6f242d67c502288ebc45a7b"
+      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
     },
     "redis/redis.d.ts": {
-      "ref": "8ea42cd8bb11863ed6f242d67c502288ebc45a7b"
+      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
     },
     "request/request.d.ts": {
-      "ref": "8ea42cd8bb11863ed6f242d67c502288ebc45a7b"
+      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
     },
     "mongoose-auto-increment/mongoose-auto-increment.d.ts": {
-      "ref": "8ea42cd8bb11863ed6f242d67c502288ebc45a7b"
+      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
     },
     "gm/gm.d.ts": {
-      "ref": "8ea42cd8bb11863ed6f242d67c502288ebc45a7b"
+      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
     },
     "gulp-babel/gulp-babel.d.ts": {
-      "ref": "8ea42cd8bb11863ed6f242d67c502288ebc45a7b"
+      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
     }
   }
 }
