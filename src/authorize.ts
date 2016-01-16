@@ -5,28 +5,18 @@ import config from './config';
 export default function(req: any): Promise<any> {
 	'use strict';
 	return new Promise<Object>((resolve, reject) => {
-		if (req.headers['passkey'] !== undefined && req.headers['passkey'] !== null) {
-			if (req.headers['passkey'] === config.apiPasskey) {
-				if (req.headers['user-id'] !== null) {
-					User.findById(req.headers['user-id'], (err: any, user: IUser) => {
-						resolve({
-							app: null,
-							user: user
-						});
-					});
-				} else {
-					resolve({
-						app: null,
-						user: null
-					});
-				}
-			} else {
-				reject();
-			}
+		if (req.headers['passkey'] === undefined || req.headers['passkey'] === null) {
+			resolve({ app: null, user: null });
+		} else if (req.headers['passkey'] !== config.apiPasskey) {
+			reject();
+		} else if (req.headers['user-id'] === null) {
+			resolve({ app: null, user: null });
 		} else {
-			resolve({
-				app: null,
-				user: null
+			User.findById(req.headers['user-id'], (err: any, user: IUser) => {
+				resolve({
+					app: null,
+					user: user
+				});
 			});
 		}
 	});
