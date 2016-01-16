@@ -30,7 +30,7 @@
     "connect-redis": "3.0.2",
     "gm": "1.21.1",
     "hapi": "12.1.0",
-    "mongoose": "4.3.5",
+    "mongoose": "4.3.6",
     "mongoose-auto-increment": "5.0.1",
     "mongoose-deep-populate": "2.0.3",
     "powerful": "8.0.1",
