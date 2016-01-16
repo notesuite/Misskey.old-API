@@ -16,7 +16,7 @@ export default function(): void {
 
 	endpoints.forEach(endpoint => {
 		if (endpoint.endpoint === 'album/files/upload') {
-			(<any>server).route({
+			server.route({
 				method: 'post',
 				path: `/${endpoint.endpoint}`,
 				config: {
