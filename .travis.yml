@@ -16,3 +16,4 @@ addons:
 cache:
   directories:
     - node_modules
+    - $HOME/.dtsm
