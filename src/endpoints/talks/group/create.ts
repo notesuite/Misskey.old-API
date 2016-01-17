@@ -1,5 +1,6 @@
 import {TalkGroup} from '../../../models';
 import {IApplication, IUser, ITalkGroup} from '../../../interfaces';
+import {isGroupName} from '../../../spec';
 
 /**
  * TalkGroupを作成します
@@ -17,12 +18,8 @@ export default function(
 
 	name = name.trim();
 
-	if (name.length > 30) {
-		return <Promise<any>>Promise.reject('too-long-name');
-	}
-
-	if (name.length === 0) {
-		return <Promise<any>>Promise.reject('empty-name');
+	if (!isGroupName(name.length)) {
+		return <Promise<any>>Promise.reject('invalid-name');
 	}
 
 	return new Promise<Object>((resolve, reject) => {
