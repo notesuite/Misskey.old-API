@@ -1,13 +1,14 @@
 import * as bcrypt from 'bcrypt';
 import {User} from '../../models';
 import {IUser} from '../../interfaces';
+import {isScreenName} from '../../spec';
 
 export default function(screenName: string, password: string): Promise<IUser> {
 	'use strict';
 
 	return (screenName === undefined || screenName === null || screenName === '') ?
 		<Promise<any>>Promise.reject('empty-screen-name')
-	: (!/^[a-zA-Z0-9\-]{1,20}$/.test(screenName)) ?
+	: (!isScreenName(screenName)) ?
 		<Promise<any>>Promise.reject('invalid-screen-name')
 	: (password === undefined || password === null || password === '') ?
 		<Promise<any>>Promise.reject('empty-password')

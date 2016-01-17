@@ -202,6 +202,7 @@
 		"./src/rest-handlers/users/search.ts",
 		"./src/rest-handlers/users/show.ts",
 		"./src/rest-handlers/users/unfollow.ts",
-		"./src/server.ts"
+		"./src/server.ts",
+		"./src/spec.ts"
 	]
 }
