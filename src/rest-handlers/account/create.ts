@@ -1,6 +1,6 @@
-import { Match } from 'powerful';
+import {Match} from 'powerful';
 import createAccount from '../../endpoints/account/create';
-import { IApplication, IUser } from '../../interfaces';
+import {IApplication, IUser} from '../../interfaces';
 
 export default function(
 	app: IApplication,

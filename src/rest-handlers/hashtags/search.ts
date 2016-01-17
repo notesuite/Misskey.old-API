@@ -1,4 +1,4 @@
-import { IApplication, IUser } from '../../interfaces';
+import {IApplication, IUser} from '../../interfaces';
 import search from '../../endpoints/hashtags/search';
 
 export default function(

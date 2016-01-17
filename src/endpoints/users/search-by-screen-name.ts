@@ -1,4 +1,4 @@
-import { List } from 'powerful';
+import {List} from 'powerful';
 const isEmpty = List.isEmpty;
 import {User} from '../../models';
 import {IUser} from '../../interfaces';

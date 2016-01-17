@@ -1,4 +1,4 @@
-import { Schema, Connection, Document, Model } from 'mongoose';
+import {Schema, Connection, Document, Model} from 'mongoose';
 import config from '../config';
 
 export default function(db: Connection): Model<Document> {

@@ -1,4 +1,4 @@
-import { Match } from 'powerful';
+import {Match} from 'powerful';
 import {PostMention} from '../../../models';
 import {IUser, IPost, IPostMention} from '../../../interfaces';
 import serializePosts from '../../../core/serialize-posts';

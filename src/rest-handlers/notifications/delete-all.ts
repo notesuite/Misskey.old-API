@@ -1,4 +1,4 @@
-import { IApplication, IUser } from '../../interfaces';
+import {IApplication, IUser} from '../../interfaces';
 import deleteAll from '../../endpoints/notifications/delete-all';
 
 export default function(

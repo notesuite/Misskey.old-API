@@ -1,5 +1,5 @@
 import * as mongoose from 'mongoose';
-import { Schema, Connection, Document, Model } from 'mongoose';
+import {Schema, Connection, Document, Model} from 'mongoose';
 
 const base: Object = {
 	updatedAt: { type: Date, required: true, default: Date.now },

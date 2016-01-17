@@ -1,5 +1,5 @@
-import { UserFollowing, User } from '../../models';
-import { IUserFollowing, IUser } from '../../interfaces';
+import {UserFollowing, User} from '../../models';
+import {IUserFollowing, IUser} from '../../interfaces';
 import createNotification from '../../core/create-notification';
 
 /**

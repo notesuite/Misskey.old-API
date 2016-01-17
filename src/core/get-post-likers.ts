@@ -1,4 +1,4 @@
-import { List, Match } from 'powerful';
+import {List, Match} from 'powerful';
 const isEmpty = List.isEmpty;
 import {PostLike} from '../models';
 import {IUser, IPostLike} from '../interfaces';

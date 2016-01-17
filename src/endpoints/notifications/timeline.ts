@@ -1,4 +1,4 @@
-import { Match } from 'powerful';
+import {Match} from 'powerful';
 import {Notification} from '../../models';
 import {IUser, INotification} from '../../interfaces';
 import serializeNotification from '../../core/serialize-notification';

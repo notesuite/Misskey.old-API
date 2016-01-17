@@ -1,4 +1,4 @@
-import { IApplication, IUser } from '../../interfaces';
+import {IApplication, IUser} from '../../interfaces';
 import getTimeline from '../../endpoints/posts/timeline';
 
 export default function(

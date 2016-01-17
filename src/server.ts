@@ -1,4 +1,4 @@
-import { dataSize } from 'powerful';
+import {dataSize} from 'powerful';
 import * as cluster from 'cluster';
 const hapi = require('hapi');
 import endpoints from './endpoints';

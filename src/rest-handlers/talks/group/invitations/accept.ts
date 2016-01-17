@@ -1,4 +1,4 @@
-import { IApplication, IUser } from '../../../../interfaces';
+import {IApplication, IUser} from '../../../../interfaces';
 import accept from '../../../../endpoints/talks/group/invitations/accept';
 
 export default function(

@@ -1,6 +1,6 @@
-import { Match } from 'powerful';
-import { Repost } from '../../../models';
-import { IUser, IRepost } from '../../../interfaces';
+import {Match} from 'powerful';
+import {Repost} from '../../../models';
+import {IUser, IRepost} from '../../../interfaces';
 import serializePosts from '../../../core/serialize-posts';
 
 /**

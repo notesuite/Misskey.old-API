@@ -1,4 +1,4 @@
-import { IApplication, IUser } from '../../../interfaces';
+import {IApplication, IUser} from '../../../interfaces';
 import update from '../../../endpoints/account/tags/update';
 
 export default function(

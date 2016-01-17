@@ -1,4 +1,4 @@
-import { IApplication, IUser } from '../../../../interfaces';
+import {IApplication, IUser} from '../../../../interfaces';
 import timelineUnreadsCount from '../../../../endpoints/posts/timeline/unread/count';
 
 export default function(

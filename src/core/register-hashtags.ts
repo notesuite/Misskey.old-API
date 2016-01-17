@@ -1,5 +1,5 @@
-import { Hashtag } from '../models';
-import { IUser, IHashtag } from '../interfaces';
+import {Hashtag} from '../models';
+import {IUser, IHashtag} from '../interfaces';
 
 export default function(me: IUser, hashtags: string[]): void {
 	'use strict';

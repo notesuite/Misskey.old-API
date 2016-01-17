@@ -11,13 +11,13 @@ import bbsTopic from './models/bbs-topic';
 import bbsWatching from './models/bbs-watching';
 import hashtag from './models/hashtag';
 import notification from './models/notification';
-import { post, status, reply, repost } from './models/post';
+import {post, status, reply, repost} from './models/post';
 import postLike from './models/post-like';
 import postMention from './models/post-mention';
 import * as talk from './models/talk-message';
 import talkGroup from './models/talk-group';
 import talkGroupInvitation from './models/talk-group-invitation';
-import { talkHistory, talkUserHistory, talkGroupHistory } from './models/talk-history';
+import {talkHistory, talkUserHistory, talkGroupHistory} from './models/talk-history';
 import user from './models/user';
 import userFollowing from './models/user-following';
 

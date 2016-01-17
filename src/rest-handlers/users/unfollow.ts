@@ -1,4 +1,4 @@
-import { IApplication, IUser } from '../../interfaces';
+import {IApplication, IUser} from '../../interfaces';
 import unfollow from '../../endpoints/users/unfollow';
 
 export default function(

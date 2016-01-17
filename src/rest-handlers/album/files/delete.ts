@@ -1,4 +1,4 @@
-import { IApplication, IUser } from '../../../interfaces';
+import {IApplication, IUser} from '../../../interfaces';
 import del from '../../../endpoints/album/files/delete';
 
 export default function(

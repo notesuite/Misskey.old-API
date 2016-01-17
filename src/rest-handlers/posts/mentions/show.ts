@@ -1,4 +1,4 @@
-import { IApplication, IUser } from '../../../interfaces';
+import {IApplication, IUser} from '../../../interfaces';
 import show from '../../../endpoints/posts/mentions/show';
 
 export default function(

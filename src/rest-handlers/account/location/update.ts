@@ -1,4 +1,4 @@
-import { IApplication, IUser } from '../../../interfaces';
+import {IApplication, IUser} from '../../../interfaces';
 import updateLocation from '../../../endpoints/account/location/update';
 
 export default function(

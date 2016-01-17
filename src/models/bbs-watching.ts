@@ -1,4 +1,4 @@
-import { Schema, Connection, Document, Model } from 'mongoose';
+import {Schema, Connection, Document, Model} from 'mongoose';
 
 export default function(db: Connection): Model<Document> {
 	'use strict';

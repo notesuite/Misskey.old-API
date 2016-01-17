@@ -1,4 +1,4 @@
-import { List } from 'powerful';
+import {List} from 'powerful';
 const isEmpty = List.isEmpty;
 import {Hashtag} from '../../models';
 import {IHashtag} from '../../interfaces';

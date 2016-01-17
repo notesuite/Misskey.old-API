@@ -1,4 +1,4 @@
-import { IApplication, IUser } from '../../../../interfaces';
+import {IApplication, IUser} from '../../../../interfaces';
 import talksUnreadCount from '../../../../endpoints/talks/messages/unread/count';
 
 export default function(

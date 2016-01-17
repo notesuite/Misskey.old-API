@@ -1,4 +1,4 @@
-import { IApplication, IUser } from '../../../../interfaces';
+import {IApplication, IUser} from '../../../../interfaces';
 import decline from '../../../../endpoints/talks/group/invitations/decline';
 
 export default function(

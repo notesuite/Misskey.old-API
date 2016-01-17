@@ -1,4 +1,4 @@
-import { IApplication, IUser } from '../../../interfaces';
+import {IApplication, IUser} from '../../../interfaces';
 import filesStream from '../../../endpoints/album/files/stream';
 
 export default function(

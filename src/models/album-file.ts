@@ -1,4 +1,4 @@
-import { Schema, Connection, Document, Model } from 'mongoose';
+import {Schema, Connection, Document, Model} from 'mongoose';
 import * as mongooseAutoIncrement from 'mongoose-auto-increment';
 import config from '../config';
 

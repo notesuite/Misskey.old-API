@@ -1,5 +1,5 @@
 import * as cluster from 'cluster';
-import { Task, print } from 'powerful';
+import {Task, print} from 'powerful';
 import * as os from 'os';
 import startServer from './server';
 

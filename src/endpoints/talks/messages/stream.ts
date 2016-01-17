@@ -1,4 +1,4 @@
-import { List, Match } from 'powerful';
+import {List, Match} from 'powerful';
 const isEmpty = List.isEmpty;
 import {TalkGroup, TalkGroupMessageBase, TalkUserMessage} from '../../../models';
 import {ITalkGroup, ITalkMessage, IUser} from '../../../interfaces';

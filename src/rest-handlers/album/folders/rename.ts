@@ -1,4 +1,4 @@
-import { IApplication, IUser } from '../../../interfaces';
+import {IApplication, IUser} from '../../../interfaces';
 import rename from '../../../endpoints/album/folders/rename';
 
 export default function(

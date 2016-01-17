@@ -1,5 +1,5 @@
-import { UserFollowing } from '../models';
-import { IUserFollowing } from '../interfaces';
+import {UserFollowing} from '../models';
+import {IUserFollowing} from '../interfaces';
 
 export default function(meId: string, otherpartyId: string): Promise<boolean> {
 	'use strict';

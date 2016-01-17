@@ -1,4 +1,4 @@
-import { List, Match } from 'powerful';
+import {List, Match} from 'powerful';
 const isEmpty = List.isEmpty;
 import {Post, UserFollowing} from '../../models';
 import {IUser, IUserFollowing, IPost} from '../../interfaces';

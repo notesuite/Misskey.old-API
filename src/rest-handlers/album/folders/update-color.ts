@@ -1,4 +1,4 @@
-import { IApplication, IUser } from '../../../interfaces';
+import {IApplication, IUser} from '../../../interfaces';
 import recolor from '../../../endpoints/album/folders/update-color';
 
 export default function(

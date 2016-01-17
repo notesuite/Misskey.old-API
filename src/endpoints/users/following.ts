@@ -1,4 +1,4 @@
-import { Match } from 'powerful';
+import {Match} from 'powerful';
 import {UserFollowing} from '../../models';
 import {IUser, IUserFollowing} from '../../interfaces';
 import serializeUser from '../../core/serialize-user';

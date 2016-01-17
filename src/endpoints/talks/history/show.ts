@@ -1,4 +1,4 @@
-import { List } from 'powerful';
+import {List} from 'powerful';
 const isEmpty = List.isEmpty;
 import {TalkHistory} from '../../../models';
 import {ITalkMessage, IUser, ITalkHistory} from '../../../interfaces';

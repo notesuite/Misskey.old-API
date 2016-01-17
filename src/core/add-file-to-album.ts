@@ -1,4 +1,4 @@
-import { dataSize } from 'powerful';
+import {dataSize} from 'powerful';
 import * as crypto from 'crypto';
 import * as request from 'request';
 import * as gm from 'gm';

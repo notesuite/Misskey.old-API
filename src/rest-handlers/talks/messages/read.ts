@@ -1,4 +1,4 @@
-import { IApplication, IUser } from '../../../interfaces';
+import {IApplication, IUser} from '../../../interfaces';
 import readMessage from '../../../endpoints/talks/messages/read';
 
 export default function(
