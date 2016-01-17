@@ -1,10 +1,11 @@
 import {AlbumFolder} from '../../../models';
 import {IUser, IAlbumFolder} from '../../../interfaces';
+import {isUserColor} from '../../../spec';
 
 export default function(user: IUser, folderId: string, color: string): Promise<Object> {
 	'use strict';
 
-	if (!/^#[a-fA-F0-9]{6}$/.exec(color)) {
+	if (!isUserColor(color)) {
 		return <Promise<any>>Promise.reject('invalid-format');
 	}
 
