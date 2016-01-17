@@ -13,40 +13,40 @@
     }
   },
   "dependencies": {
-    "gulp/gulp.d.ts": {
-      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
-    },
-    "gulp-typescript/gulp-typescript.d.ts": {
-      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
-    },
-    "gulp-tslint/gulp-tslint.d.ts": {
-      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
-    },
-    "mongoose/mongoose.d.ts": {
+    "bcrypt/bcrypt.d.ts": {
       "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
     },
     "body-parser/body-parser.d.ts": {
       "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
     },
-    "multer/multer.d.ts": {
+    "gm/gm.d.ts": {
       "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
     },
-    "bcrypt/bcrypt.d.ts": {
+    "gulp/gulp.d.ts": {
+      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
+    },
+    "gulp-babel/gulp-babel.d.ts": {
+      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
+    },
+    "gulp-tslint/gulp-tslint.d.ts": {
+      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
+    },
+    "gulp-typescript/gulp-typescript.d.ts": {
+      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
+    },
+    "mongoose/mongoose.d.ts": {
+      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
+    },
+    "mongoose-auto-increment/mongoose-auto-increment.d.ts": {
+      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
+    },
+    "multer/multer.d.ts": {
       "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
     },
     "redis/redis.d.ts": {
       "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
     },
     "request/request.d.ts": {
-      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
-    },
-    "mongoose-auto-increment/mongoose-auto-increment.d.ts": {
-      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
-    },
-    "gm/gm.d.ts": {
-      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
-    },
-    "gulp-babel/gulp-babel.d.ts": {
       "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
     }
   }
