@@ -18,7 +18,7 @@ export default function(
 
 	name = name.trim();
 
-	if (!isGroupName(name.length)) {
+	if (!isGroupName(name)) {
 		return <Promise<any>>Promise.reject('invalid-name');
 	}
 
