@@ -2,9 +2,9 @@ import {User} from './models';
 import {IUser} from './interfaces';
 import config from './config';
 
-export default function(req: any): Promise<any> {
+export default function(req: any): Promise<{ app: any, user: any }> {
 	'use strict';
-	return new Promise<any>((resolve, reject) => {
+	return new Promise<{ app: any, user: any }>((resolve, reject) => {
 		if (req.headers['passkey'] === undefined || req.headers['passkey'] === null) {
 			resolve({ app: null, user: null });
 		} else if (req.headers['passkey'] !== config.apiPasskey) {
