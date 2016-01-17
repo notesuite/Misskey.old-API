@@ -15,10 +15,10 @@ export default function(): void {
 	server.connection({ port: config.port.http });
 
 	endpoints.forEach(endpoint => {
-		if (endpoint.endpoint === 'album/files/upload') {
+		if (endpoint.name === 'album/files/upload') {
 			server.route({
 				method: 'post',
-				path: `/${endpoint.endpoint}`,
+				path: `/${endpoint.name}`,
 				config: {
 					payload: {
 						output: 'file',
@@ -34,7 +34,7 @@ export default function(): void {
 		} else {
 			server.route({
 				method: 'post',
-				path: `/${endpoint.endpoint}`,
+				path: `/${endpoint.name}`,
 				handler: (request: any, reply: any): void => {
 					apiHandler(endpoint, request, reply);
 				}
