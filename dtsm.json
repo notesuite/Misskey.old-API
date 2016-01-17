@@ -25,9 +25,6 @@
     "mongoose/mongoose.d.ts": {
       "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
     },
-    "express/express.d.ts": {
-      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
-    },
     "body-parser/body-parser.d.ts": {
       "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
     },
