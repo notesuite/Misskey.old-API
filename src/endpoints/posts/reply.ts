@@ -94,7 +94,7 @@ export default function(
 				(<any>latestPost)._doc.text !== null &&
 				text !== null &&
 				text === (<any>latestPost)._doc.text &&
-				inReplyToPostId === (<any>latestPost)._doc.inReplyToPost
+				inReplyToPostId === (<any>latestPost)._doc.inReplyToPost.toString()
 			) {
 				return reject('content-duplicate');
 			}
