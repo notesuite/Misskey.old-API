@@ -7,8 +7,8 @@ const base: Object = {
 	createdAt: { type: Date, required: true, default: Date.now },
 	cursor: { type: Number },
 	isDeleted: { type: Boolean, required: false, default: false },
-	nextPost: { type: Schema.Types.ObjectId, required: true, ref: 'Post' },
-	prevPost: { type: Schema.Types.ObjectId, required: true, ref: 'Post' },
+	nextPost: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Post' },
+	prevPost: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Post' },
 	// 各スキーマが実装します
 	// type: { type: String, required: true },
 	user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
