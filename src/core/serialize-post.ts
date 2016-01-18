@@ -23,7 +23,7 @@ export default function serializePost(
 					serializeStatus(resolve, reject, postObj, me);
 					break;
 				case 'reply':
-					serializeReply(resolve, reject, postObj, me);
+					serializeReply(resolve, reject, postObj, me, includeReply);
 					break;
 				case 'repost':
 					serializeRepost(resolve, reject, postObj, me);
