@@ -4,17 +4,23 @@ import * as mongooseAutoIncrement from 'mongoose-auto-increment';
 // Base schema of post
 const base: Object = {
 	app: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Application' },
-	channel: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Channel' },
 	createdAt: { type: Date, required: true, default: Date.now },
 	cursor: { type: Number },
 	isDeleted: { type: Boolean, required: false, default: false },
-	likesCount: { type: Number, required: false, default: 0 },
-	repliesCount: { type: Number, required: false, default: 0 },
-	repostsCount: { type: Number, required: false, default: 0 },
+	nextPost: { type: Schema.Types.ObjectId, required: true, ref: 'Post' },
+	prevPost: { type: Schema.Types.ObjectId, required: true, ref: 'Post' },
 	// 各スキーマが実装します
 	// type: { type: String, required: true },
 	user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
 };
+
+const generalBase: Object = Object.assign({
+	channel: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Channel' },
+	likesCount: { type: Number, required: false, default: 0 },
+	repliesCount: { type: Number, required: false, default: 0 },
+	repostsCount: { type: Number, required: false, default: 0 },
+	user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
+}, base);
 
 const toObject: any = (doc: any, ret: any) => {
 	// General
@@ -59,7 +65,7 @@ export function post(db: Connection): Model<Document> {
 
 	const schema = new Schema(Object.assign({
 		type: { type: String, required: true }
-	}, base));
+	}, generalBase));
 
 	if (!(<any>schema).options.toObject) {
 		(<any>schema).options.toObject = {};
@@ -77,7 +83,7 @@ export function status(db: Connection): Model<Document> {
 		hashtags: { type: [String], required: false, default: [] },
 		text: { type: String, required: false, default: null },
 		type: { type: String, required: true, default: 'status' }
-	}, base));
+	}, generalBase));
 
 	initSchema(db, schema);
 
@@ -93,7 +99,7 @@ export function reply(db: Connection): Model<Document> {
 		inReplyToPost: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Post' },
 		text: { type: String, required: false, default: null },
 		type: { type: String, required: true, default: 'reply' }
-	}, base));
+	}, generalBase));
 
 	initSchema(db, schema);
 
@@ -103,15 +109,10 @@ export function reply(db: Connection): Model<Document> {
 export function repost(db: Connection): Model<Document> {
 	'use strict';
 
-	const schema = new Schema({
-		app: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Application' },
-		createdAt: { type: Date, required: true, default: Date.now },
-		cursor: { type: Number },
-		isDeleted: { type: Boolean, required: false, default: false },
+	const schema = new Schema(Object.assign({
 		post: { type: Schema.Types.ObjectId, required: true, ref: 'Post' },
-		type: { type: String, required: true, default: 'repost' },
-		user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
-	});
+		type: { type: String, required: true, default: 'repost' }
+	}, base));
 
 	initSchema(db, schema);
 

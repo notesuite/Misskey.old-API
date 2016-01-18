@@ -26,7 +26,7 @@ export default function(db: Connection): Model<Document> {
 		isSuspended: { type: Boolean, required: false, default: false },
 		isVerified: { type: Boolean, required: false, default: false },
 		lang: { type: String, required: true },
-		latestStatusText: { type: String, required: false, default: null },
+		latestPost: { type: Schema.Types.ObjectId, required: false, default: null },
 		likedCount: { type: Number, required: false, default: 0 },
 		likesCount: { type: Number, required: false, default: 0 },
 		location: { type: String, required: false, default: null },
@@ -78,7 +78,6 @@ export default function(db: Connection): Model<Document> {
 		delete ret.screenNameLower;
 		delete ret.email;
 		delete ret.encryptedPassword;
-		delete ret.latestStatusText;
 	};
 
 	return db.model('User', schema, 'Users');

@@ -22,7 +22,7 @@ export interface IUser extends Document {
 	isSuspended: Boolean;
 	isVerified: Boolean;
 	lang: string;
-	latestStatusText: string;
+	latestPost: string | Types.ObjectId | IPost;
 	likedCount: number;
 	likesCount: number;
 	location: string;
@@ -82,6 +82,8 @@ export interface IPost extends Document {
 	cursor: number;
 	isDeleted: boolean;
 	likesCount: number;
+	prevPost: string | Types.ObjectId | IPost;
+	nextPost: string | Types.ObjectId | IPost;
 	repliesCount: number;
 	repostsCount: number;
 	type: string;
