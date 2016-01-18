@@ -52,11 +52,10 @@ export default function(
 
 		// types指定時
 		if (types !== null) {
-			const typesArray: string[] = types.split(',').map(type => {
-				return type.trim();
-			}).filter(type => {
-				return type !== '';
-			});
+			const typesArray: string[] = types
+				.split(',')
+				.map(type => type.trim())
+				.filter(type => type !== '');
 			query.type = {$in: typesArray};
 		}
 
