@@ -17,7 +17,7 @@ export default function(endpoint: any, req: any, res: any): void {
 
 	authorize(req).then((context: any) => {
 		if (endpoint.login) {
-			const limitKey = endpoint.hasOwnProperty('limitKey') ? endpoint.limitKey : endpoint.endpoint;
+			const limitKey = endpoint.hasOwnProperty('limitKey') ? endpoint.limitKey : endpoint.name;
 
 			if (endpoint.hasOwnProperty('minInterval')) {
 				detectBriefInterval();
@@ -30,7 +30,7 @@ export default function(endpoint: any, req: any, res: any): void {
 			// 短い期間の方のリミット
 			function detectBriefInterval(): void {
 				const minIntervalLimiter = new Limiter({
-					id: `${context.user.id}:${limitKey}:for-detect-brief-interval`,
+					id: `${context.user.id}:${endpoint.name}:for-detect-brief-interval`,
 					duration: endpoint.minInterval,
 					max: 1,
 					db: limiterDb
