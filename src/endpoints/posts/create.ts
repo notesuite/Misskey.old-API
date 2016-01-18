@@ -1,5 +1,5 @@
-import {Status} from '../../models';
-import {IApplication, IUser, IStatus, IAlbumFile} from '../../interfaces';
+import {Post, Status} from '../../models';
+import {IApplication, IUser, IPost, IStatus, IAlbumFile} from '../../interfaces';
 import publishUserStream from '../../core/publish-user-stream';
 import serializePost from '../../core/serialize-post';
 import savePostMentions from '../../core/save-post-mentions';
@@ -79,69 +79,85 @@ export default function(
 			return reject('text-or-files-is-required');
 		}
 
-		// 最後のStatusとテキストが同じならエラー(連投検知)
-		if (text !== null && text === user.latestStatusText) {
-			return reject('content-duplicate');
-		}
+		// 最後の投稿を取得
+		Post.findById(<string>user.latestPost, (latestPostFindErr: any, latestPost: IPost) => {
+			// 最後のStatusとテキストが同じならエラー(連投検知)
+			if (latestPost !== null &&
+				(<any>latestPost)._doc.type === 'status' &&
+				(<any>latestPost)._doc.text !== null &&
+				text !== null &&
+				text === (<any>latestPost)._doc.text
+			) {
+				return reject('content-duplicate');
+			}
 
-		// 添付ファイルがあれば添付ファイルのバリデーションを行う
-		if (fileIds !== null) {
-			Promise.all(fileIds.map(fileId => getAlbumFile(user.id, fileId)))
-			.then(files => {
-				create(files);
-			}, (filesCheckErr: any) => {
-				reject(filesCheckErr);
-			});
-		} else {
-			create(null);
-		}
+			// 添付ファイルがあれば添付ファイルのバリデーションを行う
+			if (fileIds !== null) {
+				Promise.all(fileIds.map(fileId => getAlbumFile(user.id, fileId)))
+				.then(files => {
+					create(files);
+				}, (filesCheckErr: any) => {
+					reject(filesCheckErr);
+				});
+			} else {
+				create(null);
+			}
 
-		function create(files: IAlbumFile[]): void {
-			// ハッシュタグ抽出
-			const hashtags: string[] = extractHashtags(text);
+			function create(files: IAlbumFile[]): void {
+				// ハッシュタグ抽出
+				const hashtags: string[] = extractHashtags(text);
 
-			// 作成
-			Status.create({
-				app: app !== null ? app.id : null,
-				user: user.id,
-				files: files !== null ? files.map(file => file.id) : null,
-				text: text,
-				hashtags: hashtags
-			}, (createErr: any, createdStatus: IStatus) => {
-				if (createErr !== null) {
-					return reject(createErr);
-				}
-
-				// 投稿数インクリメント
-				user.postsCount++;
-				// 最終StatusTextを更新
-				user.latestStatusText = createdStatus.text;
-				user.save((saveErr: any, user2: IUser) => {
-					if (saveErr !== null) {
-						return reject(saveErr);
+				// 作成
+				Status.create({
+					app: app !== null ? app.id : null,
+					user: user.id,
+					files: files !== null ? files.map(file => file.id) : null,
+					text: text,
+					hashtags: hashtags,
+					prevPost: latestPost !== null ? latestPost.id : null,
+					nextPost: null
+				}, (createErr: any, createdStatus: IStatus) => {
+					if (createErr !== null) {
+						return reject(createErr);
 					}
-					// Resolve promise
-					serializePost(createdStatus, user2).then(serialized => {
-						resolve(serialized);
-					}, (serializeErr: any) => {
-						reject(serializeErr);
+
+					// 投稿数インクリメント
+					user.postsCount++;
+					// 最終Postを更新
+					user.latestPost = createdStatus.id;
+					user.save((saveErr: any, user2: IUser) => {
+						if (saveErr !== null) {
+							return reject(saveErr);
+						}
+						// Resolve promise
+						serializePost(createdStatus, user2).then(serialized => {
+							resolve(serialized);
+						}, (serializeErr: any) => {
+							reject(serializeErr);
+						});
+					});
+
+					// ハッシュタグをデータベースに登録
+					registerHashtags(user, hashtags);
+
+					// メンションを抽出してデータベースに登録
+					savePostMentions(user, createdStatus, createdStatus.text);
+
+					// 作成した投稿を前の投稿の次の投稿に設定する
+					if (latestPost !== null) {
+						latestPost.nextPost = createdStatus.id;
+						latestPost.save();
+					}
+
+					// Streaming
+					publishUserStream(user.id, {
+						type: 'post',
+						value: {
+							id: createdStatus.id
+						}
 					});
 				});
-
-				// ハッシュタグをデータベースに登録
-				registerHashtags(user, hashtags);
-
-				// メンションを抽出してデータベースに登録
-				savePostMentions(user, createdStatus, createdStatus.text);
-
-				// Streaming
-				publishUserStream(user.id, {
-					type: 'post',
-					value: {
-						id: createdStatus.id
-					}
-				});
-			});
-		}
+			}
+		});
 	});
 }
