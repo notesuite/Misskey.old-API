@@ -35,10 +35,12 @@ export default function(
 	return new Promise<Object[]>((resolve, reject) => {
 		// タイムライン取得用のクエリを生成
 		let query: any = {user: targetUserId};
+		let sort: any = {createdAt: -1};
 
 		// cursor指定時
 		if (sinceCursor !== null) {
 			query.cursor = {$gt: sinceCursor};
+			sort = {createdAt: 1};
 		} else if (maxCursor !== null) {
 			query.cursor = {$lt: maxCursor};
 		}
@@ -61,7 +63,7 @@ export default function(
 		// クエリを発行してタイムラインを取得
 		Post
 		.find(query)
-		.sort({createdAt: -1})
+		.sort(sort)
 		.limit(limit)
 		.exec((err: any, timeline: IPost[]) => {
 			if (err !== null) {

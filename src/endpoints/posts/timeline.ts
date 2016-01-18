@@ -42,10 +42,12 @@ export default function(
 				: [user.id];
 
 			// タイムライン取得用のクエリを生成
+			let sort: any = {createdAt: -1};
 			const query = Object.assign({
 				user: { $in: followingIds }
 			}, new Match<void, any>(null)
 				.when(() => sinceCursor !== null, () => {
+					sort = {createdAt: 1};
 					return { cursor: { $gt: sinceCursor } };
 				})
 				.when(() => maxCursor !== null, () => {
@@ -57,7 +59,7 @@ export default function(
 			// クエリを発行してタイムラインを取得
 			Post
 			.find(query)
-			.sort({createdAt: -1})
+			.sort(sort)
 			.limit(limit)
 			.exec((err: any, timeline: IPost[]) => {
 				if (err !== null) {
