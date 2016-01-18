@@ -83,7 +83,7 @@ export default function(endpoint: any, req: any, res: any): void {
 		}
 
 		function call(): void {
-			require(`${__dirname}/rest-handlers/${endpoint.endpoint}`).default(
+			require(`${__dirname}/rest-handlers/${endpoint.name}`).default(
 				context.app, context.user, req, reply);
 		}
 	}, (err: any) => {
