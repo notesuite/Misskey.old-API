@@ -16,7 +16,6 @@ import serializePosts from '../../core/serialize-posts';
 export default function(
 	user: IUser,
 	targetUserId: string,
-	includeReplies: boolean = false,
 	types: string = null,
 	limit: number = 10,
 	sinceCursor: number = null,
@@ -43,11 +42,6 @@ export default function(
 			sort = {createdAt: 1};
 		} else if (maxCursor !== null) {
 			query.cursor = {$lt: maxCursor};
-		}
-
-		// includeRepliesしない場合
-		if (!includeReplies) {
-			query.inReplyToPost = null;
 		}
 
 		// types指定時
