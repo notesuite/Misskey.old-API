@@ -44,7 +44,7 @@ export default [
 	{ name: 'posts/create', login: true, limitDuration: hour, limitMax: 120, minInterval: 3000, imitKey: 'post' },
 	{ name: 'posts/reply', login: true, limitDuration: hour, limitMax: 120, minInterval: 3000, limitKey: 'post' },
 	{ name: 'posts/repost', login: true, limitDuration: hour, limitMax: 120, minInterval: 3000, limitKey: 'post' },
-	{ name: 'posts/like', login: true, limitDuration: hour, limitMax: 60 },
+	{ name: 'posts/like', login: true, limitDuration: hour, limitMax: 100 },
 	{ name: 'posts/search', login: false },
 	{ name: 'posts/likes/show', login: false },
 	{ name: 'posts/reposts/show', login: false },
