@@ -2,7 +2,7 @@
   "name": "misskey-api",
   "version": "0.0.0",
   "description": "Misskey API",
-  "main": "./built/index.js",
+  "main": "./built/main.js",
   "repository": {
     "url": "https://github.com/MissKernel/Misskey-API.git"
   },
