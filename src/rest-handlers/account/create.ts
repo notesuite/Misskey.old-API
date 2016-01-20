@@ -11,7 +11,6 @@ export default function(
 ): void {
 	'use strict';
 	createAccount(
-		app,
 		isOfficial,
 		req.payload['screen-name'],
 		req.payload['password']
