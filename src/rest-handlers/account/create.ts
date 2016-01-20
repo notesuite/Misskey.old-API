@@ -10,6 +10,7 @@ export default function(
 ): void {
 	'use strict';
 	createAccount(
+		app,
 		req.payload['screen-name'],
 		req.payload['password']
 	).then(created => {
