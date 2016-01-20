@@ -27,6 +27,13 @@ export default function(
 	const maxFileLength = 4;
 
 	return new Promise<Object>((resolve, reject) => {
+		// Check user
+		if (user === undefined || user === null) {
+			return reject('plz-authorize');
+		} else if (user.isSuspended) {
+			return reject('access-denied');
+		}
+
 		// Init 'text' parameter
 		if (text !== undefined && text !== null) {
 			text = text.trim();
