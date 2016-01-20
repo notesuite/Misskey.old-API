@@ -3,7 +3,7 @@ import {User} from '../../models';
 import {IApplication, IUser} from '../../interfaces';
 import {isScreenName} from '../../spec';
 
-export default function(app: IApplication, screenName: string, password: string, isOfficial: boolean): Promise<IUser> {
+export default function(isOfficial: boolean, screenName: string, password: string): Promise<IUser> {
 	'use strict';
 
 	return (!isOfficial) ?
