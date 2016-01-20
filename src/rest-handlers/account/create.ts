@@ -6,10 +6,12 @@ export default function(
 	app: IApplication,
 	user: IUser,
 	req: any,
-	res: any
+	res: any,
+	isOfficial: boolean
 ): void {
 	'use strict';
 	createAccount(
+		isOfficial,
 		req.payload['screen-name'],
 		req.payload['password']
 	).then(created => {
