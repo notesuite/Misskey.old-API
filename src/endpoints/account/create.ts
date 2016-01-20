@@ -3,10 +3,10 @@ import {User} from '../../models';
 import {IApplication, IUser} from '../../interfaces';
 import {isScreenName} from '../../spec';
 
-export default function(app: IApplication, screenName: string, password: string): Promise<IUser> {
+export default function(app: IApplication, screenName: string, password: string, isOfficial: boolean): Promise<IUser> {
 	'use strict';
 
-	return (app !== null) ?
+	return (!isOfficial) ?
 		<Promise<any>>Promise.reject('access-denied')
 	: (screenName === undefined || screenName === null || screenName === '') ?
 		<Promise<any>>Promise.reject('empty-screen-name')
