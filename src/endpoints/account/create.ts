@@ -1,14 +1,16 @@
 import * as bcrypt from 'bcrypt';
 import {User} from '../../models';
-import {IUser} from '../../interfaces';
+import {IApplication, IUser} from '../../interfaces';
 import {isScreenName} from '../../spec';
 
-export default function(screenName: string, password: string): Promise<IUser> {
+export default function(app: IApplication, screenName: string, password: string): Promise<IUser> {
 	'use strict';
 
-	return (screenName === undefined || screenName === null || screenName === '') ?
+	return (app !== null) ?
+		<Promise<any>>Promise.reject('access-denied')
+	: (screenName === undefined || screenName === null || screenName === '') ?
 		<Promise<any>>Promise.reject('empty-screen-name')
-	: (!isScreenName(screenName)) ?
+	: (!isScreenName(screenName) || screenName.length < 3) ?
 		<Promise<any>>Promise.reject('invalid-screen-name')
 	: (password === undefined || password === null || password === '') ?
 		<Promise<any>>Promise.reject('empty-password')
