@@ -5,7 +5,12 @@ const Limiter: any = require('ratelimiter');
 import authorize from './authorize';
 import config from './config';
 
-const limiterDb = redis.createClient(config.redis.port, config.redis.host);
+const limiterDb = redis.createClient(
+	config.redis.port,
+	config.redis.host,
+	{
+		auth_pass: config.redis.password
+	});
 
 export default function(endpoint: any, req: any, res: any): void {
 	'use strict';
