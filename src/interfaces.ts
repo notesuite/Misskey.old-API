@@ -19,6 +19,7 @@ export interface IUser extends Document {
 	isEmailVerified: Boolean;
 	isPrivate: Boolean;
 	isPro: Boolean;
+	isStaff: Boolean;
 	isSuspended: Boolean;
 	isVerified: Boolean;
 	lang: string;

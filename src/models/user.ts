@@ -23,6 +23,7 @@ export default function(db: Connection): Model<Document> {
 		isEmailVerified: { type: Boolean, required: false, default: false },
 		isPrivate: { type: Boolean, required: false, default: false },
 		isPro: { type: Boolean, required: false, default: false },
+		isStaff: { type: Boolean, required: false, default: false },
 		isSuspended: { type: Boolean, required: false, default: false },
 		isVerified: { type: Boolean, required: false, default: false },
 		lang: { type: String, required: true },
