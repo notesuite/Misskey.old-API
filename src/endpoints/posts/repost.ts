@@ -19,6 +19,13 @@ export default function(
 	'use strict';
 
 	return new Promise<Object>((resolve, reject) => {
+		// Check user
+		if (user === undefined || user === null) {
+			return reject('plz-authorize');
+		} else if (user.isSuspended) {
+			return reject('access-denied');
+		}
+
 		// Init 'inReplyToPostId' parameter
 		if (targetPostId === undefined || targetPostId === null || targetPostId === '') {
 			return reject('target-post-id-is-required');
