@@ -26,6 +26,13 @@ export default function(
 		return <Promise<any>>Promise.reject('too-long-filename');
 	} else {
 		return new Promise<Object>((resolve, reject) => {
+			// Check user
+			if (user === undefined || user === null) {
+				return reject('plz-authorize');
+			} else if (user.isSuspended) {
+				return reject('access-denied');
+			}
+
 			const appId = app !== null ? app.id : null;
 			add(appId, user.id, fileName, mimetype, file, size, unconditional).then(createdFile => {
 				resolve(createdFile.toObject());

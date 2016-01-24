@@ -3,12 +3,14 @@ import {User} from '../../models';
 import {IUser} from '../../interfaces';
 import {isScreenName} from '../../spec/user';
 
-export default function(screenName: string, password: string): Promise<IUser> {
+export default function(isOfficial: boolean, screenName: string, password: string): Promise<IUser> {
 	'use strict';
 
-	return (screenName === undefined || screenName === null || screenName === '') ?
+	return (!isOfficial) ?
+		<Promise<any>>Promise.reject('access-denied')
+	: (screenName === undefined || screenName === null || screenName === '') ?
 		<Promise<any>>Promise.reject('empty-screen-name')
-	: (!isScreenName(screenName)) ?
+	: (!isScreenName(screenName) || screenName.length < 3) ?
 		<Promise<any>>Promise.reject('invalid-screen-name')
 	: (password === undefined || password === null || password === '') ?
 		<Promise<any>>Promise.reject('empty-password')

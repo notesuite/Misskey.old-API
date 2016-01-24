@@ -25,7 +25,8 @@ export interface IConfig {
 	};
 	redis: {
 		host: string,
-		port: number
+		port: number,
+		password: string;
 	};
 	fileServer: {
 		passkey: string,
