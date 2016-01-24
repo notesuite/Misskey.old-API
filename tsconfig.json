@@ -114,8 +114,8 @@
 		"./src/endpoints/users/search.ts",
 		"./src/endpoints/users/show.ts",
 		"./src/endpoints/users/unfollow.ts",
-		"./src/index.ts",
 		"./src/interfaces.ts",
+		"./src/main.ts",
 		"./src/models.ts",
 		"./src/models/album-file.ts",
 		"./src/models/album-folder.ts",
@@ -203,6 +203,7 @@
 		"./src/rest-handlers/users/show.ts",
 		"./src/rest-handlers/users/unfollow.ts",
 		"./src/server.ts",
-		"./src/spec.ts"
+		"./src/spec/talk-group.ts",
+		"./src/spec/user.ts"
 	]
 }

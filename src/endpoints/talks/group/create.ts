@@ -1,6 +1,6 @@
 import {TalkGroup} from '../../../models';
 import {IApplication, IUser, ITalkGroup} from '../../../interfaces';
-import {isGroupName} from '../../../spec';
+import {isName} from '../../../spec/talk-group';
 
 /**
  * TalkGroupを作成します
@@ -18,7 +18,7 @@ export default function(
 
 	name = name.trim();
 
-	if (!isGroupName(name)) {
+	if (!isName(name)) {
 		return <Promise<any>>Promise.reject('invalid-name');
 	}
 

@@ -3,17 +3,12 @@ export function isScreenName(str: string): boolean {
 	return /^[a-zA-Z0-9\-]{1,20}$/.test(str);
 }
 
-export function isUserColor(str: string): boolean {
+export function isColor(str: string): boolean {
 	"use strict";
 	return /^#[a-fA-F0-9]{6}$/.test(str);
 }
 
-export function isUserName(str: string): boolean {
+export function isName(str: string): boolean {
 	"use strict";
 	return 1 <= str.length && str.length <= 20;
-}
-
-export function isGroupName(str: string): boolean {
-	"use strict";
-	return 1 <= str.length && str.length <= 30;
 }

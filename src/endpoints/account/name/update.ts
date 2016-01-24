@@ -1,5 +1,5 @@
 import {IUser} from '../../../interfaces';
-import {isUserName} from '../../../spec';
+import {isName} from '../../../spec/user';
 
 /**
  * ユーザーの名前を更新します
@@ -12,7 +12,7 @@ export default function(user: IUser, name: string): Promise<Object> {
 
 	name = name.trim();
 
-	if (!isUserName(name)) {
+	if (!isName(name)) {
 		return <Promise<any>>Promise.reject('invalid-name');
 	}
 
