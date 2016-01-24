@@ -18,6 +18,6 @@ export default function(
 			res({error: err}).code(500);
 		});
 	} else {
-		res({error: 'access-denied'}).code(500);
+		res({error: 'access-denied'}).code(403);
 	}
 }
