@@ -1,5 +1,5 @@
-import {Post, Reply} from '../../../models';
-import {IUser, IPost, IReply} from '../../../interfaces';
+import {Post, Reply} from '../../../db/db';
+import {IUser, IPost, IReply} from '../../../db/interfaces';
 import serializePosts from '../../../core/serialize-posts';
 
 /**

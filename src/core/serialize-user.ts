@@ -1,4 +1,4 @@
-import {IUser} from '../interfaces';
+import {IUser} from '../db/interfaces';
 import lookupFollowState from './lookup-follow-state';
 
 export default function(me: IUser, user: IUser): Promise<Object> {

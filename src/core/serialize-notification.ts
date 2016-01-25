@@ -1,5 +1,5 @@
-import {User, Post, TalkUserMessage} from '../models';
-import {IUser, IPost, ITalkUserMessage} from '../interfaces';
+import {User, Post, TalkUserMessage} from '../db/db';
+import {IUser, IPost, ITalkUserMessage} from '../db/interfaces';
 import serializePost from '../core/serialize-post';
 import serializeTalkMessage from '../core/serialize-talk-message';
 

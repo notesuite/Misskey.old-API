@@ -1,5 +1,5 @@
 import {Match} from 'powerful';
-import {IApplication, IUser} from '../../interfaces';
+import {IApplication, IUser} from '../../db/interfaces';
 import like from '../../endpoints/posts/like';
 
 export default function(

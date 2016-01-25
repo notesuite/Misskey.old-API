@@ -1,5 +1,5 @@
-import {TalkMessage, TalkGroup} from '../../../models';
-import {ITalkMessage, ITalkUserMessage, ITalkGroupMessage, ITalkGroup, IUser} from '../../../interfaces';
+import {TalkMessage, TalkGroup} from '../../../db/db';
+import {ITalkMessage, ITalkUserMessage, ITalkGroupMessage, ITalkGroup, IUser} from '../../../db/interfaces';
 import serialize from '../../../core/serialize-talk-message';
 import readTalkMessage from '../../../core/read-talk-message';
 

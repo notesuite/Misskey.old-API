@@ -1,5 +1,5 @@
-import {PostMention} from '../../../../models';
-import {IUser} from '../../../../interfaces';
+import {PostMention} from '../../../../db/db';
+import {IUser} from '../../../../db/interfaces';
 
 /**
  * 未読のメンションの件数を取得します

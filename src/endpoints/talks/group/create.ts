@@ -1,5 +1,5 @@
-import {TalkGroup} from '../../../models';
-import {IApplication, IUser, ITalkGroup} from '../../../interfaces';
+import {TalkGroup} from '../../../db/db';
+import {IApplication, IUser, ITalkGroup} from '../../../db/interfaces';
 import {isName} from '../../../spec/talk-group';
 
 /**

@@ -1,4 +1,4 @@
-import {IApplication, IUser} from '../../../interfaces';
+import {IApplication, IUser} from '../../../db/interfaces';
 import say from '../../../endpoints/talks/messages/say';
 
 export default function(

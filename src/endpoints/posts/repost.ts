@@ -1,5 +1,5 @@
-import {Post, Repost} from '../../models';
-import {IApplication, IUser, IPost, IRepost} from '../../interfaces';
+import {Post, Repost} from '../../db/db';
+import {IApplication, IUser, IPost, IRepost} from '../../db/interfaces';
 import publishUserStream from '../../core/publish-user-stream';
 import serializePost from '../../core/serialize-post';
 import createNotification from '../../core/create-notification';

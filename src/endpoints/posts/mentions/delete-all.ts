@@ -1,5 +1,5 @@
-import {PostMention} from '../../../models';
-import {IUser, IPostMention} from '../../../interfaces';
+import {PostMention} from '../../../db/db';
+import {IUser, IPostMention} from '../../../db/interfaces';
 
 /**
  * Mentionを全て削除します

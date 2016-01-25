@@ -1,4 +1,4 @@
-import {IApplication, IUser} from '../../../interfaces';
+import {IApplication, IUser} from '../../../db/interfaces';
 import show_ from '../../../endpoints/hashtags/trend/show';
 
 export default function(

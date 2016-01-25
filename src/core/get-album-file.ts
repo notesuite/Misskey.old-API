@@ -1,5 +1,5 @@
-import {AlbumFile} from '../models';
-import {IAlbumFile} from '../interfaces';
+import {AlbumFile} from '../db/db';
+import {IAlbumFile} from '../db/interfaces';
 
 export default function(
 	meId: string,

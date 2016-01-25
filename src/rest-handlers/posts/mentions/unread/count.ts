@@ -1,4 +1,4 @@
-import {IApplication, IUser} from '../../../../interfaces';
+import {IApplication, IUser} from '../../../../db/interfaces';
 import mentionsUnreadsCount from '../../../../endpoints/posts/mentions/unread/count';
 
 export default function(

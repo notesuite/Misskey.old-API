@@ -1,7 +1,7 @@
 import {List} from 'powerful';
 const isEmpty = List.isEmpty;
-import {Post, UserFollowing} from '../../../../models';
-import {IUser, IUserFollowing} from '../../../../interfaces';
+import {Post, UserFollowing} from '../../../../db/db';
+import {IUser, IUserFollowing} from '../../../../db/interfaces';
 
 /**
  * タイムラインにある未読の投稿の件数を取得します

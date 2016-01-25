@@ -1,6 +1,6 @@
 import {Match} from 'powerful';
-import {Post} from '../../models';
-import {IUser, IPost} from '../../interfaces';
+import {Post} from '../../db/db';
+import {IUser, IPost} from '../../db/interfaces';
 import serializePosts from '../../core/serialize-posts';
 import escapeRegexp from '../../core/escape-regexp';
 

@@ -1,7 +1,7 @@
 import {List, Match} from 'powerful';
 const isEmpty = List.isEmpty;
-import {Post, UserFollowing} from '../../models';
-import {IUser, IUserFollowing, IPost} from '../../interfaces';
+import {Post, UserFollowing} from '../../db/db';
+import {IUser, IUserFollowing, IPost} from '../../db/interfaces';
 import serializePosts from '../../core/serialize-posts';
 import readPost from '../../core/read-post';
 

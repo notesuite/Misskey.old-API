@@ -1,6 +1,6 @@
 import {Match} from 'powerful';
-import {Reply} from '../../../models';
-import {IUser, IPost} from '../../../interfaces';
+import {Reply} from '../../../db/db';
+import {IUser, IPost} from '../../../db/interfaces';
 import serializePosts from '../../../core/serialize-posts';
 
 /**

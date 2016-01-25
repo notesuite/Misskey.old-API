@@ -1,6 +1,6 @@
 import {Match} from 'powerful';
-import {UserFollowing} from '../../models';
-import {IUser, IUserFollowing} from '../../interfaces';
+import {UserFollowing} from '../../db/db';
+import {IUser, IUserFollowing} from '../../db/interfaces';
 import serializeUser from '../../core/serialize-user';
 
 /**

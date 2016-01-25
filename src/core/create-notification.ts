@@ -1,5 +1,5 @@
-import {Notification} from '../models';
-import {IApplication, INotification} from '../interfaces';
+import {Notification} from '../db/db';
+import {IApplication, INotification} from '../db/interfaces';
 import publishStreamingMessage from './publish-streaming-message';
 
 export default function(

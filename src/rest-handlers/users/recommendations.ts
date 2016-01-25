@@ -1,4 +1,4 @@
-import {IApplication, IUser} from '../../interfaces';
+import {IApplication, IUser} from '../../db/interfaces';
 import recommendations from '../../endpoints/users/recommendations';
 
 export default function(

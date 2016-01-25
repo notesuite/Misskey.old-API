@@ -1,4 +1,4 @@
-import {IApplication, IUser} from '../../interfaces';
+import {IApplication, IUser} from '../../db/interfaces';
 import screennameAvailable from '../../endpoints/screenname/available';
 
 export default function(

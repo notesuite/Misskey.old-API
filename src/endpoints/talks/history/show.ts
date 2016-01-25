@@ -1,7 +1,7 @@
 import {List} from 'powerful';
 const isEmpty = List.isEmpty;
-import {TalkHistory} from '../../../models';
-import {ITalkMessage, IUser, ITalkHistory} from '../../../interfaces';
+import {TalkHistory} from '../../../db/db';
+import {ITalkMessage, IUser, ITalkHistory} from '../../../db/interfaces';
 import serialize from '../../../core/serialize-talk-message';
 
 /**

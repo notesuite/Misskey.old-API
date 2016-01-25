@@ -1,5 +1,5 @@
-import {BBSTopic, BBSWatching} from '../../../models';
-import {IBBSTopic, IApplication, IUser} from '../../../interfaces';
+import {BBSTopic, BBSWatching} from '../../../db/db';
+import {IBBSTopic, IApplication, IUser} from '../../../db/interfaces';
 
 /**
  * bbs topicを作成します

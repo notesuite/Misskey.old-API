@@ -1,5 +1,5 @@
-import {Post, Reply} from '../../models';
-import {IApplication, IUser, IPost, IReply, IAlbumFile} from '../../interfaces';
+import {Post, Reply} from '../../db/db';
+import {IApplication, IUser, IPost, IReply, IAlbumFile} from '../../db/interfaces';
 import publishUserStream from '../../core/publish-user-stream';
 import serializePost from '../../core/serialize-post';
 import savePostMentions from '../../core/save-post-mentions';

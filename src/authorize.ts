@@ -1,5 +1,5 @@
-import {User} from './models';
-import {IUser} from './interfaces';
+import {User} from './db/db';
+import {IUser} from './db/interfaces';
 import config from './config';
 
 export default function(req: any): Promise<{ app: any, user: any, isOfficial: boolean }> {

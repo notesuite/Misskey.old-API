@@ -1,7 +1,7 @@
 import {List, Match} from 'powerful';
 const isEmpty = List.isEmpty;
-import {PostLike} from '../models';
-import {IUser, IPostLike} from '../interfaces';
+import {PostLike} from '../db/db';
+import {IUser, IPostLike} from '../db/interfaces';
 
 export default function(
 	postId: string,

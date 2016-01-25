@@ -1,4 +1,4 @@
-import {IApplication, IUser} from '../../interfaces';
+import {IApplication, IUser} from '../../db/interfaces';
 import search from '../../endpoints/users/search';
 
 export default function(

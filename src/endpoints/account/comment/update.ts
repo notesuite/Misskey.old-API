@@ -1,4 +1,4 @@
-import {IUser} from '../../../interfaces';
+import {IUser} from '../../../db/interfaces';
 
 /**
  * ユーザーのコメントを更新します

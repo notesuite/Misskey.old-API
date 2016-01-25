@@ -1,5 +1,5 @@
-import {BBSTopic, BBSPost, BBSWatching} from '../../../models';
-import {IBBSTopic, IBBSPost, IBBSWatching, IApplication, IUser} from '../../../interfaces';
+import {BBSTopic, BBSPost, BBSWatching} from '../../../db/db';
+import {IBBSTopic, IBBSPost, IBBSWatching, IApplication, IUser} from '../../../db/interfaces';
 import publishStream from '../../../core/publish-streaming-message';
 import createNotification from '../../../core/create-notification';
 

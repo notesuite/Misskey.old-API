@@ -2,8 +2,8 @@ import {dataSize} from 'powerful';
 import * as crypto from 'crypto';
 import * as request from 'request';
 import * as gm from 'gm';
-import {AlbumFile} from '../models';
-import {IAlbumFile} from '../interfaces';
+import {AlbumFile} from '../db/db';
+import {IAlbumFile} from '../db/interfaces';
 import config from '../config';
 
 /**

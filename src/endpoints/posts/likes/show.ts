@@ -1,6 +1,6 @@
 import {Match} from 'powerful';
-import {PostLike} from '../../../models';
-import {IUser, IPostLike} from '../../../interfaces';
+import {PostLike} from '../../../db/db';
+import {IUser, IPostLike} from '../../../db/interfaces';
 import serializeUser from '../../../core/serialize-user';
 
 /**

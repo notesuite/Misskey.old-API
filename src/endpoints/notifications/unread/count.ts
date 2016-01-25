@@ -1,5 +1,5 @@
-import {Notification} from '../../../models';
-import {IUser} from '../../../interfaces';
+import {Notification} from '../../../db/db';
+import {IUser} from '../../../db/interfaces';
 
 /**
  * 未読の通知の件数を取得します

@@ -1,7 +1,7 @@
 import {List} from 'powerful';
 const isEmpty = List.isEmpty;
-import {User, UserFollowing} from '../../models';
-import {IUser, IUserFollowing} from '../../interfaces';
+import {User, UserFollowing} from '../../db/db';
+import {IUser, IUserFollowing} from '../../db/interfaces';
 import serializeUser from '../../core/serialize-user';
 
 /**

@@ -1,4 +1,4 @@
-import {IUser, ITalkMessage, ITalkUserMessage, ITalkGroupMessage} from '../interfaces';
+import {IUser, ITalkMessage, ITalkUserMessage, ITalkGroupMessage} from '../db/interfaces';
 
 export default function(
 	message: ITalkMessage,

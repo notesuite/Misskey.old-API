@@ -1,5 +1,5 @@
-import {AlbumFile} from '../../../models';
-import {IUser, IAlbumFile} from '../../../interfaces';
+import {AlbumFile} from '../../../db/db';
+import {IUser, IAlbumFile} from '../../../db/interfaces';
 
 /**
  * ユーザーのBannerを更新します
