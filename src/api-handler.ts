@@ -5,7 +5,7 @@ const Limiter: any = require('ratelimiter');
 import authorize from './authorize';
 import config from './config';
 
-const limiterDb = redis.createClient(
+const limiterDB = redis.createClient(
 	config.redis.port,
 	config.redis.host,
 	{
@@ -38,7 +38,7 @@ export default function(endpoint: any, req: any, res: any): void {
 					id: `${context.user.id}:${endpoint.name}:for-detect-brief-interval`,
 					duration: endpoint.minInterval,
 					max: 1,
-					db: limiterDb
+					db: limiterDB
 				});
 
 				minIntervalLimiter.get((limitErr: any, limit: any) => {
@@ -66,7 +66,7 @@ export default function(endpoint: any, req: any, res: any): void {
 					id: `${context.user.id}:${limitKey}`,
 					duration: endpoint.limitDuration,
 					max: endpoint.limitMax,
-					db: limiterDb
+					db: limiterDB
 				});
 
 				limiter.get((limitErr: any, limit: any) => {
