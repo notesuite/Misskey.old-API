@@ -1,4 +1,4 @@
-import {IApplication, IUser} from '../../../interfaces';
+import {IApplication, IUser} from '../../../db/interfaces';
 import deleteAll from '../../../endpoints/posts/mentions/delete-all';
 
 export default function(

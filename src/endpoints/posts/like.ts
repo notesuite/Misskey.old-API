@@ -1,5 +1,5 @@
-import {User, Post, PostLike} from '../../models';
-import {IUser, IPost, IPostLike} from '../../interfaces';
+import {User, Post, PostLike} from '../../db/db';
+import {IUser, IPost, IPostLike} from '../../db/interfaces';
 import createNotification from '../../core/create-notification';
 
 /**

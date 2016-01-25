@@ -1,7 +1,7 @@
 import {List, Match} from 'powerful';
 const isEmpty = List.isEmpty;
-import {AlbumFile} from '../../../models';
-import {IUser, IAlbumFile} from '../../../interfaces';
+import {AlbumFile} from '../../../db/db';
+import {IUser, IAlbumFile} from '../../../db/interfaces';
 
 /**
  * アルバムのファイル ストリームを取得します

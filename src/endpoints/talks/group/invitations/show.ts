@@ -1,5 +1,5 @@
-import {TalkGroupInvitation} from '../../../../models';
-import {IApplication, IUser, ITalkGroupInvitation} from '../../../../interfaces';
+import {TalkGroupInvitation} from '../../../../db/db';
+import {IApplication, IUser, ITalkGroupInvitation} from '../../../../db/interfaces';
 
 /**
  * TalkGroupへの招待一覧を取得します

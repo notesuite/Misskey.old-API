@@ -1,5 +1,5 @@
-import {TalkUserMessage} from '../../../../models';
-import {IUser} from '../../../../interfaces';
+import {TalkUserMessage} from '../../../../db/db';
+import {IUser} from '../../../../db/interfaces';
 
 /**
  * 未読のトークメッセージの件数を取得します

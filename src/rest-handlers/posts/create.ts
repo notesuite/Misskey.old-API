@@ -1,4 +1,4 @@
-import {IApplication, IUser} from '../../interfaces';
+import {IApplication, IUser} from '../../db/interfaces';
 import create from '../../endpoints/posts/create';
 
 export default function(

@@ -1,5 +1,5 @@
-import {TalkGroup} from '../../../models';
-import {ITalkGroup, IUser} from '../../../interfaces';
+import {TalkGroup} from '../../../db/db';
+import {ITalkGroup, IUser} from '../../../db/interfaces';
 
 /**
  * Groupを取得します

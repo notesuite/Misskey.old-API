@@ -1,5 +1,5 @@
-import {PostMention} from '../models';
-import {IUser, IPost, IPostMention} from '../interfaces';
+import {PostMention} from '../db/db';
+import {IUser, IPost, IPostMention} from '../db/interfaces';
 import extractMentions from './extract-mentions';
 import createNotification from './create-notification';
 

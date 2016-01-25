@@ -1,5 +1,5 @@
-import {TalkMessage} from '../../../models';
-import {ITalkMessage, ITalkUserMessage, ITalkGroupMessage, IUser} from '../../../interfaces';
+import {TalkMessage} from '../../../db/db';
+import {ITalkMessage, ITalkUserMessage, ITalkGroupMessage, IUser} from '../../../db/interfaces';
 import publishStream from '../../../core/publish-streaming-message';
 
 function isUserMessage(message: ITalkMessage): message is ITalkUserMessage {

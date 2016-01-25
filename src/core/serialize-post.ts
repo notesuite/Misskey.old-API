@@ -1,5 +1,5 @@
-import {User, Post, PostLike, Repost, AlbumFile} from '../models';
-import {IUser, IPost, IAlbumFile} from '../interfaces';
+import {User, Post, PostLike, Repost, AlbumFile} from '../db/db';
+import {IUser, IPost, IAlbumFile} from '../db/interfaces';
 
 export default function serializePost(
 	post: any,

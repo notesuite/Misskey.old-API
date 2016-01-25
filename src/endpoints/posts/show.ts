@@ -1,5 +1,5 @@
-import {Post} from '../../models';
-import {IUser, IPost} from '../../interfaces';
+import {Post} from '../../db/db';
+import {IUser, IPost} from '../../db/interfaces';
 import serializePost from '../../core/serialize-post';
 import readPost from '../../core/read-post';
 

@@ -1,25 +1,25 @@
 import * as mongoose from 'mongoose';
-import config from './config';
+import config from '../config';
 
 const db = mongoose.createConnection(config.mongo.uri, config.mongo.options);
 
-import albumFile from './models/album-file';
-import albumFolder from './models/album-folder';
-import application from './models/application';
-import bbsPost from './models/bbs-post';
-import bbsTopic from './models/bbs-topic';
-import bbsWatching from './models/bbs-watching';
-import hashtag from './models/hashtag';
-import notification from './models/notification';
-import {post, status, reply, repost} from './models/post';
-import postLike from './models/post-like';
-import postMention from './models/post-mention';
-import * as talk from './models/talk-message';
-import talkGroup from './models/talk-group';
-import talkGroupInvitation from './models/talk-group-invitation';
-import {talkHistory, talkUserHistory, talkGroupHistory} from './models/talk-history';
-import user from './models/user';
-import userFollowing from './models/user-following';
+import albumFile from './album-file';
+import albumFolder from './album-folder';
+import application from './application';
+import bbsPost from './bbs-post';
+import bbsTopic from './bbs-topic';
+import bbsWatching from './bbs-watching';
+import hashtag from './hashtag';
+import notification from './notification';
+import {post, status, reply, repost} from './post';
+import postLike from './post-like';
+import postMention from './post-mention';
+import * as talk from './talk-message';
+import talkGroup from './talk-group';
+import talkGroupInvitation from './talk-group-invitation';
+import {talkHistory, talkUserHistory, talkGroupHistory} from './talk-history';
+import user from './user';
+import userFollowing from './user-following';
 
 /* tslint:disable:variable-name */
 export const AlbumFile = albumFile(db);

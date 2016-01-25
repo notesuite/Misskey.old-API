@@ -1,7 +1,7 @@
 import {List} from 'powerful';
 const isEmpty = List.isEmpty;
-import {User} from '../../models';
-import {IUser} from '../../interfaces';
+import {User} from '../../db/db';
+import {IUser} from '../../db/interfaces';
 import serializeUser from '../../core/serialize-user';
 import escapeRegexp from '../../core/escape-regexp';
 

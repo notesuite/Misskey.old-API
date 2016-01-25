@@ -1,5 +1,5 @@
-import {TalkGroupInvitation} from '../../../../models';
-import * as interfaces from '../../../../interfaces';
+import {TalkGroupInvitation} from '../../../../db/db';
+import * as interfaces from '../../../../db/interfaces';
 // import publishMessage from '../../../../core/publish-group-talk-message';
 
 /**

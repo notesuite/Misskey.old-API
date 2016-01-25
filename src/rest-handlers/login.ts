@@ -1,4 +1,4 @@
-import {IApplication, IUser} from '../interfaces';
+import {IApplication, IUser} from '../db/interfaces';
 import doLogin from '../endpoints/login';
 
 export default function(

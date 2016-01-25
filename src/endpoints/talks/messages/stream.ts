@@ -1,7 +1,7 @@
 import {List, Match} from 'powerful';
 const isEmpty = List.isEmpty;
-import {TalkGroup, TalkGroupMessageBase, TalkUserMessage} from '../../../models';
-import {ITalkGroup, ITalkMessage, IUser} from '../../../interfaces';
+import {TalkGroup, TalkGroupMessageBase, TalkUserMessage} from '../../../db/db';
+import {ITalkGroup, ITalkMessage, IUser} from '../../../db/interfaces';
 import serialize from '../../../core/serialize-talk-message';
 import readTalkMessage from '../../../core/read-talk-message';
 

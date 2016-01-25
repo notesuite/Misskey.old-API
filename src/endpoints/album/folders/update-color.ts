@@ -1,5 +1,5 @@
-import {AlbumFolder} from '../../../models';
-import {IUser, IAlbumFolder} from '../../../interfaces';
+import {AlbumFolder} from '../../../db/db';
+import {IUser, IAlbumFolder} from '../../../db/interfaces';
 import {isColor} from '../../../spec/user';
 
 export default function(user: IUser, folderId: string, color: string): Promise<Object> {

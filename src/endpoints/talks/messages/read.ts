@@ -1,5 +1,5 @@
-import {TalkMessage, TalkGroup} from '../../../models';
-import {IUser, ITalkGroup} from '../../../interfaces';
+import {TalkMessage, TalkGroup} from '../../../db/db';
+import {IUser, ITalkGroup} from '../../../db/interfaces';
 import readTalkMessage from '../../../core/read-talk-message';
 
 /**

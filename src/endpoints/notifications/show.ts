@@ -1,5 +1,5 @@
-import {Notification} from '../../models';
-import {IUser, INotification} from '../../interfaces';
+import {Notification} from '../../db/db';
+import {IUser, INotification} from '../../db/interfaces';
 import serializeNotification from '../../core/serialize-notification';
 
 export default function(shower: IUser, id: string): Promise<Object> {

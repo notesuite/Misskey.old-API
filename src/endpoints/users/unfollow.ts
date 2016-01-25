@@ -1,5 +1,5 @@
-import {UserFollowing, User} from '../../models';
-import {IUserFollowing, IUser} from '../../interfaces';
+import {UserFollowing, User} from '../../db/db';
+import {IUserFollowing, IUser} from '../../db/interfaces';
 
 /**
  * ユーザーのフォローを解除します

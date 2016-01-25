@@ -1,4 +1,4 @@
-import {IUser} from '../../../interfaces';
+import {IUser} from '../../../db/interfaces';
 import {isName} from '../../../spec/user';
 
 /**

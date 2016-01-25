@@ -1,5 +1,5 @@
-import {TalkGroup, TalkGroupMessage, TalkUserMessage, TalkUserHistory, User} from '../../../models';
-import * as interfaces from '../../../interfaces';
+import {TalkGroup, TalkGroupMessage, TalkUserMessage, TalkUserHistory, User} from '../../../db/db';
+import * as interfaces from '../../../db/interfaces';
 import getAlbumFile from '../../../core/get-album-file';
 import publishStream from '../../../core/publish-streaming-message';
 import publishMessage from '../../../core/publish-group-talk-message';

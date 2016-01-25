@@ -1,5 +1,5 @@
-import {UserFollowing} from '../models';
-import {IUserFollowing} from '../interfaces';
+import {UserFollowing} from '../db/db';
+import {IUserFollowing} from '../db/interfaces';
 import publishStreamingMessage from './publish-streaming-message';
 
 export default function<T>(publisherId: string, message: T): void {

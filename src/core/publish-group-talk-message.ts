@@ -1,5 +1,5 @@
-import {TalkGroupHistory} from '../models';
-import {ITalkGroup, ITalkMessage, ITalkGroupHistory} from '../interfaces';
+import {TalkGroupHistory} from '../db/db';
+import {ITalkGroup, ITalkMessage, ITalkGroupHistory} from '../db/interfaces';
 import publishStream from './publish-streaming-message';
 
 export default function(

@@ -1,5 +1,5 @@
-import {User} from '../models';
-import {IUser} from '../interfaces';
+import {User} from '../db/db';
+import {IUser} from '../db/interfaces';
 
 export default function(text: string): Promise<IUser[]> {
 	'use strict';

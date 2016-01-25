@@ -1,5 +1,5 @@
-import {PostMention} from '../models';
-import {IUser, IPost, IPostMention} from '../interfaces';
+import {PostMention} from '../db/db';
+import {IUser, IPost, IPostMention} from '../db/interfaces';
 
 export default function(me: IUser, post: IPost): void {
 	'use strict';

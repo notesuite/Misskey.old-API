@@ -1,4 +1,4 @@
-import {IApplication, IUser} from '../../../interfaces';
+import {IApplication, IUser} from '../../../db/interfaces';
 import create from '../../../endpoints/bbs/topics/create';
 
 export default function(

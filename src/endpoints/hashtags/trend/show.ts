@@ -1,7 +1,7 @@
 import {List} from 'powerful';
 const isEmpty = List.isEmpty;
-import {Hashtag} from '../../../models';
-import {IHashtag} from '../../../interfaces';
+import {Hashtag} from '../../../db/db';
+import {IHashtag} from '../../../db/interfaces';
 
 export default function(): Promise<string[]> {
 	'use strict';

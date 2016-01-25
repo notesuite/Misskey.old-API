@@ -1,5 +1,5 @@
-import {TalkUserMessage, TalkGroupMessage} from '../models';
-import {IUser, ITalkMessage} from '../interfaces';
+import {TalkUserMessage, TalkGroupMessage} from '../db/db';
+import {IUser, ITalkMessage} from '../db/interfaces';
 import publishStream from './publish-streaming-message';
 
 /**

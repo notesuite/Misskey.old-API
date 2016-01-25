@@ -1,6 +1,6 @@
 import * as bcrypt from 'bcrypt';
-import {User} from '../models';
-import {IUser} from '../interfaces';
+import {User} from '../db/db';
+import {IUser} from '../db/interfaces';
 
 export default function(screenName: string, password: string): Promise<Object> {
 	'use strict';

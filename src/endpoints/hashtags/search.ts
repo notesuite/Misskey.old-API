@@ -1,7 +1,7 @@
 import {List} from 'powerful';
 const isEmpty = List.isEmpty;
-import {Hashtag} from '../../models';
-import {IHashtag} from '../../interfaces';
+import {Hashtag} from '../../db/db';
+import {IHashtag} from '../../db/interfaces';
 import escapeRegexp from '../../core/escape-regexp';
 
 export default function(query: string): Promise<string[]> {

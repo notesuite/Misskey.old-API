@@ -1,6 +1,6 @@
 import {List} from 'powerful';
 const isEmpty = List.isEmpty;
-import {User} from '../../models';
+import {User} from '../../db/db';
 
 export default function(screenName: string): Promise<boolean> {
 	'use strict';
