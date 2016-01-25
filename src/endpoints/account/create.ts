@@ -1,7 +1,7 @@
 import * as bcrypt from 'bcrypt';
 import {User} from '../../db/db';
 import {IUser} from '../../db/interfaces';
-import {isScreenName} from '../../spec/user';
+import {isScreenName, isReservedScreenName} from '../../spec/user';
 
 export default function(isOfficial: boolean, screenName: string, password: string): Promise<IUser> {
 	'use strict';
@@ -10,7 +10,7 @@ export default function(isOfficial: boolean, screenName: string, password: strin
 		<Promise<any>>Promise.reject('access-denied')
 	: (screenName === undefined || screenName === null || screenName === '') ?
 		<Promise<any>>Promise.reject('empty-screen-name')
-	: (!isScreenName(screenName) || screenName.length < 3) ?
+	: (!isScreenName(screenName) || isReservedScreenName(screenName)) ?
 		<Promise<any>>Promise.reject('invalid-screen-name')
 	: (password === undefined || password === null || password === '') ?
 		<Promise<any>>Promise.reject('empty-password')
