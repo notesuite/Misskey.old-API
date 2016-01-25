@@ -14,40 +14,40 @@
   },
   "dependencies": {
     "bcrypt/bcrypt.d.ts": {
-      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
+      "ref": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
     },
     "body-parser/body-parser.d.ts": {
-      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
+      "ref": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
     },
     "gm/gm.d.ts": {
-      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
+      "ref": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
     },
     "gulp/gulp.d.ts": {
-      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
+      "ref": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
     },
     "gulp-babel/gulp-babel.d.ts": {
-      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
+      "ref": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
     },
     "gulp-tslint/gulp-tslint.d.ts": {
-      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
+      "ref": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
     },
     "gulp-typescript/gulp-typescript.d.ts": {
-      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
+      "ref": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
     },
     "mongoose/mongoose.d.ts": {
-      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
+      "ref": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
     },
     "mongoose-auto-increment/mongoose-auto-increment.d.ts": {
-      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
+      "ref": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
     },
     "multer/multer.d.ts": {
-      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
+      "ref": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
     },
     "redis/redis.d.ts": {
-      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
+      "ref": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
     },
     "request/request.d.ts": {
-      "ref": "fe563dff3428bac1260d1794e2c2ecf8f097535a"
+      "ref": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
     }
   }
 }
