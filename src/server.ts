@@ -3,7 +3,6 @@ import * as cluster from 'cluster';
 const hapi = require('hapi');
 import endpoints from './endpoints';
 import config from './config';
-
 import apiHandler from './api-handler';
 
 export default function(): void {
