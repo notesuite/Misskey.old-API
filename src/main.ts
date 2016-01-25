@@ -14,7 +14,7 @@ const startServers = Task.sync(() => startServer());
 (cluster.isMaster ? print('Welcome to Misskey API!').next(forkForEachCpu) : startServers).run();
 
 // Fork when a worker died.
-cluster.on('exit', (worker: cluster.Worker) => {
+cluster.on('exit', worker => {
 	console.log(`Worker ${worker.id} died :(`);
 	cluster.fork();
 });
