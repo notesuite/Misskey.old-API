@@ -7,7 +7,7 @@
     "url": "https://github.com/MissKernel/Misskey-API.git"
   },
   "scripts": {
-    "start": "node ./built/index.js",
+    "start": "node ./built/main.js",
     "dts": "dtsm --insight false install",
     "build": "gulp build",
     "lint": "gulp lint",
