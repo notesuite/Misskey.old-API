@@ -2,7 +2,7 @@
 
 import * as redis from 'redis';
 const Limiter: any = require('ratelimiter');
-import authorize from './authorize';
+import authenticate from './authenticate';
 import config from './config';
 
 const limiterDB = redis.createClient(
@@ -20,7 +20,7 @@ export default function(endpoint: any, req: any, res: any): void {
 		return res(data).header('Access-Control-Allow-Origin', '*');
 	}
 
-	authorize(req).then((context: any) => {
+	authenticate(req).then((context: any) => {
 		if (endpoint.login) {
 			const limitKey = endpoint.hasOwnProperty('limitKey') ? endpoint.limitKey : endpoint.name;
 
