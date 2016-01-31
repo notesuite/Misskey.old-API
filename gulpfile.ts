@@ -1,6 +1,6 @@
 /// <reference path="./typings/bundle.d.ts" />
 
-import {task, src, dest} from 'gulp';
+import {task, src, dest, watch} from 'gulp';
 import * as ts from 'gulp-typescript';
 import * as tslint from 'gulp-tslint';
 import * as babel from 'gulp-babel';
@@ -31,3 +31,7 @@ task('lint', () =>
 );
 
 task('test', ['build', 'lint']);
+
+task('watch', ['build'], () =>
+	watch('./src/**/*.ts', ['build:ts'])
+);
