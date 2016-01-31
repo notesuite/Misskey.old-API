@@ -1,4 +1,5 @@
 import {dataSize} from 'powerful';
+import {logInfo} from 'log-cool';
 import * as cluster from 'cluster';
 const hapi = require('hapi');
 import endpoints from './endpoints';
@@ -8,7 +9,7 @@ import apiHandler from './api-handler';
 export default function(): void {
 	'use strict';
 
-	console.log(`Initing server... (${cluster.worker.id})`);
+	logInfo(`(cluster: ${cluster.worker.id}) Initializing server`);
 
 	const server = new hapi.Server();
 	server.connection({ port: config.port.http });
