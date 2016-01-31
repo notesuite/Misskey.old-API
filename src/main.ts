@@ -14,7 +14,7 @@ if (cluster.isMaster) {
 
 // Fork when a worker died.
 cluster.on('exit', worker => {
-	console.log(`Worker ${worker.id} died :(`);
+	logInfo(`(cluster: ${worker.id}) Died`);
 	cluster.fork();
 });
 

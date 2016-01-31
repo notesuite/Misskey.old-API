@@ -4,6 +4,7 @@ import * as redis from 'redis';
 const Limiter: any = require('ratelimiter');
 import authenticate from './authenticate';
 import config from './config';
+import {logInfo} from 'log-cool';
 
 const limiterDB = redis.createClient(
 	config.redis.port,
@@ -14,7 +15,7 @@ const limiterDB = redis.createClient(
 
 export default function(endpoint: any, req: any, res: any): void {
 	'use strict';
-	console.log(`${req.method} ${req.path}`);
+	logInfo(`Request: ${req.method} ${req.path}`);
 
 	function reply(data: any): any {
 		return res(data).header('Access-Control-Allow-Origin', '*');

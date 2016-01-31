@@ -1,5 +1,5 @@
 import {dataSize} from 'powerful';
-import {logInfo} from 'log-cool';
+import {logInfo, logWarn} from 'log-cool';
 import * as cluster from 'cluster';
 const hapi = require('hapi');
 import endpoints from './endpoints';
@@ -45,13 +45,13 @@ export default function(): void {
 	server.route({ method: '*', path: '/{p*}', handler: notFoundHandler });
 
 	server.start(() => {
-		console.log(`MisskeyAPI server (${cluster.worker.id}) listening at ${server.info.uri}`);
+		logInfo(`(cluster: ${cluster.worker.id}) Listening at ${server.info.uri}`);
 	});
 }
 
 function notFoundHandler(req: any, res: any): any {
 	'use strict';
-	console.log(`NOT FOUND: ${req.path}`);
+	logWarn(`Request not handled: ${req.method.toUpperCase()} ${req.path}`);
 	return res({
 		error: 'api-not-found'
 	}).code(404);
