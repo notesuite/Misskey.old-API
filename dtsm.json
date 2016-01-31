@@ -48,6 +48,9 @@
     },
     "request/request.d.ts": {
       "ref": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
+    },
+    "shelljs/shelljs.d.ts": {
+      "ref": "5d0f2126c8dac8fce0ff020218aea06607213b0d"
     }
   }
 }

@@ -24,6 +24,7 @@
 		"./typings/bundle.d.ts",
 		"./src/api-handler.ts",
 		"./src/authenticate.ts",
+		"./src/check-env.ts",
 		"./src/config.ts",
 		"./src/core/add-file-to-album.ts",
 		"./src/core/create-notification.ts",
