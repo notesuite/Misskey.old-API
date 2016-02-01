@@ -1,7 +1,7 @@
 /* tslint:disable:variable-name */
 
 import * as redis from 'redis';
-const Limiter: any = require('ratelimiter');
+import * as Limiter from 'ratelimiter';
 import authenticate from './authenticate';
 import config from './config';
 import {logInfo} from 'log-cool';
@@ -42,7 +42,7 @@ export default function(endpoint: any, req: any, res: any): void {
 					db: limiterDB
 				});
 
-				minIntervalLimiter.get((limitErr: any, limit: any) => {
+				minIntervalLimiter.get((limitErr, limit) => {
 					if (limitErr !== null) {
 						return reply({
 							error: 'something-happened'
@@ -70,7 +70,7 @@ export default function(endpoint: any, req: any, res: any): void {
 					db: limiterDB
 				});
 
-				limiter.get((limitErr: any, limit: any) => {
+				limiter.get((limitErr, limit) => {
 					if (limitErr !== null) {
 						return reply({
 							error: 'something-happened'

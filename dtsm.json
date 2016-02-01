@@ -51,6 +51,9 @@
     },
     "shelljs/shelljs.d.ts": {
       "ref": "5d0f2126c8dac8fce0ff020218aea06607213b0d"
+    },
+    "ratelimiter/ratelimiter.d.ts": {
+      "ref": "717a5fdb079f8dd7c19f1b22f7f656dd990f0ccf"
     }
   }
 }
