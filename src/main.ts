@@ -7,7 +7,9 @@ import startServer from './server';
 if (cluster.isMaster) {
 	logInfo('Welcome to Misskey API');
 	checkEnv();
-	times(os.cpus().length, cluster.fork);
+	times(os.cpus().length, () => {
+		cluster.fork();
+	});
 } else {
 	startServer();
 }
