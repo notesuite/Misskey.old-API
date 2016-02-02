@@ -1,4 +1,4 @@
-import {logInfo, logWarn} from 'log-cool';
+import {logInfo, logDone, logWarn} from 'log-cool';
 import {exec, ExecOutputReturnValue} from 'shelljs';
 
 export default function(): void {
@@ -6,6 +6,7 @@ export default function(): void {
 	checkDependency('npm', 'npm -v', x => x.match(/^(.*)\r?\n$/)[1]);
 	checkDependency('MongoDB', 'mongo --version', x => x.match(/^MongoDB shell version: (.*)\r?\n$/)[1]);
 	checkDependency('Redis', 'redis-server --version', x => x.match(/v=([0-9\.]*)/)[1]);
+	logDone('Checked external dependencies');
 }
 
 function checkDependency(serviceName: string, command: string, transform: (x: string) => string): void {
