@@ -1,6 +1,5 @@
 import {TalkGroup, TalkGroupInvitation, TalkGroupMemberJoinActivity} from '../../../../db/db';
 import * as interfaces from '../../../../db/interfaces';
-import publishMessage from '../../../../core/publish-group-talk-message';
 
 /**
  * TalkGroupへの招待を承諾します
@@ -47,11 +46,6 @@ export default function(
 					TalkGroupMemberJoinActivity.create({
 						group: group.id,
 						joiner: me.id
-					}, (activityErr: any, createdActivity: interfaces.ITalkGroupMemberJoinActivity) => {
-						if (activityErr !== null) {
-							return;
-						}
-						publishMessage(<interfaces.ITalkMessage>createdActivity, group);
 					});
 				});
 			});

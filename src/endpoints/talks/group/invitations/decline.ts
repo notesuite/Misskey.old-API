@@ -1,6 +1,5 @@
 import {TalkGroupInvitation} from '../../../../db/db';
 import * as interfaces from '../../../../db/interfaces';
-// import publishMessage from '../../../../core/publish-group-talk-message';
 
 /**
  * TalkGroupへの招待を断ります

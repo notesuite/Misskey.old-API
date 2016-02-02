@@ -1,8 +1,6 @@
 import {TalkGroup, TalkGroupMessage, TalkUserMessage, TalkUserHistory, User} from '../../../db/db';
 import * as interfaces from '../../../db/interfaces';
 import getAlbumFile from '../../../core/get-album-file';
-import publishStream from '../../../core/publish-streaming-message';
-import publishMessage from '../../../core/publish-group-talk-message';
 import createNotification from '../../../core/create-notification';
 
 /**
@@ -110,21 +108,6 @@ function createUserMessage(
 
 		resolve(createdMessage.toObject());
 
-		[ // Streaming messages
-			[`user-stream:${recipient.id}`, 'talk-user-message'],
-			[`talk-user-stream:${recipient.id}-${me.id}`, 'message'],
-			[`talk-user-stream:${me.id}-${recipient.id}`, 'message']
-		].forEach(([channel, type]) => {
-			publishStream(channel, JSON.stringify({
-				type: type,
-				value: {
-					id: createdMessage.id,
-					userId: me.id,
-					text: createdMessage.text
-				}
-			}));
-		});
-
 		// 履歴を作成しておく(自分)
 		TalkUserHistory.findOne({
 			type: 'user',
@@ -205,7 +188,5 @@ function createGroupMessage(
 		}
 
 		resolve(createdMessage.toObject());
-
-		publishMessage(<interfaces.ITalkMessage>createdMessage, group);
 	});
 }

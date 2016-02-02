@@ -1,10 +1,5 @@
 import {TalkMessage} from '../../../db/db';
-import {ITalkMessage, ITalkUserMessage, ITalkGroupMessage, IUser} from '../../../db/interfaces';
-import publishStream from '../../../core/publish-streaming-message';
-
-function isUserMessage(message: ITalkMessage): message is ITalkUserMessage {
-	return message.hasOwnProperty('recipient');
-}
+import {ITalkUserMessage, ITalkGroupMessage, IUser} from '../../../db/interfaces';
 
 /**
  * Talkのメッセージを削除します
@@ -42,23 +37,6 @@ export default function(
 				}
 
 				resolve();
-
-				// Publish stream messages
-				if (isUserMessage(message)) {
-					publishStream(`talk-user-stream:${message.recipient}-${user.id}`, JSON.stringify({
-						type: 'otherparty-message-delete',
-						value: message.id
-					}));
-					publishStream(`talk-user-stream:${user.id}-${message.recipient}`, JSON.stringify({
-						type: 'me-message-delete',
-						value: message.id
-					}));
-				} else {
-					publishStream(`talk-group-stream:${message.group}`, JSON.stringify({
-						type: 'otherparty-message-delete',
-						value: message.id
-					}));
-				}
 			});
 		});
 	});

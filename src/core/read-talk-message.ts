@@ -1,6 +1,5 @@
 import {TalkUserMessage, TalkGroupMessage} from '../db/db';
 import {IUser, ITalkMessage} from '../db/interfaces';
-import publishStream from './publish-streaming-message';
 
 /**
  * メッセージを既読にします
@@ -18,17 +17,9 @@ export default function(
 					return reject('is-me');
 				}
 
-				const otherpartyId: string = <string>(<any>message)._doc.user;
-
 				TalkUserMessage.findByIdAndUpdate(message.id, { $set: { isRead: true }}, (_1, _2) => {
 					// dummy
 				});
-
-				// Publish stream message
-				publishStream(`talk-user-stream:${otherpartyId}-${me.id}`, JSON.stringify({
-					type: 'read',
-					value: message.id
-				}));
 				break;
 			case 'group-message':
 				if ((<any>message)._doc.user.toString() === me.id.toString()) {
@@ -40,12 +31,6 @@ export default function(
 				TalkGroupMessage.findByIdAndUpdate(message.id, { $set: { reads: (<string[]>(<any>message)._doc.reads).concat(me.id) }}, (_1, _2) => {
 					// dummy
 				});
-
-				// Publish stream message
-				publishStream(`talk-group-stream:${(<any>message)._doc.group}`, JSON.stringify({
-					type: 'read',
-					value: message.id
-				}));
 				break;
 			case 'group-send-invitation-activity':
 			case 'group-member-join-activity':
@@ -56,12 +41,6 @@ export default function(
 				TalkGroupMessage.findByIdAndUpdate(message.id, { $set: { reads: (<string[]>(<any>message)._doc.reads).concat(me.id) }}, (_1, _2) => {
 					// dummy
 				});
-
-				// Publish stream message
-				publishStream(`talk-group-stream:${(<any>message)._doc.group}`, JSON.stringify({
-					type: 'read',
-					value: message.id
-				}));
 				break;
 			default:
 				resolve();

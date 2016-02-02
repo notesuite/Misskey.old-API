@@ -1,6 +1,5 @@
 import {BBSTopic, BBSPost, BBSWatching} from '../../../db/db';
 import {IBBSTopic, IBBSPost, IBBSWatching, IApplication, IUser} from '../../../db/interfaces';
-import publishStream from '../../../core/publish-streaming-message';
 import createNotification from '../../../core/create-notification';
 
 /**
@@ -89,11 +88,6 @@ export default function(
 							reply.repliesCount++;
 							reply.save();
 						}
-
-						publishStream(`bbs-topic-stream:${topic.id}`, JSON.stringify({
-							type: 'post',
-							value: post.toObject()
-						}));
 
 						BBSWatching.find({
 							topic: topic.id

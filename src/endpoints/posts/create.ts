@@ -1,6 +1,5 @@
 import {Post, Status} from '../../db/db';
 import {IApplication, IUser, IPost, IStatus, IAlbumFile} from '../../db/interfaces';
-import publishUserStream from '../../core/publish-user-stream';
 import serializePost from '../../core/serialize-post';
 import savePostMentions from '../../core/save-post-mentions';
 import extractHashtags from '../../core/extract-hashtags';
@@ -153,14 +152,6 @@ export default function(
 						latestPost.nextPost = createdStatus.id;
 						latestPost.save();
 					}
-
-					// Streaming
-					publishUserStream(user.id, {
-						type: 'post',
-						value: {
-							id: createdStatus.id
-						}
-					});
 				});
 			}
 		});
