@@ -8,11 +8,7 @@ export default loadConfig();
 
 function loadConfig(): IConfig {
 	'use strict';
-	try {
-		return <IConfig>require(configPath);
-	} catch (e) {
-		return null;
-	}
+	return <IConfig>require(configPath);
 }
 
 export interface IConfig {
