@@ -8,8 +8,6 @@ export default function(
 	type: string,
 	content: any
 ): Promise<INotification> {
-	'use strict';
-
 	return new Promise<INotification>((resolve, reject) => {
 		Notification.create({
 			app: app !== null ? app.id : null,

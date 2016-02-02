@@ -7,7 +7,6 @@ export default function(
 	req: any,
 	res: any
 ): void {
-	'use strict';
 	const userId = req.payload['user-id'];
 	const groupId = req.payload['group-id'];
 	const text: string = req.payload['text'];

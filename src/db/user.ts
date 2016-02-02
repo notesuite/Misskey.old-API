@@ -2,8 +2,6 @@ import {Schema, Connection, Document, Model} from 'mongoose';
 import config from '../config';
 
 export default function(db: Connection): Model<Document> {
-	'use strict';
-
 	const schema = new Schema({
 		avatar: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFile' },
 		avatarPath: { type: String, required: false, default: null },
@@ -85,6 +83,5 @@ export default function(db: Connection): Model<Document> {
 }
 
 function encodePath(path: string): string {
-	'use strict';
 	return (<string>path).split('/').map(encodeURI).join('/');
 }

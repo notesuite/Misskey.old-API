@@ -3,7 +3,6 @@ import {IUser, INotification} from '../../db/interfaces';
 import serializeNotification from '../../core/serialize-notification';
 
 export default function(shower: IUser, id: string): Promise<Object> {
-	'use strict';
 	return new Promise<Object>((resolve, reject) => {
 		Notification.findById(id, (findErr: any, notification: INotification) => {
 			if (findErr !== null) {

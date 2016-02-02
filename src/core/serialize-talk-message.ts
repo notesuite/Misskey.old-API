@@ -5,7 +5,6 @@ export default function(
 	me: IUser,
 	includeGroup: boolean = false
 ): Promise<Object> {
-	'use strict';
 	return new Promise<Object>((resolve, reject) => {
 		switch (message.type) {
 			case 'user-message':

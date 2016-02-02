@@ -7,8 +7,6 @@ import {IUser} from '../../../db/interfaces';
  * @return 未読の通知の件数
  */
 export default function(user: IUser): Promise<number> {
-	'use strict';
-
 	return new Promise<number>((resolve, reject) => {
 		Notification
 		.find({

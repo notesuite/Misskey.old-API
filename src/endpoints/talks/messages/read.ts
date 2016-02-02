@@ -11,8 +11,6 @@ export default function(
 	user: IUser,
 	messageId: string
 ): Promise<void> {
-	'use strict';
-
 	return new Promise<void>((resolve, reject) => {
 		// 対象のメッセージを取得
 		TalkMessage.findById(messageId, (findErr: any, message: any) => {

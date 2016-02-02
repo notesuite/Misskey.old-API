@@ -21,7 +21,6 @@ cluster.on('exit', worker => {
 });
 
 function times(n: number, f: () => void): void {
-	'use strict';
 	for (let i = 1; i <= n; i++) {
 		f();
 	}

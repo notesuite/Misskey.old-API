@@ -7,7 +7,6 @@ export default function(
 	req: any,
 	res: any
 ): void {
-	'use strict';
 	followers(
 		user,
 		req.payload['user-id'],

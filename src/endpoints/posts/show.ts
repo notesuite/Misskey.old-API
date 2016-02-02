@@ -10,7 +10,6 @@ import readPost from '../../core/read-post';
  * @return 投稿オブジェクト
  */
 export default function(shower: IUser, postId: string): Promise<Object> {
-	'use strict';
 	return new Promise<Object>((resolve, reject) => {
 		// Init 'postId' parameter
 		if (postId === undefined || postId === null || postId === '') {

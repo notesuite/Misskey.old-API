@@ -20,8 +20,6 @@ export default function(
 	size: number,
 	unconditional: boolean = false
 ): Promise<Object> {
-	'use strict';
-
 	if (fileName.length > 200) {
 		return <Promise<any>>Promise.reject('too-long-filename');
 	} else {

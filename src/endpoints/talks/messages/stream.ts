@@ -23,8 +23,6 @@ export default function(
 	userId: string = null,
 	groupId: string = null
 ): Promise<Object[]> {
-	'use strict';
-
 	limit = parseInt(<any>limit, 10);
 
 	if (limit < 1) {
@@ -43,7 +41,6 @@ export default function(
 		}
 
 		function getUserStream(): void {
-			'use strict';
 			const query = Object.assign({
 				$or: [{
 					user: me.id,
@@ -85,7 +82,6 @@ export default function(
 		}
 
 		function getGroupStream(): void {
-			'use strict';
 			TalkGroup
 			.findById(groupId)
 			.exec((groupFindErr: any, group: ITalkGroup) => {

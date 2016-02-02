@@ -44,8 +44,6 @@ const toObject: any = (doc: any, ret: any) => {
 };
 
 function initSchema(db: Connection, schema: Schema): void {
-	'use strict';
-
 	mongooseAutoIncrement.initialize(db);
 
 	// Auto increment
@@ -61,8 +59,6 @@ function initSchema(db: Connection, schema: Schema): void {
 }
 
 export function post(db: Connection): Model<Document> {
-	'use strict';
-
 	const schema = new Schema(Object.assign({
 		type: { type: String, required: true }
 	}, generalBase));
@@ -76,8 +72,6 @@ export function post(db: Connection): Model<Document> {
 }
 
 export function status(db: Connection): Model<Document> {
-	'use strict';
-
 	const schema = new Schema(Object.assign({
 		files: { type: [Schema.Types.ObjectId], required: false, default: null, ref: 'AlbumFile' },
 		hashtags: { type: [String], required: false, default: [] },
@@ -91,8 +85,6 @@ export function status(db: Connection): Model<Document> {
 }
 
 export function reply(db: Connection): Model<Document> {
-	'use strict';
-
 	const schema = new Schema(Object.assign({
 		files: { type: [Schema.Types.ObjectId], required: false, default: null, ref: 'AlbumFile' },
 		hashtags: { type: [String], required: false, default: [] },
@@ -107,8 +99,6 @@ export function reply(db: Connection): Model<Document> {
 }
 
 export function repost(db: Connection): Model<Document> {
-	'use strict';
-
 	const schema = new Schema(Object.assign({
 		post: { type: Schema.Types.ObjectId, required: true, ref: 'Post' },
 		type: { type: String, required: true, default: 'repost' }

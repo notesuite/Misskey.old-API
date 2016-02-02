@@ -7,8 +7,6 @@ export default function(
 	req: any,
 	res: any
 ): void {
-	'use strict';
-
 	rename(
 		user,
 		req.payload['folder-id'],

@@ -3,8 +3,6 @@ const isEmpty = List.isEmpty;
 import {User} from '../../db/db';
 
 export default function(screenName: string): Promise<boolean> {
-	'use strict';
-
 	if (screenName) {
 		return Promise.resolve(User.find({
 			screenNameLower: screenName.toLowerCase()

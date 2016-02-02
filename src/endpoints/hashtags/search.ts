@@ -5,7 +5,6 @@ import {IHashtag} from '../../db/interfaces';
 import escapeRegexp from '../../core/escape-regexp';
 
 export default function(query: string): Promise<string[]> {
-	'use strict';
 	return new Promise<string[]>((resolve, reject) => {
 		Hashtag.find({
 			name: new RegExp(escapeRegexp(query), 'i')

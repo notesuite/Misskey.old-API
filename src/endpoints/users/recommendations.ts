@@ -13,8 +13,6 @@ export default function(
 	me: IUser,
 	limit: number = 4
 ): Promise<Object[]> {
-	'use strict';
-
 	return new Promise<Object[]>((resolve, reject) => {
 		// 自分がフォローしているユーザーの関係を取得
 		UserFollowing.find({

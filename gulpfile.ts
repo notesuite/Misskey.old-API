@@ -8,7 +8,6 @@ import * as babel from 'gulp-babel';
 task('build', ['build:ts']);
 
 function buildTypeScript(): ts.CompilationStream {
-	'use strict';
 	const project = ts.createProject('tsconfig.json', {
 		typescript: require('typescript')
 	});

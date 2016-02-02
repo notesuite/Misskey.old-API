@@ -1,5 +1,4 @@
 export default function(text: string): string[] {
-	'use strict';
 	if (text === null) {
 		return [];
 	}

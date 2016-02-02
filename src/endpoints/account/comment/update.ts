@@ -7,8 +7,6 @@ import {IUser} from '../../../db/interfaces';
  * @return ユーザーオブジェクト
  */
 export default function(user: IUser, comment: string): Promise<Object> {
-	'use strict';
-
 	comment = comment.trim();
 
 	if (comment.length > 50) {

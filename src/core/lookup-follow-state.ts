@@ -2,7 +2,6 @@ import {UserFollowing} from '../db/db';
 import {IUserFollowing} from '../db/interfaces';
 
 export default function(meId: string, otherpartyId: string): Promise<boolean> {
-	'use strict';
 	return new Promise<boolean>((resolve, reject) => {
 		UserFollowing.findOne({
 			followee: otherpartyId,

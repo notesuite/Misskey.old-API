@@ -8,8 +8,6 @@ import {IUser, IAlbumFile} from '../../../db/interfaces';
  * @return ファイルオブジェクト
  */
 export default function(user: IUser, folderId: string = null): Promise<Object[]> {
-	'use strict';
-
 	return new Promise<Object[]>((resolve, reject) => {
 		AlbumFile.find({
 			user: user.id,

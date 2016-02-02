@@ -11,8 +11,6 @@ export default function(
 	me: IUser,
 	message: ITalkMessage
 ): Promise<void> {
-	'use strict';
-
 	return new Promise<void>((resolve, reject) => {
 		switch (message.type) {
 			case 'user-message':

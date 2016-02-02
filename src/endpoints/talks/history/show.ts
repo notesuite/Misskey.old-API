@@ -15,8 +15,6 @@ export default function(
 	type: string = null,
 	limit: number = 30
 ): Promise<Object[]> {
-	'use strict';
-
 	return new Promise<Object[]>((resolve, reject) => {
 		let query: any = {
 			user: user.id

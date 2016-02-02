@@ -22,8 +22,6 @@ export default function(
 	userId: string = null,
 	groupId: string = null
 ): Promise<Object> {
-	'use strict';
-
 	const maxTextLength = 500;
 	text = text.trim();
 
@@ -100,8 +98,6 @@ function createUserMessage(
 	text: string,
 	file: interfaces.IAlbumFile = null
 ): void {
-	'use strict';
-
 	TalkUserMessage.create({
 		user: me.id,
 		recipient: recipient.id,
@@ -198,8 +194,6 @@ function createGroupMessage(
 	text: string,
 	file: interfaces.IAlbumFile = null
 ): void {
-	'use strict';
-
 	TalkGroupMessage.create({
 		user: me.id,
 		group: group.id,

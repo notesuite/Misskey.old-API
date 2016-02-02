@@ -3,8 +3,6 @@ import {User} from '../db/db';
 import {IUser} from '../db/interfaces';
 
 export default function(screenName: string, password: string): Promise<Object> {
-	'use strict';
-
 	screenName = screenName.trim();
 
 	if (screenName === '') {

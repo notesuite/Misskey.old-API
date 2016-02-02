@@ -7,8 +7,6 @@ export default function(
 	req: any,
 	res: any
 ): void {
-	'use strict';
-
 	move(user, req.payload['file-id'], req.payload['folder-id']).then(file => {
 		res(file);
 	}, (err: any) => {

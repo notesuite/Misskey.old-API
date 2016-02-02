@@ -6,8 +6,6 @@ export default function(
 	message: ITalkMessage,
 	group: ITalkGroup
 ): void {
-	'use strict';
-
 	// Streaming messages
 	(<string[]>group.members).map(member => [`user-stream:${member}`, 'talk-user-message']).concat([
 		[`talk-group-stream:${group.id}`, 'message']

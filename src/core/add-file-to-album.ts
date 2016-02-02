@@ -26,8 +26,6 @@ export default function(
 	size: number,
 	unconditional: boolean = false
 ): Promise<IAlbumFile> {
-	'use strict';
-
 	// ハッシュ生成
 	const hash: string = crypto
 		.createHash('sha256')

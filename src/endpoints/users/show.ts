@@ -10,7 +10,6 @@ import serializeUser from '../../core/serialize-user';
  * @return ユーザーオブジェクト
  */
 export default function(me: IUser, id?: string, screenName?: string): Promise<Object> {
-	'use strict';
 	return new Promise<Object>((resolve, reject) => {
 		function resolver(user: IUser): void {
 			if (user === null) {

@@ -7,7 +7,6 @@ import {IUser, INotification} from '../../db/interfaces';
  * @return Promise<なし>
  */
 export default function(user: IUser): Promise<void> {
-	'use strict';
 	return new Promise<void>((resolve, reject) => {
 		Notification.find({
 			user: user.id

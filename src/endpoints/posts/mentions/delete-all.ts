@@ -7,7 +7,6 @@ import {IUser, IPostMention} from '../../../db/interfaces';
  * @return Promise<なし>
  */
 export default function(user: IUser): Promise<void> {
-	'use strict';
 	return new Promise<void>((resolve, reject) => {
 		PostMention.find({
 			user: user.id

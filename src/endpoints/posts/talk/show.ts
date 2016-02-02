@@ -14,8 +14,6 @@ export default function(
 	postId: string,
 	limit: number = 30
 ): Promise<Object[]> {
-	'use strict';
-
 	return new Promise<Object[]>((resolve, reject) => {
 		// Init 'postId' parameter
 		if (postId === undefined || postId === null || postId === '') {
@@ -46,7 +44,6 @@ export default function(
 }
 
 function get(id: string): Promise<IPost[]> {
-	'use strict';
 	return new Promise<IPost[]>((resolve, reject) => {
 		Post.findById(id, (err: any, post: IPost) => {
 			if (err !== null) {

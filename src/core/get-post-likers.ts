@@ -9,8 +9,6 @@ export default function(
 	sinceCursor: number = null,
 	maxCursor: number = null
 ): Promise<IUser[]> {
-	'use strict';
-
 	return new Promise<IUser[]>((resolve, reject) => {
 		const query = new Match<void, any>(null)
 			.when(() => sinceCursor !== null, () => {

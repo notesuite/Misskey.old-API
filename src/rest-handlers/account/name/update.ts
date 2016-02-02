@@ -7,8 +7,6 @@ export default function(
 	req: any,
 	res: any
 ): void {
-	'use strict';
-
 	updateName(
 		user,
 		req.payload['name']

@@ -16,8 +16,6 @@ export default function(
 	user: IUser,
 	targetPostId: string
 ): Promise<Object> {
-	'use strict';
-
 	return new Promise<Object>((resolve, reject) => {
 		// Check user
 		if (user === undefined || user === null) {

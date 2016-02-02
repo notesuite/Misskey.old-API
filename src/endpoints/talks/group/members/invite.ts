@@ -18,8 +18,6 @@ export default function(
 	userId: string,
 	text: string = null
 ): Promise<Object> {
-	'use strict';
-
 	if (text !== null) {
 		text = text.trim();
 

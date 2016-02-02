@@ -6,8 +6,6 @@ export default function serializePost(
 	me: IUser = null,
 	includeReply: boolean = true
 ): Promise<Object> {
-	'use strict';
-
 	const postObj = post.toObject();
 
 	return new Promise<Object>((resolve, reject) => {
@@ -42,7 +40,6 @@ function serializeStatus(
 	post: any,
 	me: IUser = null
 ): void {
-	'use strict';
 	common(post, me).then(postObj => {
 		if (postObj.files === null) {
 			return resolve(postObj);
@@ -75,7 +72,6 @@ function serializeReply(
 	me: IUser = null,
 	includeReply: boolean = true
 ): void {
-	'use strict';
 	common(post, me).then(postObj => {
 		// Get reply source
 		if (includeReply) {
@@ -125,7 +121,6 @@ function serializeRepost(
 	post: any,
 	me: IUser = null
 ): void {
-	'use strict';
 	Post.findById(post.post, (findTargetErr: any, target: IPost) => {
 		if (findTargetErr !== null) {
 			return reject(findTargetErr);
@@ -143,7 +138,6 @@ function common(
 		post: any,
 		me: IUser = null
 ): Promise<any> {
-	'use strict';
 	return new Promise<Object>((resolve, reject) => {
 		Promise.all<boolean, boolean>([
 			// Get is liked

@@ -13,8 +13,6 @@ export default function(
 	user: IUser,
 	title: string
 ): Promise<Object> {
-	'use strict';
-
 	title = title.trim();
 
 	if (title.length === 0) {

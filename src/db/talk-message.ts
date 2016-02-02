@@ -30,7 +30,6 @@ const toObject: any = (doc: any, ret: any) => {
 };
 
 export function message(db: Connection): Model<Document> {
-	'use strict';
 	mongooseAutoIncrement.initialize(db);
 
 	const schema = new Schema(Object.assign({
@@ -46,7 +45,6 @@ export function message(db: Connection): Model<Document> {
 }
 
 export function userMessage(db: Connection): Model<Document> {
-	'use strict';
 	mongooseAutoIncrement.initialize(db);
 
 	const schema = new Schema(Object.assign({
@@ -75,7 +73,6 @@ export function userMessage(db: Connection): Model<Document> {
 }
 
 export function groupMessageBase(db: Connection): Model<Document> {
-	'use strict';
 	mongooseAutoIncrement.initialize(db);
 
 	const schema = new Schema(Object.assign({
@@ -91,7 +88,6 @@ export function groupMessageBase(db: Connection): Model<Document> {
 }
 
 export function groupMessage(db: Connection): Model<Document> {
-	'use strict';
 	mongooseAutoIncrement.initialize(db);
 
 	const schema = new Schema(Object.assign({
@@ -118,7 +114,6 @@ export function groupMessage(db: Connection): Model<Document> {
 }
 
 export function groupSendInvitationActivity(db: Connection): Model<Document> {
-	'use strict';
 	mongooseAutoIncrement.initialize(db);
 
 	const schema = new Schema(Object.assign({
@@ -143,7 +138,6 @@ export function groupSendInvitationActivity(db: Connection): Model<Document> {
 }
 
 export function groupMemberJoinActivity(db: Connection): Model<Document> {
-	'use strict';
 	mongooseAutoIncrement.initialize(db);
 
 	const schema = new Schema(Object.assign({
@@ -166,7 +160,6 @@ export function groupMemberJoinActivity(db: Connection): Model<Document> {
 }
 
 export function groupMemberLeftActivity(db: Connection): Model<Document> {
-	'use strict';
 	mongooseAutoIncrement.initialize(db);
 
 	const schema = new Schema(Object.assign({
@@ -189,7 +182,6 @@ export function groupMemberLeftActivity(db: Connection): Model<Document> {
 }
 
 export function renameGroupActivity(db: Connection): Model<Document> {
-	'use strict';
 	mongooseAutoIncrement.initialize(db);
 
 	const schema = new Schema(Object.assign({
@@ -214,7 +206,6 @@ export function renameGroupActivity(db: Connection): Model<Document> {
 }
 
 export function transferGroupOwnershipActivity(db: Connection): Model<Document> {
-	'use strict';
 	mongooseAutoIncrement.initialize(db);
 
 	const schema = new Schema(Object.assign({

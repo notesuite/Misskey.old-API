@@ -7,6 +7,5 @@ export default function(
 	req: any,
 	res: any
 ): void {
-	'use strict';
 	res(show(user));
 };

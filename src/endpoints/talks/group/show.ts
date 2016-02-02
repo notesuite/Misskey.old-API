@@ -11,8 +11,6 @@ export default function(
 	user: IUser,
 	groupId: string
 ): Promise<Object> {
-	'use strict';
-
 	return new Promise<Object>((resolve, reject) => {
 		TalkGroup
 		.findById(groupId)

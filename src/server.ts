@@ -7,8 +7,6 @@ import config from './config';
 import apiHandler from './api-handler';
 
 export default function(): void {
-	'use strict';
-
 	logInfo(`(cluster: ${cluster.worker.id}) Initializing server`);
 
 	const server = new hapi.Server();
@@ -50,7 +48,6 @@ export default function(): void {
 }
 
 function notFoundHandler(req: any, res: any): any {
-	'use strict';
 	logWarn(`Request not handled: ${req.method.toUpperCase()} ${req.path}`);
 	return res({
 		error: 'api-not-found'

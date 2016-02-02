@@ -3,7 +3,6 @@ import {ITalkMessage, ITalkUserMessage, ITalkGroupMessage, IUser} from '../../..
 import publishStream from '../../../core/publish-streaming-message';
 
 function isUserMessage(message: ITalkMessage): message is ITalkUserMessage {
-	'use strict';
 	return message.hasOwnProperty('recipient');
 }
 
@@ -16,8 +15,6 @@ export default function(
 	user: IUser,
 	messageId: string
 ): Promise<void> {
-	'use strict';
-
 	if (messageId === '')  {
 		return <Promise<any>>Promise.reject('empty-message-id');
 	}

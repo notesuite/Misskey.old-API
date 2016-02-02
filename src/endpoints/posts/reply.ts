@@ -23,8 +23,6 @@ export default function(
 	text?: string,
 	filesString?: string
 ): Promise<Object> {
-	'use strict';
-
 	const maxTextLength = 300;
 	const maxFileLength = 4;
 

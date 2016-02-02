@@ -11,8 +11,6 @@ import config from '../../../config';
  * @return ファイルオブジェクト
  */
 export default function(user: IUser, fileId: string, name: string): Promise<Object> {
-	'use strict';
-
 	if (name.length > 100) {
 		return <Promise<any>>Promise.reject('too-long-filename');
 	}

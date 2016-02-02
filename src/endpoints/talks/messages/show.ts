@@ -13,8 +13,6 @@ export default function(
 	user: IUser,
 	messageId: string
 ): Promise<Object> {
-	'use strict';
-
 	return new Promise<Object>((resolve, reject) => {
 		// 対象のメッセージを取得
 		TalkMessage

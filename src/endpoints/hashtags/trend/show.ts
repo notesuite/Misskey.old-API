@@ -4,7 +4,6 @@ import {Hashtag} from '../../../db/db';
 import {IHashtag} from '../../../db/interfaces';
 
 export default function(): Promise<string[]> {
-	'use strict';
 	return new Promise<string[]>((resolve, reject) => {
 		Hashtag.find({})
 		.sort({

@@ -7,7 +7,6 @@ export default function(
 	req: any,
 	res: any
 ): void {
-	'use strict';
 	const groupId: string = req.payload['group-id'];
 	show(
 		user,

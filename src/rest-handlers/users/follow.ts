@@ -7,7 +7,6 @@ export default function(
 	req: any,
 	res: any
 ): void {
-	'use strict';
 	if (req.payload['user-id'] === undefined || req.payload['user-id'] === null) {
 		res('user-id-is-empty').code(400);
 	} else {

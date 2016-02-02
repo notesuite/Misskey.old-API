@@ -7,8 +7,6 @@ import {IUser} from '../../../db/interfaces';
  * @return ユーザーオブジェクト
  */
 export default function(user: IUser, tags: string): Promise<Object> {
-	'use strict';
-
 	tags = tags.trim();
 
 	const tagEntities: string[] = tags.split(' ');

@@ -1,8 +1,6 @@
 import {Schema, Connection, Document, Model} from 'mongoose';
 
 export default function(db: Connection): Model<Document> {
-	'use strict';
-
 	const schema = new Schema({
 		createdAt: { type: Date, required: true, default: Date.now },
 		topic: { type: Schema.Types.ObjectId, required: true, ref: 'BBSTopic' },

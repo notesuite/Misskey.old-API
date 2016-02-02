@@ -7,8 +7,6 @@ export default function(
 	req: any,
 	res: any
 ): void {
-	'use strict';
-
 	files(user, req.payload['folder-id']).then(files => {
 		res(files);
 	}, (err: any) => {

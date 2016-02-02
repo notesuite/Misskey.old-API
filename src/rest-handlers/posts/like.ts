@@ -8,7 +8,6 @@ export default function(
 	req: any,
 	res: any
 ): void {
-	'use strict';
 	like(user, req.payload['post-id']).then(() => {
 		res({ kyoppie: "yuppie" });
 	}, (err: any) => {

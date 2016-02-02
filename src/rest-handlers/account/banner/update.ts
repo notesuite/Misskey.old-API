@@ -7,7 +7,6 @@ export default function(
 	req: any,
 	res: any
 ): void {
-	'use strict';
 	update(user, req.payload['file-id']).then(me => {
 		res(me);
 	}, (err: any) => {

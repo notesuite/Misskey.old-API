@@ -13,8 +13,6 @@ export default function(
 	me: interfaces.IUser,
 	invitationId: string
 ): Promise<void> {
-	'use strict';
-
 	return new Promise<void>((resolve, reject) => {
 		// 招待取得
 		TalkGroupInvitation.findById(invitationId, (invitationFindErr: any, invitation: interfaces.ITalkGroupInvitation) => {

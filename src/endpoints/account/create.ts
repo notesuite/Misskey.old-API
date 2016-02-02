@@ -4,8 +4,6 @@ import {IUser} from '../../db/interfaces';
 import {isScreenName, isReservedScreenName} from '../../spec/user';
 
 export default function(isOfficial: boolean, screenName: string, password: string): Promise<IUser> {
-	'use strict';
-
 	return (!isOfficial) ?
 		<Promise<any>>Promise.reject('access-denied')
 	: (screenName === undefined || screenName === null || screenName === '') ?

@@ -5,8 +5,6 @@ export default function(
 	meId: string,
 	fileId: string
 ): Promise<IAlbumFile> {
-	'use strict';
-
 	return new Promise<IAlbumFile>((resolve, reject) => {
 		AlbumFile.findById(fileId, (findErr: any, file: IAlbumFile) => {
 			if (findErr !== null) {

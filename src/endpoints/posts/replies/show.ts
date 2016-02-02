@@ -19,8 +19,6 @@ export default function(
 	sinceCursor: number = null,
 	maxCursor: number = null
 ): Promise<Object[]> {
-	'use strict';
-
 	return new Promise<Object[]>((resolve, reject) => {
 		const query = Object.assign({inReplyToPost: id}, new Match<void, any>(null)
 			.when(() => sinceCursor !== null, () => { return {cursor: {$gt: sinceCursor}}; })

@@ -2,8 +2,6 @@ import {PostMention} from '../db/db';
 import {IUser, IPost, IPostMention} from '../db/interfaces';
 
 export default function(me: IUser, post: IPost): void {
-	'use strict';
-
 	if (me.timelineReadCursor < post.cursor) {
 		me.timelineReadCursor = post.cursor;
 		me.save();

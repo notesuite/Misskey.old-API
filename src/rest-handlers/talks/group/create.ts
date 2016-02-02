@@ -7,7 +7,6 @@ export default function(
 	req: any,
 	res: any
 ): void {
-	'use strict';
 	const name: string = req.payload['name'];
 	create(
 		app,

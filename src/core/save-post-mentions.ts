@@ -4,8 +4,6 @@ import extractMentions from './extract-mentions';
 import createNotification from './create-notification';
 
 export default function(author: IUser, post: IPost, text: string): void {
-	'use strict';
-
 	extractMentions(text).then(users => {
 		users.forEach(user => {
 			PostMention.create({

@@ -2,8 +2,6 @@ import {Schema, Connection, Document, Model} from 'mongoose';
 import * as mongooseAutoIncrement from 'mongoose-auto-increment';
 
 export default function(db: Connection): Model<Document> {
-	'use strict';
-
 	mongooseAutoIncrement.initialize(db);
 
 	const schema = new Schema({

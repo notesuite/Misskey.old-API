@@ -12,8 +12,6 @@ import escapeRegexp from '../../core/escape-regexp';
  * @return ユーザーオブジェクトの配列
  */
 export default function(me: IUser, screenName: string): Promise<Object[]> {
-	'use strict';
-
 	const screenNameLower = escapeRegexp(screenName.toLowerCase());
 
 	return new Promise<Object[]>((resolve, reject) => {

@@ -8,8 +8,6 @@ import {isName} from '../../../spec/user';
  * @return ユーザーオブジェクト
  */
 export default function(user: IUser, name: string): Promise<Object> {
-	'use strict';
-
 	name = name.trim();
 
 	if (!isName(name)) {

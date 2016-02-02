@@ -2,8 +2,6 @@ import {AlbumFile, AlbumFolder} from '../../../db/db';
 import {IUser, IAlbumFile, IAlbumFolder} from '../../../db/interfaces';
 
 export default function(user: IUser, fileId: string, folderId: string): Promise<Object> {
-	'use strict';
-
 	return new Promise<Object>((resolve, reject) => {
 		AlbumFile.findOne({
 			_id: fileId,

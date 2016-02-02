@@ -14,8 +14,6 @@ export default function(
 	me: IUser,
 	name: string
 ): Promise<Object> {
-	'use strict';
-
 	name = name.trim();
 
 	if (!isName(name)) {

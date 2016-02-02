@@ -7,7 +7,6 @@ export const configPath = `${configDirectoryPath}/${configFileName}`;
 export default loadConfig();
 
 function loadConfig(): IConfig {
-	'use strict';
 	return <IConfig>require(configPath);
 }
 

@@ -11,8 +11,6 @@ export default function(
 	app: IApplication,
 	me: IUser
 ): Promise<Object[]> {
-	'use strict';
-
 	return new Promise<Object[]>((resolve, reject) => {
 		// 招待取得
 		TalkGroupInvitation.find({

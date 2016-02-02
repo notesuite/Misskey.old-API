@@ -7,8 +7,6 @@ import {IUser} from '../../../db/interfaces';
  * @return ユーザーオブジェクト
  */
 export default function(user: IUser, url: string): Promise<Object> {
-	'use strict';
-
 	url = url.trim();
 
 	if (url.length > 100) {

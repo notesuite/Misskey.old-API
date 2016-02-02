@@ -8,7 +8,6 @@ export default function(
 	req: any,
 	res: any
 ): void {
-	'use strict';
 	const file = req.payload.file;
 	if (file === undefined || file === null) {
 		res('empty-file').code(400);

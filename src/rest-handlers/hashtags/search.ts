@@ -7,7 +7,6 @@ export default function(
 	req: any,
 	res: any
 ): void {
-	'use strict';
 	search(req.payload['name']).then(hashtags => {
 		res(hashtags);
 	}, (err: any) => {

@@ -7,8 +7,6 @@ export default function(
 	notification: any,
 	me: IUser
 ): Promise<Object> {
-	'use strict';
-
 	const type: string = notification.type;
 	const content: any = notification.content;
 

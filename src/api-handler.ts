@@ -14,7 +14,6 @@ const limiterDB = redis.createClient(
 	});
 
 export default function(endpoint: any, req: any, res: any): void {
-	'use strict';
 	logInfo(`Request: ${req.method} ${req.path}`);
 
 	function reply(data: any): any {

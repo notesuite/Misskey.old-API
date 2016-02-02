@@ -21,8 +21,6 @@ export default function(
 	sinceCursor: number = null,
 	maxCursor: number = null
 ): Promise<Object[]> {
-	'use strict';
-
 	limit = parseInt(<any>limit, 10);
 
 	if (limit < 1) {

@@ -9,8 +9,6 @@ import {IUser, IUserFollowing} from '../../../../db/interfaces';
  * @return タイムラインにある未読の投稿の件数
  */
 export default function(user: IUser): Promise<number> {
-	'use strict';
-
 	return new Promise<number>((resolve, reject) => {
 		// 自分がフォローしているユーザーの関係を取得
 		UserFollowing.find({follower: user.id}, (followingFindErr: any, following: IUserFollowing[]) => {

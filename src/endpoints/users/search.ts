@@ -13,8 +13,6 @@ import escapeRegexp from '../../core/escape-regexp';
  * @return ユーザーオブジェクトの配列
  */
 export default function(me: IUser, query: string, limit: number = 5): Promise<Object[]> {
-	'use strict';
-
 	query = escapeRegexp(query.toLowerCase());
 
 	limit = parseInt(<any>limit, 10);

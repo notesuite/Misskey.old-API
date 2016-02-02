@@ -8,7 +8,6 @@ export default function(
 	res: any,
 	isOfficial: boolean
 ): void {
-	'use strict';
 	const screenName: string = req.payload['screen-name'];
 	const password: string = req.payload['password'];
 	if (isOfficial) {

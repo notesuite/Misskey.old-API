@@ -7,7 +7,6 @@ export default function(
 	req: any,
 	res: any
 ): void {
-	'use strict';
 	screennameAvailable(req.payload['screen-name']).then(available => {
 		res({
 			available

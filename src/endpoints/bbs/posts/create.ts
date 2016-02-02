@@ -19,8 +19,6 @@ export default function(
 	text: string,
 	inReplyToPostId: string = null
 ): Promise<Object> {
-	'use strict';
-
 	text = text.trim();
 
 	if (text.length === 0) {

@@ -7,7 +7,6 @@ export default function(
 	req: any,
 	res: any
 ): void {
-	'use strict';
 	search(user, req.payload['query'], req.payload['limit']).then(users => {
 		res(users);
 	}, (err: any) => {

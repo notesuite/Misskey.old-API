@@ -2,7 +2,6 @@ import {logInfo, logWarn} from 'log-cool';
 import {exec, ExecOutputReturnValue} from 'shelljs';
 
 export default function(): void {
-	'use strict';
 	checkEnv('Node.js', 'node -v', x => x.match(/^v(.*)\r?\n$/)[1]);
 	checkEnv('npm', 'npm -v', x => x.match(/^(.*)\r?\n$/)[1]);
 	checkEnv('MongoDB', 'mongo --version', x => x.match(/^MongoDB shell version: (.*)\r?\n$/)[1]);
@@ -10,7 +9,6 @@ export default function(): void {
 }
 
 function checkEnv(serviceName: string, command: string, transform: (x: string) => string): void {
-	'use strict';
 	const code = {
 		success: 0,
 		notFound: 127

@@ -1,8 +1,6 @@
 import {Schema, Connection, Document, Model} from 'mongoose';
 
 export default function(db: Connection): Model<Document> {
-	'use strict';
-
 	const schema = new Schema({
 		count: { type: Number, required: false, default: 1 },
 		createdAt: { type: Date, required: true, default: Date.now },

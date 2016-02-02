@@ -7,7 +7,6 @@ export default function(
 	req: any,
 	res: any
 ): void {
-	'use strict';
 	readMessage(
 		user,
 		req.payload['message-id']

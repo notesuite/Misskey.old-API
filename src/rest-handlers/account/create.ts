@@ -9,7 +9,6 @@ export default function(
 	res: any,
 	isOfficial: boolean
 ): void {
-	'use strict';
 	createAccount(
 		isOfficial,
 		req.payload['screen-name'],

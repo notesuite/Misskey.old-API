@@ -8,7 +8,6 @@ import createNotification from '../../core/create-notification';
  * @param followeeId フォローされるユーザーID
  */
 export default function(follower: IUser, followeeId: string): Promise<void> {
-	'use strict';
 	return new Promise<void>((resolve, reject) => {
 		if (follower.id.toString() === followeeId) {
 			return reject('followee-is-you');

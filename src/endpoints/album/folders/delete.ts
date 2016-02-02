@@ -3,8 +3,6 @@ import {IUser, IAlbumFile, IAlbumFolder} from '../../../db/interfaces';
 import fileDel from '../files/delete';
 
 export default function(user: IUser, folderId: string = null): Promise<void> {
-	'use strict';
-
 	return new Promise<void>((resolve, reject) => {
 		AlbumFolder.findOne({
 			_id: folderId,

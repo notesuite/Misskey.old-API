@@ -2,7 +2,6 @@ import {Hashtag} from '../db/db';
 import {IUser, IHashtag} from '../db/interfaces';
 
 export default function(me: IUser, hashtags: string[]): void {
-	'use strict';
 	hashtags.forEach(hashtag => {
 		hashtag = hashtag.toLowerCase();
 		Hashtag.findOne({

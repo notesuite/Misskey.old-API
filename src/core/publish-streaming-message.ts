@@ -9,6 +9,5 @@ const publisher = redis.createClient(
 	});
 
 export default function<T>(channel: string, message: T): void {
-	'use strict';
 	publisher.publish(`misskey:${channel}`, message);
 }

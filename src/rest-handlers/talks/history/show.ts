@@ -7,7 +7,6 @@ export default function(
 	req: any,
 	res: any
 ): void {
-	'use strict';
 	const type = req.payload['type'];
 	const limit = req.payload['limit'];
 	show(
