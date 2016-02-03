@@ -8,7 +8,7 @@ export default function(req: any): Promise<{ app: any, user: any, isOfficial: bo
 			resolve({ app: null, user: null, isOfficial: false });
 		} else if (req.headers['passkey'] !== config.apiPasskey) {
 			reject();
-		} else if (req.headers['user-id'] === null) {
+		} else if (req.headers['user-id'] === undefined || req.headers['user-id'] === null || req.headers['user-id'] === 'null') {
 			resolve({ app: null, user: null, isOfficial: true });
 		} else {
 			User.findById(req.headers['user-id'], (err: any, user: IUser) => {
