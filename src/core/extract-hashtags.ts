@@ -2,7 +2,9 @@ export default function(text: string): string[] {
 	if (text === null) {
 		return [];
 	}
-	const tags: string[] = text.trim().match(/(^|\s)#(\S+)/g);
+
+	const tags = text.trim().match(/(^|\s)#(\S+)/g);
+
 	return (tags !== null ? tags : [])
 		.map(tag => tag.trim())
 		.map(tag => tag.replace('#', '')) // 先頭の#を除去
