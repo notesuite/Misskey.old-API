@@ -3,7 +3,7 @@ import {IUser, IPost, IPostLike} from '../../db/interfaces';
 import createNotification from '../../core/create-notification';
 
 /**
- * ふぁぼります
+ * Likeします
  * @param user ユーザー
  * @param id 対象の投稿のID
  */
@@ -46,7 +46,7 @@ export default function(user: IUser, id: string): Promise<void> {
 					user.likesCount++;
 					user.save();
 
-					// 投稿の作者のlikesCountをインクリメント
+					// 投稿の作者のlikedCountをインクリメント
 					User.findById(<string>post.user, (authorFindErr: any, author: IUser) => {
 						author.likedCount++;
 						author.save();
