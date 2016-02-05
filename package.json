@@ -33,7 +33,7 @@
     "gm": "1.21.1",
     "hapi": "13.0.0",
     "log-cool": "1.1.0",
-    "mongoose": "4.4.1",
+    "mongoose": "4.4.2",
     "mongoose-auto-increment": "5.0.1",
     "mongoose-deep-populate": "2.0.3",
     "powerful": "8.0.1",
