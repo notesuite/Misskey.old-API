@@ -20,8 +20,6 @@
     "gulp": "3.9.0",
     "gulp-tslint": "4.3.1",
     "gulp-typescript": "2.10.0",
-    "log-cool": "1.1.0",
-    "powerful": "8.0.1",
     "tslint": "3.3.0",
     "typescript": "1.8.0",
     "typescript-require": "0.2.9-1"
