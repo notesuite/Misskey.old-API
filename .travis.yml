@@ -17,7 +17,6 @@ after_success:
   - git config --global user.name "Aya Morisawa"
   - git commit -am "Release commit"
   - if [ $TRAVIS_BRANCH = "master" ]; then git push -f git@github.com:MissKernel/Misskey-API release; fi
-  - git push -f git@github.com:MissKernel/Misskey-API release:release-$TRAVIS_BRANCH-$TRAVIS_COMMIT
 env:
   - CXX=g++-4.8
 addons:
