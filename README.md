@@ -10,13 +10,12 @@
 * MongoDB
 * Redis
 * GraphicsMagick
+* OpenSSL
 
 ## External devDependencies
 * node-gyp - https://github.com/nodejs/node-gyp#installation
-* OpenSSL
 
 ## How to build
-
 1. `git clone git://github.com/MissKernel/Misskey-API.git`
 2. `cd Misskey-API`
 3. `npm install`
