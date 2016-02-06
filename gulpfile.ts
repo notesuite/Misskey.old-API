@@ -7,11 +7,11 @@ import * as babel from 'gulp-babel';
 
 task('build', ['build:ts']);
 
-function buildTypeScript(): ts.CompilationStream {
-	const project = ts.createProject('tsconfig.json', {
-		typescript: require('typescript')
-	});
+const project = ts.createProject('tsconfig.json', {
+	typescript: require('typescript')
+});
 
+function buildTypeScript(): ts.CompilationStream {
 	return project.src().pipe(ts(project));
 }
 
