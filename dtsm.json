@@ -25,9 +25,6 @@
     "gulp/gulp.d.ts": {
       "ref": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
     },
-    "gulp-babel/gulp-babel.d.ts": {
-      "ref": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
-    },
     "gulp-tslint/gulp-tslint.d.ts": {
       "ref": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
     },

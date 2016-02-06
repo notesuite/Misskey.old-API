@@ -3,7 +3,7 @@
 		"noEmitOnError": true,
 		"noImplicitAny": true,
 		"sourceMap": false,
-		"target": "ES6",
+		"target": "ES5",
 		"module": "commonjs",
 		"removeComments": true,
 		"noLib": true,

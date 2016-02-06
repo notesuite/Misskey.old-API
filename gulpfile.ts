@@ -3,7 +3,6 @@
 import {task, src, dest, watch} from 'gulp';
 import * as ts from 'gulp-typescript';
 import * as tslint from 'gulp-tslint';
-import * as babel from 'gulp-babel';
 
 task('build', ['build:ts']);
 
@@ -17,7 +16,6 @@ function buildTypeScript(): ts.CompilationStream {
 
 task('build:ts', () =>
 	buildTypeScript()
-		.pipe(babel())
 		.pipe(dest('./built'))
 );
 
