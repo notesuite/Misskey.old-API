@@ -29,6 +29,7 @@
   "dependencies": {
     "bcrypt": "0.8.5",
     "connect-redis": "3.0.2",
+    "fork-for-each-cpu": "1.0.1",
     "gm": "1.21.1",
     "hapi": "13.0.0",
     "log-cool": "1.1.0",

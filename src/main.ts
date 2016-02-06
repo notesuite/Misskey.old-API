@@ -1,6 +1,6 @@
 import * as cluster from 'cluster';
 import {logInfo} from 'log-cool';
-import * as os from 'os';
+import forkForEachCpu from 'fork-for-each-cpu';
 import checkDependencies from './check-dependencies';
 import startServer from './server';
 
@@ -19,20 +19,3 @@ cluster.on('exit', worker => {
 	logInfo(`(cluster: ${worker.id}) Died`);
 	cluster.fork();
 });
-
-function forkForEachCpu(callbacks: { master: () => void; worker: () => void }): void {
-	if (cluster.isMaster) {
-		callbacks.master();
-		times(os.cpus().length, () => {
-			cluster.fork();
-		});
-	} else {
-		callbacks.worker();
-	}
-}
-
-function times(n: number, f: () => void): void {
-	for (let i = 1; i <= n; i++) {
-		f();
-	}
-}
