@@ -12,10 +12,9 @@
 * GraphicsMagick
 * OpenSSL
 
-## External devDependencies
-* node-gyp - https://github.com/nodejs/node-gyp#installation
-
 ## How to build
+Ensure that you have [node-gyp](https://github.com/nodejs/node-gyp#installation) installed.
+
 1. `git clone git://github.com/MissKernel/Misskey-API.git`
 2. `cd Misskey-API`
 3. `npm install`
