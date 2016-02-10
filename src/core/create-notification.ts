@@ -1,6 +1,5 @@
 import {Notification} from '../db/db';
 import {IApplication, INotification} from '../db/interfaces';
-import publishStreamingMessage from './publish-streaming-message';
 
 export default function(
 	app: IApplication,
@@ -19,10 +18,6 @@ export default function(
 				reject(createErr);
 			} else {
 				resolve(createdNotification);
-				publishStreamingMessage(`user-stream:${userId}`, JSON.stringify({
-					type: 'notification',
-					value: createdNotification.toObject()
-				}));
 			}
 		});
 	});

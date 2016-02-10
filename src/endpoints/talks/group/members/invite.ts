@@ -1,6 +1,5 @@
 import {TalkGroup, TalkGroupInvitation, TalkGroupSendInvitationActivity, User} from '../../../../db/db';
 import * as interfaces from '../../../../db/interfaces';
-import publishMessage from '../../../../core/publish-group-talk-message';
 
 /**
  * TalkGroupにユーザーを招待します
@@ -91,11 +90,6 @@ export default function(
 							invitee: invitee.id,
 							inviter: me.id,
 							invitation: invitation.id
-						}, (activityErr: any, createdActivity: interfaces.ITalkGroupSendInvitationActivity) => {
-							if (activityErr !== null) {
-								return;
-							}
-							publishMessage(<interfaces.ITalkMessage>createdActivity, group);
 						});
 					});
 				});

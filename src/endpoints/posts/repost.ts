@@ -1,6 +1,5 @@
 import {Post, Repost} from '../../db/db';
 import {IApplication, IUser, IPost, IRepost} from '../../db/interfaces';
-import publishUserStream from '../../core/publish-user-stream';
 import serializePost from '../../core/serialize-post';
 import createNotification from '../../core/create-notification';
 
@@ -90,14 +89,6 @@ export default function(
 						// 被Repost数をインクリメント
 						post.repostsCount++;
 						post.save();
-
-						// User stream
-						publishUserStream(user.id, {
-							type: 'post',
-							value: {
-								id: createdRepost.id
-							}
-						});
 
 						// 通知を作成
 						createNotification(null, <string>post.user, 'repost', {
