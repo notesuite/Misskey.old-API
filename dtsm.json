@@ -14,40 +14,40 @@
   },
   "dependencies": {
     "bcrypt/bcrypt.d.ts": {
-      "ref": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
+      "ref": "717a5fdb079f8dd7c19f1b22f7f656dd990f0ccf"
     },
     "body-parser/body-parser.d.ts": {
-      "ref": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
+      "ref": "717a5fdb079f8dd7c19f1b22f7f656dd990f0ccf"
     },
     "gm/gm.d.ts": {
-      "ref": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
+      "ref": "717a5fdb079f8dd7c19f1b22f7f656dd990f0ccf"
     },
     "gulp/gulp.d.ts": {
-      "ref": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
+      "ref": "717a5fdb079f8dd7c19f1b22f7f656dd990f0ccf"
     },
     "gulp-tslint/gulp-tslint.d.ts": {
-      "ref": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
+      "ref": "717a5fdb079f8dd7c19f1b22f7f656dd990f0ccf"
     },
     "gulp-typescript/gulp-typescript.d.ts": {
-      "ref": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
+      "ref": "717a5fdb079f8dd7c19f1b22f7f656dd990f0ccf"
     },
     "mongoose/mongoose.d.ts": {
-      "ref": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
+      "ref": "717a5fdb079f8dd7c19f1b22f7f656dd990f0ccf"
     },
     "mongoose-auto-increment/mongoose-auto-increment.d.ts": {
-      "ref": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
+      "ref": "717a5fdb079f8dd7c19f1b22f7f656dd990f0ccf"
     },
     "multer/multer.d.ts": {
-      "ref": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
+      "ref": "717a5fdb079f8dd7c19f1b22f7f656dd990f0ccf"
     },
     "redis/redis.d.ts": {
-      "ref": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
+      "ref": "717a5fdb079f8dd7c19f1b22f7f656dd990f0ccf"
     },
     "request/request.d.ts": {
-      "ref": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
+      "ref": "717a5fdb079f8dd7c19f1b22f7f656dd990f0ccf"
     },
     "shelljs/shelljs.d.ts": {
-      "ref": "5d0f2126c8dac8fce0ff020218aea06607213b0d"
+      "ref": "717a5fdb079f8dd7c19f1b22f7f656dd990f0ccf"
     },
     "ratelimiter/ratelimiter.d.ts": {
       "ref": "717a5fdb079f8dd7c19f1b22f7f656dd990f0ccf"
