@@ -27,7 +27,7 @@ Ensure that you have [node-gyp](https://github.com/nodejs/node-gyp#installation)
 4. `npm run dts`
 5. `npm run build`
 
-## How to test
+## How to run tests
 `npm run test`
 
 ## How to start Misskey API server
