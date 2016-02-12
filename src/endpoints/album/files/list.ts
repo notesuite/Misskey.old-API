@@ -2,10 +2,10 @@ import {AlbumFile} from '../../../db/db';
 import {IUser, IAlbumFile} from '../../../db/interfaces';
 
 /**
- * アルバムのファイルを取得します
+ * アルバムのファイル一覧を取得します
  * @param user API利用ユーザー
  * @param folderId 対象フォルダID(nullでルート)
- * @return ファイルオブジェクト
+ * @return ファイルオブジェクトの配列
  */
 export default function(user: IUser, folderId: string = null): Promise<Object[]> {
 	return new Promise<Object[]>((resolve, reject) => {
