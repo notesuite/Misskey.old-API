@@ -2,6 +2,7 @@ import {Post, Repost} from '../../db/db';
 import {IApplication, IUser, IPost, IRepost} from '../../db/interfaces';
 import serializePost from '../../core/serialize-post';
 import createNotification from '../../core/create-notification';
+import event from '../../event';
 
 /**
  * 対象の投稿をRepostします
@@ -89,6 +90,8 @@ export default function(
 						// 被Repost数をインクリメント
 						post.repostsCount++;
 						post.save();
+
+						event.publishPost(user.id, createdRepost);
 
 						// 通知を作成
 						createNotification(null, <string>post.user, 'repost', {

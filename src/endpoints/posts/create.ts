@@ -5,6 +5,7 @@ import savePostMentions from '../../core/save-post-mentions';
 import extractHashtags from '../../core/extract-hashtags';
 import registerHashtags from '../../core/register-hashtags';
 import getAlbumFile from '../../core/get-album-file';
+import event from '../../event';
 
 /**
  * 投稿を作成します
@@ -152,6 +153,8 @@ export default function(
 						latestPost.nextPost = createdStatus.id;
 						latestPost.save();
 					}
+
+					event.publishPost(user.id, createdStatus);
 				});
 			}
 		});

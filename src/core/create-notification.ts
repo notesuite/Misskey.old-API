@@ -1,5 +1,6 @@
 import {Notification} from '../db/db';
 import {IApplication, INotification} from '../db/interfaces';
+import event from '../event';
 
 export default function(
 	app: IApplication,
@@ -18,6 +19,7 @@ export default function(
 				reject(createErr);
 			} else {
 				resolve(createdNotification);
+				event.publishNotification(createdNotification);
 			}
 		});
 	});

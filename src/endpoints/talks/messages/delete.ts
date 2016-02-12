@@ -1,5 +1,10 @@
 import {TalkMessage} from '../../../db/db';
-import {ITalkUserMessage, ITalkGroupMessage, IUser} from '../../../db/interfaces';
+import {ITalkMessage, ITalkUserMessage, ITalkGroupMessage, IUser} from '../../../db/interfaces';
+import event from '../../../event';
+
+function isUserMessage(message: ITalkMessage): message is ITalkUserMessage {
+	return message.type === 'user-message';
+}
 
 /**
  * Talkのメッセージを削除します
@@ -37,6 +42,12 @@ export default function(
 				}
 
 				resolve();
+
+				if (isUserMessage(message)) {
+					event.publishDeleteTalkUserMessage(user.id, <string>message.recipient, message);
+				} else {
+					event.publishDeleteTalkGroupMessage(<string>message.group, message);
+				}
 			});
 		});
 	});
