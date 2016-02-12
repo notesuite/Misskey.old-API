@@ -21,8 +21,8 @@ export default function(user: IUser, folderId: string): Promise<Object> {
 				if (folder.parent === null) {
 					resolve(folderObj);
 				} else {
-					get(<string>folder.parent).then((parents: Object[]) => {
-						folderObj.parent = parents;
+					get(<string>folder.parent).then((parent: Object) => {
+						folderObj.parent = parent;
 						resolve(folderObj);
 					});
 				}
@@ -31,16 +31,18 @@ export default function(user: IUser, folderId: string): Promise<Object> {
 	});
 }
 
-function get(id: string): Promise<Object[]> {
-	return new Promise<Object[]>((resolve, reject) => {
+function get(id: string): Promise<Object> {
+	return new Promise<Object>((resolve, reject) => {
 		AlbumFolder.findById(id, (err: any, folder: IAlbumFolder) => {
 			if (err !== null) {
 				reject(err);
 			} else if (folder.parent === null) {
-				resolve([folder.toObject()]);
+				resolve(folder.toObject());
 			} else {
-				get(<string>folder.parent).then(nextFolders => {
-					resolve([...nextFolders, folder.toObject()]);
+				get(<string>folder.parent).then(parent => {
+					let folderObj: any = folder.toObject();
+					folderObj.parent = parent;
+					resolve(folderObj);
 				}, (getErr: any) => {
 					reject(getErr);
 				});
