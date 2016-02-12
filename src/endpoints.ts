@@ -72,6 +72,7 @@ export default [
 	{ name: 'album/files/delete', login: true },
 	{ name: 'album/folders/create', login: true, limitDuration: hour, limitMax: 50 },
 	{ name: 'album/folders/list', login: true },
+	{ name: 'album/folders/show', login: true },
 	{ name: 'album/folders/move', login: true },
 	{ name: 'album/folders/rename', login: true },
 
