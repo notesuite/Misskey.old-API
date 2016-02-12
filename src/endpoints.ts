@@ -71,6 +71,7 @@ export default [
 	{ name: 'album/files/rename', login: true },
 	{ name: 'album/files/delete', login: true },
 	{ name: 'album/folders/create', login: true, limitDuration: hour, limitMax: 50 },
+	{ name: 'album/folders/list', login: true },
 	{ name: 'album/folders/move', login: true },
 	{ name: 'album/folders/rename', login: true },
 
