@@ -25,7 +25,7 @@ export default function(
 	mimetype: string,
 	file: Buffer,
 	size: number,
-	folderId: string,
+	folderId: string = null,
 	unconditional: boolean = false
 ): Promise<IAlbumFile> {
 	// ハッシュ生成

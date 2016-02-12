@@ -14,7 +14,10 @@ export default function(
 		return;
 	}
 	const unconditional: boolean = req.payload.unconditional;
-	const folder: string = req.payload['folder-id'];
+	let folder: string = req.payload['folder-id'];
+	if (folder === 'null') {
+		folder = null;
+	}
 	const path: string = file.path;
 	const fileName: string = file.filename;
 	const mimetype: string = file.headers['content-type'];
