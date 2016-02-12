@@ -34,9 +34,10 @@ export default function(
 
 	return new Promise<IAlbumFile>((resolve, reject) => {
 		if (!unconditional) {
-			// 同じハッシュ(と同じファイルサイズ)を持つファイルが既に存在するか確認
+			// 同じハッシュ(と同じファイルサイズ(念のため))を持つファイルが既に存在するか確認
 			AlbumFile.findOne({
 				user: userId,
+				isDeleted: false, // 削除されているファイルは除外する
 				hash: hash,
 				dataSize: size
 			}, (hashmuchFileFindErr: any, hashmuchFile: IAlbumFile) => {
