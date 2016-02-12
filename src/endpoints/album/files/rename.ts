@@ -26,7 +26,7 @@ export default function(user: IUser, fileId: string, name: string): Promise<Obje
 			} else {
 				request.put({
 					url: `http://${config.fileServer.ip}:${config.fileServer.port}/rename`,
-					formData: {
+					form: {
 						passkey: config.fileServer.passkey,
 						'old-path': file.serverPath,
 						'new-name': name
