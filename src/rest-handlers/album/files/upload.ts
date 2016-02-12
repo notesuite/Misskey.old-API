@@ -14,6 +14,7 @@ export default function(
 		return;
 	}
 	const unconditional: boolean = req.payload.unconditional;
+	const folder: string = req.payload['folder-id'];
 	const path: string = file.path;
 	const fileName: string = file.filename;
 	const mimetype: string = file.headers['content-type'];
@@ -28,6 +29,7 @@ export default function(
 		mimetype,
 		fileBuffer,
 		size,
+		folder,
 		unconditional
 	).then(albumFile => {
 		res(albumFile);
