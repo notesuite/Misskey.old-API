@@ -1,7 +1,8 @@
-import {TalkGroup, TalkGroupMessage, TalkUserMessage, TalkUserHistory, User} from '../../../db/db';
+import {TalkGroup, TalkGroupMessage, TalkUserMessage, TalkUserHistory, TalkGroupHistory, User} from '../../../db/db';
 import * as interfaces from '../../../db/interfaces';
 import getAlbumFile from '../../../core/get-album-file';
 import createNotification from '../../../core/create-notification';
+import event from '../../../event';
 
 /**
  * Talkメッセージを作成します
@@ -108,6 +109,8 @@ function createUserMessage(
 
 		resolve(createdMessage.toObject());
 
+		event.publishUserTalkMessage(me.id, recipient.id, createdMessage);
+
 		// 履歴を作成しておく(自分)
 		TalkUserHistory.findOne({
 			type: 'user',
@@ -188,5 +191,31 @@ function createGroupMessage(
 		}
 
 		resolve(createdMessage.toObject());
+
+		event.publishGroupTalkMessage(<interfaces.ITalkMessage>createdMessage, group);
+
+		// 履歴を作成しておく
+		(<string[]>group.members).forEach(member => {
+			TalkGroupHistory.findOne({
+				type: 'group',
+				user: member,
+				group: group.id
+			}, (findHistoryErr: any, history: interfaces.ITalkGroupHistory) => {
+				if (findHistoryErr !== null) {
+					return;
+				}
+				if (history === null) {
+					TalkGroupHistory.create({
+						user: member,
+						group: group.id,
+						message: createdMessage.id
+					});
+				} else {
+					history.updatedAt = <any>Date.now();
+					history.message = createdMessage.id;
+					history.save();
+				}
+			});
+		});
 	});
 }

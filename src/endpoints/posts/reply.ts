@@ -5,6 +5,7 @@ import savePostMentions from '../../core/save-post-mentions';
 import extractHashtags from '../../core/extract-hashtags';
 import registerHashtags from '../../core/register-hashtags';
 import getAlbumFile from '../../core/get-album-file';
+import event from '../../event';
 
 /**
  * 投稿に返信します
@@ -174,6 +175,8 @@ export default function(
 
 						// メンションを抽出してデータベースに登録
 						savePostMentions(user, createdReply, createdReply.text);
+
+						event.publishPost(user.id, createdReply);
 					});
 				}
 			});

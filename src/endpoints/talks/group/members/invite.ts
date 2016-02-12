@@ -1,5 +1,6 @@
 import {TalkGroup, TalkGroupInvitation, TalkGroupSendInvitationActivity, User} from '../../../../db/db';
 import * as interfaces from '../../../../db/interfaces';
+import event from '../../../../event';
 
 /**
  * TalkGroupにユーザーを招待します
@@ -90,6 +91,11 @@ export default function(
 							invitee: invitee.id,
 							inviter: me.id,
 							invitation: invitation.id
+						}, (activityErr: any, createdActivity: interfaces.ITalkGroupSendInvitationActivity) => {
+							if (activityErr !== null) {
+								return;
+							}
+							event.publishGroupTalkMessage(<interfaces.ITalkMessage>createdActivity, group);
 						});
 					});
 				});
