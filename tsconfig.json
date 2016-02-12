@@ -134,6 +134,7 @@
 		"./src/endpoints/users/search.ts",
 		"./src/endpoints/users/show.ts",
 		"./src/endpoints/users/unfollow.ts",
+		"./src/event.ts",
 		"./src/main.ts",
 		"./src/rest-handlers/account/avatar/update.ts",
 		"./src/rest-handlers/account/banner/update.ts",

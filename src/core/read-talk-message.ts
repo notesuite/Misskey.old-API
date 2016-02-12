@@ -1,5 +1,6 @@
 import {TalkUserMessage, TalkGroupMessage} from '../db/db';
 import {IUser, ITalkMessage} from '../db/interfaces';
+import event from '../event';
 
 /**
  * メッセージを既読にします
@@ -20,6 +21,10 @@ export default function(
 				TalkUserMessage.findByIdAndUpdate(message.id, { $set: { isRead: true }}, (_1, _2) => {
 					// dummy
 				});
+
+				const otherpartyId: string = <string>(<any>message)._doc.user;
+
+				event.publishReadTalkUserMessage(otherpartyId, me.id, message);
 				break;
 			case 'group-message':
 				if ((<any>message)._doc.user.toString() === me.id.toString()) {
@@ -31,6 +36,8 @@ export default function(
 				TalkGroupMessage.findByIdAndUpdate(message.id, { $set: { reads: (<string[]>(<any>message)._doc.reads).concat(me.id) }}, (_1, _2) => {
 					// dummy
 				});
+
+				event.publishReadTalkGroupMessage((<any>message)._doc.group, message);
 				break;
 			case 'group-send-invitation-activity':
 			case 'group-member-join-activity':
@@ -41,6 +48,8 @@ export default function(
 				TalkGroupMessage.findByIdAndUpdate(message.id, { $set: { reads: (<string[]>(<any>message)._doc.reads).concat(me.id) }}, (_1, _2) => {
 					// dummy
 				});
+
+				event.publishReadTalkGroupMessage((<any>message)._doc.group, message);
 				break;
 			default:
 				resolve();
