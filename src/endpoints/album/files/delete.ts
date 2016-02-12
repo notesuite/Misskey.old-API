@@ -21,7 +21,7 @@ export default function(user: IUser, fileId: string): Promise<Object> {
 			} else {
 				request.del({
 					url: `http://${config.fileServer.ip}:${config.fileServer.port}/delete`,
-					formData: {
+					form: {
 						passkey: config.fileServer.passkey,
 						path: file.serverPath
 					}
