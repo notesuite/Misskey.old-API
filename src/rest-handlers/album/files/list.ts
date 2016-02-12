@@ -7,7 +7,13 @@ export default function(
 	req: any,
 	res: any
 ): void {
-	files(user, req.payload['folder-id']).then(files => {
+	files(
+		user,
+		req.payload['folder-id'],
+		req.payload['limit'],
+		req.payload['since-cursor'],
+		req.payload['max-cursor']
+	).then(files => {
 		res(files);
 	}, (err: any) => {
 		res({error: err}).code(500);
