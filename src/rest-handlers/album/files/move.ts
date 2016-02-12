@@ -7,7 +7,11 @@ export default function(
 	req: any,
 	res: any
 ): void {
-	move(user, req.payload['file-id'], req.payload['folder-id']).then(file => {
+	let folderId: string = req.payload['folder-id'];
+	if (folderId === 'null') {
+		folderId = null;
+	}
+	move(user, req.payload['file-id'], folderId).then(file => {
 		res(file);
 	}, (err: any) => {
 		res({error: err}).code(500);
