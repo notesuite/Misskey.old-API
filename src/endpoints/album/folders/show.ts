@@ -17,7 +17,33 @@ export default function(user: IUser, folderId: string): Promise<Object> {
 			} else if (folder.user.toString() !== user.id) {
 				reject('folder-not-found');
 			} else {
-				resolve(folder.toObject());
+				let folderObj: any = folder.toObject();
+				if (folder.parent === null) {
+					resolve(folderObj);
+				} else {
+					get(<string>folder.parent).then((parents: Object[]) => {
+						folderObj.parent = parents;
+						resolve(folderObj);
+					});
+				}
+			}
+		});
+	});
+}
+
+function get(id: string): Promise<Object[]> {
+	return new Promise<Object[]>((resolve, reject) => {
+		AlbumFolder.findById(id, (err: any, folder: IAlbumFolder) => {
+			if (err !== null) {
+				reject(err);
+			} else if (folder.parent === null) {
+				resolve([folder.toObject()]);
+			} else {
+				get(<string>folder.parent).then(nextFolders => {
+					resolve([...nextFolders, folder.toObject()]);
+				}, (getErr: any) => {
+					reject(getErr);
+				});
 			}
 		});
 	});
