@@ -46,6 +46,7 @@ export default function(
 		.find(query)
 		.sort(sort)
 		.limit(limit)
+		.populate('tags')
 		.exec(query, (filesFindErr: any, files: IAlbumFile[]) => {
 			if (filesFindErr !== null) {
 				return reject(filesFindErr);

@@ -40,6 +40,7 @@ export default function(
 		.find(query)
 		.sort({createdAt: -1})
 		.limit(limit)
+		.populate('tags')
 		.exec((err: any, files: IAlbumFile[]) => {
 			if (err !== null) {
 				return reject(err);

@@ -143,6 +143,7 @@ export interface IAlbumFile extends Document {
 	name: string;
 	properties: any;
 	serverPath: string;
+	tags: string[] | Types.ObjectId[] | IAlbumTag[];
 	user: string | Types.ObjectId | IUser;
 }
 
@@ -152,6 +153,12 @@ export interface IAlbumFolder extends Document {
 	cursor: number;
 	name: string;
 	parent: string | Types.ObjectId | IAlbumFolder;
+	user: string | Types.ObjectId | IUser;
+}
+
+export interface IAlbumTag extends Document {
+	color: string;
+	name: string;
 	user: string | Types.ObjectId | IUser;
 }
 
