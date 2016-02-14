@@ -1,5 +1,5 @@
 import {Schema, Connection, Document, Model} from 'mongoose';
-import config from '../config';
+import config from '../../config';
 
 export default function(db: Connection): Model<Document> {
 	const schema = new Schema({
