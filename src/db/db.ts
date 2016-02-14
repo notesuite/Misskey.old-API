@@ -3,24 +3,24 @@ import config from '../config';
 
 const db = mongoose.createConnection(config.mongo.uri, config.mongo.options);
 
-import albumFile from './album-file';
-import albumFolder from './album-folder';
-import albumTag from './album-tag';
-import application from './application';
-import bbsPost from './bbs-post';
-import bbsTopic from './bbs-topic';
-import bbsWatching from './bbs-watching';
-import hashtag from './hashtag';
-import notification from './notification';
-import {post, status, reply, repost} from './post';
-import postLike from './post-like';
-import postMention from './post-mention';
-import * as talk from './talk-message';
-import talkGroup from './talk-group';
-import talkGroupInvitation from './talk-group-invitation';
-import {talkHistory, talkUserHistory, talkGroupHistory} from './talk-history';
-import user from './user';
-import userFollowing from './user-following';
+import albumFile from './schemas/album-file';
+import albumFolder from './schemas/album-folder';
+import albumTag from './schemas/album-tag';
+import application from './schemas/application';
+import bbsPost from './schemas/bbs-post';
+import bbsTopic from './schemas/bbs-topic';
+import bbsWatching from './schemas/bbs-watching';
+import hashtag from './schemas/hashtag';
+import notification from './schemas/notification';
+import {post, status, reply, repost} from './schemas/post';
+import postLike from './schemas/post-like';
+import postMention from './schemas/post-mention';
+import * as talk from './schemas/talk-message';
+import talkGroup from './schemas/talk-group';
+import talkGroupInvitation from './schemas/talk-group-invitation';
+import {talkHistory, talkUserHistory, talkGroupHistory} from './schemas/talk-history';
+import user from './schemas/user';
+import userFollowing from './schemas/user-following';
 
 /* tslint:disable:variable-name */
 export const AlbumFile = albumFile(db);
