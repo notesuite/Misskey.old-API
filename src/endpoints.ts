@@ -70,6 +70,8 @@ export default [
 	{ name: 'album/files/move', login: true },
 	{ name: 'album/files/rename', login: true },
 	{ name: 'album/files/delete', login: true },
+	{ name: 'album/files/add-tag', login: true },
+	{ name: 'album/files/remove-tag', login: true },
 	{ name: 'album/files/find-by-tag', login: true },
 	{ name: 'album/folders/create', login: true, limitDuration: hour, limitMax: 50 },
 	{ name: 'album/folders/list', login: true },
