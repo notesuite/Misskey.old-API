@@ -19,6 +19,7 @@ export default function(db: Connection): Model<Document> {
 		name: { type: String, required: true },
 		properties: { type: Schema.Types.Mixed, required: false, default: null },
 		serverPath: { type: String, required: false },
+		tags: [{ type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumTag' }],
 		user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
 	});
 

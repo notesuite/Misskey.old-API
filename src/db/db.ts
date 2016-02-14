@@ -5,6 +5,7 @@ const db = mongoose.createConnection(config.mongo.uri, config.mongo.options);
 
 import albumFile from './album-file';
 import albumFolder from './album-folder';
+import albumTag from './album-tag';
 import application from './application';
 import bbsPost from './bbs-post';
 import bbsTopic from './bbs-topic';
@@ -24,6 +25,7 @@ import userFollowing from './user-following';
 /* tslint:disable:variable-name */
 export const AlbumFile = albumFile(db);
 export const AlbumFolder = albumFolder(db);
+export const AlbumTag = albumTag(db);
 export const Application = application(db);
 export const BBSPost = bbsPost(db);
 export const BBSTopic = bbsTopic(db);

@@ -9,7 +9,10 @@ import {IUser, IAlbumFile} from '../../../db/interfaces';
  */
 export default function(user: IUser, fileId: string): Promise<Object> {
 	return new Promise<Object>((resolve, reject) => {
-		AlbumFile.findById(fileId, (findErr: any, file: IAlbumFile) => {
+		AlbumFile
+		.findById(fileId)
+		.populate('tags')
+		.exec((findErr: any, file: IAlbumFile) => {
 			if (findErr !== null) {
 				reject(findErr);
 			} else if (file === null) {
