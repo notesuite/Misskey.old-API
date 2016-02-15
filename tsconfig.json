@@ -225,6 +225,7 @@
 		"./src/rest-handlers/users/show.ts",
 		"./src/rest-handlers/users/unfollow.ts",
 		"./src/server.ts",
+		"./src/spec/album-file.ts",
 		"./src/spec/album-tag.ts",
 		"./src/spec/talk-group.ts",
 		"./src/spec/user.ts"

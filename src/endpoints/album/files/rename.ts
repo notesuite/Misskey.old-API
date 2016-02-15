@@ -1,6 +1,7 @@
 import * as request from 'request';
 import {AlbumFile} from '../../../db/db';
 import {IUser, IAlbumFile} from '../../../db/interfaces';
+import {isName} from '../../../spec/album-file';
 import config from '../../../config';
 
 /**
@@ -11,8 +12,8 @@ import config from '../../../config';
  * @return ファイルオブジェクト
  */
 export default function(user: IUser, fileId: string, name: string): Promise<Object> {
-	if (name.length > 100) {
-		return <Promise<any>>Promise.reject('too-long-filename');
+	if (!isName(name)) {
+		return <Promise<any>>Promise.reject('invalid-file-name');
 	}
 
 	return new Promise<Object>((resolve, reject) => {
