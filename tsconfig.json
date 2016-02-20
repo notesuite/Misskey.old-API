@@ -85,6 +85,7 @@
 		"./src/endpoints/album/files/rename.ts",
 		"./src/endpoints/album/files/show.ts",
 		"./src/endpoints/album/files/stream.ts",
+		"./src/endpoints/album/files/update-tag.ts",
 		"./src/endpoints/album/files/upload.ts",
 		"./src/endpoints/album/folders/create.ts",
 		"./src/endpoints/album/folders/delete.ts",
@@ -165,6 +166,7 @@
 		"./src/rest-handlers/album/files/rename.ts",
 		"./src/rest-handlers/album/files/show.ts",
 		"./src/rest-handlers/album/files/stream.ts",
+		"./src/rest-handlers/album/files/update-tag.ts",
 		"./src/rest-handlers/album/files/upload.ts",
 		"./src/rest-handlers/album/folders/create.ts",
 		"./src/rest-handlers/album/folders/delete.ts",
@@ -225,6 +227,7 @@
 		"./src/rest-handlers/users/show.ts",
 		"./src/rest-handlers/users/unfollow.ts",
 		"./src/server.ts",
+		"./src/spec/album-file.ts",
 		"./src/spec/album-tag.ts",
 		"./src/spec/talk-group.ts",
 		"./src/spec/user.ts"

@@ -1,5 +1,6 @@
 import {IApplication, IUser} from '../../../db/interfaces';
 import add from '../../../core/add-file-to-album';
+import {isName} from '../../../spec/album-file';
 
 /**
  * アルバムにファイルを追加します
@@ -22,8 +23,8 @@ export default function(
 	folderId: string = null,
 	unconditional: boolean = false
 ): Promise<Object> {
-	if (fileName.length > 200) {
-		return <Promise<any>>Promise.reject('too-long-filename');
+	if (!isName(fileName)) {
+		return <Promise<any>>Promise.reject('invalid-file-name');
 	}
 	return new Promise<Object>((resolve, reject) => {
 		// Check user
