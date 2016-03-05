@@ -50,7 +50,7 @@ export interface IUserMute extends Document {
 	createdAt: Date;
 	cursor: number;
 	from: string | Types.ObjectId | IUser;
-	to: string | Types.ObjectId | IUser;
+	target: string | Types.ObjectId | IUser;
 }
 
 export interface IUserKey extends Document {

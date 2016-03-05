@@ -4,21 +4,21 @@ import {IUserMute, IUser} from '../../db/interfaces';
 /**
  * ユーザーのミュートを解除します
  * @param from: ミュートを解除するユーザー
- * @param toId: ミュートを解除されるユーザーID
+ * @param targetId: ミュートを解除されるユーザーID
  */
-export default function(from: IUser, toId: string): Promise<void> {
+export default function(from: IUser, targetId: string): Promise<void> {
 	return new Promise<void>((resolve, reject) => {
-		if (from.id.toString() === toId) {
-			reject('to-is-you');
+		if (from.id.toString() === targetId) {
+			reject('target-is-you');
 		} else {
-			User.findById(toId, (userFindErr: any, to: IUser) => {
+			User.findById(targetId, (userFindErr: any, target: IUser) => {
 				if (userFindErr !== null) {
 					reject(userFindErr);
-				} else if (to === null) {
-					reject('to-not-found');
+				} else if (target === null) {
+					reject('target-not-found');
 				} else {
 					UserMute.findOne({
-						to: toId,
+						target: targetId,
 						from: from.id
 					}, (muteFindErr: any, userMute: IUserMute) => {
 						if (muteFindErr !== null) {
