@@ -7,8 +7,8 @@ export default function(db: Connection): Model<Document> {
 	const schema = new Schema({
 		createdAt: { type: Date, required: true, default: Date.now },
 		cursor: { type: Number },
-		from: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
-		target: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
+		muter: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
+		mutee: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
 	});
 
 	// Auto increment

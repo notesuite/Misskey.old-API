@@ -3,23 +3,23 @@ import {IUserMute, IUser} from '../../db/interfaces';
 
 /**
  * ユーザーをミュートします
- * @param from ミュートするユーザー
- * @param targetId ミュートされるユーザーID
+ * @param muter ミュートするユーザー
+ * @param muteeId ミュートされるユーザーID
  */
-export default function(from: IUser, targetId: string): Promise<void> {
+export default function(muter: IUser, muteeId: string): Promise<void> {
 	return new Promise<void>((resolve, reject) => {
-		if (from.id.toString() === targetId) {
-			return reject('target-is-you');
+		if (muter.id.toString() === muteeId) {
+			return reject('mutee-is-you');
 		}
-		User.findById(targetId, (userFindErr: any, target: IUser) => {
+		User.findById(muteeId, (userFindErr: any, mutee: IUser) => {
 			if (userFindErr !== null) {
 				return reject(userFindErr);
-			} else if (target === null) {
-				return reject('target-not-found');
+			} else if (mutee === null) {
+				return reject('mutee-not-found');
 			}
 			UserMute.findOne({
-				target: targetId,
-				from: from.id
+				mutee: muteeId,
+				muter: muter.id
 			}, (muteFindErr: any, userMute: IUserMute) => {
 				if (muteFindErr !== null) {
 					return reject(muteFindErr);
@@ -27,8 +27,8 @@ export default function(from: IUser, targetId: string): Promise<void> {
 					return reject('already-mute');
 				}
 				UserMute.create({
-					target: targetId,
-					from: from.id
+					mutee: muteeId,
+					muter: muter.id
 				}, (createErr: any, createdUserMute: IUserMute) => {
 					if (createErr !== null) {
 						return reject(createErr);

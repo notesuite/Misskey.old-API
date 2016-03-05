@@ -3,23 +3,23 @@ import {IUserMute, IUser} from '../../db/interfaces';
 
 /**
  * ユーザーのミュートを解除します
- * @param from: ミュートを解除するユーザー
- * @param targetId: ミュートを解除されるユーザーID
+ * @param muter: ミュートを解除するユーザー
+ * @param muteeId: ミュートを解除されるユーザーID
  */
-export default function(from: IUser, targetId: string): Promise<void> {
+export default function(muter: IUser, muteeId: string): Promise<void> {
 	return new Promise<void>((resolve, reject) => {
-		if (from.id.toString() === targetId) {
-			reject('target-is-you');
+		if (muter.id.toString() === muteeId) {
+			reject('mutee-is-you');
 		} else {
-			User.findById(targetId, (userFindErr: any, target: IUser) => {
+			User.findById(muteeId, (userFindErr: any, mutee: IUser) => {
 				if (userFindErr !== null) {
 					reject(userFindErr);
-				} else if (target === null) {
-					reject('target-not-found');
+				} else if (mutee === null) {
+					reject('mutee-not-found');
 				} else {
 					UserMute.findOne({
-						target: targetId,
-						from: from.id
+						mutee: muteeId,
+						muter: muter.id
 					}, (muteFindErr: any, userMute: IUserMute) => {
 						if (muteFindErr !== null) {
 							reject(muteFindErr);

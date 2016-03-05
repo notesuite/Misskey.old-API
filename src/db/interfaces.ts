@@ -49,8 +49,8 @@ export interface IUserFollowing extends Document {
 export interface IUserMute extends Document {
 	createdAt: Date;
 	cursor: number;
-	from: string | Types.ObjectId | IUser;
-	target: string | Types.ObjectId | IUser;
+	muter: string | Types.ObjectId | IUser;
+	mutee: string | Types.ObjectId | IUser;
 }
 
 export interface IUserKey extends Document {
