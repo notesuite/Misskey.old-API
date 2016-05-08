@@ -9,15 +9,15 @@ import readPost from '../../core/read-post';
  * タイムラインを取得します
  * @param user API利用ユーザー
  * @param limit 取得する投稿の最大数
- * @param sinceCursor 取得する投稿を、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
- * @param maxCursor 取得する投稿を、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
+ * @param sinceId 取得する投稿を、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
+ * @param maxId 取得する投稿を、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
  * @return 投稿オブジェクトの配列
  */
 export default function(
 	user: IUser,
 	limit: number = 10,
-	sinceCursor: number = null,
-	maxCursor: number = null
+	sinceId: number = null,
+	maxId: number = null
 ): Promise<Object[]> {
 	limit = parseInt(<any>limit, 10);
 
@@ -44,12 +44,12 @@ export default function(
 			const query = Object.assign({
 				user: { $in: followingIds }
 			}, new Match<void, any>(null)
-				.when(() => sinceCursor !== null, () => {
+				.when(() => sinceId !== null, () => {
 					sort = {createdAt: 1};
-					return { cursor: { $gt: sinceCursor } };
+					return { _id: { $gt: sinceId } };
 				})
-				.when(() => maxCursor !== null, () => {
-					return { cursor: { $lt: maxCursor } };
+				.when(() => maxId !== null, () => {
+					return { _id: { $lt: maxId } };
 				})
 				.getValue({})
 			);

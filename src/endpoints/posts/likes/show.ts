@@ -8,27 +8,27 @@ import serializeUser from '../../../core/serialize-user';
  * @param user API利用ユーザー
  * @param postId 対象の投稿のID
  * @param limit 取得するLikeの最大数
- * @param sinceCursor 取得するLikeを、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
- * @param maxCursor 取得するLikeを、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
+ * @param sinceId 取得するLikeを、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
+ * @param maxId 取得するLikeを、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
  * @return Likeオブジェクトの配列
  */
 export default function(
 	user: IUser,
 	postId: string,
 	limit: number = 10,
-	sinceCursor: number = null,
-	maxCursor: number = null
+	sinceId: number = null,
+	maxId: number = null
 ): Promise<Object[]> {
 	return new Promise<Object[]>((resolve, reject) => {
 
 		const query = Object.assign({
 			post: postId
 		}, new Match<void, any>(null)
-			.when(() => sinceCursor !== null, () => {
-				return { cursor: { $gt: sinceCursor } };
+			.when(() => sinceId !== null, () => {
+				return { _id: { $gt: sinceId } };
 			})
-			.when(() => maxCursor !== null, () => {
-				return { cursor: { $lt: maxCursor } };
+			.when(() => maxId !== null, () => {
+				return { _id: { $lt: maxId } };
 			})
 			.getValue({})
 		);

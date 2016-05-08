@@ -34,9 +34,6 @@
     "mongoose/mongoose.d.ts": {
       "ref": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
-    "mongoose-auto-increment/mongoose-auto-increment.d.ts": {
-      "ref": "e69fe60f2d6377ea4fae539493997b098f52cad1"
-    },
     "multer/multer.d.ts": {
       "ref": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },

@@ -12,8 +12,8 @@ export default function(
 		req.payload['user-id'],
 		req.payload['types'],
 		req.payload['limit'],
-		req.payload['since-cursor'],
-		req.payload['max-cursor'])
+		req.payload['since-id'],
+		req.payload['max-id'])
 	.then(timeline => {
 		res(timeline);
 	}, (err: any) => {

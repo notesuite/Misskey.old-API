@@ -10,8 +10,8 @@ export default function(
 	getTimeline(
 		user,
 		req.payload['limit'],
-		req.payload['since-cursor'],
-		req.payload['max-cursor']
+		req.payload['since-id'],
+		req.payload['max-id']
 	).then(timeline => {
 		res(timeline);
 	}, (err: any) => {

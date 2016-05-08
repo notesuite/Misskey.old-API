@@ -32,7 +32,6 @@
     "hapi": "13.4.0",
     "log-cool": "1.1.0",
     "mongoose": "4.4.15",
-    "mongoose-auto-increment": "5.0.1",
     "mongoose-deep-populate": "3.0.0",
     "powerful": "8.0.1",
     "ratelimiter": "2.1.3",

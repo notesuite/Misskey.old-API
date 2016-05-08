@@ -12,8 +12,8 @@ export default function(
 		req.payload['tag-id'],
 		req.payload['folder-id'],
 		req.payload['limit'],
-		req.payload['since-cursor'],
-		req.payload['max-cursor']
+		req.payload['since-id'],
+		req.payload['max-id']
 	).then(files => {
 		res(files);
 	}, (err: any) => {

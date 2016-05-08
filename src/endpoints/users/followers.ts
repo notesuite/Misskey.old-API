@@ -8,16 +8,16 @@ import serializeUser from '../../core/serialize-user';
  * @param me API利用ユーザー
  * @param userId 対象ユーザーのID
  * @param limit 取得するユーザーの最大数
- * @param sinceCursor 取得するユーザーを、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
- * @param maxCursor 取得するユーザーを、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
+ * @param sinceId 取得するユーザーを、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
+ * @param maxId 取得するユーザーを、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
  * @return ユーザーオブジェクトの配列
  */
 export default function(
 	me: IUser,
 	userId: string,
 	limit: number = 30,
-	sinceCursor: number = null,
-	maxCursor: number = null
+	sinceId: number = null,
+	maxId: number = null
 ): Promise<Object[]> {
 	limit = parseInt(<any>limit, 10);
 
@@ -31,11 +31,11 @@ export default function(
 		const query = Object.assign({
 			followee: userId
 		}, new Match<void, any>(null)
-			.when(() => sinceCursor !== null, () => {
-				return { cursor: { $gt: sinceCursor } };
+			.when(() => sinceId !== null, () => {
+				return { _id: { $gt: sinceId } };
 			})
-			.when(() => maxCursor !== null, () => {
-				return { cursor: { $lt: maxCursor } };
+			.when(() => maxId !== null, () => {
+				return { _id: { $lt: maxId } };
 			})
 			.getValue({})
 		);
@@ -54,7 +54,7 @@ export default function(
 				return serializeUser(me, <IUser>follow.follower);
 			})).then((followers: any[]) => {
 				for (let i = 0; i < followers.length; i++) {
-					followers[i].cursor = userFollowing[i].cursor;
+					followers[i].followingId = userFollowing[i]._id;
 				}
 				resolve(followers);
 			});

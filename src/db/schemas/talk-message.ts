@@ -1,9 +1,7 @@
 import {Schema, Connection, Document, Model} from 'mongoose';
-import * as mongooseAutoIncrement from 'mongoose-auto-increment';
 
 const base: Object = {
-	createdAt: { type: Date, required: true, default: Date.now },
-	cursor: { type: Number },
+	createdAt: { type: Date, required: true, default: Date.now }
 };
 
 const groupBaseScema: Object = Object.assign({
@@ -30,8 +28,6 @@ const toObject: any = (doc: any, ret: any) => {
 };
 
 export function message(db: Connection): Model<Document> {
-	mongooseAutoIncrement.initialize(db);
-
 	const schema = new Schema(Object.assign({
 		type: { type: String, required: true }
 	}, base));
@@ -45,8 +41,6 @@ export function message(db: Connection): Model<Document> {
 }
 
 export function userMessage(db: Connection): Model<Document> {
-	mongooseAutoIncrement.initialize(db);
-
 	const schema = new Schema(Object.assign({
 		file: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFile' },
 		isContentModified: { type: Boolean, required: false, default: false },
@@ -58,12 +52,6 @@ export function userMessage(db: Connection): Model<Document> {
 		user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
 	}, base));
 
-	// Auto increment
-	schema.plugin(mongooseAutoIncrement.plugin, {
-		model: 'TalkMessage',
-		field: 'cursor'
-	});
-
 	if (!(<any>schema).options.toObject) {
 		(<any>schema).options.toObject = {};
 	}
@@ -73,8 +61,6 @@ export function userMessage(db: Connection): Model<Document> {
 }
 
 export function groupMessageBase(db: Connection): Model<Document> {
-	mongooseAutoIncrement.initialize(db);
-
 	const schema = new Schema(Object.assign({
 		type: { type: String, required: true }
 	}, groupBaseScema));
@@ -88,8 +74,6 @@ export function groupMessageBase(db: Connection): Model<Document> {
 }
 
 export function groupMessage(db: Connection): Model<Document> {
-	mongooseAutoIncrement.initialize(db);
-
 	const schema = new Schema(Object.assign({
 		file: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFile' },
 		isContentModified: { type: Boolean, required: false, default: false },
@@ -98,12 +82,6 @@ export function groupMessage(db: Connection): Model<Document> {
 		type: { type: String, required: false, default: 'group-message' },
 		user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }
 	}, groupBaseScema));
-
-	// Auto increment
-	schema.plugin(mongooseAutoIncrement.plugin, {
-		model: 'TalkMessage',
-		field: 'cursor'
-	});
 
 	if (!(<any>schema).options.toObject) {
 		(<any>schema).options.toObject = {};
@@ -114,20 +92,12 @@ export function groupMessage(db: Connection): Model<Document> {
 }
 
 export function groupSendInvitationActivity(db: Connection): Model<Document> {
-	mongooseAutoIncrement.initialize(db);
-
 	const schema = new Schema(Object.assign({
 		invitee: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
 		inviter: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
 		invitation: { type: Schema.Types.ObjectId, required: true, ref: 'TalkGroupInvitation' },
 		type: { type: String, required: false, default: 'group-send-invitation-activity' }
 	}, groupBaseScema));
-
-	// Auto increment
-	schema.plugin(mongooseAutoIncrement.plugin, {
-		model: 'TalkMessage',
-		field: 'cursor'
-	});
 
 	if (!(<any>schema).options.toObject) {
 		(<any>schema).options.toObject = {};
@@ -138,18 +108,10 @@ export function groupSendInvitationActivity(db: Connection): Model<Document> {
 }
 
 export function groupMemberJoinActivity(db: Connection): Model<Document> {
-	mongooseAutoIncrement.initialize(db);
-
 	const schema = new Schema(Object.assign({
 		joiner: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
 		type: { type: String, required: false, default: 'group-member-join-activity' }
 	}, groupBaseScema));
-
-	// Auto increment
-	schema.plugin(mongooseAutoIncrement.plugin, {
-		model: 'TalkMessage',
-		field: 'cursor'
-	});
 
 	if (!(<any>schema).options.toObject) {
 		(<any>schema).options.toObject = {};
@@ -160,18 +122,10 @@ export function groupMemberJoinActivity(db: Connection): Model<Document> {
 }
 
 export function groupMemberLeftActivity(db: Connection): Model<Document> {
-	mongooseAutoIncrement.initialize(db);
-
 	const schema = new Schema(Object.assign({
 		lefter: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
 		type: { type: String, required: false, default: 'group-member-left-activity' }
 	}, groupBaseScema));
-
-	// Auto increment
-	schema.plugin(mongooseAutoIncrement.plugin, {
-		model: 'TalkMessage',
-		field: 'cursor'
-	});
 
 	if (!(<any>schema).options.toObject) {
 		(<any>schema).options.toObject = {};
@@ -182,20 +136,12 @@ export function groupMemberLeftActivity(db: Connection): Model<Document> {
 }
 
 export function renameGroupActivity(db: Connection): Model<Document> {
-	mongooseAutoIncrement.initialize(db);
-
 	const schema = new Schema(Object.assign({
 		renamer: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
 		oldName: { type: String, required: true },
 		newName: { type: String, required: true },
 		type: { type: String, required: false, default: 'rename-group-activity' }
 	}, groupBaseScema));
-
-	// Auto increment
-	schema.plugin(mongooseAutoIncrement.plugin, {
-		model: 'TalkMessage',
-		field: 'cursor'
-	});
 
 	if (!(<any>schema).options.toObject) {
 		(<any>schema).options.toObject = {};
@@ -206,19 +152,11 @@ export function renameGroupActivity(db: Connection): Model<Document> {
 }
 
 export function transferGroupOwnershipActivity(db: Connection): Model<Document> {
-	mongooseAutoIncrement.initialize(db);
-
 	const schema = new Schema(Object.assign({
 		oldOwner: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
 		newOwner: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
 		type: { type: String, required: false, default: 'transfer-group-ownership-activity' }
 	}, groupBaseScema));
-
-	// Auto increment
-	schema.plugin(mongooseAutoIncrement.plugin, {
-		model: 'TalkMessage',
-		field: 'cursor'
-	});
 
 	if (!(<any>schema).options.toObject) {
 		(<any>schema).options.toObject = {};
