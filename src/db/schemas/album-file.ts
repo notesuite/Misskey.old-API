@@ -1,14 +1,10 @@
 import {Schema, Connection, Document, Model} from 'mongoose';
-import * as mongooseAutoIncrement from 'mongoose-auto-increment';
 import config from '../../config';
 
 export default function(db: Connection): Model<Document> {
-	mongooseAutoIncrement.initialize(db);
-
 	const schema = new Schema({
 		app: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Application' },
 		createdAt: { type: Date, required: true, default: Date.now },
-		cursor: { type: Number },
 		dataSize: { type: Number, required: true },
 		folder: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'AlbumFolder' },
 		mimeType: { type: String, required: true },
@@ -34,12 +30,6 @@ export default function(db: Connection): Model<Document> {
 		delete ret.__v;
 		delete ret.serverPath;
 	};
-
-	// Auto increment
-	schema.plugin(mongooseAutoIncrement.plugin, {
-		model: 'AlbumFile',
-		field: 'cursor'
-	});
 
 	return db.model('AlbumFile', schema, 'AlbumFiles');
 }

@@ -7,15 +7,15 @@ import serializeNotification from '../../core/serialize-notification';
  * 通知を取得します
  * @param user API利用ユーザー
  * @param limit 取得する通知の最大数
- * @param sinceCursor 取得する通知を、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
- * @param maxCursor 取得する通知を、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
+ * @param sinceId 取得する通知を、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
+ * @param maxId 取得する通知を、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
  * @return 通知オブジェクトの配列
  */
 export default function(
 	user: IUser,
 	limit: number = 10,
-	sinceCursor: number = null,
-	maxCursor: number = null
+	sinceId: number = null,
+	maxId: number = null
 ): Promise<Object[]> {
 	limit = parseInt(<any>limit, 10);
 
@@ -28,16 +28,16 @@ export default function(
 	return new Promise<Object[]>((resolve, reject) => {
 		// タイムライン取得用のクエリを生成
 		const query = new Match<void, any>(null)
-			.when(() => sinceCursor !== null, () => {
+			.when(() => sinceId !== null, () => {
 				return {
 					user: user.id,
-					cursor: {$gt: sinceCursor}
+					_id: {$gt: sinceId}
 				};
 			})
-			.when(() => maxCursor !== null, () => {
+			.when(() => maxId !== null, () => {
 				return {
 					user: user.id,
-					cursor: {$lt: maxCursor}
+					_id: {$lt: maxId}
 				};
 			})
 			.getValue({user: user.id});

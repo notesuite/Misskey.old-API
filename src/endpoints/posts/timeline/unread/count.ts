@@ -24,7 +24,7 @@ export default function(user: IUser): Promise<number> {
 			// タイムライン取得用のクエリ
 			const query: any = {
 				user: {$in: followingIds},
-				cursor: {$gt: user.timelineReadCursor}
+				_id: {$gt: user.timelineReadCursor}
 			};
 
 			// クエリを発行して件数を取得

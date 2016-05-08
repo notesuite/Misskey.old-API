@@ -12,8 +12,8 @@ export default function(
 	user: IUser,
 	folderId: string = null,
 	limit: number = 20,
-	sinceCursor: number = null,
-	maxCursor: number = null
+	sinceId: number = null,
+	maxId: number = null
 ): Promise<Object[]> {
 	limit = parseInt(<any>limit, 10);
 
@@ -32,12 +32,12 @@ export default function(
 			isHidden: false,
 			isDeleted: false
 		}, new Match<void, any>(null)
-			.when(() => sinceCursor !== null, () => {
+			.when(() => sinceId !== null, () => {
 				sort = {createdAt: 1};
-				return { cursor: { $gt: sinceCursor } };
+				return { _id: { $gt: sinceId } };
 			})
-			.when(() => maxCursor !== null, () => {
-				return { cursor: { $lt: maxCursor } };
+			.when(() => maxId !== null, () => {
+				return { _id: { $lt: maxId } };
 			})
 			.getValue({})
 		);

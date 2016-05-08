@@ -9,8 +9,8 @@ import readTalkMessage from '../../../core/read-talk-message';
  * Talkのストリームを取得します
  * @param me API利用ユーザー
  * @param limit 取得する投稿の最大数
- * @param sinceCursor 取得するメッセージを、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
- * @param maxCursor 取得するメッセージを、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
+ * @param sinceId 取得するメッセージを、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
+ * @param maxId 取得するメッセージを、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
  * @param userId 相手のユーザーのID
  * @param groupId
  * @return トークメッセージの配列
@@ -18,8 +18,8 @@ import readTalkMessage from '../../../core/read-talk-message';
 export default function(
 	me: IUser,
 	limit: number = 10,
-	sinceCursor: number = null,
-	maxCursor: number = null,
+	sinceId: number = null,
+	maxId: number = null,
 	userId: string = null,
 	groupId: string = null
 ): Promise<Object[]> {
@@ -50,11 +50,11 @@ export default function(
 					recipient: me.id
 				}]
 			}, new Match<void, any>(null)
-				.when(() => sinceCursor !== null, () => {
-					return { cursor: { $gt: sinceCursor } };
+				.when(() => sinceId !== null, () => {
+					return { _id: { $gt: sinceId } };
 				})
-				.when(() => maxCursor !== null, () => {
-					return { cursor: { $lt: maxCursor } };
+				.when(() => maxId !== null, () => {
+					return { _id: { $lt: maxId } };
 				})
 				.getValue({})
 			);
@@ -100,11 +100,11 @@ export default function(
 				const query = Object.assign({
 					group: group.id,
 				}, new Match<void, any>(null)
-					.when(() => sinceCursor !== null, () => {
-						return { cursor: { $gt: sinceCursor } };
+					.when(() => sinceId !== null, () => {
+						return { _id: { $gt: sinceId } };
 					})
-					.when(() => maxCursor !== null, () => {
-						return { cursor: { $lt: maxCursor } };
+					.when(() => maxId !== null, () => {
+						return { _id: { $lt: maxId } };
 					})
 					.getValue({})
 				);

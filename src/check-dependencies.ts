@@ -1,5 +1,5 @@
 import {logInfo, logDone, logWarn} from 'log-cool';
-import {exec, ExecOutputReturnValue} from 'shelljs';
+import {exec} from 'shelljs';
 
 export default function(): void {
 	checkDependency('Node.js', 'node -v', x => x.match(/^v(.*)\r?\n$/)[1]);
@@ -14,9 +14,9 @@ function checkDependency(serviceName: string, command: string, transform: (x: st
 		success: 0,
 		notFound: 127
 	};
-	const x = <ExecOutputReturnValue>exec(command, { silent: true });
+	const x = <any>exec(command, { silent: true });
 	if (x.code === code.success) {
-		logInfo(`${serviceName} ${transform(x.output)}`);
+		logInfo(`${serviceName} ${transform(x.stdout)}`);
 	} else if (x.code === code.notFound) {
 		logWarn(`Unable to find ${serviceName}`);
 	}

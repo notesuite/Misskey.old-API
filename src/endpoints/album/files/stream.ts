@@ -8,16 +8,16 @@ import {IUser, IAlbumFile} from '../../../db/interfaces';
  * @param user API利用ユーザー
  * @param folderId 対象フォルダID(nullでルート)
  * @param limit 取得するファイルの最大数
- * @param sinceCursor 取得するファイルを、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
- * @param maxCursor 取得するファイルを、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
+ * @param sinceId 取得するファイルを、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
+ * @param maxId 取得するファイルを、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
  * @return ファイルオブジェクト
  */
 export default function(
 	user: IUser,
 	folderId: string = null,
 	limit: number = 50,
-	sinceCursor: number = null,
-	maxCursor: number = null
+	sinceId: number = null,
+	maxId: number = null
 ): Promise<Object[]> {
 	return new Promise<Object[]>((resolve, reject) => {
 
@@ -27,11 +27,11 @@ export default function(
 			isHidden: false,
 			isDeleted: false
 		}, new Match<void, any>(null)
-			.when(() => sinceCursor !== null, () => {
-				return { cursor: { $gt: sinceCursor } };
+			.when(() => sinceId !== null, () => {
+				return { _id: { $gt: sinceId } };
 			})
-			.when(() => maxCursor !== null, () => {
-				return { cursor: { $lt: maxCursor } };
+			.when(() => maxId !== null, () => {
+				return { _id: { $lt: maxId } };
 			})
 			.getValue({})
 		);

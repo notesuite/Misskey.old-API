@@ -1,11 +1,9 @@
 import {Schema, Connection, Document, Model} from 'mongoose';
-import * as mongooseAutoIncrement from 'mongoose-auto-increment';
 
 // Base schema of post
 const base: Object = {
 	app: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Application' },
 	createdAt: { type: Date, required: true, default: Date.now },
-	cursor: { type: Number },
 	isDeleted: { type: Boolean, required: false, default: false },
 	nextPost: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Post' },
 	prevPost: { type: Schema.Types.ObjectId, required: false, default: null, ref: 'Post' },
@@ -44,14 +42,6 @@ const toObject: any = (doc: any, ret: any) => {
 };
 
 function initSchema(db: Connection, schema: Schema): void {
-	mongooseAutoIncrement.initialize(db);
-
-	// Auto increment
-	schema.plugin(mongooseAutoIncrement.plugin, {
-		model: 'Post',
-		field: 'cursor'
-	});
-
 	if (!(<any>schema).options.toObject) {
 		(<any>schema).options.toObject = {};
 	}

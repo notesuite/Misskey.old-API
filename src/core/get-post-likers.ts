@@ -6,21 +6,21 @@ import {IUser, IPostLike} from '../db/interfaces';
 export default function(
 	postId: string,
 	limit: number = 10,
-	sinceCursor: number = null,
-	maxCursor: number = null
+	sinceId: number = null,
+	maxId: number = null
 ): Promise<IUser[]> {
 	return new Promise<IUser[]>((resolve, reject) => {
 		const query = new Match<void, any>(null)
-			.when(() => sinceCursor !== null, () => {
+			.when(() => sinceId !== null, () => {
 				return {$and: [
 					{post: postId},
-					{cursor: {$gt: sinceCursor}}
+					{_id: {$gt: sinceId}}
 				]};
 			})
-			.when(() => maxCursor !== null, () => {
+			.when(() => maxId !== null, () => {
 				return {$and: [
 					{post: postId},
-					{cursor: {$lt: maxCursor}}
+					{_id: {$lt: maxId}}
 				]};
 			})
 			.getValue({post: postId});

@@ -10,8 +10,8 @@ export default function(
 	getStream(
 		user,
 		req.payload['limit'],
-		req.payload['since-cursor'],
-		req.payload['max-cursor'],
+		req.payload['since-id'],
+		req.payload['max-id'],
 		req.payload['user-id'],
 		req.payload['group-id']
 	).then(stream => {
