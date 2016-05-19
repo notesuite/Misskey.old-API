@@ -90,4 +90,4 @@ export default [
 
 	{ name: 'bbs/topics/create', login: true, limitDuration: day, limitMax: 30 },
 	{ name: 'bbs/posts/create', login: true, limitDuration: hour, limitMax: 120 }
-]
+];
