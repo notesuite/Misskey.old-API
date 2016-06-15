@@ -48,6 +48,9 @@
     },
     "ratelimiter/ratelimiter.d.ts": {
       "ref": "e69fe60f2d6377ea4fae539493997b098f52cad1"
+    },
+    "argv/argv.d.ts": {
+      "ref": "1315d46f8066eec8c197914da88e98629ebc2254"
     }
   }
 }
