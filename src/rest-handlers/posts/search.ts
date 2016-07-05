@@ -11,8 +11,8 @@ export default function(
 		user,
 		req.payload['query'],
 		req.payload['limit'],
-		req.payload['since-cursor'],
-		req.payload['max-cursor']
+		req.payload['since-id'],
+		req.payload['max-id']
 	).then(posts => {
 		res(posts);
 	}, (err: any) => {

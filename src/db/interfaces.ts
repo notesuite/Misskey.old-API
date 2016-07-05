@@ -41,7 +41,6 @@ export interface IUser extends Document {
 
 export interface IUserFollowing extends Document {
 	createdAt: Date;
-	cursor: number;
 	followee: string | Types.ObjectId | IUser;
 	follower: string | Types.ObjectId | IUser;
 }
@@ -87,7 +86,6 @@ export interface IPost extends Document {
 	app: string | Types.ObjectId | IApplication;
 	channel: string | Types.ObjectId | IChannel;
 	createdAt: Date;
-	cursor: number;
 	isDeleted: boolean;
 	likesCount: number;
 	prevPost: string | Types.ObjectId | IPost;
@@ -114,7 +112,6 @@ export interface IReply extends IPost {
 export interface IRepost extends Document {
 	app: string | Types.ObjectId | IApplication;
 	createdAt: Date;
-	cursor: number;
 	isDeleted: boolean;
 	post: string | Types.ObjectId | IPost;
 	type: string;
@@ -123,14 +120,12 @@ export interface IRepost extends Document {
 
 export interface IPostLike extends Document {
 	createdAt: Date;
-	cursor: number;
 	post: string | Types.ObjectId | IPost;
 	user: string | Types.ObjectId | IUser;
 }
 
 export interface IPostMention extends Document {
 	createdAt: Date;
-	cursor: number;
 	isRead: boolean;
 	post: string | Types.ObjectId | IPost;
 	user: string | Types.ObjectId | IUser;
@@ -139,7 +134,6 @@ export interface IPostMention extends Document {
 export interface IAlbumFile extends Document {
 	app: string | Types.ObjectId | IApplication;
 	createdAt: Date;
-	cursor: number;
 	dataSize: number;
 	folder: string | Types.ObjectId | IAlbumFolder;
 	mimeType: string;
@@ -157,7 +151,6 @@ export interface IAlbumFile extends Document {
 export interface IAlbumFolder extends Document {
 	createdAt: Date;
 	color: string;
-	cursor: number;
 	name: string;
 	parent: string | Types.ObjectId | IAlbumFolder;
 	user: string | Types.ObjectId | IUser;
@@ -173,7 +166,6 @@ export interface INotification extends Document {
 	app: string | Types.ObjectId | IApplication;
 	content: Object;
 	createdAt: Date;
-	cursor: number;
 	isRead: boolean;
 	type: string;
 	user: string | Types.ObjectId | IUser;
@@ -199,7 +191,6 @@ export interface ITalkGroupInvitation extends Document {
 
 export interface ITalkMessage extends Document {
 	createdAt: Date;
-	cursor: number;
 	type: string;
 }
 
@@ -270,7 +261,6 @@ export interface ITalkGroupHistory extends ITalkHistory {
 export interface IBBSTopic extends Document {
 	bookmarksCount: number;
 	createdAt: Date;
-	cursor: number;
 	pinnedPost: string | Types.ObjectId | IBBSPost;
 	title: string;
 	user: string | Types.ObjectId | IUser;
@@ -280,7 +270,6 @@ export interface IBBSPost extends Document {
 	app: string | Types.ObjectId | IApplication;
 	files: string | Types.ObjectId[] | IAlbumFile[];
 	createdAt: Date;
-	cursor: number;
 	inReplyToPost: string | Types.ObjectId | IBBSPost;
 	isContentModified: boolean;
 	isDeleted: boolean;

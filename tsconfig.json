@@ -1,11 +1,11 @@
 {
 	"compilerOptions": {
-		"noEmitOnError": true,
+		"noEmitOnError": false,
 		"noImplicitAny": true,
 		"noImplicitReturns": true,
 		"noFallthroughCasesInSwitch": true,
 		"sourceMap": false,
-		"target": "ES5",
+		"target": "es6",
 		"module": "commonjs",
 		"removeComments": true,
 		"noLib": true,
@@ -25,6 +25,7 @@
 		"./node_modules/typescript/lib/lib.es6.d.ts",
 		"./typings/bundle.d.ts",
 		"./src/api-handler.ts",
+		"./src/argv.ts",
 		"./src/authenticate.ts",
 		"./src/check-dependencies.ts",
 		"./src/config.ts",

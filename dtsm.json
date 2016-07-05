@@ -14,43 +14,43 @@
   },
   "dependencies": {
     "bcrypt/bcrypt.d.ts": {
-      "ref": "717a5fdb079f8dd7c19f1b22f7f656dd990f0ccf"
+      "ref": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "body-parser/body-parser.d.ts": {
-      "ref": "717a5fdb079f8dd7c19f1b22f7f656dd990f0ccf"
+      "ref": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "gm/gm.d.ts": {
-      "ref": "717a5fdb079f8dd7c19f1b22f7f656dd990f0ccf"
+      "ref": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "gulp/gulp.d.ts": {
-      "ref": "717a5fdb079f8dd7c19f1b22f7f656dd990f0ccf"
+      "ref": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "gulp-tslint/gulp-tslint.d.ts": {
-      "ref": "717a5fdb079f8dd7c19f1b22f7f656dd990f0ccf"
+      "ref": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "gulp-typescript/gulp-typescript.d.ts": {
-      "ref": "717a5fdb079f8dd7c19f1b22f7f656dd990f0ccf"
+      "ref": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "mongoose/mongoose.d.ts": {
-      "ref": "717a5fdb079f8dd7c19f1b22f7f656dd990f0ccf"
-    },
-    "mongoose-auto-increment/mongoose-auto-increment.d.ts": {
-      "ref": "717a5fdb079f8dd7c19f1b22f7f656dd990f0ccf"
+      "ref": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "multer/multer.d.ts": {
-      "ref": "717a5fdb079f8dd7c19f1b22f7f656dd990f0ccf"
+      "ref": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "redis/redis.d.ts": {
-      "ref": "717a5fdb079f8dd7c19f1b22f7f656dd990f0ccf"
+      "ref": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "request/request.d.ts": {
-      "ref": "717a5fdb079f8dd7c19f1b22f7f656dd990f0ccf"
+      "ref": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "shelljs/shelljs.d.ts": {
-      "ref": "717a5fdb079f8dd7c19f1b22f7f656dd990f0ccf"
+      "ref": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "ratelimiter/ratelimiter.d.ts": {
-      "ref": "717a5fdb079f8dd7c19f1b22f7f656dd990f0ccf"
+      "ref": "e69fe60f2d6377ea4fae539493997b098f52cad1"
+    },
+    "argv/argv.d.ts": {
+      "ref": "1315d46f8066eec8c197914da88e98629ebc2254"
     }
   }
 }

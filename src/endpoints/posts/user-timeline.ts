@@ -9,8 +9,8 @@ import serializePosts from '../../core/serialize-posts';
  * @param includeReplies リプライを含めるかどうか
  * @param types ,で区切った取得する投稿の種類 ex: "status, photo, video"
  * @param limit 取得する投稿の最大数
- * @param sinceCursor 取得する投稿を、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
- * @param maxCursor 取得する投稿を、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
+ * @param sinceId 取得する投稿を、設定されたカーソルよりも大きなカーソルを持つもののみに制限します
+ * @param maxId 取得する投稿を、設定されたカーソルよりも小さなカーソルを持つもののみに制限します
  * @return 投稿オブジェクトの配列
  */
 export default function(
@@ -18,8 +18,8 @@ export default function(
 	targetUserId: string,
 	types: string = null,
 	limit: number = 10,
-	sinceCursor: number = null,
-	maxCursor: number = null
+	sinceId: number = null,
+	maxId: number = null
 ): Promise<Object[]> {
 	limit = parseInt(<any>limit, 10);
 
@@ -35,11 +35,11 @@ export default function(
 		let sort: any = {createdAt: -1};
 
 		// cursor指定時
-		if (sinceCursor !== null) {
-			query.cursor = {$gt: sinceCursor};
+		if (sinceId !== null) {
+			query.cursor = {$gt: sinceId};
 			sort = {createdAt: 1};
-		} else if (maxCursor !== null) {
-			query.cursor = {$lt: maxCursor};
+		} else if (maxId !== null) {
+			query.cursor = {$lt: maxId};
 		}
 
 		// types指定時

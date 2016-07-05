@@ -8,8 +8,7 @@ export default function(author: IUser, post: IPost, text: string): void {
 		users.forEach(user => {
 			PostMention.create({
 				user: user.id,
-				post: post.id,
-				cursor: post.cursor
+				post: post.id
 			}, (createErr: any, createdMention: IPostMention) => {
 				// 通知を作成
 				createNotification(null, user.id, 'mention', {
