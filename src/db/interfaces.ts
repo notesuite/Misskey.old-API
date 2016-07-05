@@ -45,6 +45,13 @@ export interface IUserFollowing extends Document {
 	follower: string | Types.ObjectId | IUser;
 }
 
+export interface IUserMute extends Document {
+	createdAt: Date;
+	cursor: number;
+	muter: string | Types.ObjectId | IUser;
+	mutee: string | Types.ObjectId | IUser;
+}
+
 export interface IUserKey extends Document {
 	app: string | Types.ObjectId | IApplication;
 	key: string;

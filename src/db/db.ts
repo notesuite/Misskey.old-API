@@ -21,6 +21,7 @@ import talkGroupInvitation from './schemas/talk-group-invitation';
 import {talkHistory, talkUserHistory, talkGroupHistory} from './schemas/talk-history';
 import user from './schemas/user';
 import userFollowing from './schemas/user-following';
+import userMute from './schemas/user-mute';
 
 /* tslint:disable:variable-name */
 export const AlbumFile = albumFile(db);
@@ -54,3 +55,4 @@ export const TalkGroup = talkGroup(db);
 export const TalkGroupInvitation = talkGroupInvitation(db);
 export const User = user(db);
 export const UserFollowing = userFollowing(db);
+export const UserMute = userMute(db);
